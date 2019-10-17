@@ -10,8 +10,8 @@
 #define  S2_OUT  12
 #define  S3_OUT  13
 #define  OE_OUT   8               // LOW = ENABLED wh
-#define MAX_COLOURS 19            // Max colours allowed to store, 10 takes up 140 bytes
-#define MAX_COLOUR_NAME_CHARS 1  // Max chars allowed in name of colour
+#define MAX_COLOURS 10            // Max colours allowed to store, 10 takes up 140 bytes
+#define MAX_COLOUR_NAME_CHARS 10  // Max chars allowed in name of colour
 #define TOLERANCE 35              // How far out the red,green or blue can be to match
 
 typedef struct
@@ -32,24 +32,6 @@ void setup()
   // Check if we have some calibration data
   ReadCalibrations();
   ReadColours();
-
-  sensorData sd;
-  sd.value[0] = 0;
-  sd.value[1] = 0;
-  sd.value[1] = 0;
-  CS.setDarkCal(&sd); 
-  sd.value[0] = 255;
-  sd.value[1] = 255;
-  sd.value[1] = 255;
-  CS.setWhiteCal(&sd);
-
-  int index = 0;
-  SingleColour sc;
-
-  sc.Red = 157;
-  sc.Green = 187;
-  sc.Blue = 177;
-  Colours[index++] = sc;
 }
 
 void loop() 
