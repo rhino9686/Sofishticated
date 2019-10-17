@@ -17,6 +17,16 @@ TaskHandle_t xNitrate;
 TaskHandle_t xPH;
 TaskHandle_t xTemperature;
 
+enum ReadType {
+  AMMONIA,
+  NITRATE,
+  NITRITE
+};
+
+ReadType typeToRead;
+
+double ScanColor();
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   
@@ -26,6 +36,9 @@ void setup() {
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
   }
+
+  // load test strip color data
+  addColors();
 
   // TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
   attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
@@ -95,7 +108,8 @@ void TaskAmmoniaRead(void *pvParameters)
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
       // TODO: set indicator LED, analyze color value, transmit to Wifi
-      digitalWrite(LED_BUILTIN, LOW);
+      typeToRead = AMMONIA;
+      double value = ScanColor();
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -117,7 +131,8 @@ void TaskNitriteRead(void *pvParameters)
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
       // TODO: set indicator LED, analyze color value, transmit to Wifi
-      digitalWrite(LED_BUILTIN, LOW);
+      typeToRead = NITRITE;
+      double value = ScanColor();
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -139,7 +154,8 @@ void TaskNitrateRead(void *pvParameters)
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
       // TODO: set indicator LED, analyze color value, transmit to Wifi
-      digitalWrite(LED_BUILTIN, LOW);
+      typeToRead = NITRATE;
+      double value = ScanColor();
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);

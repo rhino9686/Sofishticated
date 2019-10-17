@@ -4,137 +4,199 @@
 //
 #include <MD_TCS230.h>   // colour sensor library
 #include <FreqCount.h>   // used by above library
-#include <EEPROM.h>      // Ensure data is still valid after power offs
 
 // Pin definitions
-#define  S2_OUT  12
-#define  S3_OUT  13
-#define  OE_OUT   8               // LOW = ENABLED wh
-#define MAX_COLOURS 10            // Max colours allowed to store, 10 takes up 140 bytes
+#define  S2  12
+#define  S3  13
+#define  OE   8               // LOW = ENABLED wh
+#define MAX_AMMONIA_COLORS 5
+#define MAX_NITRITE_NITRATE_COLORS 7
 #define TOLERANCE 35              // How far out the red,green or blue can be to match
 
 typedef struct
 {
-  String Name;             // Name for Colour, plus 1 extra for terminator '0'
-  uint8_t Red,Green,Blue;  // The colour values
-}SingleColour;
+  uint8_t R, G, B;  
+}Pixel;
 
-SingleColour Colours[MAX_COLOURS];        // Our array of colours to match against       
-uint8_t NumColours;                     // Current Number of colours   
-
-MD_TCS230  CS(S2_OUT, S3_OUT, OE_OUT);
-
-void setup() 
+typedef struct
 {
-  Serial.begin(115200);
-  CS.begin();
-  // Check if we have some calibration data
+  double ppm;
+  Pixel p;
+}Color;
 
-  /*sensorData sd;
-  sd.value[0] = 0;
-  sd.value[1] = 0;
-  sd.value[1] = 0;
-  CS.setDarkCal(&sd); 
-  sd.value[0] = 255;
-  sd.value[1] = 255;
-  sd.value[1] = 255;
-  CS.setWhiteCal(&sd);  */
+Color Ammonia[MAX_AMMONIA_COLORS];
+Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
+Color Nitrate[MAX_NITRITE_NITRATE_COLORS];  
+
+
+colorData rgb;
+Color c;
+
+MD_TCS230  CS(S2, S3, OE);
+
+
+// add possible color strip values to specific arrays
+void addColors()
+{
   int index = 0;
-  SingleColour sc;
-  sc.Name = "Ammonia0.0";
-  sc.Red = 255; sc.Green = 99; sc.Blue = 100;
-  Colours[index++] = sc;
-  ++NumColours;
+  Color c;
+  c.ppm = 0.0;
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
 
-  sc.Name = "Ammonia0.25";
-  sc.Red = 180; sc.Green = 35; sc.Blue = 65;
-  Colours[index++] = sc;
-  ++NumColours;
-  
+  c.ppm = 0.0;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 0.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 0.25;
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.ppm = 0.15;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 0.5;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 0.5;
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.ppm = 0.3;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 2.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 3.0;
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.ppm = 1.0;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 5.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 6.0;
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.ppm = 1.5;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 10.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 3.0;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 20.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.ppm = 10.0;
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.ppm = 50.0;
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
 }
 
-void loop() 
+double ScanColor()
 {
-  static char Choice;            
-
-  Choice=MainMenu();
-  switch(Choice)
-  {
-    case '1': 
-      ScanColour();
-      break;
-  }
-}
-
-char MainMenu()
-{  
-  char Choice;
-  Serial.print(F("\nCalibration Menu (Choose option and press RETURN)\n"));
-  Serial.print(F("1 Scan Colour\n"));
-  return getChar();
-}
-
-void ScanColour()
-{
-  // Scan and find a colour on the sensor
-  colorData  rgb;  
+  // Scan for color 
   CS.read();
   while(CS.available()==0);  // wait for read to complete
-  CS.getRGB(&rgb);  
-  int8_t ColIdx=MatchColour(&rgb);  
-  Serial.print(F("\nScanning for RGB["));
-  Serial.print(rgb.value[TCS230_RGB_R]);
-  Serial.print(F(","));
-  Serial.print(rgb.value[TCS230_RGB_G]);
-  Serial.print(F(","));
-  Serial.print(rgb.value[TCS230_RGB_B]);
-  Serial.print(F("]\n"));
-  if(ColIdx==-1)
-    Serial.println("\nNo match found");
-  else
-  {
-    Serial.print("\nThat colour is ");
-    Serial.print(Colours[ColIdx].Name);
-    Serial.print(" [");
-    Serial.print(Colours[ColIdx].Red);
-    Serial.print(F(","));
-    Serial.print(Colours[ColIdx].Green);
-    Serial.print(F(","));
-    Serial.print(Colours[ColIdx].Blue);
-    Serial.println("]");
-  }
+  CS.getRGB(&rgb); 
+  // look for match
+  return FindMatch();  
 }
 
-int8_t MatchColour(colorData *rgb)
+double FindMatch()
 {
   // Look through colours looking for a match
-  uint8_t Idx=0;
-  bool Found=false;
-  while((Idx<NumColours)&(Found==false))
+  switch(typeToRead)
   {
-    if((CheckColour(rgb->value[TCS230_RGB_R],Colours[Idx].Red)) &(CheckColour(rgb->value[TCS230_RGB_G],Colours[Idx].Green))&(CheckColour(rgb->value[TCS230_RGB_B],Colours[Idx].Blue)))
-          Found=true;
-    Idx++;
+    case AMMONIA:
+    {
+      // start at highest ammonia level - false positive better than false negative
+      for(int i = MAX_AMMONIA_COLORS - 1; i >= 0; --i)
+      {
+        c = Ammonia[i];
+        if(SameColor())
+          return Ammonia[i].ppm;
+      }
+      return -1;
+      break;
+    }
+    case NITRITE:
+    {
+      // start at highest nitrite level - false positive better than false negative
+      for(int i = MAX_NITRITE_NITRATE_COLORS - 1; i >= 0; --i)
+      {
+        c = Nitrite[i];
+        if(SameColor())
+          return Nitrite[i].ppm;
+      }
+      return -1;
+      break;
+    }
+    case NITRATE:
+    {
+      // start at highest nitrate level - false positive better than false negative
+      for(int i = MAX_NITRITE_NITRATE_COLORS - 1; i >= 0; --i)
+      {
+        c = Nitrate[i];
+        if(SameColor())
+          return Nitrate[i].ppm;
+      }
+      return -1;
+      break;
+    }   
   }
-  if(Found) return Idx-1; else return -1;
 }
 
-bool CheckColour(uint8_t ScanCol, uint8_t StoredCol)
+bool SameColor()
 {
-  // returns true if matched on this single colour else false
-  int16_t StoreColLow,StoreColHigh;
-  StoreColLow=StoredCol-TOLERANCE;
-  StoreColHigh=StoredCol+TOLERANCE;
-  if(StoreColLow<0) StoreColLow=0;
-  if(StoreColHigh>255) StoreColHigh=255;
-  return ((ScanCol>=StoreColLow)&(ScanCol<=StoreColHigh));
+  // values of stored color being compared against
+  uint8_t redExpected = rgb.value[TCS230_RGB_R];
+  uint8_t greenExpected = rgb.value[TCS230_RGB_R];
+  uint8_t blueExpected = rgb.value[TCS230_RGB_R];
 
-}
-
-char getChar()
-// Wait for user to return a char over serial connection, returns uppercase version of any alpha char
-{
-  while (Serial.available() == 0)
-    ;
-  return(toupper(Serial.read()));
+  // check if RGB values are within range specified by tolerance
+  if (c.p.R < (redExpected - TOLERANCE) or c.p.R > (redExpected + TOLERANCE))
+    return false;
+  if (c.p.G < (greenExpected - TOLERANCE) or c.p.G > (greenExpected + TOLERANCE))
+    return false;
+  if (c.p.B < (blueExpected - TOLERANCE) or c.p.B > (blueExpected + TOLERANCE))
+    return false;
+  Serial.print(F("\nFound Matching Color"));
+  return true;
 }
