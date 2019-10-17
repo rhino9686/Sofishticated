@@ -4,53 +4,43 @@
 //
 #include <MD_TCS230.h>   // colour sensor library
 #include <FreqCount.h>   // used by above library
-#include <EEPROM.h>      // Ensure data is still valid after power offs
 
 // Pin definitions
-#define  S2_OUT  12
-#define  S3_OUT  13
-#define  OE_OUT   8               // LOW = ENABLED wh
-#define MAX_COLOURS 10            // Max colours allowed to store, 10 takes up 140 bytes
+#define  S2  12
+#define  S3  13
+#define  OE   8               // LOW = ENABLED wh
+#define MAX_AMMONIA_COLORS 5
+#define MAX_NITRITE_NITRATE_COLORS 7
 #define TOLERANCE 35              // How far out the red,green or blue can be to match
+
+enum ReadType {
+  AMMONIA,
+  NITRATE,
+  NITRITE
+};
 
 typedef struct
 {
-  String Name;             // Name for Colour, plus 1 extra for terminator '0'
-  uint8_t Red,Green,Blue;  // The colour values
-}SingleColour;
+  uint8_t R, G, B;  
+}Pixel;
 
-SingleColour Colours[MAX_COLOURS];        // Our array of colours to match against       
-uint8_t NumColours;                     // Current Number of colours   
+typedef struct
+{
+  String Name;
+  Pixel p;
+}Color;
 
-MD_TCS230  CS(S2_OUT, S3_OUT, OE_OUT);
+Color Ammonia[MAX_AMMONIA_COLORS];
+Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
+Color Nitrate[MAX_NITRITE_NITRATE_COLORS];  
+
+MD_TCS230  CS(S2, S3, OE);
 
 void setup() 
 {
   Serial.begin(115200);
-  CS.begin();
-  // Check if we have some calibration data
-
-  /*sensorData sd;
-  sd.value[0] = 0;
-  sd.value[1] = 0;
-  sd.value[1] = 0;
-  CS.setDarkCal(&sd); 
-  sd.value[0] = 255;
-  sd.value[1] = 255;
-  sd.value[1] = 255;
-  CS.setWhiteCal(&sd);  */
-  int index = 0;
-  SingleColour sc;
-  sc.Name = "Ammonia0.0";
-  sc.Red = 255; sc.Green = 99; sc.Blue = 100;
-  Colours[index++] = sc;
-  ++NumColours;
-
-  sc.Name = "Ammonia0.25";
-  sc.Red = 180; sc.Green = 35; sc.Blue = 65;
-  Colours[index++] = sc;
-  ++NumColours;
-  
+  CS.begin();  
+  addColors();
 }
 
 void loop() 
@@ -61,9 +51,104 @@ void loop()
   switch(Choice)
   {
     case '1': 
-      ScanColour();
+      //ScanColor();
       break;
   }
+}
+
+// add possible color strip values to specific arrays
+void addColors()
+{
+  int index = 0;
+  Color c;
+  c.Name = "0.0";
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.Name = "0.0";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "0.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "0.25";
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.Name = "0.15";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "0.5";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "0.5";
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.Name = "0.3";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "2.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "3.0";
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.Name = "1.0";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "5.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "6.0";
+  c.p = {0, 0, 0};
+  Ammonia[index] = c;
+
+  c.Name = "1.5";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "10.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "3.0";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "20.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+
+  ++index;
+
+  c.Name = "10.0";
+  c.p = {0, 0, 0};
+  Nitrite[index] = c;
+
+  c.Name = "50.0";
+  c.p = {0, 0, 0};
+  Nitrate[index] = c;
+  
 }
 
 char MainMenu()
@@ -74,40 +159,46 @@ char MainMenu()
   return getChar();
 }
 
-void ScanColour()
+void ScanColor(ReadType type)
 {
-  // Scan and find a colour on the sensor
+  // Scan for color
   colorData  rgb;  
   CS.read();
   while(CS.available()==0);  // wait for read to complete
   CS.getRGB(&rgb);  
-  int8_t ColIdx=MatchColour(&rgb);  
-  Serial.print(F("\nScanning for RGB["));
-  Serial.print(rgb.value[TCS230_RGB_R]);
-  Serial.print(F(","));
-  Serial.print(rgb.value[TCS230_RGB_G]);
-  Serial.print(F(","));
-  Serial.print(rgb.value[TCS230_RGB_B]);
-  Serial.print(F("]\n"));
-  if(ColIdx==-1)
-    Serial.println("\nNo match found");
-  else
-  {
-    Serial.print("\nThat colour is ");
-    Serial.print(Colours[ColIdx].Name);
-    Serial.print(" [");
-    Serial.print(Colours[ColIdx].Red);
-    Serial.print(F(","));
-    Serial.print(Colours[ColIdx].Green);
-    Serial.print(F(","));
-    Serial.print(Colours[ColIdx].Blue);
-    Serial.println("]");
-  }
+  // look for match
+  double testStripValue = FindMatch(&rgb, type);  
+
 }
 
-int8_t MatchColour(colorData *rgb)
+double FindMatch(colorData *rgb, ReadType type)
 {
   // Look through colours looking for a match
+  switch(type)
+  {
+    case AMMONIA:
+    {
+      for(int i = MAX_AMMONIA_COLORS - 1; i >= 0; --i)
+      {
+        if(SameColor(rgb, Ammonia[i]))
+          return Ammonia[i].Name.toDouble();
+      }
+      break;
+    }
+    case NITRITE:
+    {
+
+      break;
+    }
+    case NITRATE:
+    {
+
+      break;
+    }   
+  }
+
+
+  
   uint8_t Idx=0;
   bool Found=false;
   while((Idx<NumColours)&(Found==false))
@@ -117,6 +208,11 @@ int8_t MatchColour(colorData *rgb)
     Idx++;
   }
   if(Found) return Idx-1; else return -1;
+}
+
+bool SameColor(colorData *rgb, ReadType type)
+{
+  bool same = true;
 }
 
 bool CheckColour(uint8_t ScanCol, uint8_t StoredCol)
