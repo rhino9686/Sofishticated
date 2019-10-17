@@ -20,7 +20,7 @@ typedef struct
 }SingleColour;
 
 SingleColour Colours[MAX_COLOURS];        // Our array of colours to match against       
-uint8_t NumColours=0;                     // Current Number of colours   
+uint8_t NumColours;                     // Current Number of colours   
 
 MD_TCS230  CS(S2_OUT, S3_OUT, OE_OUT);
 
@@ -42,13 +42,14 @@ void setup()
   int index = 0;
   SingleColour sc;
   sc.Name = "Ammonia0.0";
-  sc.Red = 176; sc.Green = 197; sc.Blue = 178;
+  sc.Red = 255; sc.Green = 99; sc.Blue = 100;
   Colours[index++] = sc;
+  ++NumColours;
 
   sc.Name = "Ammonia0.25";
-  sc.Red = 157; sc.Green = 187; sc.Blue = 177;
+  sc.Red = 180; sc.Green = 35; sc.Blue = 65;
   Colours[index++] = sc;
-
+  ++NumColours;
   
 }
 
