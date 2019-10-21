@@ -109,6 +109,10 @@ void TaskAmmoniaRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
+	  if (!findTestStrip())
+	  {
+		// transmit error to Wifi module  
+	  }
       setLED(Red);
       typeToRead = AMMONIA;
 	  vTaskDelay(700); // wait 10 sec for the test strip to develop
@@ -136,6 +140,10 @@ void TaskNitriteRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
+      if (!findTestStrip())
+      {
+	      // transmit error to Wifi module
+      }
       setLED(Green);
       typeToRead = NITRITE;
 	  vTaskDelay(4000); // wait 1 min for the test strip to develop
@@ -163,6 +171,10 @@ void TaskNitrateRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
+	  if (!findTestStrip())
+	  {
+		  // transmit error to Wifi module
+	  }
       setLED(Blue);
       typeToRead = NITRATE;
 	  vTaskDelay(4000); // wait 1 min for the test strip to develop

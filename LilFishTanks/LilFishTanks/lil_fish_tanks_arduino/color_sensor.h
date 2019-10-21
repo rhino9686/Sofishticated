@@ -27,7 +27,8 @@ typedef struct
 enum ReadType {
 	AMMONIA,
 	NITRATE,
-	NITRITE
+	NITRITE,
+	FIND_TEST_STRIP
 };
 
 ReadType typeToRead;
@@ -36,6 +37,7 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
+Color EmptyTestBox {0, {0, 0, 0}};
 
 colorData rgb;
 Color c;
@@ -146,11 +148,11 @@ bool SameColor()
 	uint8_t blueExpected = rgb.value[TCS230_RGB_R];
 
 	// check if RGB values are within range specified by tolerance
-	if (c.p.R < (redExpected - TOLERANCE) or c.p.R > (redExpected + TOLERANCE))
+	if (c.p.R < (redExpected - TOLERANCE) || c.p.R > (redExpected + TOLERANCE))
 	return false;
-	if (c.p.G < (greenExpected - TOLERANCE) or c.p.G > (greenExpected + TOLERANCE))
+	if (c.p.G < (greenExpected - TOLERANCE) || c.p.G > (greenExpected + TOLERANCE))
 	return false;
-	if (c.p.B < (blueExpected - TOLERANCE) or c.p.B > (blueExpected + TOLERANCE))
+	if (c.p.B < (blueExpected - TOLERANCE) || c.p.B > (blueExpected + TOLERANCE))
 	return false;
 	Serial.print(F("\nFound Matching Color"));
 	return true;
@@ -203,8 +205,19 @@ double ScanColor()
 {
 	// Scan for color
 	CS.read();
-	while(CS.available()==0);  // wait for read to complete
+	while(CS.available() == 0);  // wait for read to complete
 	CS.getRGB(&rgb);
 	// look for match
 	return FindMatch();
+}
+
+bool findTestStrip()
+{
+	// Scan for color
+	CS.read();
+	while (CS.available() == 0);
+	CS.getRGB(&rgb);
+	// look for match against black
+	c = EmptyTestBox;
+	return SameColor();
 }
