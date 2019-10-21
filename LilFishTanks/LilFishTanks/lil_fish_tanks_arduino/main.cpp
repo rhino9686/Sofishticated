@@ -5,6 +5,7 @@
 #include <Arduino_FreeRTOS.h>
 #include <semphr.h>
 #include "color_sensor.h"
+#include "indicatorLED.h"
 //Beginning of Auto generated function prototypes by Atmel Studio
 void fromWifi();
 //End of Auto generated function prototypes by Atmel Studio
@@ -37,8 +38,9 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
   }
 
-  // load test strip color data
+  // load test strip color data and initialize indicator LED
   addColors();
+  setupLED();
 
   // TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
   attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
@@ -107,9 +109,12 @@ void TaskAmmoniaRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-      // TODO: set indicator LED, analyze color value, transmit to Wifi
+      setLED(Red);
       typeToRead = AMMONIA;
+	  vTaskDelay(700); // wait 10 sec for the test strip to develop
       double value = ScanColor();
+	  // TODO: transmit value to Wifi module
+			  
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -130,9 +135,11 @@ void TaskNitriteRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-      // TODO: set indicator LED, analyze color value, transmit to Wifi
+      setLED(Green);
       typeToRead = NITRITE;
+	  vTaskDelay(4000); // wait 1 min for the test strip to develop
       double value = ScanColor();
+	  // TODO: transmit to Wifi module
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -153,9 +160,12 @@ void TaskNitrateRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-      // TODO: set indicator LED, analyze color value, transmit to Wifi
+      setLED(Blue);
       typeToRead = NITRATE;
+	  vTaskDelay(4000); // wait 1 min for the test strip to develop
       double value = ScanColor();
+	  // TODO: transmit to Wifi module
+	  
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
