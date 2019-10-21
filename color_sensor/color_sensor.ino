@@ -13,6 +13,10 @@
 #define MAX_NITRITE_NITRATE_COLORS 7
 #define TOLERANCE 35              // How far out the red,green or blue can be to match
 
+#define   Red   2
+#define   Green 3
+#define   Blue  4
+
 enum ReadType {
   AMMONIA,
   NITRATE,
@@ -38,9 +42,15 @@ MD_TCS230  CS(S2, S3, OE);
 
 void setup() 
 {
+  pinMode(Red, OUTPUT);
+  pinMode(Green, OUTPUT);
+  pinMode(Blue, OUTPUT);
   Serial.begin(115200);
   CS.begin();  
   addColors();
+  digitalWrite(Red, LOW);
+  digitalWrite(Green, LOW);
+  digitalWrite(Blue, HIGH);
 }
 
 void loop() 
