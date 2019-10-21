@@ -114,7 +114,8 @@ void TaskAmmoniaRead(void *pvParameters)
 	  vTaskDelay(700); // wait 10 sec for the test strip to develop
       double value = ScanColor();
 	  // TODO: transmit value to Wifi module
-			  
+	  
+	  setLED(Black);			  
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -140,6 +141,8 @@ void TaskNitriteRead(void *pvParameters)
 	  vTaskDelay(4000); // wait 1 min for the test strip to develop
       double value = ScanColor();
 	  // TODO: transmit to Wifi module
+	  
+	  setLED(Black);
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -166,6 +169,7 @@ void TaskNitrateRead(void *pvParameters)
       double value = ScanColor();
 	  // TODO: transmit to Wifi module
 	  
+	  setLED(Black);
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
