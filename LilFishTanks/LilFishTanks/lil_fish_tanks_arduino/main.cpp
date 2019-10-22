@@ -6,6 +6,7 @@
 #include <semphr.h>
 #include "color_sensor.h"
 #include "indicatorLED.h"
+#include "phSensor.h"
 //Beginning of Auto generated function prototypes by Atmel Studio
 void fromWifi();
 //End of Auto generated function prototypes by Atmel Studio
@@ -199,7 +200,12 @@ void TaskPHRead(void *pvParameters)
   TickType_t xLastWakeTime = xTaskGetTickCount();
   for (;;) // A Task shall never return or exit.
   {
-    // TODO: get pH value, transmit to Wifi
+    // Gets pH value
+	phInit();
+	float phValue = getPH();
+	
+	//TODO: Transmit ph to Wifi
+	
     digitalWrite(LED_BUILTIN, LOW);
     // check pH every 15 min
     vTaskDelayUntil( &xLastWakeTime, 900000 / portTICK_PERIOD_MS );
