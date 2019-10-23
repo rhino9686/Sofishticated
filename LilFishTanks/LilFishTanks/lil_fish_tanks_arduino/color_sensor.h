@@ -37,7 +37,8 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
-Color EmptyTestBox {0, {0, 0, 0}};
+Color EmptyTestBox {0, {27, 25, 43}};
+Color WhiteTestStrip {0, {80, 81, 125}};
 
 colorData rgb;
 Color c;
@@ -219,5 +220,7 @@ bool findTestStrip()
 	CS.getRGB(&rgb);
 	// look for match against black
 	c = EmptyTestBox;
-	return SameColor();
+	bool found =  SameColor();
+	c = WhiteTestStrip;
+	return found && SameColor();
 }

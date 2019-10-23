@@ -16,8 +16,7 @@ void fromWifi();
 
 // task definitions
 void TaskAmmoniaRead( void *pvParameters );
-void TaskNitriteRead( void *pvParameters );
-void TaskNitrateRead( void *pvParameters );
+void TaskNitriteNitrateRead( void *pvParameters );
 void TaskPHRead( void *pvParameters );
 void TaskTemperatureRead( void *pvParameters );
 
@@ -25,8 +24,7 @@ SemaphoreHandle_t xSerialSemaphoreColorSensor;
 SemaphoreHandle_t xSerialSemaphoreWifi;
 
 TaskHandle_t xAmmonia;
-TaskHandle_t xNitrite;
-TaskHandle_t xNitrate;
+TaskHandle_t xNitriteNitrate;
 TaskHandle_t xPH;
 TaskHandle_t xTemperature;
 
@@ -59,20 +57,12 @@ void setup() {
     ,  &xAmmonia );
 
   xTaskCreate(
-    TaskNitriteRead
-    ,  (const portCHAR *) "Nitrite"
+    TaskNitriteNitrateRead
+    ,  (const portCHAR *) "Nitrite/Nitrate"
     ,  128  // Stack size
     ,  NULL
     ,  2  // Priority
-    ,  &xNitrite );
-
-  xTaskCreate(
-    TaskNitrateRead
-    ,  (const portCHAR *) "Nitrate"
-    ,  128  // Stack size
-    ,  NULL
-    ,  2  // Priority
-    ,  &xNitrate );
+    ,  &xNitriteNitrate );
 
   xTaskCreate(
     TaskPHRead
@@ -113,13 +103,10 @@ void TaskAmmoniaRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-	  if (!findTestStrip())
-	  {
-		// transmit error to Wifi module  
-	  }
+	  while (!findTestStrip());
       setLED(Red);
       typeToRead = AMMONIA;
-	  vTaskDelay(700); // wait 10 sec for the test strip to develop
+	  //vTaskDelay(700); // wait 10 sec for the test strip to develop
       double value = ScanColor();
 	  // TODO: transmit value to Wifi module
 	  
@@ -134,7 +121,7 @@ void TaskAmmoniaRead(void *pvParameters)
 }
 
 // get Nitrite reading from color sensor
-void TaskNitriteRead(void *pvParameters)
+void TaskNitriteNitrateRead(void *pvParameters)
 {
   (void) pvParameters;
   
@@ -144,45 +131,23 @@ void TaskNitriteRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-      if (!findTestStrip())
-      {
-	      // transmit error to Wifi module
-      }
+      while (!findTestStrip());
       setLED(Green);
-      typeToRead = NITRITE;
-	  vTaskDelay(4000); // wait 1 min for the test strip to develop
+      typeToRead = NITRATE;
+	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
       double value = ScanColor();
 	  // TODO: transmit to Wifi module
 	  
 	  setLED(Black);
-      xSemaphoreGive( xSerialSemaphoreColorSensor );
-      //suspend until triggered by next interrupt from Wifi module
-      vTaskSuspend(NULL);
-    }
-
-    vTaskDelay(1); // 1 tick delay between reads for stability
-  }
-}
-
-// get Nitrate reading from color sensor
-void TaskNitrateRead(void *pvParameters)
-{
-  (void) pvParameters;
-  
-  TickType_t xLastWakeTime = xTaskGetTickCount();
-  pinMode(LED_BUILTIN, OUTPUT);
-  for (;;) // A Task shall never return or exit.
-  {
-    if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
-    {
-	  if (!findTestStrip())
+	  
+	  while (!findTestStrip())
 	  {
 		  // transmit error to Wifi module
 	  }
-      setLED(Blue);
-      typeToRead = NITRATE;
-	  vTaskDelay(4000); // wait 1 min for the test strip to develop
-      double value = ScanColor();
+	  setLED(Blue);
+	  typeToRead = NITRITE;
+	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
+	  double value = ScanColor();
 	  // TODO: transmit to Wifi module
 	  
 	  setLED(Black);
@@ -243,11 +208,8 @@ void fromWifi()
     case 'a':
       vTaskResume(xAmmonia);
       break;
-    case 'i':
-      vTaskResume(xNitrite);
-      break;
     case 'n':
-      vTaskResume(xNitrate);
+      vTaskResume(xNitriteNitrate);
       break;
   }
 }
