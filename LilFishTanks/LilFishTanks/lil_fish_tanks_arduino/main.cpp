@@ -4,6 +4,7 @@
 
 #include <Arduino_FreeRTOS.h>
 #include <semphr.h>
+#include "tempSensor.h"
 #include "color_sensor.h"
 #include "indicatorLED.h"
 #include "phSensor.h"
@@ -28,6 +29,8 @@ TaskHandle_t xNitrite;
 TaskHandle_t xNitrate;
 TaskHandle_t xPH;
 TaskHandle_t xTemperature;
+
+
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -220,10 +223,13 @@ void TaskTemperatureRead(void *pvParameters)
   TickType_t xLastWakeTime = xTaskGetTickCount();
   for (;;) // A Task shall never return or exit.
   {
-    // TODO: get temperature value, transmit to Wifi
-    digitalWrite(LED_BUILTIN, LOW);
-    // check temperature every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 900000 / portTICK_PERIOD_MS );
+    // Gets temperature value in Celsius
+	float temp = measureTemp();
+
+	// TODO: transmit to Wifi
+
+    // check temperature every 2 min
+    vTaskDelayUntil( &xLastWakeTime, 7500 / portTICK_PERIOD_MS );
   }
 }
 
