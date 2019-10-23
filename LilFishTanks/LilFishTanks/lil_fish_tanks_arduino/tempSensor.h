@@ -1,4 +1,4 @@
-#include <OneWire.h>
+#include "OneWire.h"
 
 #define TEMP_PIN 7
 
@@ -19,7 +19,7 @@ float measureTemp() {
 		Serial.println();
 		ds.reset_search();
 		delay(250);
-		return;
+		return -1;
 	}
 	
 	Serial.print("ROM =");
@@ -30,7 +30,7 @@ float measureTemp() {
 
 	if (OneWire::crc8(addr, 7) != addr[7]) {
 		Serial.println("CRC is not valid!");
-		return;
+		return -1;
 	}
 	Serial.println();
 	
@@ -50,7 +50,7 @@ float measureTemp() {
 		break;
 		default:
 		Serial.println("Device is not a DS18x20 family device.");
-		return;
+		return -1;
 	}
 
 	ds.reset();
