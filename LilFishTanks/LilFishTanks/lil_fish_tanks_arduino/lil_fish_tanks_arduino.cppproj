@@ -248,6 +248,12 @@
     <Compile Include="OneWire.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="OneWire_direct_gpio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OneWire_direct_regtype.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="phSensor.h">
       <SubType>compile</SubType>
     </Compile>
