@@ -11,11 +11,11 @@
 #define  OE   8               // LOW = ENABLED wh
 #define MAX_AMMONIA_COLORS 5
 #define MAX_NITRITE_NITRATE_COLORS 7
-#define TOLERANCE 35              // How far out the red,green or blue can be to match
+#define TOLERANCE 20              // How far out the red,green or blue can be to match
 
 typedef struct
 {
-	uint8_t R, G, B;
+	int R, G, B;
 }Pixel;
 
 typedef struct
@@ -37,8 +37,8 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
-Color EmptyTestBox {0, {27, 25, 43}};
-Color WhiteTestStrip {0, {80, 81, 125}};
+Color EmptyTestBox {0, {162, 25, 25}};
+Color WhiteTestStrip {0, {255, 81, 84}};
 
 colorData rgb;
 Color c;
@@ -145,16 +145,38 @@ bool SameColor()
 {
 	// values of stored color being compared against
 	uint8_t redExpected = rgb.value[TCS230_RGB_R];
-	uint8_t greenExpected = rgb.value[TCS230_RGB_R];
-	uint8_t blueExpected = rgb.value[TCS230_RGB_R];
-
+	uint8_t greenExpected = rgb.value[TCS230_RGB_G];
+	uint8_t blueExpected = rgb.value[TCS230_RGB_B];
+	Serial.print("c: ");
+	Serial.print(c.p.R);
+	Serial.print(" ");
+	Serial.print(c.p.G);
+	Serial.print(" ");
+	Serial.print(c.p.B);
+	Serial.print("read_in: ");
+	Serial.print(redExpected);
+	Serial.print(" ");
+	Serial.print(greenExpected);
+	Serial.print(" ");
+	Serial.print(blueExpected);
 	// check if RGB values are within range specified by tolerance
-	if (c.p.R < (redExpected - TOLERANCE) || c.p.R > (redExpected + TOLERANCE))
-	return false;
-	if (c.p.G < (greenExpected - TOLERANCE) || c.p.G > (greenExpected + TOLERANCE))
-	return false;
-	if (c.p.B < (blueExpected - TOLERANCE) || c.p.B > (blueExpected + TOLERANCE))
-	return false;
+	if (redExpected < (c.p.R - TOLERANCE) || redExpected > (c.p.R + TOLERANCE))
+	{
+		
+		//Serial.print("Red fails")	;
+		return false;
+	}
+	
+	if (greenExpected < (c.p.G - TOLERANCE) || greenExpected > (c.p.G + TOLERANCE))
+	{
+		//Serial.print("Green fails");
+		return false;}
+	if (blueExpected < (c.p.B - TOLERANCE) || blueExpected > (c.p.B + TOLERANCE))
+	{
+		//Serial.print("Blue fails")	;
+		return false;
+	}
+	
 	Serial.print(F("\nFound Matching Color"));
 	return true;
 }
@@ -220,7 +242,10 @@ bool findTestStrip()
 	CS.getRGB(&rgb);
 	// look for match against black
 	c = EmptyTestBox;
-	bool found =  SameColor();
+	bool foundEmptyBox = SameColor();
 	c = WhiteTestStrip;
-	return found && SameColor();
+	foundEmptyBox =  foundEmptyBox || SameColor();
+	Serial.print(foundEmptyBox);
+	Serial.print("\n");
+	return foundEmptyBox;
 }

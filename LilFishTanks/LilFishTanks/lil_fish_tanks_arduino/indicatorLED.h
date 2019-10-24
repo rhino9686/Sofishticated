@@ -16,7 +16,7 @@ LEDColor Cyan = {0, 255, 255};
 LEDColor Magenta = {255, 0, 255};
 LEDColor Yellow = {255, 255, 0};
 LEDColor White = {255, 255, 255};
-LEDColor Black = {0, 0, 0};
+LEDColor Off = {0, 0, 0};
 
 
 void setLED(LEDColor c)
@@ -31,5 +31,5 @@ void setupLED()
 	pinMode(R_LED, OUTPUT);
 	pinMode(G_LED, OUTPUT);
 	pinMode(B_LED, OUTPUT);
-	setLED(Black);
+	setLED(Off);
 }

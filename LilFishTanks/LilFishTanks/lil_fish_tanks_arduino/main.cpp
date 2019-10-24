@@ -43,6 +43,11 @@ void setup() {
   // load test strip color data and initialize indicator LED
   addColors();
   setupLED();
+  
+  // initialize pH sensor
+  phInit();
+  
+  digitalWrite(0, LOW);
 
   // TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
   attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
@@ -56,15 +61,15 @@ void setup() {
     ,  2
     ,  &xAmmonia );
 
-  xTaskCreate(
+  /*xTaskCreate(
     TaskNitriteNitrateRead
     ,  (const portCHAR *) "Nitrite/Nitrate"
     ,  128  // Stack size
     ,  NULL
     ,  2  // Priority
-    ,  &xNitriteNitrate );
+    ,  &xNitriteNitrate );*/
 
-  xTaskCreate(
+  /*xTaskCreate(
     TaskPHRead
     ,  (const portCHAR *) "pH"
     ,  128  // Stack size
@@ -78,9 +83,13 @@ void setup() {
     ,  128  // Stack size
     ,  NULL
     ,  2  // Priority
-    ,  &xTemperature );
+    ,  &xTemperature );*/
+	
+  //vTaskSuspend(xAmmonia);
+  //vTaskSuspend(xNitriteNitrate);
 
   // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
+  vTaskStartScheduler();
 }
 
 void loop()
@@ -103,16 +112,19 @@ void TaskAmmoniaRead(void *pvParameters)
   {
     if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
     {
-	  while (!findTestStrip());
-      setLED(Red);
+	  digitalWrite(9, HIGH);
+	  setLED(Blue);
+	  while (findTestStrip());
+      setLED(Green);
       typeToRead = AMMONIA;
-	  //vTaskDelay(700); // wait 10 sec for the test strip to develop
+	  
       double value = ScanColor();
 	  // TODO: transmit value to Wifi module
 	  
-	  setLED(Black);			  
+	  setLED(Off);	
+	  digitalWrite(9, LOW);		  
       xSemaphoreGive( xSerialSemaphoreColorSensor );
-      //suspend until triggered by next interrupt from Wifi module
+      // suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
     }
 
@@ -138,7 +150,7 @@ void TaskNitriteNitrateRead(void *pvParameters)
       double value = ScanColor();
 	  // TODO: transmit to Wifi module
 	  
-	  setLED(Black);
+	  setLED(Off);
 	  
 	  while (!findTestStrip())
 	  {
@@ -147,10 +159,10 @@ void TaskNitriteNitrateRead(void *pvParameters)
 	  setLED(Blue);
 	  typeToRead = NITRITE;
 	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
-	  double value = ScanColor();
+	  value = ScanColor();
 	  // TODO: transmit to Wifi module
 	  
-	  setLED(Black);
+	  setLED(Off);
       xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
       vTaskSuspend(NULL);
@@ -158,7 +170,7 @@ void TaskNitriteNitrateRead(void *pvParameters)
 
     vTaskDelay(1); // 1 tick delay between reads for stability
   }
-}
+}*/
 
 // get pH reading from sensor
 void TaskPHRead(void *pvParameters)
@@ -168,15 +180,18 @@ void TaskPHRead(void *pvParameters)
   TickType_t xLastWakeTime = xTaskGetTickCount();
   for (;;) // A Task shall never return or exit.
   {
-    // Gets pH value
-	phInit();
+    setLED(Red);
+	digitalWrite(9, HIGH);
+	// Gets pH value
+	delay(500);
 	float phValue = getPH();
 	
 	//TODO: Transmit ph to Wifi
 	
-    digitalWrite(LED_BUILTIN, LOW);
+    setLED(Off);
+	digitalWrite(9, LOW);
     // check pH every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 900000 / portTICK_PERIOD_MS );
+    vTaskDelayUntil( &xLastWakeTime, 4000 / portTICK_PERIOD_MS );
   }
 }
 
@@ -188,11 +203,13 @@ void TaskTemperatureRead(void *pvParameters)
   TickType_t xLastWakeTime = xTaskGetTickCount();
   for (;;) // A Task shall never return or exit.
   {
+	setLED(Blue);
     // Gets temperature value in Celsius
 	float temp = measureTemp();
-
+	Serial.print(temp);
+	
 	// TODO: transmit to Wifi
-
+	setLED(Off);
     // check temperature every 2 min
     vTaskDelayUntil( &xLastWakeTime, 7500 / portTICK_PERIOD_MS );
   }
