@@ -45,8 +45,9 @@ main.d main.o: .././main.cpp ..\\..\ArduinoCore\include\core/Arduino.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/task.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/list.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/semphr.h \
- ..\\..\ArduinoCore\include\libraries\FreeRTOS/queue.h .././tempSensor.h \
- .././OneWire.h \
+ ..\\..\ArduinoCore\include\libraries\FreeRTOS/queue.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\assert.h \
+ .././tempSensor.h .././OneWire.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\crc16.h \
  .././OneWire_direct_regtype.h .././color_sensor.h \
  ..\\..\ArduinoCore\include\libraries\MD_TCS230/MD_TCS230.h \
@@ -149,6 +150,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ..\\..\ArduinoCore\include\libraries\FreeRTOS/semphr.h:
 
 ..\\..\ArduinoCore\include\libraries\FreeRTOS/queue.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\assert.h:
 
 .././tempSensor.h:
 

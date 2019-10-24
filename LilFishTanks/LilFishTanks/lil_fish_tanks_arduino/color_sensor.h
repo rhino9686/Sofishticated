@@ -224,7 +224,7 @@ double FindMatch()
 	}
 }
 
-double ScanColor()
+long ScanColor()
 {
 	// Scan for color
 	CS.read();

@@ -4,6 +4,7 @@
 
 #include <Arduino_FreeRTOS.h>
 #include <semphr.h>
+#include <assert.h>
 #include "tempSensor.h"
 #include "color_sensor.h"
 #include "indicatorLED.h"
@@ -33,12 +34,18 @@ TaskHandle_t xTemperature;
 // the setup function runs once when you press reset or power the board
 void setup() {
   
-  // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
+  // initialize serial communication at 115200 bits per second:
+  Serial.begin(115200);
   
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
   }
+  
+  // initialize Wifi module
+  Serial.write("AT");
+  //String okay = Serial.read(); // unsure how to read from Wifi module
+  //assert(okay == "OK"); // module is on
+  Serial.write("AT+CWMODE=1"); // client mode
 
   // load test strip color data and initialize indicator LED
   addColors();
@@ -61,15 +68,15 @@ void setup() {
     ,  2
     ,  &xAmmonia );
 
-  /*xTaskCreate(
+  xTaskCreate(
     TaskNitriteNitrateRead
     ,  (const portCHAR *) "Nitrite/Nitrate"
     ,  128  // Stack size
     ,  NULL
     ,  2  // Priority
-    ,  &xNitriteNitrate );*/
+    ,  &xNitriteNitrate );
 
-  /*xTaskCreate(
+  xTaskCreate(
     TaskPHRead
     ,  (const portCHAR *) "pH"
     ,  128  // Stack size
@@ -83,10 +90,10 @@ void setup() {
     ,  128  // Stack size
     ,  NULL
     ,  2  // Priority
-    ,  &xTemperature );*/
+    ,  &xTemperature );
 	
-  //vTaskSuspend(xAmmonia);
-  //vTaskSuspend(xNitriteNitrate);
+  vTaskSuspend(xAmmonia);
+  vTaskSuspend(xNitriteNitrate);
 
   // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
   vTaskStartScheduler();
@@ -115,11 +122,16 @@ void TaskAmmoniaRead(void *pvParameters)
 	  digitalWrite(9, HIGH);
 	  setLED(Blue);
 	  while (findTestStrip());
-      setLED(Green);
-      typeToRead = AMMONIA;
+	  setLED(Green);
+	  delay(250); // let user see LED and stop moving before measuring
 	  
-      double value = ScanColor();
+      typeToRead = AMMONIA;
+      long value = ScanColor();
 	  // TODO: transmit value to Wifi module
+	  Serial.write("AT+CTIPSEND"); // indicate we are about to send ammonia
+	  Serial.write("ammonia");
+	  Serial.write("AT+CTIPSEND"); // send ammonia
+	  Serial.write(value);
 	  
 	  setLED(Off);	
 	  digitalWrite(9, LOW);		  
@@ -145,10 +157,15 @@ void TaskNitriteNitrateRead(void *pvParameters)
     {
       while (!findTestStrip());
       setLED(Green);
+	  delay(250); // allow user to see LED and stop moving test strip
       typeToRead = NITRATE;
 	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
-      double value = ScanColor();
+      long value = ScanColor();
 	  // TODO: transmit to Wifi module
+	  Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrate
+	  Serial.write("nitrate");
+	  Serial.write("AT+CTIPSEND"); // send nitrate
+	  Serial.write(value);
 	  
 	  setLED(Off);
 	  
@@ -161,6 +178,10 @@ void TaskNitriteNitrateRead(void *pvParameters)
 	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
 	  value = ScanColor();
 	  // TODO: transmit to Wifi module
+	  Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrite
+	  Serial.write("nitrite");
+	  Serial.write("AT+CTIPSEND"); // send nitrite
+	  Serial.write(value);
 	  
 	  setLED(Off);
       xSemaphoreGive( xSerialSemaphoreColorSensor );
@@ -170,7 +191,7 @@ void TaskNitriteNitrateRead(void *pvParameters)
 
     vTaskDelay(1); // 1 tick delay between reads for stability
   }
-}*/
+}
 
 // get pH reading from sensor
 void TaskPHRead(void *pvParameters)
@@ -184,9 +205,13 @@ void TaskPHRead(void *pvParameters)
 	digitalWrite(9, HIGH);
 	// Gets pH value
 	delay(500);
-	float phValue = getPH();
+	long phValue = getPH();
 	
 	//TODO: Transmit ph to Wifi
+	Serial.write("AT+CTIPSEND"); // indicate we are about to send pH
+	Serial.write("pH");
+	Serial.write("AT+CTIPSEND"); // send pH
+	Serial.write(phValue);
 	
     setLED(Off);
 	digitalWrite(9, LOW);
@@ -205,10 +230,14 @@ void TaskTemperatureRead(void *pvParameters)
   {
 	setLED(Blue);
     // Gets temperature value in Celsius
-	float temp = measureTemp();
-	Serial.print(temp);
+	long temp = measureTemp();
 	
 	// TODO: transmit to Wifi
+	Serial.write("AT+CTIPSEND"); // indicate that we are about to send temp
+	Serial.write("temp");
+	Serial.write("AT+CTIPSEND"); // send temp
+	Serial.write(temp);
+	
 	setLED(Off);
     // check temperature every 2 min
     vTaskDelayUntil( &xLastWakeTime, 7500 / portTICK_PERIOD_MS );
