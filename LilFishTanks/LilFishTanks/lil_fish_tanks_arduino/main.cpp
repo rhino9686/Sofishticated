@@ -205,7 +205,8 @@ void TaskPHRead(void *pvParameters)
 	digitalWrite(9, HIGH);
 	// Gets pH value
 	delay(500);
-	long phValue = getPH();
+	long temp = measureTemp();
+	long phValue = getPH(temp);
 	
 	//TODO: Transmit ph to Wifi
 	Serial.write("AT+CTIPSEND"); // indicate we are about to send pH
