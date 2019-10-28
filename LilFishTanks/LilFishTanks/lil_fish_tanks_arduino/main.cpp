@@ -60,13 +60,13 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
 
   // Now set up two tasks to run independently.
-  xTaskCreate(
+  /*xTaskCreate(
     TaskAmmoniaRead
     ,  (const portCHAR *)"Ammonia"
     ,  128
     ,  NULL
     ,  2
-    ,  &xAmmonia );
+    ,  &xAmmonia );*/
 
   xTaskCreate(
     TaskNitriteNitrateRead
@@ -76,7 +76,7 @@ void setup() {
     ,  2  // Priority
     ,  &xNitriteNitrate );
 
-  xTaskCreate(
+  /*xTaskCreate(
     TaskPHRead
     ,  (const portCHAR *) "pH"
     ,  128  // Stack size
@@ -93,7 +93,7 @@ void setup() {
     ,  &xTemperature );
 	
   vTaskSuspend(xAmmonia);
-  vTaskSuspend(xNitriteNitrate);
+  vTaskSuspend(xNitriteNitrate);*/
 
   // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
   vTaskStartScheduler();
@@ -153,43 +153,44 @@ void TaskNitriteNitrateRead(void *pvParameters)
   pinMode(LED_BUILTIN, OUTPUT);
   for (;;) // A Task shall never return or exit.
   {
-    if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
-    {
-      while (!findTestStrip());
+    //if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
+    //{
+		setLED(Red);
+	  typeToRead = NITRATE;
+      while (findTestStrip());
       setLED(Green);
 	  delay(250); // allow user to see LED and stop moving test strip
-      typeToRead = NITRATE;
+      
 	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
       long value = ScanColor();
 	  // TODO: transmit to Wifi module
-	  Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrate
-	  Serial.write("nitrate");
-	  Serial.write("AT+CTIPSEND"); // send nitrate
-	  Serial.write(value);
+	  //Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrate
+	  //Serial.write("nitrate");
+	  //Serial.write("AT+CTIPSEND"); // send nitrate
+	  //Serial.write(value);
 	  
 	  setLED(Off);
 	  
-	  while (!findTestStrip())
-	  {
-		  // transmit error to Wifi module
-	  }
-	  setLED(Blue);
 	  typeToRead = NITRITE;
+	  while (findTestStrip());
+	  setLED(Blue);
+	  delay(250);
+	  
 	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
 	  value = ScanColor();
 	  // TODO: transmit to Wifi module
-	  Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrite
-	  Serial.write("nitrite");
-	  Serial.write("AT+CTIPSEND"); // send nitrite
-	  Serial.write(value);
+	 // Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrite
+	  //Serial.write("nitrite");
+	  //Serial.write("AT+CTIPSEND"); // send nitrite
+	  //Serial.write(value);
 	  
 	  setLED(Off);
-      xSemaphoreGive( xSerialSemaphoreColorSensor );
+      //xSemaphoreGive( xSerialSemaphoreColorSensor );
       //suspend until triggered by next interrupt from Wifi module
-      vTaskSuspend(NULL);
-    }
-
-    vTaskDelay(1); // 1 tick delay between reads for stability
+      //vTaskSuspend(NULL);
+   // }
+	vTaskDelayUntil( &xLastWakeTime, 10000 / portTICK_PERIOD_MS );
+    //vTaskDelay(2000); // 1 tick delay between reads for stability
   }
 }
 

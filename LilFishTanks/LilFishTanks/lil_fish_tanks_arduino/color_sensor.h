@@ -8,10 +8,10 @@
 // Pin definitions
 #define  S2  12
 #define  S3  13
-#define  OE   8               // LOW = ENABLED wh
+#define  OE   8               // LOW = ENABLED
 #define MAX_AMMONIA_COLORS 5
 #define MAX_NITRITE_NITRATE_COLORS 7
-#define TOLERANCE 20              // How far out the red,green or blue can be to match
+#define TOLERANCE 5              // How far out the red,green or blue can be to match
 
 typedef struct
 {
@@ -37,8 +37,8 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
-Color EmptyTestBox {0, {162, 25, 25}};
-Color WhiteTestStrip {0, {255, 81, 84}};
+Color EmptyTestBox {0, {140, 15, 15}};
+Color WhiteTestStrip {0, {245, 45, 45}};
 
 colorData rgb;
 Color c;
@@ -56,11 +56,11 @@ void addColors()
 	Ammonia[index] = c;
 
 	c.ppm = 0.0;
-	c.p = {0, 0, 0};
+	c.p = {255, 95, 95};
 	Nitrite[index] = c;
 
 	c.ppm = 0.0;
-	c.p = {0, 0, 0};
+	c.p = {255, 95, 95};
 	Nitrate[index] = c;
 
 	++index;
@@ -161,21 +161,11 @@ bool SameColor()
 	Serial.print(blueExpected);
 	// check if RGB values are within range specified by tolerance
 	if (redExpected < (c.p.R - TOLERANCE) || redExpected > (c.p.R + TOLERANCE))
-	{
-		
-		//Serial.print("Red fails")	;
 		return false;
-	}
-	
 	if (greenExpected < (c.p.G - TOLERANCE) || greenExpected > (c.p.G + TOLERANCE))
-	{
-		//Serial.print("Green fails");
-		return false;}
-	if (blueExpected < (c.p.B - TOLERANCE) || blueExpected > (c.p.B + TOLERANCE))
-	{
-		//Serial.print("Blue fails")	;
 		return false;
-	}
+	if (blueExpected < (c.p.B - TOLERANCE) || blueExpected > (c.p.B + TOLERANCE))
+		return false;
 	
 	Serial.print(F("\nFound Matching Color"));
 	return true;
@@ -243,9 +233,13 @@ bool findTestStrip()
 	// look for match against black
 	c = EmptyTestBox;
 	bool foundEmptyBox = SameColor();
+	Serial.print(" foundEmptyBox ");
+	Serial.println(foundEmptyBox);
+	Serial.print("\n");
 	c = WhiteTestStrip;
 	foundEmptyBox =  foundEmptyBox || SameColor();
-	Serial.print(foundEmptyBox);
+	Serial.print(" foundEmptyBoxOrTestStrip ");
+	Serial.println(foundEmptyBox);
 	Serial.print("\n");
-	return foundEmptyBox;
+	return foundEmptyBox && (FindMatch() == -1);
 }
