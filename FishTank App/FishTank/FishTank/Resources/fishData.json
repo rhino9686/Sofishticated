@@ -1,0 +1,13 @@
+[
+    {
+           "name": "Lucky",
+           "id": 1001,
+           "imageName": "goldfish"
+    },
+
+    {
+           "name": "Steve",
+           "id": 1002,
+           "imageName": "seaSnail"
+    }
+]
