@@ -17,6 +17,8 @@ The model for a fishtank.
 
 final class TankProfile: ObservableObject {
     
+    let messenger: Messenger
+    
     var inFahrenheight = true;
     
     //Placeholder array of fish
@@ -85,6 +87,8 @@ final class TankProfile: ObservableObject {
     // Default constructor
     init() {
         currentResidents = [FishProfile]()
+        messenger = Messenger(ipAddress: "0.0.0.1")
+        
     }
     
     
@@ -103,6 +107,10 @@ final class TankProfile: ObservableObject {
     }
     
     
+    func updateParams() {
+        return
+    }
+    
 }
 
 
@@ -116,13 +124,5 @@ struct TankConfig {
     
 }
 
-
-extension Double //Delete later, kinda useless
-{
-    func truncate(places : Int)-> Double
-    {
-        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
-    }
-}
 
 

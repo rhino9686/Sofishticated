@@ -17,12 +17,15 @@ struct TankHome: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: FishDetail(fish: fishData[0])) {
-                     FishRow(fishProfile: fishData[0])
-                }
-            
-                NavigationLink(destination: FishDetail(fish: fishData[1])) {
-                     FishRow(fishProfile: fishData[1])
+                
+                ForEach(tankData.placeHolderFish, id: \.self) { fish in
+               
+                        NavigationLink(
+                            destination: FishDetail(fish: fish)
+                                .environmentObject(self.tankData)
+                        ){
+                            FishRow(fishProfile: fish)
+                    }
                 }
                 
                 NavigationLink(destination: AddFishView()) {
@@ -31,9 +34,6 @@ struct TankHome: View {
                 }
                 
 
-                    
-                
-                
                 Divider()
                 TankStatsView()
                     .environmentObject(self.tankData)
@@ -49,7 +49,7 @@ struct TankHome: View {
                     Text("Reminders")
                     .fontWeight(.semibold)
                 }
-                NavigationLink(destination: RemindersView()) {
+                NavigationLink(destination: SettingsView()) {
                     Text("Settings")
                     .fontWeight(.semibold)
                 }

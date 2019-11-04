@@ -11,10 +11,9 @@ import SwiftUI
 struct CircleImage: View {
     
     var fish: FishProfile
-    var fishImage: Image = fishData[0].image
     
     var body: some View {
-        fishImage
+        fish.image
             .resizable()
             .clipShape(Circle())
             .overlay(
@@ -25,6 +24,6 @@ struct CircleImage: View {
 
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
-        CircleImage(fish: fishData[0])
+        CircleImage(fish: fishData[1])
     }
 }

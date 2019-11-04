@@ -25,6 +25,6 @@ struct FishDetail: View {
 
 struct FishDetail_Previews: PreviewProvider {
     static var previews: some View {
-        FishDetail(fish: fishData[0])
+        FishDetail(fish: fishData[1])
     }
 }
