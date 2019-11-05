@@ -11,8 +11,10 @@ import SwiftUI
 struct AddFishView: View {
     
     @State private var name: String = ""
-    @State private var email: String = ""
+    @State private var type: String = ""
     @State private var password: String = ""
+    
+    let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
     
     var body: some View {
         NavigationView {
@@ -22,7 +24,12 @@ struct AddFishView: View {
                 }
                 
                 Section(header: Text("Type of Fish")) {
-                    TextField("Enter your fish's breed", text: $name)
+                    Picker(selection: $type, label: Text("Types"), content: {
+                        ForEach(listOfBreeds, id: \.self){ type in
+                             Text(type)
+                        }
+                        
+                    })
                 }
 
                 Section {

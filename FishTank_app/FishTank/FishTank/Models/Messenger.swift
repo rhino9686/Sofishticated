@@ -10,8 +10,10 @@ import Foundation
 
 final class Messenger {
     
-    //IP Address of target Server
+    //IP Address of target server
     private var ipAddress: String
+    //Port number of target server
+    private var port: String = ":5000"
     
     //Something to hold the result of a Get request
     private var result: String = "Result Placeholder"
@@ -59,13 +61,13 @@ final class Messenger {
         
         let json = ["query":param]
         
-        var HttpResult: String = "Error"
+        var HttpResult: String = "Nothing received"
         
         do {
             
             let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
             
-            let urlString =   "http://" + self.ipAddress + route
+            let urlString =   "http://" + self.ipAddress + self.port + route
             let url = URL(string: urlString)!
             
             var request = URLRequest(url: url)
@@ -74,21 +76,37 @@ final class Messenger {
             request.httpBody = jsonData
 
             
-            let task = URLSession.shared.dataTask(with: request){ data, response, error in
+            let task = URLSession.shared.dataTask(with: request as URLRequest){ (data, response, error) in
                 if error != nil{
                     print("Error -> \(String(describing: error))")
                     return
                 }
+                
+                if response == nil {
+                    print("Empty Response")
+                    return
+                }
+                guard let data = data else {
+                    print("Empty Data")
+                    return
+                }
+                
                 do {
-                    let result = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String:AnyObject]
+                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
+                    let randVal = result?["randVal"] as! String
+                    
+                    HttpResult = randVal
                     print("Result -> \(String(describing: result))")
-                    HttpResult = (String(describing: result))
                     
                 } catch {
                     print("Error -> \(error)")
                 }
             }
+            
+            
             task.resume()
+            usleep(200000)
+            return HttpResult
         } catch {
             print(error)
             
@@ -99,19 +117,19 @@ final class Messenger {
     
     
     func requestRando() -> String {
-        return sendRequest(param: "rando", route: "fromApp/getRando")
+        return sendRequest(param: "rando", route: "/fromApp/requestRando")
     }
     
     
     
     // Requests the Tanks's pH from the server
     func requestPh() -> String {
-         return sendRequest(param: "pH", route: "fromApp/getPH")
+         return sendRequest(param: "pH", route: "/fromApp/requestPH")
     }
     
     // Requests the Tank's Temperature from the server
     func requestTemp() -> String {
-        return sendRequest(param: "Temp", route: "fromApp/getTemp")
+        return sendRequest(param: "Temp", route: "/fromApp/requestTemp")
     }
     
     

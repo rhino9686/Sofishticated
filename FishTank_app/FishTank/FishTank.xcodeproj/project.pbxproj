@@ -27,7 +27,7 @@
 		41C616802351464D003DADD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C6167E2351464D003DADD8 /* LaunchScreen.storyboard */; };
 		41C6168B2351464E003DADD8 /* FishTankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6168A2351464E003DADD8 /* FishTankTests.swift */; };
 		41C616962351464E003DADD8 /* FishTankUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C616952351464E003DADD8 /* FishTankUITests.swift */; };
-		41E35CCD236FBC8A00B45147 /* SelectBreedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E35CCC236FBC8A00B45147 /* SelectBreedView.swift */; };
+		41E2144D2370EB3F0050433E /* TestConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2144C2370EB3F0050433E /* TestConnectionView.swift */; };
 		41E35CCF236FBCD200B45147 /* fishBreeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 41E35CCE236FBCD200B45147 /* fishBreeds.json */; };
 		41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41E35CD2236FCB7300B45147 /* seaSnail.jpg */; };
 		41E35CD5236FCE9800B45147 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E35CD4236FCE9800B45147 /* SettingsView.swift */; };
@@ -78,7 +78,7 @@
 		41C616912351464E003DADD8 /* FishTankUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FishTankUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C616952351464E003DADD8 /* FishTankUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishTankUITests.swift; sourceTree = "<group>"; };
 		41C616972351464E003DADD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		41E35CCC236FBC8A00B45147 /* SelectBreedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBreedView.swift; sourceTree = "<group>"; };
+		41E2144C2370EB3F0050433E /* TestConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConnectionView.swift; sourceTree = "<group>"; };
 		41E35CCE236FBCD200B45147 /* fishBreeds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fishBreeds.json; sourceTree = "<group>"; };
 		41E35CD2236FCB7300B45147 /* seaSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = seaSnail.jpg; sourceTree = "<group>"; };
 		41E35CD4236FCE9800B45147 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -125,7 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				41C162AC235E39AA00413584 /* AddFishView.swift */,
-				41E35CCC236FBC8A00B45147 /* SelectBreedView.swift */,
+				41E35CD4236FCE9800B45147 /* SettingsView.swift */,
+				41AF6B23235E2B8B005BA174 /* RemindersView.swift */,
+				41E2144C2370EB3F0050433E /* TestConnectionView.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -170,8 +172,6 @@
 				410FE231235BC4E800F69F43 /* FishRow.swift */,
 				417A8525235E019D00C00E8C /* FishDetail.swift */,
 				416B8668235CF72400C36ED7 /* TankStatsView.swift */,
-				41AF6B23235E2B8B005BA174 /* RemindersView.swift */,
-				41E35CD4236FCE9800B45147 /* SettingsView.swift */,
 				413BF50523673F9B0081F5CB /* Home.swift */,
 				41C616792351464D003DADD8 /* Assets.xcassets */,
 				41AECDD9235631A90091A1BA /* Supporting Views */,
@@ -350,6 +350,7 @@
 				41F42EA623615108000B9182 /* Messenger.swift in Sources */,
 				41AECDE0235634F20091A1BA /* Data.swift in Sources */,
 				41C616742351464C003DADD8 /* AppDelegate.swift in Sources */,
+				41E2144D2370EB3F0050433E /* TestConnectionView.swift in Sources */,
 				410FE232235BC4E800F69F43 /* FishRow.swift in Sources */,
 				4128BA73235547DE00C55044 /* CircleImage.swift in Sources */,
 				4128BA7523554BD900C55044 /* MapView.swift in Sources */,
@@ -359,7 +360,6 @@
 				41C616762351464C003DADD8 /* SceneDelegate.swift in Sources */,
 				416B866B235CF84B00C36ED7 /* TankData.swift in Sources */,
 				417A8526235E019D00C00E8C /* FishDetail.swift in Sources */,
-				41E35CCD236FBC8A00B45147 /* SelectBreedView.swift in Sources */,
 				413BF50623673F9B0081F5CB /* Home.swift in Sources */,
 				416B8669235CF72400C36ED7 /* TankStatsView.swift in Sources */,
 			);
