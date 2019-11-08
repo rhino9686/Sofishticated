@@ -91,6 +91,13 @@ final class TankProfile: ObservableObject {
         
     }
     
+    // Extra constructor for variable IP address
+    init( ipAddressInput: String ) {
+        currentResidents = [FishProfile]()
+        messenger = Messenger(ipAddress: ipAddressInput)
+        
+    }
+    
     
     //Adds a new fish to the tank
     func addFish(fishEntry fish: FishProfile){
@@ -112,17 +119,5 @@ final class TankProfile: ObservableObject {
     }
     
 }
-
-
-struct TankConfig {
-    
-    var maxTemp: Double
-    var minTemp: Double
-    
-    var minPh: Double
-    var maxPh: Double
-    
-}
-
 
 

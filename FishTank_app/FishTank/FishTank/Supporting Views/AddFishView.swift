@@ -17,7 +17,6 @@ struct AddFishView: View {
     let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
     
     var body: some View {
-        NavigationView {
             Form {
                 Section(header: Text("Your Fish's Name")) {
                     TextField("Enter your name", text: $name)
@@ -41,7 +40,7 @@ struct AddFishView: View {
                 }
             }
             .navigationBarTitle(Text("Add New Fish"))
-        }
+        
     }
 }
 

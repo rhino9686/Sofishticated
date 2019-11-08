@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		410FE232235BC4E800F69F43 /* FishRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FE231235BC4E800F69F43 /* FishRow.swift */; };
 		410FE235235BC58700F69F43 /* goldfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 410FE233235BC58700F69F43 /* goldfish.jpg */; };
+		41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41194B782375EBCE005BF9EF /* LivingConfig.swift */; };
+		41194B7B2375EE90005BF9EF /* betta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7A2375EE90005BF9EF /* betta.jpg */; };
+		41194B7D2375EF9B005BF9EF /* tetra.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7C2375EF9B005BF9EF /* tetra.jpg */; };
 		4128BA73235547DE00C55044 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128BA72235547DE00C55044 /* CircleImage.swift */; };
 		4128BA7523554BD900C55044 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128BA7423554BD900C55044 /* MapView.swift */; };
 		413BF50623673F9B0081F5CB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BF50523673F9B0081F5CB /* Home.swift */; };
@@ -54,6 +57,9 @@
 /* Begin PBXFileReference section */
 		410FE231235BC4E800F69F43 /* FishRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishRow.swift; sourceTree = "<group>"; };
 		410FE233235BC58700F69F43 /* goldfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldfish.jpg; sourceTree = "<group>"; };
+		41194B782375EBCE005BF9EF /* LivingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivingConfig.swift; sourceTree = "<group>"; };
+		41194B7A2375EE90005BF9EF /* betta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = betta.jpg; sourceTree = "<group>"; };
+		41194B7C2375EF9B005BF9EF /* tetra.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tetra.jpg; sourceTree = "<group>"; };
 		4128BA72235547DE00C55044 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		4128BA7423554BD900C55044 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		413BF50523673F9B0081F5CB /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 				41AECDDF235634F20091A1BA /* Data.swift */,
 				416B866A235CF84B00C36ED7 /* TankData.swift */,
 				41F42EA523615108000B9182 /* Messenger.swift */,
+				41194B782375EBCE005BF9EF /* LivingConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,6 +142,8 @@
 		41AECDDA235631B70091A1BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41194B7A2375EE90005BF9EF /* betta.jpg */,
+				41194B7C2375EF9B005BF9EF /* tetra.jpg */,
 				41E35CD2236FCB7300B45147 /* seaSnail.jpg */,
 				410FE233235BC58700F69F43 /* goldfish.jpg */,
 				41AECDDD235633450091A1BA /* fishData.json */,
@@ -315,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41194B7B2375EE90005BF9EF /* betta.jpg in Resources */,
 				41C616802351464D003DADD8 /* LaunchScreen.storyboard in Resources */,
 				41AECDDE235633450091A1BA /* fishData.json in Resources */,
 				41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */,
@@ -322,6 +332,7 @@
 				41C6167A2351464D003DADD8 /* Assets.xcassets in Resources */,
 				41E35CCF236FBCD200B45147 /* fishBreeds.json in Resources */,
 				410FE235235BC58700F69F43 /* goldfish.jpg in Resources */,
+				41194B7D2375EF9B005BF9EF /* tetra.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +365,7 @@
 				410FE232235BC4E800F69F43 /* FishRow.swift in Sources */,
 				4128BA73235547DE00C55044 /* CircleImage.swift in Sources */,
 				4128BA7523554BD900C55044 /* MapView.swift in Sources */,
+				41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */,
 				41AECDDC235632250091A1BA /* FishProfile.swift in Sources */,
 				41AF6B24235E2B8B005BA174 /* RemindersView.swift in Sources */,
 				41E35CD5236FCE9800B45147 /* SettingsView.swift in Sources */,

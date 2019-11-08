@@ -18,7 +18,7 @@ struct FishProfile: Hashable, Codable {
     var name: String
     var id: Int
     fileprivate var imageName: String
-
+    
 }
 
 extension FishProfile {
@@ -27,4 +27,22 @@ extension FishProfile {
     }
 }
 
+struct FishBreedData {
+    var breedName: String
+    
+    var maxTemp: Double
+    var minTemp: Double
+    
+    var maxPh: Double
+    var minPh: Double
 
+    fileprivate var imageName: String
+
+}
+
+
+extension FishBreedData{
+    var image: Image {
+        ImageStore.shared.image(name: imageName)
+    }
+}

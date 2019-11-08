@@ -1,9 +1,40 @@
 
 [
-    "GoldFish",
-    "Sea Snail",
-    ""
-
+    {
+           "breedName": "goldfish",
+           "maxTemp": 74,
+           "minTemp": 68,
+           "maxPh": 8.4,
+           "minPh": 7.0,
+           "imageName": "goldfish"
+    },
+    
+    {
+           "breedName": "betta",
+           "maxTemp": 85,
+           "minTemp": 76,
+           "maxPh": 7.5,
+           "minPh": 6.8,
+           "imageName": "betta"
+    },
+    
+    {
+           "breedName": "tetra",
+           "maxTemp": 80,
+           "minTemp": 75,
+           "maxPh": 7.8,
+           "minPh": 6.8,
+           "imageName": "tetra"
+    },
+    
+    {
+           "breedName": "angelfish",
+           "maxTemp": 84,
+           "minTemp": 78,
+           "maxPh": 7.8,
+           "minPh": 6.8,
+           "imageName": "tetra"
+    },
 
 
 
