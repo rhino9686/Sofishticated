@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from tank import Tank
 ## Setup Server
 app = Flask(__name__)
@@ -22,22 +22,29 @@ def getPhFromTank():
     return "pH retrieved from tank"
 
 ## handler for tank making a GET request to know if it's time to check chemicals 
-@app.route("fromTank/check")
+@app.route("/fromTank/check")
 def checkTankChemicals():
     return "checking tank chemicals"
 
-@app.route("fromApp/requestTemp")
+@app.route("/fromApp/requestTemp")
 def sendTempToApp():
     return "temp sent to app"
 
-@app.route("fromApp/requestpH")
+@app.route("/fromApp/requestpH")
 def sendPhToApp():
     return "pH sent to app"
 
-@app.route("fromApp/requestCheck")
+@app.route("/fromApp/requestRando",methods = ['POST'])
+def sendRandoToApp():
+    myRandStr = str(random())
+    print("Returning rand val " + myRandStr)
+    return jsonify({"randVal": myRandStr})
+
+
+@app.route("/fromApp/requestCheck")
 def App():
     return "chemicals set to be check"
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port =5000)
