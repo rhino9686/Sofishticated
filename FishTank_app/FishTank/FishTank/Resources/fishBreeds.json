@@ -1,7 +1,7 @@
 
 [
     {
-           "breedName": "goldfish",
+           "breedName": "Goldfish",
            "maxTemp": 74,
            "minTemp": 68,
            "maxPh": 8.4,
@@ -10,7 +10,7 @@
     },
     
     {
-           "breedName": "betta",
+           "breedName": "Betta",
            "maxTemp": 85,
            "minTemp": 76,
            "maxPh": 7.5,
@@ -19,7 +19,7 @@
     },
     
     {
-           "breedName": "tetra",
+           "breedName": "Tetra",
            "maxTemp": 80,
            "minTemp": 75,
            "maxPh": 7.8,
@@ -28,12 +28,20 @@
     },
     
     {
-           "breedName": "angelfish",
+           "breedName": "Angelfish",
            "maxTemp": 84,
            "minTemp": 78,
            "maxPh": 7.8,
            "minPh": 6.8,
            "imageName": "tetra"
+    },
+    {
+           "breedName": "Nerite Snail",
+           "maxTemp": 78,
+           "minTemp": 72,
+           "maxPh": 8.4,
+           "minPh": 8.1,
+           "imageName": "nerite"
     },
 
 

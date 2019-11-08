@@ -17,14 +17,21 @@ The model for a fishtank.
 
 final class TankProfile: ObservableObject {
     
+    //Our HTTPClient
     let messenger: Messenger
     
+    //Boolean to show whether we are showing tank temp in F or C
     var inFahrenheight = true;
     
     //Placeholder array of fish
     var placeHolderFish = fishData
+    
+    //Array of FishBreeds
+    var breeds = fishBreedData
+    
     //array to use later, store in persistent memory
     var currentResidents: [FishProfile]
+    
     
     //Current Temperature of the tank (in degrees Fahrenheit)
     @Published var currentTempF: Double = 80
@@ -83,7 +90,6 @@ final class TankProfile: ObservableObject {
         case terrible = "Terrible"
     }
     
-    
     // Default constructor
     init() {
         currentResidents = [FishProfile]()
@@ -109,6 +115,7 @@ final class TankProfile: ObservableObject {
         return
     }
     
+    //Calculates how long it has been since we've checked the Tank stats
     func calculateTimeDelta() {
         return
     }
@@ -117,6 +124,14 @@ final class TankProfile: ObservableObject {
     func updateParams() {
         return
     }
+    
+    
+    // Function to set the IP address for the messenger server
+    func SetServer() {
+        return
+    }
+    
+    
     
 }
 

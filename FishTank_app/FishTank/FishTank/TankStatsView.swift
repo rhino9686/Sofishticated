@@ -14,11 +14,16 @@ struct TankStatsView: View {
     
     @EnvironmentObject private var tankData: TankProfile
     
+    func update() {
+        print("updating")
+    }
+    
+    
     var body: some View {
         
         VStack {
             HStack {
-                Text("Tank Health : ")
+                Text("Health: ")
                     .font(.title)
                     .fontWeight(.medium)
                 Text("Good")
@@ -29,17 +34,27 @@ struct TankStatsView: View {
                 Spacer()
             }
             .padding(.top)
-            .padding(.leading)
+    
             
             
             HStack {
                 Text("Last checked: \(self.tankData.lastTimeChecked)")
                     .font(.footnote)
 
+                Button(action: {
+                                
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                    .foregroundColor(Color.white)
+                    .padding(10)
+                .background(myGrey)
+                .onTapGesture {  self.update() } //This updates all params
+                .cornerRadius(5)
+                
                 Spacer()
             }
-            .padding(.top)
-            .padding(.leading)
+       
             
             
             HStack {
@@ -51,7 +66,7 @@ struct TankStatsView: View {
                 Spacer()
             }
             .padding(.top)
-            .padding(.leading)
+     
             
             //pH label
             HStack {
@@ -60,9 +75,11 @@ struct TankStatsView: View {
                     .foregroundColor(Color.blue)
                 Spacer()
             }
-            .padding()
+           
+            .padding(.top)
             
         }
+        .padding(.leading, 6)
      // .frame(width: 350, height: 200, alignment: .center )
     }
 }

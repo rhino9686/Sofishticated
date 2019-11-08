@@ -10,22 +10,25 @@ import SwiftUI
 
 struct AddFishView: View {
     
+    @EnvironmentObject private var tankData: TankProfile
+    
     @State private var name: String = ""
-    @State private var type: String = ""
+    @State private var type: FishBreedData = FishBreedData("gold", 3.0, 4.0, 3.0, 5.0)
     @State private var password: String = ""
     
     let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
     
+    
     var body: some View {
             Form {
                 Section(header: Text("Your Fish's Name")) {
-                    TextField("Enter your name", text: $name)
+                    TextField("Enter name", text: $name)
                 }
                 
                 Section(header: Text("Type of Fish")) {
                     Picker(selection: $type, label: Text("Types"), content: {
-                        ForEach(listOfBreeds, id: \.self){ type in
-                             Text(type)
+                        ForEach(tankData.breeds, id: \.self){ breed in
+                            Text(breed.breedName)
                         }
                         
                     })
@@ -47,5 +50,6 @@ struct AddFishView: View {
 struct AddFishView_Previews: PreviewProvider {
     static var previews: some View {
         AddFishView()
+         .environmentObject(TankProfile())
     }
 }

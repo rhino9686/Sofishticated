@@ -18,33 +18,40 @@ struct TankHome: View {
         NavigationView {
             List {
                 
-                ForEach(tankData.placeHolderFish, id: \.self) { fish in
-               
-                        NavigationLink(
-                            destination: FishDetail(fish: fish)
-                                .environmentObject(self.tankData)
-                        ){
-                            FishRow(fishProfile: fish)
+                
+                Divider()
+ 
+                Section(header: Text("Conditions")) {
+                   TankStatsView()
+                        .environmentObject(self.tankData)
+                }
+                
+                Divider()
+                
+                Section(header: Text("Residents")) {
+                    ForEach(tankData.placeHolderFish, id: \.self) { fish in
+                   
+                            NavigationLink(
+                                destination: FishDetail(fish: fish)
+                                    .environmentObject(self.tankData)
+                            ){
+                                FishRow(fishProfile: fish)
+                        }
                     }
                 }
                 
-                NavigationLink(destination: AddFishView()) {
+                
+                NavigationLink(destination:
+                        AddFishView()
+                                .environmentObject(self.tankData)
+                
+                ) {
                      AddFishButton(incr: self.$incr)
                         .padding(.top)
                 }
                 
+                Divider()
 
-                Divider()
-                TankStatsView()
-                    .environmentObject(self.tankData)
-                    .edgesIgnoringSafeArea(.leading)
-                    .edgesIgnoringSafeArea(.trailing)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 7)
-                            .stroke(Color.black, lineWidth: 1)
-                    )
-                
-                Divider()
                 NavigationLink(destination: RemindersView()) {
                     Text("Reminders")
                     .fontWeight(.semibold)

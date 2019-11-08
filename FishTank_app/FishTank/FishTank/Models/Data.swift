@@ -13,6 +13,8 @@ import Foundation
 
 let fishData: [FishProfile] = load("fishData.json")
 
+let fishBreedData: [FishBreedData] = load("fishBreeds.json")
+
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
     
