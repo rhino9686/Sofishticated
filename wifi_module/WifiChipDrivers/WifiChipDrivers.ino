@@ -4,9 +4,12 @@
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
+
+
+
 void setup() {
  
-  Serial.begin(115200);                                  //Serial connection
+ Serial.begin(115200);                         //Serial connection
   WiFi.begin("Linksys01101", "vpgpgwt9000");   //WiFi connection
  
   while (WiFi.status() != WL_CONNECTED) {  //Wait for the WiFI connection completion
