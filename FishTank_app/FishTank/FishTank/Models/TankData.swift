@@ -132,6 +132,19 @@ final class TankProfile: ObservableObject {
     }
     
     
+    func addNotifications() {
+        
+        let manager = LocalNotificationManager()
+        manager.notifications = [
+            Notification(id: "reminder-1", title: "Remember the milk!", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 0)),
+            Notification(id: "reminder-2", title: "Ask Bob from accounting", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 1)),
+            Notification(id: "reminder-3", title: "Send postcard to mom", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 2))
+        ]
+
+        manager.schedule()
+        
+    }
+    
     
 }
 

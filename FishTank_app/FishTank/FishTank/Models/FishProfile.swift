@@ -62,7 +62,6 @@ struct FishBreedData: Hashable, Codable {
 
 }
 
-
 extension FishBreedData{
     var image: Image {
         ImageStore.shared.image(name: imageName)

@@ -12,12 +12,12 @@ let lightGrey = Color(red: (220/255), green: (220/255), blue: (220/255), opacity
 
 struct TankHome: View {
     @EnvironmentObject private var tankData: TankProfile
+    
     @State var incr = 1;
     
     var body: some View {
         NavigationView {
             List {
-                
                 
                 Divider()
  
@@ -47,7 +47,7 @@ struct TankHome: View {
                 
                 ) {
                      AddFishButton(incr: self.$incr)
-                        .padding(.top)
+                        .padding(.top , 6)
                 }
                 
                 Divider()
@@ -96,8 +96,6 @@ struct AddFishButton: View {
                 )
             }
             Spacer()
-            
-
             
         }
 
