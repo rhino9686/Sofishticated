@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from tank import Tank
 ## Setup Server
 app = Flask(__name__)
@@ -34,12 +34,15 @@ def sendTempToApp():
 def sendPhToApp():
     return "pH sent to app"
 
-@app.route("/fromApp/requestRando",methods = ['POST'])
+##@app.route("/fromApp/requestRando",methods = ['POST'])
 def sendRandoToApp():
     myRandStr = str(random())
     print("Returning rand val " + myRandStr)
     return jsonify({"randVal": myRandStr})
 
+@app.route("/fromApp/requestRando",methods = ['POST'])
+def sendRandoFromChip():
+    return redirect("http://www.example.com", code=302)
 
 @app.route("/fromApp/requestCheck")
 def App():
