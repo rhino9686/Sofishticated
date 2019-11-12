@@ -22,12 +22,12 @@
            "imageName": "seaSnail",
            "breedData":
            {
-                  "breedName": "Goldfish",
+                  "breedName": "Nerite snail",
                   "maxTemp": 74,
                   "minTemp": 68,
                   "maxPh": 8.4,
                   "minPh": 7.0,
-                  "imageName": "goldfish"
+                  "imageName": "seaSnail"
            }
            
     }

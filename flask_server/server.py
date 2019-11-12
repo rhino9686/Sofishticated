@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify, redirect
 from tank import Tank
+from random import random
 ## Setup Server
 app = Flask(__name__)
 
-##Setup tank construct
+## Setup tank construct
 myTank = Tank()
+
+myTank.rando = 3
 
 ## Home route, use to check connection with a code?
 @app.route("/")
@@ -21,10 +24,33 @@ def getTempFromTank():
 def getPhFromTank():
     return "pH retrieved from tank"
 
+@app.route("/fromTank/sendAmmonia")
+def getAmmoniaFromTank():
+    return "pH retrieved from tank"
+
+@app.route("/fromTank/sendNitrate")
+def getAmmoniaFromTank():
+    return "pH retrieved from tank"
+
+
+
 ## handler for tank making a GET request to know if it's time to check chemicals 
 @app.route("/fromTank/check")
 def checkTankChemicals():
+    return "Y"
+
+
+
+## handler for tank making a GET request to know if it's time to check chemicals 
+@app.route("/fromTank/sendRando", methods = ['POST'])
+def getRando():
+    randStr = str(request.data)
+    numStr = randStr[2]
+    myTank.rando = int(numStr)
+    print(myTank.rando)
     return "checking tank chemicals"
+
+
 
 @app.route("/fromApp/requestTemp")
 def sendTempToApp():
@@ -34,13 +60,13 @@ def sendTempToApp():
 def sendPhToApp():
     return "pH sent to app"
 
-##@app.route("/fromApp/requestRando",methods = ['POST'])
+@app.route("/fromApp/requestRando",methods = ['POST'])
 def sendRandoToApp():
-    myRandStr = str(random())
+    myRandStr = str(myTank.rando)
     print("Returning rand val " + myRandStr)
     return jsonify({"randVal": myRandStr})
 
-@app.route("/fromApp/requestRando",methods = ['POST'])
+##@app.route("/fromApp/requestRando",methods = ['POST'])
 def sendRandoFromChip():
     return redirect("http://www.example.com", code=302)
 

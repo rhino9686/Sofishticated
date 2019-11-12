@@ -13,15 +13,54 @@ struct FishDetail: View {
     
     var body: some View {
         VStack {
-            CircleImage(fish: fish)
-            Text(fish.name)
-                .font(.title)
-            Text("Goldfish")
-                .font(.caption)
+            
+            FittedImage(image: fish.image, width: 300, height: 300)
+            
+            Divider()
+    
+            HStack {
+                Text(fish.name)
+                    .font(.title)
+                Spacer()
+            }
+            .padding(.top, 6)
+            .padding(.leading)
+            
+            HStack {
+                Text(fish.breedData.breedName)
+                    .font(.footnote)
+                Spacer()
+            }
+            .padding(.top, 6)
+            .padding(.leading)
             Spacer()
         }.frame(height:600)
     }
 }
+
+struct FittedImage: View
+{
+    let image: Image
+    let width: CGFloat
+    let height: CGFloat
+
+    var body: some View {
+        VStack {
+            image
+                .resizable()
+                .aspectRatio(1, contentMode: .fill)
+        }
+        .frame(width: width, height: height)
+        .clipShape(
+            RoundedRectangle(cornerRadius: 20))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.black, lineWidth: 1)
+        )
+    }
+}
+
+
 
 struct FishDetail_Previews: PreviewProvider {
     static var previews: some View {

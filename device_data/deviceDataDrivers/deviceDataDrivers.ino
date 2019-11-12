@@ -45,6 +45,11 @@ void loop() {
     else if (str[2] == "P") { //Wi-Fi module wants pH value
       SerialWriteInt(myTank.pH + random(0, 10) );
     }
+
+    
+    else if (str[2] == "R") { //Wi-Fi module wants random number
+      SerialWriteInt(random(0, 10) );
+    }
  
   }
 }

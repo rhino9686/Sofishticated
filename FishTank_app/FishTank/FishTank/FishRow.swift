@@ -26,7 +26,7 @@ struct FishRow: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color.black, lineWidth: 1)
-                )
+                    )
                 Text(fishProfile.name)
                 Spacer()
             }

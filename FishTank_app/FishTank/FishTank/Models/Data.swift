@@ -41,7 +41,7 @@ final class ImageStore {
     typealias _ImageDictionary = [String: CGImage]
     fileprivate var images: _ImageDictionary = [:]
 
-    fileprivate static var scale = 2
+    fileprivate static var scale = 1
     
     static var shared = ImageStore()
     
