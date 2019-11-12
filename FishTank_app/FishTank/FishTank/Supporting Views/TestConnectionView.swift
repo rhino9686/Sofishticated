@@ -8,9 +8,16 @@
 
 import SwiftUI
 
+let piServerAdress = "192.168.1.166"
+
+let laptopServerAddress = "192.168.1.162"
+
+let wifiServerAddress = "192.168.1.107"
+
+
 struct TestConnectionView: View {
     @State var testString = "not yeeted "
-    let myMessenger = Messenger(ipAddress: "192.168.1.166")
+    let myMessenger = Messenger(ipAddress: laptopServerAddress)
     
     func updateTest() {
         testString = "yeet"
