@@ -10,7 +10,7 @@ import SwiftUI
 
 let piServerAdress = "192.168.1.166"
 
-let laptopServerAddress = "192.168.1.162"
+let laptopServerAddress = "35.6.158.8"
 
 let wifiServerAddress = "192.168.1.107"
 

@@ -10,7 +10,8 @@ struct TankData {
 
 TankData myTank; // Our Tank
 
-char str[4];
+
+String str;
 
 void setup() {
   // set the baud rate at 
@@ -30,14 +31,16 @@ void loop() {
 
   if (Serial.available()) {
     delay(100); //allows all serial sent to be received together
-    while(Serial.available() && i<4) {
-      str[i++] = Serial.read();
+    while(Serial.available() ) {
+      str = Serial.readString();
     }
-    str[i++]='\0';
+
+    Serial.println("Hi");
+    Serial.print(str);
   }
   
-  if (i> 4) {
 
+/**
     if (str[2] == "T") { //Wi-Fi module wants Temperature
       SerialWriteInt(myTank.Temp + random(0, 24));
     }
@@ -50,8 +53,8 @@ void loop() {
     else if (str[2] == "R") { //Wi-Fi module wants random number
       SerialWriteInt(random(0, 10) );
     }
- 
-  }
+ **/
+  
 }
 
 

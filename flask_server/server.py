@@ -29,7 +29,7 @@ def getAmmoniaFromTank():
     return "pH retrieved from tank"
 
 @app.route("/fromTank/sendNitrate")
-def getAmmoniaFromTank():
+def getNitrateFromTank():
     return "pH retrieved from tank"
 
 

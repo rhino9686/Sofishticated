@@ -52,12 +52,10 @@ void getNitrates();
 
 void resetWifiParams();
 
-
-
 void setup() {
  
   Serial.begin(115200);                         //Serial connection
-  WiFi.begin("Linksys01101", "vpgpgwt900");   //WiFi connection
+  WiFi.begin("MSetup");   //WiFi connection
  
   while (WiFi.status() != WL_CONNECTED) {  //Wait for the WiFI connection completion
     delay(500);
@@ -69,10 +67,9 @@ void setup() {
 void loop() {
 
   
- 
  if(WiFi.status()== WL_CONNECTED) {   //Check WiFi connection status
  
-   http.begin("http://192.168.1.162:5000/fromTank/sendRando");      //Specify request destination
+   http.begin("http://35.6.158.8:5000/fromTank/sendRando");      //Specify request destination
    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
    int num  = random(0,10); 
    itoa(num,buffer,10); 
@@ -80,7 +77,7 @@ void loop() {
    int httpCode = http.POST(buffer);                   //Send the request
    String payload = http.getString();                  //Get the response payload
  
-   //Serial.println(httpCode);   //Print HTTP return code
+   Serial.println(httpCode);   //Print HTTP return code
    //Serial.println(payload);    //Print request response payload
  
    http.end();  //Close connection
