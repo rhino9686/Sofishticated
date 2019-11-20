@@ -27,7 +27,7 @@ struct FishDetail: View {
             .padding(.leading)
             
             HStack {
-                Text(fish.breedData.breedName)
+                Text(fish.breedData!.breedName)
                     .font(.footnote)
                 Spacer()
             }

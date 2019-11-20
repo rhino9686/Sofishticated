@@ -40,19 +40,25 @@ struct TankStatsView: View {
             HStack {
                 Text("Last checked: \(self.tankData.lastTimeChecked)")
                     .font(.footnote)
-
-                Button(action: {
-                                
-                }, label: {
-                    Image(systemName: "arrow.clockwise")
-                })
-                    .foregroundColor(Color.white)
-                    .padding(10)
-                .background(myGrey)
-                .onTapGesture {  self.update() } //This updates all params
-                .cornerRadius(5)
                 
                 Spacer()
+
+                Group {
+                    Button(action: {
+                        self.tankData.updateParams()
+                    }, label: {
+                        Image(systemName: "arrow.clockwise")
+                    })
+                        .foregroundColor(Color.white)
+                        .padding(10)
+                    .background(myGrey)
+                    .onTapGesture {  self.update() } //This updates all params
+                    .cornerRadius(5)
+                }.padding(.trailing)
+
+                
+             
+               
             }
        
             
@@ -88,6 +94,6 @@ struct TankStatsView_Previews: PreviewProvider {
     static var previews: some View {
         TankStatsView()
         .environmentObject(TankProfile())
-        .previewLayout(.fixed(width: 300, height: 200))
+        .previewLayout(.fixed(width: 350, height: 250))
     }
 }

@@ -30,20 +30,23 @@ final class TankProfile: ObservableObject {
     var breeds = fishBreedData
     
     //array to use later, store in persistent memory
-    var currentResidents: [FishProfile]
+    @Published var currentResidents: [FishProfile]
     
+    //Counter variable to give each fish a unique ID
+    var idCounter: Int
     
     //Current Temperature of the tank (in degrees Fahrenheit)
-    @Published var currentTempF: Double = 80
+    @Published var currentTempF: Double
     
     //Current Temperature of the tank formatted in a string
     var currentTemp: String {
+        let tempDouble = self.messenger.currentTempF
         if inFahrenheight {
-            let tempInt = Int(self.currentTempF)
+            let tempInt = Int(tempDouble)
             return String(tempInt)
         }
         else {
-            let currentTempC = Int((currentTempF - 32) * 5.0 / 9.0)
+            let currentTempC = Int((tempDouble - 32) * 5.0 / 9.0)
             return String(currentTempC)
         }
         
@@ -54,7 +57,7 @@ final class TankProfile: ObservableObject {
     
     //Current pH formatted to 2 decimal places in a string
     var currentpHStr: String {
-        let pH = currentPh
+        let pH = self.messenger.currentPh
         return String(format: " %.2f", pH)
     }
     
@@ -93,6 +96,8 @@ final class TankProfile: ObservableObject {
     // Default constructor
     init() {
         currentResidents = [FishProfile]()
+        self.currentTempF = 80
+        self.idCounter = 0
         messenger = Messenger(ipAddress: "0.0.0.1")
         
     }
@@ -100,14 +105,21 @@ final class TankProfile: ObservableObject {
     // Extra constructor for variable IP address
     init( ipAddressInput: String ) {
         currentResidents = [FishProfile]()
+        self.currentTempF = 80
+        self.idCounter = 0
         messenger = Messenger(ipAddress: ipAddressInput)
-        
+    }
+    
+    func getNextID()-> Int {
+        let nextId = self.idCounter
+        self.idCounter += 1
+        return nextId
     }
     
     
     //Adds a new fish to the tank
-    func addFish(fishEntry fish: FishProfile){
-        return
+   func addFish(fishEntry fish: FishProfile){
+        self.currentResidents.append(fish)
     }
     
     //Removes a fish from the tank by id
@@ -122,7 +134,7 @@ final class TankProfile: ObservableObject {
     
     
     func updateParams() {
-        return
+        self.messenger.refreshParams()
     }
     
     

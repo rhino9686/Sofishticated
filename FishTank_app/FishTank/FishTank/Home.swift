@@ -13,7 +13,6 @@ let lightGrey = Color(red: (220/255), green: (220/255), blue: (220/255), opacity
 struct TankHome: View {
     @EnvironmentObject private var tankData: TankProfile
     
-    @State var incr = 1;
     
     var body: some View {
         NavigationView {
@@ -24,31 +23,53 @@ struct TankHome: View {
                 Section(header: Text("Conditions")) {
                    TankStatsView()
                         .environmentObject(self.tankData)
+                    
+                   // Divider()
+                    NavigationLink(destination:
+                            AddFishView()
+                                    .environmentObject(self.tankData)
+                    ) {
+                        Text("Check Chemicals")
+                            .font(.footnote)
+                            .fontWeight(.bold)
+                    }.padding(5).padding(.top, 7).padding(.bottom, 7)
+                    
                 }
                 
-                Divider()
+        
                 
                 Section(header: Text("Residents")) {
                     ForEach(tankData.placeHolderFish, id: \.self) { fish in
-                   
                             NavigationLink(
                                 destination: FishDetail(fish: fish)
                                     .environmentObject(self.tankData)
                             ){
                                 FishRow(fishProfile: fish)
                         }
-                    }
+                    }.padding(.top, 6)
+                    
+                    ForEach(tankData.currentResidents, id: \.self) { fish in
+                        
+                       // Text(fish.name)
+                            NavigationLink(
+                                destination: FishDetail(fish: fish)
+                                    .environmentObject(self.tankData)
+                            ){
+                                FishRow(fishProfile: fish)
+                        }
+                    }.padding(.top, 6)
+                    
                 }
                 
                 
                 NavigationLink(destination:
                         AddFishView()
                                 .environmentObject(self.tankData)
-                
                 ) {
-                     AddFishButton(incr: self.$incr)
-                        .padding(.top , 6)
-                }
+                    Text("+ Add New fish")
+                        .font(.footnote)
+                        .fontWeight(.light)
+                }.padding(.top)
                 
                 Divider()
 
@@ -56,7 +77,10 @@ struct TankHome: View {
                     Text("Reminders")
                     .fontWeight(.semibold)
                 }
-                NavigationLink(destination: SettingsView()) {
+                
+                NavigationLink(destination: SettingsView()
+                         .environmentObject(self.tankData)
+                ) {
                     Text("Settings")
                     .fontWeight(.semibold)
                 }
@@ -78,26 +102,4 @@ struct TankHome_Previews: PreviewProvider {
 }
 
 
-struct AddFishButton: View {
-    @Binding var incr: Int
-    var body: some View {
-        HStack {
-            
-            Button(action: {self.incr = self.incr + 1}) {
-                Text("+ Add new fish")
-                    .fontWeight(.medium)
-                    .font(.footnote)
-                .padding(8)
-                .cornerRadius(10)
-                .padding(2)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
-                )
-            }
-            Spacer()
-            
-        }
 
-    }
-}

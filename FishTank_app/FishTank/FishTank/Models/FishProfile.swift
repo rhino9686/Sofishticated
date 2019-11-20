@@ -21,13 +21,24 @@ struct FishProfile: Hashable, Codable {
     var id: Int
     fileprivate var imageName: String
     
-    var breedData: FishBreedData
+    var breedData: FishBreedData?
     
     mutating func setBreed(_ breed: String, _ maxTempIn: Double, _ minTempIn: Double, _ maxPhIn: Double, _ minPhIn: Double) {
         
         self.breedData = FishBreedData(breed,maxTempIn,minTempIn, maxPhIn, minPhIn)
     }
     
+    init() {
+        self.name =  "howie"
+        self.id = 2
+        imageName = "goldfish"
+    }
+    
+    init(name_in: String, id_in: Int  ) {
+        self.name =  name_in
+        self.id = id_in
+        imageName = "goldfish"
+    }
 }
 
 extension FishProfile {

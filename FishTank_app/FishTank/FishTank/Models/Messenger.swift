@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
 final class Messenger {
+    
+    //Published vars to change and send out the data to observers
+    @Published var currentTempF: Double = 0
+    @Published var currentPh: Double = 7.0
+    @Published var lastCheckedTimeInMins = 3
     
     //IP Address of target server
     private var ipAddress: String
@@ -19,7 +26,7 @@ final class Messenger {
     private var result: String = "Result Placeholder"
     
     //Constructor
-    init(ipAddress: String ) {
+    init(ipAddress: String) {
         self.ipAddress = ipAddress
     }
     
@@ -93,9 +100,18 @@ final class Messenger {
                 
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
-                    let randVal = result?["randVal"] as! String
+                    let Val = result?[param] as! String
                     
-                    HttpResult = randVal
+                    HttpResult = Val
+                    
+                    if param == "pH" {
+                        self.parsePh(param: param, httpResult: HttpResult)
+                        
+                    }
+                    else if param == "temp" {
+                        self.parseTemp(param: param, httpResult: HttpResult)
+                    }
+                    
                     print("Result -> \(String(describing: result))")
                     
                 } catch {
@@ -121,7 +137,6 @@ final class Messenger {
     }
     
     
-    
     // Requests the Tanks's pH from the server
     func requestPh() -> String {
          return sendRequest(param: "pH", route: "/fromApp/requestPH")
@@ -132,5 +147,34 @@ final class Messenger {
         return sendRequest(param: "Temp", route: "/fromApp/requestTemp")
     }
     
+    
+    func refreshParams() {
+       var _ = self.requestPh()
+       var _ = self.requestTemp()
+    }
+    
+    
+    func parsePh(param: String, httpResult: String ) {
+        
+        let numDouble: Double? = Double(httpResult)
+            
+        if (numDouble != nil) {
+            //Here we make the final correction to make the number a decimal
+            let truepH = numDouble! / 100
+            //Make sure this works
+            var _ = self.$currentPh.append(truepH)
+        }
+    }
+    
+    func parseTemp(param: String, httpResult: String ) {
+        // Make sure that the httpString value contains an actual number
+        let numDouble: Double? = Double(httpResult)
+            
+        if (numDouble != nil) {
+           //Here we make the final correction to make the number a decimal
+           let trueTemp = numDouble! / 100
+           var _ = self.$currentTempF.append(trueTemp)
+        }
+    }
     
 }

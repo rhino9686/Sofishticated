@@ -11,12 +11,13 @@ import SwiftUI
 struct AddFishView: View {
     
     @EnvironmentObject private var tankData: TankProfile
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var name: String = ""
-    @State private var type: FishBreedData = FishBreedData("gold", 3.0, 4.0, 3.0, 5.0)
-    @State private var password: String = ""
+    @State private var type: FishBreedData = FishBreedData("no_breed", 3.0, 4.0, 3.0, 5.0)
+    @State private var errorMsg: String = ""
     
-    let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
+  //  let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
     
     
     var body: some View {
@@ -26,26 +27,86 @@ struct AddFishView: View {
                 }
                 
                 Section(header: Text("Type of Fish")) {
-                    Picker(selection: $type, label: Text("Types"), content: {
-                        ForEach(tankData.breeds, id: \.self){ breed in
-                            Text(breed.breedName)
+                    
+                   VStack {
+                        Picker(selection: $type, label: Text("Types")) {
+                            ForEach(tankData.breeds, id: \.self){ breed in
+                                Text(breed.breedName)
+                            }
                         }
-                        
-                    })
+                    }
                 }
 
-                Section {
+                Section(header: Text(errorMsg)
+                    .foregroundColor(Color.red)) {
                     Button(action: {
-                                print("register account")
-                            }) {
-                                Text("Add to Tank")
-                            }
+                        
+                        if self.checkValidity() {
+                            print("registered new fish")
+                            self.addFish()
+                            //This goes back to the home view
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+
+                              
+                    }) {
+                        Text("Add to Tank")
+                        }
                 }
+                
+                
+                
             }
             .navigationBarTitle(Text("Add New Fish"))
         
     }
+    
+    func checkValidity() -> Bool{
+        if self.name == "" {
+            self.errorMsg = "Please enter a valid name for your fish"
+            return false
+        }
+        
+        if self.type.breedName == "no_breed" {
+            self.errorMsg = "Please select a type of fish"
+            return false
+        }
+        
+        
+        return true
+    }
+    
+    
+    func addFish() {
+        
+        let newID = self.tankData.getNextID()
+        var myFish = FishProfile(name_in: self.name, id_in: newID)
+        myFish.breedData = self.type
+        
+        self.tankData.addFish(fishEntry: myFish)
+        
+    }
+    
+    
 }
+
+struct ContentView: View {
+   var colors = ["Red", "Green", "Blue", "Tartan"]
+   @State private var selectedColor = 0
+
+   var body: some View {
+      VStack {
+         Picker(selection: $selectedColor, label: Text("Please choose a color")) {
+            ForEach(0 ..< colors.count) {
+               Text(self.colors[$0])
+            }
+         }
+         Text("You selected: \(colors[selectedColor])")
+      }
+   }
+}
+
+
 
 struct AddFishView_Previews: PreviewProvider {
     static var previews: some View {
