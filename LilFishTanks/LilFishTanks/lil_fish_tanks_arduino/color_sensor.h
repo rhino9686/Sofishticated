@@ -2,7 +2,7 @@
 //
 // Input and output using the Serial console.
 //
-#include <MD_TCS230.h>   // colour sensor library
+#include <MD_TCS230.h>   // color sensor library
 #include <FreqCount.h>   // used by above library
 
 // Pin definitions
@@ -37,8 +37,8 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
-Color EmptyTestBox {0, {140, 15, 15}};
-Color WhiteTestStrip {0, {245, 45, 45}};
+Color EmptyTestBox {0, {0, 0, 7}};
+Color WhiteTestStrip {0, {20, 23, 48}};
 
 colorData rgb;
 Color c;
@@ -223,7 +223,11 @@ long ScanColor()
 	redScanned = rgb.value[TCS230_RGB_R];
 	blueScanned = rgb.value[TCS230_RGB_B];
 	// look for match
-	return FindMatch();
+	Serial.println("RGB");
+	Serial.println(redScanned);
+	Serial.println(greenScanned);
+	Serial.println(blueScanned);
+	//return FindMatch();
 }
 
 bool findTestStrip()

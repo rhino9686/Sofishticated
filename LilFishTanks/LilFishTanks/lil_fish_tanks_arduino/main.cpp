@@ -18,22 +18,19 @@ int ammoniaValue = 0;
 int nitrateValue = 0;
 int nitriteValue = 0;
 
+char colorToRead = 'a';
+
 
 
 // task definitions
-void TaskAmmoniaRead( void *pvParameters );
-void TaskNitriteNitrateRead( void *pvParameters );
-void TaskPHRead( void *pvParameters );
-void TaskTemperatureRead( void *pvParameters );
+void TaskColorSensor( void *pvParameters );
+void TaskPHandTemperature( void *pvParameters );
 
 SemaphoreHandle_t xSerialSemaphoreColorSensor;
 SemaphoreHandle_t xSerialSemaphoreWifi;
 
-TaskHandle_t xAmmonia;
-TaskHandle_t xNitriteNitrate;
-TaskHandle_t xPH;
-TaskHandle_t xTemperature;
-
+TaskHandle_t xColorSensor;
+TaskHandle_t xPHandTemperature;
 
 
 // the setup function runs once when you press reset or power the board
@@ -63,39 +60,22 @@ void setup() {
 
 	// Now set up two tasks to run independently.
 	xTaskCreate(
-	TaskAmmoniaRead
-	,  (const portCHAR *)"Ammonia"
+	TaskColorSensor
+	,  (const portCHAR *)"ColorSensor"
 	,  128
 	,  NULL
-	,  2
-	,  &xAmmonia );
-
-	/*xTaskCreate(
-	TaskNitriteNitrateRead
-	,  (const portCHAR *) "Nitrite/Nitrate"
-	,  128
-	,  NULL
-	,  2
-	,  &xNitriteNitrate );*/
+	,  1
+	,  &xColorSensor );
 
 	xTaskCreate(
-	TaskPHRead
-	,  (const portCHAR *) "pH"
+	TaskPHandTemperature
+	,  (const portCHAR *) "PHandTemperature"
 	,  128
 	,  NULL
 	,  2
-	,  &xPH );
-
-	xTaskCreate(
-	TaskTemperatureRead
-	,  (const portCHAR *) "Temperature"
-	,  128
-	,  NULL
-	,  2
-	,  &xTemperature );
+	,  &xPHandTemperature );
 	
-	//vTaskSuspend(xAmmonia);
-	//vTaskSuspend(xNitriteNitrate);
+	//vTaskSuspend(xColorSensor);
 	
 	delay(1000);
 	setLED(Off);
@@ -103,7 +83,6 @@ void setup() {
 	Serial.print("Inside setup");
 
 	// Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
-	vTaskStartScheduler();
 }
 
 void loop()
@@ -115,74 +94,59 @@ void loop()
 /*---------------------- Tasks ---------------------*/
 /*--------------------------------------------------*/
 
-// get Ammonia reading from color sensor
-void TaskAmmoniaRead(void *pvParameters)
+// get Ammonia, Nitrite, and Nitrate reading from color sensor
+void TaskColorSensor(void *pvParameters)
 {
 	(void) pvParameters;
   
 	TickType_t xLastWakeTime = xTaskGetTickCount();
-	pinMode(LED_BUILTIN, OUTPUT);
 	for (;;) // A Task shall never return or exit.
 	{
 		//if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
 		//{
-			setLED(White);
-			while (findTestStrip());
-			//setLED(Green);
-			delay(250); // let user see LED and stop moving before measuring
-	  
-			typeToRead = AMMONIA;
-			ammoniaValue = ScanColor() * 100;
-	  
+			if (colorToRead == 'a')
+			{
+				Serial.println("c");
+				setLED(White);
+				//while (findTestStrip());
+				//setLED(Green);
+				delay(250); // let user see LED and stop moving before measuring
+				
+				typeToRead = AMMONIA;
+				ammoniaValue = ScanColor() * 100;
+			}
+			else
+			{
+				setLED(Red);
+				typeToRead = NITRATE;
+				while (findTestStrip());
+				setLED(Green);
+				delay(250); // allow user to see LED and stop moving test strip
+
+				nitrateValue = ScanColor() * 100;
+				
+				setLED(Off);
+				
+				typeToRead = NITRITE;
+				while (findTestStrip());
+				setLED(Blue);
+				delay(250);
+				
+				nitriteValue = ScanColor() * 100;
+			}
 			setLED(Off);	  
-			xSemaphoreGive( xSerialSemaphoreColorSensor );
+			//xSemaphoreGive( xSerialSemaphoreColorSensor );
 			// suspend until triggered by next interrupt from Wifi module
-			vTaskSuspend(NULL);
+			//vTaskSuspend(NULL);
 		//}
 		vTaskDelayUntil( &xLastWakeTime, 1000 / portTICK_PERIOD_MS );
 		//vTaskDelay(1); // 1 tick delay between reads for stability
 	}
 }
 
-// get Nitrite reading from color sensor
-void TaskNitriteNitrateRead(void *pvParameters)
-{
-	(void) pvParameters;
-  
-	TickType_t xLastWakeTime = xTaskGetTickCount();
-	pinMode(LED_BUILTIN, OUTPUT);
-	for (;;) // A Task shall never return or exit.
-	{
-		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
-		{
-			setLED(Red);
-			typeToRead = NITRATE;
-			while (findTestStrip());
-			setLED(Green);
-			delay(250); // allow user to see LED and stop moving test strip
 
-			nitrateValue = ScanColor() * 100;
-	  
-			setLED(Off);
-	  
-			typeToRead = NITRITE;
-			while (findTestStrip());
-			setLED(Blue);
-			delay(250);
-	  
-			nitriteValue = ScanColor() * 100;
-			
-			setLED(Off);
-			xSemaphoreGive( xSerialSemaphoreColorSensor );
-			//suspend until triggered by next interrupt from Wifi module
-			vTaskSuspend(NULL);
-			}
-		vTaskDelay(1); // 1 tick delay between reads for stability
-	}
-}
-
-// get pH reading from sensor
-void TaskPHRead(void *pvParameters)
+// get pH and temp reading from sensors
+void TaskPHandTemperature(void *pvParameters)
 {
   (void) pvParameters;
   
@@ -192,39 +156,27 @@ void TaskPHRead(void *pvParameters)
 	// Gets pH value
 	//delay(500);
 	setLED(Green);
-	Serial.write("Inside PH\n");
+	Serial.write("p\n");
 	//long temp = measureTemp();
 	phValue = getPH(tempValue) * 100;
-	Serial.write("\npH Value:");
 	//Serial.write(phValue);
 	Serial.print(phValue);
 	delay(100);
 	setLED(Off);
-    // check pH every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 500 / portTICK_PERIOD_MS );
+	
+	setLED(Red);
+	// Gets temperature value in Celsius
+	tempValue = measureTemp() * 100;
+	Serial.write("t\n");
+	Serial.print(tempValue);
+	
+	delay(100);
+	setLED(Off);
+    // check pH and temp every 15 min
+    vTaskDelayUntil( &xLastWakeTime, 5000 / portTICK_PERIOD_MS );
   }
 }
 
-// get Temperature reading from sensor
-void TaskTemperatureRead(void *pvParameters)
-{
-	(void) pvParameters;
-  
-	TickType_t xLastWakeTime = xTaskGetTickCount();
-	for (;;) // A Task shall never return or exit.
-	{
-		setLED(Red);
-		// Gets temperature value in Celsius
-		tempValue = measureTemp() * 100;
-		Serial.write("Temp value:\n");
-		Serial.print(tempValue);
-		
-		delay(100);
-		setLED(Off);
-		// check temperature every 2 min (CURRENTLY 2 SEC)
-		vTaskDelayUntil( &xLastWakeTime, 2000 / portTICK_PERIOD_MS );
-	}
-}
 
 void fromWifi()
 {
@@ -244,12 +196,14 @@ void fromWifi()
 	{
 	case 'a':
 	{
-		vTaskResume(xAmmonia);
+		colorToRead = 'a';
+		vTaskResume(xColorSensor);
 		break;
 	}
 	case 'n':
 	{
-		vTaskResume(xNitriteNitrate);
+		colorToRead = 'n';
+		vTaskResume(xColorSensor);
 		break;
 	}
 	case 'p':

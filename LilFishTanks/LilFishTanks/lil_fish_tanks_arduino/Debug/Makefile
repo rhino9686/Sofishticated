@@ -36,7 +36,19 @@ SUBDIRS :=  \
 ../include/ \
 ../include/libraries/ \
 ../include/libraries/EEPROM/ \
-../include/libraries/EEPROM/src/
+../include/libraries/EEPROM/src/ \
+../include/libraries/MD_TCS230/ \
+../include/libraries/MD_TCS230/docs/ \
+../include/libraries/MD_TCS230/docs/search/ \
+../include/libraries/MD_TCS230/examples/ \
+../include/libraries/MD_TCS230/examples/ColorMatch_TCS230/ \
+../include/libraries/MD_TCS230/src/ \
+../src/ \
+../src/libraries/ \
+../src/libraries/MD_TCS230/ \
+../src/libraries/MD_TCS230/docs/ \
+../src/libraries/MD_TCS230/docs/search/ \
+../src/libraries/MD_TCS230/src/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -44,7 +56,8 @@ C_SRCS +=  \
 ../DFRobot_PH.cpp \
 ../main.cpp \
 ../OneWire.cpp \
-../phSensor.cpp
+../phSensor.cpp \
+../src/libraries/MD_TCS230/src/MD_TCS230.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -57,25 +70,29 @@ OBJS +=  \
 DFRobot_PH.o \
 main.o \
 OneWire.o \
-phSensor.o
+phSensor.o \
+src/libraries/MD_TCS230/src/MD_TCS230.o
 
 OBJS_AS_ARGS +=  \
 DFRobot_PH.o \
 main.o \
 OneWire.o \
-phSensor.o
+phSensor.o \
+src/libraries/MD_TCS230/src/MD_TCS230.o
 
 C_DEPS +=  \
 DFRobot_PH.d \
 main.d \
 OneWire.d \
-phSensor.d
+phSensor.d \
+src/libraries/MD_TCS230/src/MD_TCS230.d
 
 C_DEPS_AS_ARGS +=  \
 DFRobot_PH.d \
 main.d \
 OneWire.d \
-phSensor.d
+phSensor.d \
+src/libraries/MD_TCS230/src/MD_TCS230.d
 
 OUTPUT_FILE_PATH +=lil_fish_tanks_arduino.elf
 
@@ -95,28 +112,35 @@ LINKER_SCRIPT_DEP+=
 ./DFRobot_PH.o: .././DFRobot_PH.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\include\libraries\MD_TCS230\docs" -I"..\include\libraries\MD_TCS230\docs\search" -I"..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230" -I"..\include\libraries\MD_TCS230\src"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./main.o: .././main.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\include\libraries\MD_TCS230\docs" -I"..\include\libraries\MD_TCS230\docs\search" -I"..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230" -I"..\include\libraries\MD_TCS230\src"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./OneWire.o: .././OneWire.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\include\libraries\MD_TCS230\docs" -I"..\include\libraries\MD_TCS230\docs\search" -I"..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230" -I"..\include\libraries\MD_TCS230\src"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./phSensor.o: .././phSensor.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\include\libraries\MD_TCS230\docs" -I"..\include\libraries\MD_TCS230\docs\search" -I"..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230" -I"..\include\libraries\MD_TCS230\src"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/libraries/MD_TCS230/src/MD_TCS230.o: ../src/libraries/MD_TCS230/src/MD_TCS230.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=108010 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0043 -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\libraries\FreeRTOS" -I"..\\..\ArduinoCore\include\libraries\freqcount" -I"..\\..\ArduinoCore\include\libraries\MD_TCS230" -I"..\\..\ArduinoCore\include\libraries\freqcount\util" -I"..\\..\ArduinoCore\include\variants\standard" -I"..\include\libraries\EEPROM\src" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\include\libraries\MD_TCS230\docs" -I"..\include\libraries\MD_TCS230\docs\search" -I"..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230" -I"..\include\libraries\MD_TCS230\src"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
