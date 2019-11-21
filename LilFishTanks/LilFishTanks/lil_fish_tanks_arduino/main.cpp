@@ -9,9 +9,14 @@
 #include "color_sensor.h"
 #include "indicatorLED.h"
 #include "phSensor.h"
-//Beginning of Auto generated function prototypes by Atmel Studio
+
 void fromWifi();
-//End of Auto generated function prototypes by Atmel Studio
+
+int phValue = 0;
+int tempValue = 0;
+int ammoniaValue = 0;
+int nitrateValue = 0;
+int nitriteValue = 0;
 
 
 
@@ -32,71 +37,73 @@ TaskHandle_t xTemperature;
 
 
 // the setup function runs once when you press reset or power the board
-void setup() {
+void setup() {  
+	// initialize serial communication at 115200 bits per second:
+	Serial.begin(115200);
   
-  // initialize serial communication at 115200 bits per second:
-  Serial.begin(115200);
+	while (!Serial) {
+		; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
+	}
   
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
-  }
-  
-  // initialize Wifi module
-  Serial.write("AT");
-  //String okay = Serial.read(); // unsure how to read from Wifi module
-  //assert(okay == "OK"); // module is on
-  Serial.write("AT+CWMODE=1"); // client mode
+	// initialize Wifi module (Maybe?)
 
-  // load test strip color data and initialize indicator LED
-  addColors();
-  setupLED();
-  
-  // initialize pH sensor
-  phInit();
-  
-  digitalWrite(0, LOW);
-
-  // TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
-  attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
-
-  // Now set up two tasks to run independently.
-  /*xTaskCreate(
-    TaskAmmoniaRead
-    ,  (const portCHAR *)"Ammonia"
-    ,  128
-    ,  NULL
-    ,  2
-    ,  &xAmmonia );*/
-
-  xTaskCreate(
-    TaskNitriteNitrateRead
-    ,  (const portCHAR *) "Nitrite/Nitrate"
-    ,  128  // Stack size
-    ,  NULL
-    ,  2  // Priority
-    ,  &xNitriteNitrate );
-
-  /*xTaskCreate(
-    TaskPHRead
-    ,  (const portCHAR *) "pH"
-    ,  128  // Stack size
-    ,  NULL
-    ,  2  // Priority
-    ,  &xPH );
-
-  xTaskCreate(
-    TaskTemperatureRead
-    ,  (const portCHAR *) "Temperature"
-    ,  128  // Stack size
-    ,  NULL
-    ,  2  // Priority
-    ,  &xTemperature );
+	// load test strip color data and initialize indicator LED
+	CS.begin();
+	addColors();
+	setupLED();
+	Serial.print("Starting setup");
 	
-  vTaskSuspend(xAmmonia);
-  vTaskSuspend(xNitriteNitrate);*/
+	setLED(Green);
+  
+	// initialize pH sensor
+	phInit();
 
-  // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
-  vTaskStartScheduler();
+	// TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
+	attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
+
+	// Now set up two tasks to run independently.
+	xTaskCreate(
+	TaskAmmoniaRead
+	,  (const portCHAR *)"Ammonia"
+	,  128
+	,  NULL
+	,  2
+	,  &xAmmonia );
+
+	/*xTaskCreate(
+	TaskNitriteNitrateRead
+	,  (const portCHAR *) "Nitrite/Nitrate"
+	,  128
+	,  NULL
+	,  2
+	,  &xNitriteNitrate );*/
+
+	xTaskCreate(
+	TaskPHRead
+	,  (const portCHAR *) "pH"
+	,  128
+	,  NULL
+	,  2
+	,  &xPH );
+
+	xTaskCreate(
+	TaskTemperatureRead
+	,  (const portCHAR *) "Temperature"
+	,  128
+	,  NULL
+	,  2
+	,  &xTemperature );
+	
+	//vTaskSuspend(xAmmonia);
+	//vTaskSuspend(xNitriteNitrate);
+	
+	delay(1000);
+	setLED(Off);
+	//calibratePH(25);
+	Serial.print("Inside setup");
+
+	// Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
+	vTaskStartScheduler();
 }
 
 void loop()
@@ -111,87 +118,67 @@ void loop()
 // get Ammonia reading from color sensor
 void TaskAmmoniaRead(void *pvParameters)
 {
-  (void) pvParameters;
+	(void) pvParameters;
   
-  TickType_t xLastWakeTime = xTaskGetTickCount();
-  pinMode(LED_BUILTIN, OUTPUT);
-  for (;;) // A Task shall never return or exit.
-  {
-    if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
-    {
-	  digitalWrite(9, HIGH);
-	  setLED(Blue);
-	  while (findTestStrip());
-	  setLED(Green);
-	  delay(250); // let user see LED and stop moving before measuring
+	TickType_t xLastWakeTime = xTaskGetTickCount();
+	pinMode(LED_BUILTIN, OUTPUT);
+	for (;;) // A Task shall never return or exit.
+	{
+		//if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
+		//{
+			setLED(White);
+			while (findTestStrip());
+			//setLED(Green);
+			delay(250); // let user see LED and stop moving before measuring
 	  
-      typeToRead = AMMONIA;
-      long value = ScanColor();
-	  // TODO: transmit value to Wifi module
-	  Serial.write("AT+CTIPSEND"); // indicate we are about to send ammonia
-	  Serial.write("ammonia");
-	  Serial.write("AT+CTIPSEND"); // send ammonia
-	  Serial.write(value);
+			typeToRead = AMMONIA;
+			ammoniaValue = ScanColor() * 100;
 	  
-	  setLED(Off);	
-	  digitalWrite(9, LOW);		  
-      xSemaphoreGive( xSerialSemaphoreColorSensor );
-      // suspend until triggered by next interrupt from Wifi module
-      vTaskSuspend(NULL);
-    }
-
-    vTaskDelay(1); // 1 tick delay between reads for stability
-  }
+			setLED(Off);	  
+			xSemaphoreGive( xSerialSemaphoreColorSensor );
+			// suspend until triggered by next interrupt from Wifi module
+			vTaskSuspend(NULL);
+		//}
+		vTaskDelayUntil( &xLastWakeTime, 1000 / portTICK_PERIOD_MS );
+		//vTaskDelay(1); // 1 tick delay between reads for stability
+	}
 }
 
 // get Nitrite reading from color sensor
 void TaskNitriteNitrateRead(void *pvParameters)
 {
-  (void) pvParameters;
+	(void) pvParameters;
   
-  TickType_t xLastWakeTime = xTaskGetTickCount();
-  pinMode(LED_BUILTIN, OUTPUT);
-  for (;;) // A Task shall never return or exit.
-  {
-    //if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
-    //{
-		setLED(Red);
-	  typeToRead = NITRATE;
-      while (findTestStrip());
-      setLED(Green);
-	  delay(250); // allow user to see LED and stop moving test strip
-      
-	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
-      long value = ScanColor();
-	  // TODO: transmit to Wifi module
-	  //Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrate
-	  //Serial.write("nitrate");
-	  //Serial.write("AT+CTIPSEND"); // send nitrate
-	  //Serial.write(value);
+	TickType_t xLastWakeTime = xTaskGetTickCount();
+	pinMode(LED_BUILTIN, OUTPUT);
+	for (;;) // A Task shall never return or exit.
+	{
+		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
+		{
+			setLED(Red);
+			typeToRead = NITRATE;
+			while (findTestStrip());
+			setLED(Green);
+			delay(250); // allow user to see LED and stop moving test strip
+
+			nitrateValue = ScanColor() * 100;
 	  
-	  setLED(Off);
+			setLED(Off);
 	  
-	  typeToRead = NITRITE;
-	  while (findTestStrip());
-	  setLED(Blue);
-	  delay(250);
+			typeToRead = NITRITE;
+			while (findTestStrip());
+			setLED(Blue);
+			delay(250);
 	  
-	  //vTaskDelay(4000); // wait 1 min for the test strip to develop
-	  value = ScanColor();
-	  // TODO: transmit to Wifi module
-	 // Serial.write("AT+CTIPSEND"); // indicate we are about to send nitrite
-	  //Serial.write("nitrite");
-	  //Serial.write("AT+CTIPSEND"); // send nitrite
-	  //Serial.write(value);
-	  
-	  setLED(Off);
-      //xSemaphoreGive( xSerialSemaphoreColorSensor );
-      //suspend until triggered by next interrupt from Wifi module
-      //vTaskSuspend(NULL);
-   // }
-	vTaskDelayUntil( &xLastWakeTime, 10000 / portTICK_PERIOD_MS );
-    //vTaskDelay(2000); // 1 tick delay between reads for stability
-  }
+			nitriteValue = ScanColor() * 100;
+			
+			setLED(Off);
+			xSemaphoreGive( xSerialSemaphoreColorSensor );
+			//suspend until triggered by next interrupt from Wifi module
+			vTaskSuspend(NULL);
+			}
+		vTaskDelay(1); // 1 tick delay between reads for stability
+	}
 }
 
 // get pH reading from sensor
@@ -202,62 +189,83 @@ void TaskPHRead(void *pvParameters)
   TickType_t xLastWakeTime = xTaskGetTickCount();
   for (;;) // A Task shall never return or exit.
   {
-    setLED(Red);
-	digitalWrite(9, HIGH);
 	// Gets pH value
-	delay(500);
-	long temp = measureTemp();
-	long phValue = getPH(temp);
-	
-	//TODO: Transmit ph to Wifi
-	Serial.write("AT+CTIPSEND"); // indicate we are about to send pH
-	Serial.write("pH");
-	Serial.write("AT+CTIPSEND"); // send pH
-	Serial.write(phValue);
-	
-    setLED(Off);
-	digitalWrite(9, LOW);
+	//delay(500);
+	setLED(Green);
+	Serial.write("Inside PH\n");
+	//long temp = measureTemp();
+	phValue = getPH(tempValue) * 100;
+	Serial.write("\npH Value:");
+	//Serial.write(phValue);
+	Serial.print(phValue);
+	delay(100);
+	setLED(Off);
     // check pH every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 4000 / portTICK_PERIOD_MS );
+    vTaskDelayUntil( &xLastWakeTime, 500 / portTICK_PERIOD_MS );
   }
 }
 
 // get Temperature reading from sensor
 void TaskTemperatureRead(void *pvParameters)
 {
-  (void) pvParameters;
+	(void) pvParameters;
   
-  TickType_t xLastWakeTime = xTaskGetTickCount();
-  for (;;) // A Task shall never return or exit.
-  {
-	setLED(Blue);
-    // Gets temperature value in Celsius
-	long temp = measureTemp();
-	
-	// TODO: transmit to Wifi
-	Serial.write("AT+CTIPSEND"); // indicate that we are about to send temp
-	Serial.write("temp");
-	Serial.write("AT+CTIPSEND"); // send temp
-	Serial.write(temp);
-	
-	setLED(Off);
-    // check temperature every 2 min
-    vTaskDelayUntil( &xLastWakeTime, 7500 / portTICK_PERIOD_MS );
-  }
+	TickType_t xLastWakeTime = xTaskGetTickCount();
+	for (;;) // A Task shall never return or exit.
+	{
+		setLED(Red);
+		// Gets temperature value in Celsius
+		tempValue = measureTemp() * 100;
+		Serial.write("Temp value:\n");
+		Serial.print(tempValue);
+		
+		delay(100);
+		setLED(Off);
+		// check temperature every 2 min (CURRENTLY 2 SEC)
+		vTaskDelayUntil( &xLastWakeTime, 2000 / portTICK_PERIOD_MS );
+	}
 }
 
 void fromWifi()
 {
-  //TODO: get this indicator from Wifi module
-  char action = 'a';
+	int i = 0;
+	char action = '\0';
+	// check for data from Wifi
+	if (Serial.available())
+	{
+		delay(100); // allows all serial sent to be received together
+		while (Serial.available())
+		{
+			action = Serial.read();
+		}
+	}
 
-  switch(action)
-  {
-    case 'a':
-      vTaskResume(xAmmonia);
-      break;
-    case 'n':
-      vTaskResume(xNitriteNitrate);
-      break;
-  }
+	switch(action)
+	{
+	case 'a':
+	{
+		vTaskResume(xAmmonia);
+		break;
+	}
+	case 'n':
+	{
+		vTaskResume(xNitriteNitrate);
+		break;
+	}
+	case 'p':
+	{
+		Serial.write("ph:");
+		Serial.write(phValue);
+		Serial.write("temp:");
+		Serial.write(tempValue);
+		Serial.write("ammonia:");
+		Serial.write(ammoniaValue);
+		Serial.write("nitrite:");
+		Serial.write(nitriteValue);
+		Serial.write("nitrate:");
+		Serial.write(nitrateValue);
+	}
+	default:
+		break;
+	}
 }

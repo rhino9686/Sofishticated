@@ -1,6 +1,6 @@
 #include "OneWire.h"
 
-#define TEMP_PIN 7
+#define TEMP_PIN 6
 
 OneWire ds(TEMP_PIN); // Temp sensor on pin 7
 

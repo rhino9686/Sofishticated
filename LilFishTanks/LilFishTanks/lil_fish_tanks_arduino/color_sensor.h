@@ -43,6 +43,10 @@ Color WhiteTestStrip {0, {245, 45, 45}};
 colorData rgb;
 Color c;
 
+uint8_t greenScanned;
+uint8_t redScanned;
+uint8_t blueScanned;
+
 MD_TCS230  CS(S2, S3, OE);
 
 
@@ -143,10 +147,6 @@ void addColors()
 
 bool SameColor()
 {
-	// values of stored color being compared against
-	uint8_t redExpected = rgb.value[TCS230_RGB_R];
-	uint8_t greenExpected = rgb.value[TCS230_RGB_G];
-	uint8_t blueExpected = rgb.value[TCS230_RGB_B];
 	Serial.print("c: ");
 	Serial.print(c.p.R);
 	Serial.print(" ");
@@ -154,17 +154,17 @@ bool SameColor()
 	Serial.print(" ");
 	Serial.print(c.p.B);
 	Serial.print("read_in: ");
-	Serial.print(redExpected);
+	Serial.print(redScanned);
 	Serial.print(" ");
-	Serial.print(greenExpected);
+	Serial.print(greenScanned);
 	Serial.print(" ");
-	Serial.print(blueExpected);
+	Serial.print(blueScanned);
 	// check if RGB values are within range specified by tolerance
-	if (redExpected < (c.p.R - TOLERANCE) || redExpected > (c.p.R + TOLERANCE))
+	if (redScanned < (c.p.R - TOLERANCE) || redScanned > (c.p.R + TOLERANCE))
 		return false;
-	if (greenExpected < (c.p.G - TOLERANCE) || greenExpected > (c.p.G + TOLERANCE))
+	if (greenScanned < (c.p.G - TOLERANCE) || greenScanned > (c.p.G + TOLERANCE))
 		return false;
-	if (blueExpected < (c.p.B - TOLERANCE) || blueExpected > (c.p.B + TOLERANCE))
+	if (blueScanned < (c.p.B - TOLERANCE) || blueScanned > (c.p.B + TOLERANCE))
 		return false;
 	
 	Serial.print(F("\nFound Matching Color"));
@@ -216,10 +216,12 @@ double FindMatch()
 
 long ScanColor()
 {
-	// Scan for color
 	CS.read();
 	while(CS.available() == 0);  // wait for read to complete
 	CS.getRGB(&rgb);
+	greenScanned = rgb.value[TCS230_RGB_G];
+	redScanned = rgb.value[TCS230_RGB_R];
+	blueScanned = rgb.value[TCS230_RGB_B];
 	// look for match
 	return FindMatch();
 }
@@ -230,6 +232,9 @@ bool findTestStrip()
 	CS.read();
 	while (CS.available() == 0);
 	CS.getRGB(&rgb);
+	greenScanned = rgb.value[TCS230_RGB_G];
+	redScanned = rgb.value[TCS230_RGB_R];
+	blueScanned = rgb.value[TCS230_RGB_B];
 	// look for match against black
 	c = EmptyTestBox;
 	bool foundEmptyBox = SameColor();

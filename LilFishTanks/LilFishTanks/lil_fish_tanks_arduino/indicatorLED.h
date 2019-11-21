@@ -1,7 +1,7 @@
 // Pin definitions
-#define  R_LED  2
-#define  G_LED  3
-#define  B_LED   4
+#define  R_LED  A1
+#define  G_LED  A2
+#define  B_LED  A3
 
 typedef struct 
 {

@@ -4,7 +4,7 @@
 #include "DFRobot_PH.h"
 #include <EEPROM.h>
 
-#define PH_PIN A1
+#define PH_PIN A0
 
 
 void phInit();
