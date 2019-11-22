@@ -8,40 +8,49 @@
 #define STAPSK  "vpgpgwt9000"
 #endif
 
-const char* ssid = STASSID;
-const char* password = STAPSK;
+const char* ssid = "MSetup";
 
-//ESP8266WebServer server(80);
+ESP8266WebServer server(80);
 
-const char* www_username = "admin";
-const char* www_password = "esp8266";
+//const char* www_username = "admin";
+//const char* www_password = "esp8266";
+
+// Handles when the server wants to know the Temp and pH vals
+void handleParamRequest();
+
+//Handles when the server wants to check Nitrate and Ammonia vals
+void handleCheckRequest();
 
 void setup() {
   Serial.begin(115200);
- /** WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid);
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("WiFi Connect Failed! Rebooting...");
     delay(1000);
     ESP.restart();
   }
   ArduinoOTA.begin();
-
-  server.on("/", []() {
-    if (!server.authenticate(www_username, www_password)) {
-      return server.requestAuthentication();
-    }
-    server.send(200, "text/plain", "Login OK");
-  });
+  
+    //Handler for http requests for requests
+    server.on("/requestVals", handleRequest);
+  
   server.begin();
 
   Serial.print("Open http://");
   Serial.print(WiFi.localIP());
-  Serial.println("/ in your browser to see it working");**/
+  Serial.println("/ in your browser to see it working");
 }
 
+void handleParamRequest() {
+  server.send(200, "text/plain", "fetching Temp and pH vals");
+}
+
+void handleCheckRequest() {
+  server.send(200, "text/plain", "checking chemical levels");
+}
+
+
 void loop() {
-  /**ArduinoOTA.handle();
-  server.handleClient();**/
-  Serial.print("K");
+  server.handleClient();
 }

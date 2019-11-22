@@ -17,8 +17,6 @@ void setup() {
   // set the baud rate at 
     Serial.begin(115200);
 
-
-    Initialize
     myTank.Temp = 7030;
     myTank.pH = 850;
 

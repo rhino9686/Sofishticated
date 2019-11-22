@@ -9,6 +9,11 @@ myTank = Tank()
 
 myTank.rando = 3
 
+
+## define Wi-Fi chip IP address
+
+WIFI_IP = "35.6.179.38"
+
 ## Home route, use to check connection with a code?
 @app.route("/")
 def hello():
@@ -17,21 +22,29 @@ def hello():
 ## handler for tank making a PUT request for temperature 
 @app.route("/fromTank/sendTemp")
 def getTempFromTank():
-    return "temp retrieved from tank"
+    tempStr = str(request.data)
+    temperatureStr = tempStr[2] ## check this val
+    print(tempStr)
+    return "temp received" #return val is meaningless
 
 ## handler for tank making a PUT request for pH
 @app.route("/fromTank/sendpH")
 def getPhFromTank():
-    return "pH retrieved from tank"
+    phStr = str(request.data)
+    phValStr = phStr[2] ##check this val
+    return "pH retrieved"
 
 @app.route("/fromTank/sendAmmonia")
 def getAmmoniaFromTank():
+    ammonStr = str(request.data)
+    ammonValStr = ammonStr[2] ##check this val
     return "pH retrieved from tank"
 
 @app.route("/fromTank/sendNitrate")
 def getNitrateFromTank():
+    nitStr = str(request.data)
+    nitrateStr = nitStr[2] ##check this val
     return "pH retrieved from tank"
-
 
 
 ## handler for tank making a GET request to know if it's time to check chemicals 
@@ -45,9 +58,10 @@ def checkTankChemicals():
 @app.route("/fromTank/sendRando", methods = ['POST'])
 def getRando():
     randStr = str(request.data)
-    numStr = randStr[2]
-    myTank.rando = int(numStr)
-    print(myTank.rando)
+    print(randStr)
+    ##numStr = randStr[2]
+    ##myTank.rando = int(numStr)
+    ##print(myTank.rando)
     return "checking tank chemicals"
 
 
@@ -71,8 +85,17 @@ def sendRandoToApp():
     return jsonify({"randVal": myRandStr})
 
 ##@app.route("/fromApp/requestRando",methods = ['POST'])
-def sendRandoFromChip():
-    return redirect("http://www.example.com", code=302)
+def promptChipForVals():
+    dest_url = "http://" + WIFI_IP + ":5000/requestVals"
+
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "blank"
+    response = request.post(dest_url, data=data, headers=headers)
+    return jsonify({"data": "data_requested"})
+
+
+
+
 
 @app.route("/fromApp/requestCheck")
 def App():
