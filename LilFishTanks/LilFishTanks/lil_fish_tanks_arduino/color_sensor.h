@@ -37,8 +37,8 @@ Color Ammonia[MAX_AMMONIA_COLORS];
 Color Nitrite[MAX_NITRITE_NITRATE_COLORS];
 Color Nitrate[MAX_NITRITE_NITRATE_COLORS];
 
-Color EmptyTestBox {0, {0, 0, 7}};
-Color WhiteTestStrip {0, {20, 23, 48}};
+Color EmptyTestBox {0, {29, 31, 60}};
+Color WhiteTestStrip {0, {60, 65, 110}};
 
 colorData rgb;
 Color c;
@@ -56,20 +56,20 @@ void addColors()
 	int index = 0;
 	Color c;
 	c.ppm = 0.0;
-	c.p = {0, 0, 0};
+	c.p = {55, 55, 80};
 	Ammonia[index] = c;
 
 	c.ppm = 0.0;
-	c.p = {255, 95, 95};
+	c.p = {65, 65, 110};
 	Nitrite[index] = c;
 
 	c.ppm = 0.0;
-	c.p = {255, 95, 95};
+	c.p = {49, 50, 90};
 	Nitrate[index] = c;
 
 	++index;
 
-	c.ppm = 0.25;
+	c.ppm = 0.5;
 	c.p = {0, 0, 0};
 	Ammonia[index] = c;
 
@@ -83,8 +83,8 @@ void addColors()
 
 	++index;
 
-	c.ppm = 0.5;
-	c.p = {0, 0, 0};
+	c.ppm = 1.0;
+	c.p = {57, 58, 85};
 	Ammonia[index] = c;
 
 	c.ppm = 0.3;
