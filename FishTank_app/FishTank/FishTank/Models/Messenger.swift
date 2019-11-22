@@ -140,7 +140,7 @@ final class Messenger {
     
     // Requests the Tanks's pH from the server
     func requestPh() -> String {
-         return sendRequest(param: "pH", route: "/fromApp/requestPH")
+         return sendRequest(param: "pH", route: "/fromApp/requestpH")
     }
     
     // Requests the Tank's Temperature from the server
@@ -151,7 +151,7 @@ final class Messenger {
     
     func refreshParams() {
  
-    // var _ = self.requestPh()
+       var _ = self.requestPh()
        var _ = self.requestTemp()
     }
     
@@ -164,7 +164,7 @@ final class Messenger {
             //Here we make the final correction to make the number a decimal
             let truepH = numDouble! / 100
             //Make sure this works
-            var _ = self.$currentPh.append(truepH)
+            self.currentPh = truepH
         }
     }
     

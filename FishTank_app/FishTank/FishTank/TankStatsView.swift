@@ -12,12 +12,22 @@ let myGrey = Color(red: (30/255), green: (30/255), blue: (30/255), opacity: 1.0)
 
 struct TankStatsView: View {
     
-    @EnvironmentObject private var tankData: TankProfile
+    @Binding var tankData: TankProfile
+    @State var currentTempStr = "70"
+    @State var currentpHStr = "6.03"
+    @State var lastTimeChecked = "placeholder"
+    
+    
+   // @EnvironmentObject private var tankData: TankProfile
     
     func update() {
         print("updating")
         self.tankData.updateParams()
+        self.currentTempStr = self.tankData.currentTemp
+        self.currentpHStr = self.tankData.currentpHStr
+        self.lastTimeChecked = self.tankData.lastTimeChecked
     }
+    
     
     
     var body: some View {
@@ -67,7 +77,7 @@ struct TankStatsView: View {
             HStack {
                 Text("Temperature: ")
              //   let format = String(format: " %.2f ", self.tankData.currentTempF)
-                Text("\(self.tankData.currentTemp)° F ")
+                Text("\(self.currentTempStr)")
                     .foregroundColor(Color.blue)
 
                 Spacer()
@@ -92,9 +102,11 @@ struct TankStatsView: View {
 }
 
 struct TankStatsView_Previews: PreviewProvider {
+   @State static var tank = TankProfile()
     static var previews: some View {
-        TankStatsView()
-        .environmentObject(TankProfile())
+        
+        TankStatsView(tankData: $tank)
+       // .environmentObject(TankProfile())
         .previewLayout(.fixed(width: 350, height: 250))
     }
 }

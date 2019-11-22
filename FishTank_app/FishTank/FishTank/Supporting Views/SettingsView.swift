@@ -10,16 +10,12 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject private var tankData: TankProfile
+    @Binding var tankData: TankProfile
     
     var body: some View {
-        
-        
-        
             List {
 
-            
-                ToggleTempView()
+                ToggleTempView(inFar: $tankData.inFahrenheight)
                 
                 NavigationLink(destination: TestConnectionView()) {
                      Text("Test Wifi Connection")
@@ -39,18 +35,18 @@ struct SettingsView: View {
 }
 
 struct ToggleTempView: View {
-    @State private var showGreeting = true
+    @Binding var inFar: Bool
 
     var body: some View {
         VStack {
-            Toggle(isOn: $showGreeting) {
+            Toggle(isOn: $inFar) {
                 HStack {
                     Text("Temperature")
                     .fontWeight(.semibold)
                     
                     Spacer()
                     Group {
-                        if showGreeting {
+                        if inFar {
                             Text("Fahrenheit")
                         }
                         else {
@@ -62,6 +58,24 @@ struct ToggleTempView: View {
                 
             }.padding(.trailing, 5)
 
+            Toggle(isOn: $inFar, label: {
+                HStack {
+                    Text("Temperature")
+                    .fontWeight(.semibold)
+                    
+                    Spacer()
+                    Group {
+                        if inFar {
+                            Text("Fahrenheit")
+                        }
+                        else {
+                            Text("Celcius")
+                        }
+                    }.padding(.trailing)
+
+                }
+            }).padding(.trailing, 5)
+            
 
         }
     }
@@ -69,8 +83,9 @@ struct ToggleTempView: View {
 
 
 struct SettingsView_Previews: PreviewProvider {
+    @State static var tank = TankProfile()
+    
     static var previews: some View {
-        SettingsView()
-          .environmentObject(TankProfile())
+        SettingsView(tankData: $tank)
     }
 }

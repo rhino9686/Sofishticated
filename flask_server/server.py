@@ -96,7 +96,6 @@ def promptChipForVals():
 
 
 
-
 @app.route("/fromApp/requestCheck")
 def App():
     return "chemicals set to be check"

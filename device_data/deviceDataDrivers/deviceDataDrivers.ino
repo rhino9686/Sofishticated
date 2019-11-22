@@ -18,7 +18,7 @@ void setup() {
     Serial.begin(115200);
 
 
-    Initialize
+
     myTank.Temp = 7030;
     myTank.pH = 850;
 

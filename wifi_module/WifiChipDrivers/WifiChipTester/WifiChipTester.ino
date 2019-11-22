@@ -4,14 +4,13 @@
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
-#include "Tank.cpp"
 
 
 bool SETUP_MODE = false;
 
 //Message buffer for HTTP Data
 char buffer[10];
-char str[10];
+String str;
 
 //HTTPClient to send messages to Server
 HTTPClient http;    
@@ -47,7 +46,7 @@ void loop() {
   }
 
 
-   http.begin("http://35.6.158.8:5000/fromTank/sendRando");      //Specify request destination
+   http.begin("http://35.6.191.190:5000/fromTank/sendRando");      //Specify request destination
    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
 
     

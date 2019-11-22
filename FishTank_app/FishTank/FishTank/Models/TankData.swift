@@ -36,24 +36,28 @@ final class TankProfile: ObservableObject {
     var idCounter: Int
     
     //Current Temperature of the tank (in degrees Fahrenheit)
-    @Published var currentTempF: Double
+    @State var currentTempF: Double
     
     //Current Temperature of the tank formatted in a string
     var currentTemp: String {
-        let tempDouble = self.messenger.currentTempF
+        var tempDouble: Double = 8
+        
+        tempDouble  = self.messenger.currentTempF
+           
         if inFahrenheight {
             let tempInt = Int(tempDouble)
-            return String(tempInt)
+            return String(tempInt) + " ° F"
         }
         else {
             let currentTempC = Int((tempDouble - 32) * 5.0 / 9.0)
-            return String(currentTempC)
+            return String(currentTempC) + " ° C"
         }
         
     }
     
+    
     //Current pH level of the tank
-    @Published var currentPh: Double = 7.0
+    @State var currentPh: Double = 7.0
     
     //Current pH formatted to 2 decimal places in a string
     var currentpHStr: String {
@@ -100,7 +104,7 @@ final class TankProfile: ObservableObject {
         self.idCounter = 0
         
        // let piServerAdress = "192.168.1.166"
-        let laptopServerAddress = "35.6.158.8"
+        let laptopServerAddress = "35.6.191.190"
         let server = laptopServerAddress
         messenger = Messenger(ipAddress: server)
         
