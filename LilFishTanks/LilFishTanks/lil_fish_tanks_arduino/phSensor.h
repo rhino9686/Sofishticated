@@ -13,4 +13,6 @@ float getPH(long temperaturePH);
 
 void calibratePH(long temperaturePH);
 
+float calcPH();
+
 #endif

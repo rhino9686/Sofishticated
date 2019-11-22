@@ -44,6 +44,8 @@ main.d main.o: .././main.cpp ..\\..\ArduinoCore\include\core/Arduino.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/Arduino_FreeRTOS.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/task.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/list.h \
+ ..\include\libraries\SoftwareSerial\src/SoftwareSerial.h \
+ ..\\..\ArduinoCore\include\core/Stream.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/semphr.h \
  ..\\..\ArduinoCore\include\libraries\FreeRTOS/queue.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\assert.h \
@@ -146,6 +148,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ..\\..\ArduinoCore\include\libraries\FreeRTOS/task.h:
 
 ..\\..\ArduinoCore\include\libraries\FreeRTOS/list.h:
+
+..\include\libraries\SoftwareSerial\src/SoftwareSerial.h:
+
+..\\..\ArduinoCore\include\core/Stream.h:
 
 ..\\..\ArduinoCore\include\libraries\FreeRTOS/semphr.h:
 

@@ -110,6 +110,7 @@
       <Value>..\include\libraries\MD_TCS230\docs\search</Value>
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
+      <Value>..\include\libraries\SoftwareSerial\src</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -147,6 +148,7 @@
       <Value>..\include\libraries\MD_TCS230\docs\search</Value>
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
+      <Value>..\include\libraries\SoftwareSerial\src</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -208,6 +210,7 @@
       <Value>..\include\libraries\MD_TCS230\docs\search</Value>
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
+      <Value>..\include\libraries\SoftwareSerial\src</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -245,6 +248,7 @@
       <Value>..\include\libraries\MD_TCS230\docs\search</Value>
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
+      <Value>..\include\libraries\SoftwareSerial\src</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -291,6 +295,9 @@
     <Compile Include="include\libraries\MD_TCS230\src\MD_TCS230.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\libraries\SoftwareSerial\src\SoftwareSerial.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\tempSensor.h">
       <SubType>compile</SubType>
     </Compile>
@@ -319,6 +326,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\libraries\MD_TCS230\src\MD_TCS230.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\SoftwareSerial\src\SoftwareSerial.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="tempSensor.h">
@@ -560,12 +570,16 @@
     <Folder Include="include\libraries\MD_TCS230\examples\" />
     <Folder Include="include\libraries\MD_TCS230\examples\ColorMatch_TCS230\" />
     <Folder Include="include\libraries\MD_TCS230\src\" />
+    <Folder Include="include\libraries\SoftwareSerial\" />
+    <Folder Include="include\libraries\SoftwareSerial\src\" />
     <Folder Include="src\" />
     <Folder Include="src\libraries\" />
     <Folder Include="src\libraries\MD_TCS230\" />
     <Folder Include="src\libraries\MD_TCS230\docs\" />
     <Folder Include="src\libraries\MD_TCS230\docs\search\" />
     <Folder Include="src\libraries\MD_TCS230\src\" />
+    <Folder Include="src\libraries\SoftwareSerial\" />
+    <Folder Include="src\libraries\SoftwareSerial\src\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
