@@ -157,9 +157,19 @@ void TaskPHandTemperature(void *pvParameters)
 	//delay(500);
 	setLED(Green);
 	Serial.write("p\n");
-	//long temp = measureTemp();
-	phValue = getPH(tempValue) * 100;
-	//Serial.write(phValue);
+	float voltage = analogRead(PH_PIN);
+	float neutralVoltage = 359.0; //CHANGE THESE AS NEEDED
+	float acidVoltage = 178.0; //CHANGE THESE AS NEEDED
+	float slope = (7.0 - 4.0)/(neutralVoltage - acidVoltage);
+	float intercept = 7.0-(slope * neutralVoltage);
+	phValue = (slope * voltage) + intercept;
+	Serial.write("Neutral Voltage:");
+	Serial.print(neutralVoltage);
+	Serial.write("\nAcid Voltage:");
+	Serial.print(acidVoltage);
+	Serial.write("\nVoltage Measured:");
+	Serial.print(voltage);
+	Serial.write("\npH Value:");
 	Serial.print(phValue);
 	delay(100);
 	setLED(Off);
