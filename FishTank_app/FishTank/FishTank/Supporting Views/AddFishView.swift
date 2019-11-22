@@ -54,8 +54,6 @@ struct AddFishView: View {
                         }
                 }
                 
-                
-                
             }
             .navigationBarTitle(Text("Add New Fish"))
         

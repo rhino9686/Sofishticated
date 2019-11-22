@@ -98,7 +98,11 @@ final class TankProfile: ObservableObject {
         currentResidents = [FishProfile]()
         self.currentTempF = 80
         self.idCounter = 0
-        messenger = Messenger(ipAddress: "0.0.0.1")
+        
+       // let piServerAdress = "192.168.1.166"
+        let laptopServerAddress = "35.6.158.8"
+        let server = laptopServerAddress
+        messenger = Messenger(ipAddress: server)
         
     }
     
@@ -118,13 +122,24 @@ final class TankProfile: ObservableObject {
     
     
     //Adds a new fish to the tank
-   func addFish(fishEntry fish: FishProfile){
+    func addFish(fishEntry fish: FishProfile){
         self.currentResidents.append(fish)
     }
     
     //Removes a fish from the tank by id
     func removeFish(id: Int) {
-        return
+        
+        var index = -1
+        
+        for i in (0...self.currentResidents.count) {
+            if self.currentResidents[i].id == id {
+                index = i
+            }
+        }
+        if index < 0 {
+            return
+        }
+        self.currentResidents.remove(at: index)
     }
     
     //Calculates how long it has been since we've checked the Tank stats
@@ -134,6 +149,7 @@ final class TankProfile: ObservableObject {
     
     
     func updateParams() {
+        print("reached tank")
         self.messenger.refreshParams()
     }
     

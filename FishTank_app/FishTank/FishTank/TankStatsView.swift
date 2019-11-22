@@ -16,6 +16,7 @@ struct TankStatsView: View {
     
     func update() {
         print("updating")
+        self.tankData.updateParams()
     }
     
     
@@ -45,7 +46,7 @@ struct TankStatsView: View {
 
                 Group {
                     Button(action: {
-                        self.tankData.updateParams()
+                       
                     }, label: {
                         Image(systemName: "arrow.clockwise")
                     })

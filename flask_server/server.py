@@ -52,13 +52,17 @@ def getRando():
 
 
 
-@app.route("/fromApp/requestTemp")
+@app.route("/fromApp/requestTemp",methods = ['POST'])
 def sendTempToApp():
-    return "temp sent to app"
+    myTempStr = str(myTank.getTemp())
+    print("Returning Temp val " + myTempStr)
+    return jsonify({"temp": myTempStr})
 
-@app.route("/fromApp/requestpH")
+@app.route("/fromApp/requestpH",methods = ['POST'])
 def sendPhToApp():
-    return "pH sent to app"
+    mypHStr = str(myTank.getPH())
+    print("Returning pH val " + mypHStr)
+    return jsonify({"pH": mypHStr})
 
 @app.route("/fromApp/requestRando",methods = ['POST'])
 def sendRandoToApp():

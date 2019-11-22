@@ -74,7 +74,7 @@ final class Messenger {
             
             let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
             
-            let urlString =   "http://" + self.ipAddress + self.port + route
+            let urlString =  "http://" + self.ipAddress + self.port + route
             let url = URL(string: urlString)!
             
             var request = URLRequest(url: url)
@@ -100,26 +100,27 @@ final class Messenger {
                 
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
-                    let Val = result?[param] as! String
-                    
-                    HttpResult = Val
-                    
-                    if param == "pH" {
-                        self.parsePh(param: param, httpResult: HttpResult)
+                    if result != nil {
+                        let Val = result?[param] as! String
                         
-                    }
-                    else if param == "temp" {
-                        self.parseTemp(param: param, httpResult: HttpResult)
-                    }
+                        HttpResult = Val
+                        print(Val)
+                        if param == "pH" {
+                            self.parsePh(param: param, httpResult: HttpResult)
+                        }
+                        else if param == "temp" {
+                            self.parseTemp(param: param, httpResult: HttpResult)
+                        }
+                        print("Result -> \(String(describing: result))")
                     
-                    print("Result -> \(String(describing: result))")
-                    
+                    }
+
                 } catch {
                     print("Error -> \(error)")
                 }
             }
             
-            
+            //This is for testing the server connection
             task.resume()
             usleep(200000)
             return HttpResult
@@ -133,7 +134,7 @@ final class Messenger {
     
     
     func requestRando() -> String {
-        return sendRequest(param: "rando", route: "/fromApp/requestRando")
+        return sendRequest(param: "randVal", route: "/fromApp/requestRando")
     }
     
     
@@ -144,12 +145,13 @@ final class Messenger {
     
     // Requests the Tank's Temperature from the server
     func requestTemp() -> String {
-        return sendRequest(param: "Temp", route: "/fromApp/requestTemp")
+        return sendRequest(param: "temp", route: "/fromApp/requestTemp")
     }
     
     
     func refreshParams() {
-       var _ = self.requestPh()
+ 
+    // var _ = self.requestPh()
        var _ = self.requestTemp()
     }
     
@@ -168,12 +170,14 @@ final class Messenger {
     
     func parseTemp(param: String, httpResult: String ) {
         // Make sure that the httpString value contains an actual number
+       // print(httpResult)
+        
         let numDouble: Double? = Double(httpResult)
             
         if (numDouble != nil) {
            //Here we make the final correction to make the number a decimal
            let trueTemp = numDouble! / 100
-           var _ = self.$currentTempF.append(trueTemp)
+           self.currentTempF = (trueTemp)
         }
     }
     
