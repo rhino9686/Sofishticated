@@ -14,8 +14,8 @@ struct SettingsView: View {
     
     var body: some View {
             List {
-
-                ToggleTempView(inFar: $tankData.inFahrenheight)
+                
+               ToggleTempView(inFar: $tankData.inFahrenheight)
                 
                 NavigationLink(destination: TestConnectionView()) {
                      Text("Test Wifi Connection")
