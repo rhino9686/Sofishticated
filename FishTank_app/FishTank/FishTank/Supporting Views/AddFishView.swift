@@ -10,7 +10,8 @@ import SwiftUI
 
 struct AddFishView: View {
     
-    @EnvironmentObject private var tankData: TankProfile
+    @EnvironmentObject var tankData: TankProfile
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var name: String = ""
@@ -78,7 +79,7 @@ struct AddFishView: View {
     func addFish() {
         
         let newID = self.tankData.getNextID()
-        var myFish = FishProfile(name_in: self.name, id_in: newID)
+        var myFish = FishProfile(name_in: self.name, id_in: newID, img_in: type.imageName)
         myFish.breedData = self.type
         
         self.tankData.addFish(fishEntry: myFish)
@@ -107,8 +108,9 @@ struct ContentView: View {
 
 
 struct AddFishView_Previews: PreviewProvider {
+    @State static var myTank = TankProfile()
     static var previews: some View {
-        AddFishView()
-         .environmentObject(TankProfile())
+        AddFishView(/**tankData: $myTank*/)
+        .environmentObject(self.myTank)
     }
 }

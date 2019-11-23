@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @Binding var tankData: TankProfile
+    @EnvironmentObject var tankData: TankProfile
     
     var body: some View {
             List {
@@ -57,24 +57,6 @@ struct ToggleTempView: View {
                 }
                 
             }.padding(.trailing, 5)
-
-            Toggle(isOn: $inFar, label: {
-                HStack {
-                    Text("Temperature")
-                    .fontWeight(.semibold)
-                    
-                    Spacer()
-                    Group {
-                        if inFar {
-                            Text("Fahrenheit")
-                        }
-                        else {
-                            Text("Celcius")
-                        }
-                    }.padding(.trailing)
-
-                }
-            }).padding(.trailing, 5)
             
 
         }
@@ -86,6 +68,7 @@ struct SettingsView_Previews: PreviewProvider {
     @State static var tank = TankProfile()
     
     static var previews: some View {
-        SettingsView(tankData: $tank)
+        SettingsView()
+        .environmentObject(tank)
     }
 }

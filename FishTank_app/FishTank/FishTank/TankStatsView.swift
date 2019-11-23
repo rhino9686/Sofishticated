@@ -12,7 +12,7 @@ let myGrey = Color(red: (30/255), green: (30/255), blue: (30/255), opacity: 1.0)
 
 struct TankStatsView: View {
     
-    @Binding var tankData: TankProfile
+    @EnvironmentObject var tankData: TankProfile
     @State var currentTempStr = "70"
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "placeholder"
@@ -105,8 +105,8 @@ struct TankStatsView_Previews: PreviewProvider {
    @State static var tank = TankProfile()
     static var previews: some View {
         
-        TankStatsView(tankData: $tank)
-       // .environmentObject(TankProfile())
+        TankStatsView()
+        .environmentObject(TankProfile())
         .previewLayout(.fixed(width: 350, height: 250))
     }
 }

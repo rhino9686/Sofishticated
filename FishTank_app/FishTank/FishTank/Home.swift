@@ -11,7 +11,7 @@ import SwiftUI
 let lightGrey = Color(red: (220/255), green: (220/255), blue: (220/255), opacity: 1.0)
 
 struct TankHome: View {
-    @State var tankData: TankProfile
+    @EnvironmentObject var tankData: TankProfile
     
     var body: some View {
         NavigationView {
@@ -20,12 +20,12 @@ struct TankHome: View {
                 Divider()
  
                 Section(header: Text("Conditions")) {
-                    TankStatsView(tankData: $tankData)
+                    TankStatsView().environmentObject(self.tankData)
                     
                    // Divider()
                     NavigationLink(destination:
-                            AddFishView()
-                                    .environmentObject(self.tankData)
+                        AddFishView()
+                                   .environmentObject(self.tankData)
                     ) {
                         Text("Check Chemicals")
                             .font(.footnote)
@@ -76,7 +76,8 @@ struct TankHome: View {
                     .fontWeight(.semibold)
                 }
                 
-                NavigationLink(destination: SettingsView(tankData: $tankData)
+                NavigationLink(destination: SettingsView()
+                    .environmentObject(self.tankData)
                 ) {
                     Text("Settings")
                     .fontWeight(.semibold)
@@ -94,7 +95,7 @@ struct TankHome: View {
 struct TankHome_Previews: PreviewProvider {
     @State static var tank = TankProfile()
     static var previews: some View {
-        TankHome(tankData: tank)
+        TankHome()
          .environmentObject(TankProfile())
     }
 }

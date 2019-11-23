@@ -66,7 +66,13 @@ final class TankProfile: ObservableObject {
     }
     
     // time since tank was checked last (in minutes)
-    @Published var lastCheckedTimeInMins = 3
+    @State var lastCheckedTimeInMins = 3
+    
+    // Deltas for calculating last time
+    @State var timeNow = 0;
+    @State var lastTime = 0;
+    
+    
     
     var lastTimeChecked: String {
         if self.lastCheckedTimeInMins < 60 {

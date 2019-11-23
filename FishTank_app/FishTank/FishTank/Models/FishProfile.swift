@@ -34,10 +34,10 @@ struct FishProfile: Hashable, Codable {
         imageName = "goldfish"
     }
     
-    init(name_in: String, id_in: Int  ) {
+    init(name_in: String, id_in: Int, img_in: String  ) {
         self.name =  name_in
         self.id = id_in
-        imageName = "goldfish"
+        imageName = img_in
     }
 }
 
@@ -58,7 +58,7 @@ struct FishBreedData: Hashable, Codable {
     var maxPh: Double
     var minPh: Double
 
-    fileprivate var imageName: String = "goldfish"
+    var imageName: String = "goldfish"
     
     
     //Constructor to easily create a breed packet
