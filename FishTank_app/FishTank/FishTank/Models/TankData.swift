@@ -87,6 +87,15 @@ final class TankProfile: ObservableObject {
     
     var lastTimeChecked: String {
         updateDelta()
+        
+        if self.lastCheckedTimeInMins == 0 {
+            return " just now "
+        }
+        
+        if self.lastCheckedTimeInMins == 1 {
+           return " \(self.lastCheckedTimeInMins) minute ago"
+        }
+        
         if self.lastCheckedTimeInMins < 60 {
             return " \(self.lastCheckedTimeInMins) minutes ago"
         }

@@ -15,8 +15,9 @@ struct TankStatsView: View {
     @EnvironmentObject var tankData: TankProfile
     @State var currentTempStr = "70"
     @State var currentpHStr = "6.03"
-    @State var lastTimeChecked = "placeholder"
+    @State var lastTimeChecked = "3 hours ago"
     
+    let timer = Timer.publish(every: 20, on: .main, in: .common).autoconnect()
     
    // @EnvironmentObject private var tankData: TankProfile
     
@@ -48,6 +49,9 @@ struct TankStatsView: View {
             
             HStack {
                 Text("Last checked: \(self.lastTimeChecked)")
+                    .onReceive(timer) { input in
+                    self.lastTimeChecked = self.tankData.lastTimeChecked
+                }
                     .font(.footnote)
                 
                 Spacer()
