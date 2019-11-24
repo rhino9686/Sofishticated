@@ -28,8 +28,6 @@ struct TankStatsView: View {
         self.lastTimeChecked = self.tankData.lastTimeChecked
     }
     
-    
-    
     var body: some View {
         
         VStack {
@@ -49,7 +47,7 @@ struct TankStatsView: View {
             
             
             HStack {
-                Text("Last checked: \(self.tankData.lastTimeChecked)")
+                Text("Last checked: \(self.lastTimeChecked)")
                     .font(.footnote)
                 
                 Spacer()

@@ -35,9 +35,6 @@ final class TankProfile: ObservableObject {
     //Counter variable to give each fish a unique ID
     var idCounter: Int
     
-    //Current Temperature of the tank (in degrees Fahrenheit)
-    @State var currentTempF: Double
-    
     //Current Temperature of the tank formatted in a string
     var currentTemp: String {
         var tempDouble: Double = 8
@@ -55,10 +52,6 @@ final class TankProfile: ObservableObject {
         
     }
     
-    
-    //Current pH level of the tank
-    @State var currentPh: Double = 7.0
-    
     //Current pH formatted to 2 decimal places in a string
     var currentpHStr: String {
         let pH = self.messenger.currentPh
@@ -66,15 +59,34 @@ final class TankProfile: ObservableObject {
     }
     
     // time since tank was checked last (in minutes)
-    @State var lastCheckedTimeInMins = 3
+    var lastCheckedTimeInMins = 3
     
     // Deltas for calculating last time
-    @State var timeNow = 0;
-    @State var lastTime = 0;
+    var lastTime = 0;
     
+    //Calculates how long it has been since we've checked the Tank stats
+    func getNow() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        return (hour * 60) + minutes
+    }
+    
+    func updateParams() {
+        print("reached tank")
+        self.messenger.refreshParams()
+        self.lastTime = self.getNow()
+    }
+    
+    func updateDelta() {
+        self.lastCheckedTimeInMins = self.getNow() - self.lastTime;
+        return
+    }
     
     
     var lastTimeChecked: String {
+        updateDelta()
         if self.lastCheckedTimeInMins < 60 {
             return " \(self.lastCheckedTimeInMins) minutes ago"
         }
@@ -88,7 +100,7 @@ final class TankProfile: ObservableObject {
     
     var category: Health {
         //Will need more robust logic
-        if self.currentTempF > 0 {
+        if self.messenger.currentTempF > 0 {
             return Health.good
         }
         else {
@@ -106,7 +118,6 @@ final class TankProfile: ObservableObject {
     // Default constructor
     init() {
         currentResidents = [FishProfile]()
-        self.currentTempF = 80
         self.idCounter = 0
         
        // let piServerAdress = "192.168.1.166"
@@ -119,11 +130,11 @@ final class TankProfile: ObservableObject {
     // Extra constructor for variable IP address
     init( ipAddressInput: String ) {
         currentResidents = [FishProfile]()
-        self.currentTempF = 80
         self.idCounter = 0
         messenger = Messenger(ipAddress: ipAddressInput)
     }
     
+    //This is for assigning unique ID's for fish
     func getNextID()-> Int {
         let nextId = self.idCounter
         self.idCounter += 1
@@ -152,16 +163,7 @@ final class TankProfile: ObservableObject {
         self.currentResidents.remove(at: index)
     }
     
-    //Calculates how long it has been since we've checked the Tank stats
-    func calculateTimeDelta() {
-        return
-    }
-    
-    
-    func updateParams() {
-        print("reached tank")
-        self.messenger.refreshParams()
-    }
+
     
     
     // Function to set the IP address for the messenger server
