@@ -19,7 +19,7 @@ struct AddFishView: View {
     @State private var errorMsg: String = ""
     
   //  let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
-    
+    @State private var showingAlert = false
     
     var body: some View {
             Form {
@@ -57,8 +57,17 @@ struct AddFishView: View {
                 
             }
             .navigationBarTitle(Text("Add New Fish"))
+            .alert(isPresented: $showingAlert) {
+                  Alert(title: Text("Warning!"), message: Text("Incompatible"), dismissButton: .default(Text("Oops")))
+              }
         
     }
+    
+    
+    func buttonAction() {
+        return
+    }
+    
     
     func checkValidity() -> Bool{
         if self.name == "" {

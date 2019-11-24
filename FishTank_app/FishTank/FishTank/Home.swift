@@ -24,7 +24,7 @@ struct TankHome: View {
                     
                    // Divider()
                     NavigationLink(destination:
-                        AddFishView()
+                        TestChemicalsView()
                                    .environmentObject(self.tankData)
                     ) {
                         Text("Check Chemicals")
