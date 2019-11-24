@@ -15,14 +15,18 @@ struct SettingsView: View {
     var body: some View {
             List {
                 
-               ToggleTempView(inFar: $tankData.inFahrenheight)
+            Section(header: Text("Your Name")) {
+                    TextField("Enter name", text: $tankData.userName)
+            }
                 
-                NavigationLink(destination: TestConnectionView()) {
+            ToggleTempView(inFar: $tankData.inFahrenheight)
+                
+            NavigationLink(destination: TestConnectionView()) {
                      Text("Test Wifi Connection")
                      .fontWeight(.semibold)
                  }
                 
-                NavigationLink(destination: TestConnectionView()) { //CHANGE
+                NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
                      Text("Reset Tank")
                      .fontWeight(.semibold)
                  }
@@ -41,17 +45,15 @@ struct ToggleTempView: View {
         VStack {
             Toggle(isOn: $inFar) {
                 HStack {
+                    
                     Text("Temperature")
                     .fontWeight(.semibold)
                     
                     Spacer()
                     Group {
-                        if inFar {
-                            Text("Fahrenheit")
-                        }
-                        else {
-                            Text("Celcius")
-                        }
+                        Text("Celcius / Fahrenheit")
+                            .font(.footnote)
+   
                     }.padding(.trailing)
 
                 }

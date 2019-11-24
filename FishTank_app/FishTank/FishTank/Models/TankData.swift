@@ -17,6 +17,8 @@ The model for a fishtank.
 
 final class TankProfile: ObservableObject {
     
+    @Published var userName: String
+    
     //Our HTTPClient
     let messenger: Messenger
     
@@ -89,7 +91,7 @@ final class TankProfile: ObservableObject {
         updateDelta()
         
         if self.lastCheckedTimeInMins == 0 {
-            return " just now "
+            return " Just now "
         }
         
         if self.lastCheckedTimeInMins == 1 {
@@ -128,6 +130,7 @@ final class TankProfile: ObservableObject {
     init() {
         currentResidents = [FishProfile]()
         self.idCounter = 0
+        self.userName = "Robert"
         
        // let piServerAdress = "192.168.1.166"
         let laptopServerAddress = "35.6.191.190"
@@ -140,6 +143,7 @@ final class TankProfile: ObservableObject {
     init( ipAddressInput: String ) {
         currentResidents = [FishProfile]()
         self.idCounter = 0
+        self.userName = "Robert"
         messenger = Messenger(ipAddress: ipAddressInput)
     }
     

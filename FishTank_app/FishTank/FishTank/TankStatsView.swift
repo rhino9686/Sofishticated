@@ -17,9 +17,9 @@ struct TankStatsView: View {
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "3 hours ago"
     
+    //Timer to get the "last time checked" to update by itself
     let timer = Timer.publish(every: 20, on: .main, in: .common).autoconnect()
     
-   // @EnvironmentObject private var tankData: TankProfile
     
     func update() {
         print("updating")
@@ -69,13 +69,8 @@ struct TankStatsView: View {
                     .cornerRadius(5)
                 }.padding(.trailing)
 
-                
-             
-               
             }
        
-            
-            
             HStack {
                 Text("Temperature: ")
              //   let format = String(format: " %.2f ", self.tankData.currentTempF)
@@ -99,7 +94,6 @@ struct TankStatsView: View {
             
         }
         .padding(.leading, 6)
-     // .frame(width: 350, height: 200, alignment: .center )
     }
 }
 

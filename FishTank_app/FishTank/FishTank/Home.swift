@@ -86,7 +86,7 @@ struct TankHome: View {
 
                 
             }
-        .navigationBarTitle(Text("Robert's Tank"))
+            .navigationBarTitle(Text(" \(self.tankData.userName)'s Tank"))
         }
 
     }
