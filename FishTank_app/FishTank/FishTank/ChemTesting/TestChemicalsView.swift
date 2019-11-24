@@ -36,7 +36,8 @@ struct TestChemicalsView: View {
             
                 
             }
-                    .navigationBarTitle(Text("Test Chemical Levels"))
+        .navigationBarTitle(Text("Test Chemical Levels")
+        .font(.headline))
         }
 
 }

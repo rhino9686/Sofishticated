@@ -21,6 +21,8 @@ struct AddFishView: View {
   //  let listOfBreeds = ["Goldfish", "Betta", "Sea snail", "other"]
     @State private var showingAlert = false
     
+    let incompatibleSpeciesMsg = "This fish is incompatible with other fish in your tank, due to a mismatch in living parameters!"
+    
     var body: some View {
             Form {
                 Section(header: Text("Your Fish's Name")) {
@@ -58,14 +60,42 @@ struct AddFishView: View {
             }
             .navigationBarTitle(Text("Add New Fish"))
             .alert(isPresented: $showingAlert) {
-                  Alert(title: Text("Warning!"), message: Text("Incompatible"), dismissButton: .default(Text("Oops")))
+                  Alert(title: Text("Warning!"),
+                        message: Text(self.incompatibleSpeciesMsg),
+                        dismissButton: .default(Text("Oops")))
               }
         
     }
     
-    
-    func buttonAction() {
-        return
+    func checkCompatibility() {
+        var compatible = true
+        let res = self.tankData.currentResidents
+        
+        res.forEach {
+            let fish = $0
+            
+            if type.minPh > fish.breedData!.maxPh {
+                compatible = false
+                return
+            }
+            if type.maxPh < fish.breedData!.minPh {
+                compatible = false
+                return
+            }
+            if type.minTemp > fish.breedData!.maxTemp {
+                compatible = false
+                return
+            }
+            if type.maxTemp < fish.breedData!.minTemp {
+                compatible = false
+                return
+            }
+            
+        }
+        if !compatible {
+            showingAlert = true
+        }
+ 
     }
     
     
@@ -79,8 +109,7 @@ struct AddFishView: View {
             self.errorMsg = "Please select a type of fish"
             return false
         }
-        
-        
+        self.checkCompatibility()
         return true
     }
     

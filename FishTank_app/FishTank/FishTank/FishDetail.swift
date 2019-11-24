@@ -9,33 +9,61 @@
 import SwiftUI
 
 struct FishDetail: View {
-    var fish: FishProfile
+    @State var fish: FishProfile
+    @EnvironmentObject var tankData: TankProfile
+    
+    @Environment(\.editMode) var mode
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
+            HStack {
+                if self.mode?.wrappedValue == .active {
+                    Button("Cancel") {
+                        self.mode?.animation().wrappedValue = .inactive
+                    }
+                }
+                
+                Spacer()
+                
+                EditButton()
+            }.padding(.trailing).padding(.leading)
             
             FittedImage(image: fish.image, width: 300, height: 300)
             
             Divider()
     
             HStack {
-                Text(fish.name)
-                    .font(.title)
-                Spacer()
-            }
-            .padding(.top, 6)
-            .padding(.leading)
-            
-            HStack {
                 Text(fish.breedData!.breedName)
-                    .font(.footnote)
+                    .font(.headline)
                 Spacer()
             }
             .padding(.top, 6)
             .padding(.leading)
             Spacer()
-        }.frame(height:600)
+            
+            if self.mode?.wrappedValue == .inactive {
+               
+              } else {
+                  Button("Remove from Tank") {
+                    self.removeFishFromTank()
+                  }
+              }
+            
+        }
+        .navigationBarTitle(Text(fish.name))
     }
+    
+    func removeFishFromTank() {
+        
+         let myId = self.fish.id
+         self.tankData.removeFish(id: myId)
+         self.presentationMode.wrappedValue.dismiss()
+    }
+    
+    
+    
+    
 }
 
 struct FittedImage: View
@@ -61,9 +89,9 @@ struct FittedImage: View
 }
 
 
-
 struct FishDetail_Previews: PreviewProvider {
     static var previews: some View {
         FishDetail(fish: fishData[1])
+        .environmentObject(TankProfile())
     }
 }

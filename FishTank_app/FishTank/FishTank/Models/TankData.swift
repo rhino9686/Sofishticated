@@ -165,7 +165,11 @@ final class TankProfile: ObservableObject {
         
         var index = -1
         
-        for i in (0...self.currentResidents.count) {
+        if self.currentResidents.isEmpty {
+            return
+        }
+        
+        for i in (0...self.currentResidents.count - 1) {
             if self.currentResidents[i].id == id {
                 index = i
             }
