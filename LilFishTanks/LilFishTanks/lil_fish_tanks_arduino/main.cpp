@@ -13,6 +13,7 @@
 
 #define rxPin 2
 #define txPin 3
+#define wifiRst 10
 
 void fromWifi();
 
@@ -40,13 +41,14 @@ SoftwareSerial serial(rxPin, txPin);
 void setup() {  
 	// initialize serial communication at 115200 bits per second:
 	serial.begin(115200);
-  
+   pinMode(wifiRst, OUTPUT);
 	while (!serial) {
 		; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
 	}
   
 	// initialize Wifi module (Maybe?)
-
+	// drive Wifi Enable pin High
+	digitalWrite(wifiRst, HIGH);
 	// load test strip color data and initialize indicator LED
 	CS.begin();
 	addColors();
