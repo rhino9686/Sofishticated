@@ -139,6 +139,12 @@ final class Messenger {
     
     
     // Requests the Tanks's pH from the server
+    func requestCheck() -> String {
+         return sendRequest(param: "check", route: "/fromApp/requestCheck")
+    }
+    
+    
+    // Requests the Tanks's pH from the server
     func requestPh() -> String {
          return sendRequest(param: "pH", route: "/fromApp/requestpH")
     }
@@ -151,6 +157,7 @@ final class Messenger {
     
     func refreshParams() {
  
+       let _ = self.requestCheck()
        var _ = self.requestPh()
        var _ = self.requestTemp()
     }

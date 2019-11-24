@@ -84,7 +84,7 @@ def sendRandoToApp():
     print("Returning rand val " + myRandStr)
     return jsonify({"randVal": myRandStr})
 
-##@app.route("/fromApp/requestRando",methods = ['POST'])
+@app.route("/fromApp/requestCheck")
 def promptChipForVals():
     dest_url = "http://" + WIFI_IP + ":5000/requestVals"
 
@@ -93,12 +93,6 @@ def promptChipForVals():
     response = request.post(dest_url, data=data, headers=headers)
     return jsonify({"data": "data_requested"})
 
-
-
-
-@app.route("/fromApp/requestCheck")
-def App():
-    return "chemicals set to be check"
 
 
 if __name__ == "__main__":

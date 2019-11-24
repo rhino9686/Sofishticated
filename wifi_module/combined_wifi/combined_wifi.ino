@@ -6,21 +6,14 @@
 #include <ESP8266WiFiMulti.h> 
 #include <ESP8266HTTPClient.h>
 
+// Change this depending on what the current IP address is for the server
+#define SERVER_ADDR "35.6.191.190"
+
 
 #ifndef STASSID
 #define STASSID "Linksys01101"
-#define STAPSK  "vpgpgwt9000"
+#define STAPSK  "huugg"
 #endif
-
-const char* ssid = "MSetup";
-//ssid and password for Access Point
-const char* ssid2 = "FishTank";  //Previously MadiWifi, duly noted
-const char* password = "password";
-
-bool SETUP_MODE = false; //This will determine if the Wifi module will
-
-//Message buffer for HTTP Data
-char buffer[10];
 
 struct Tank {
   //We store everything as a integer here, will be the actual value multiplied by 100 to get 2 decimal places
@@ -28,14 +21,23 @@ struct Tank {
   int pH;
   int ammoniaReading;
   int nitrateReading;
-
 };
+
+
+const char* ssid = "MSetup";
+//ssid and password for Access Point
+const char* ssid2 = "FishTank";  //Previously MadiWifi, duly noted
+const char* password = "password";
+
+bool SETUP_MODE = false; //This will determine if the Wifi module will be hosting it's own access point or not
+
+//Message buffer for HTTP Data
+char buffer[10];
+
 
 
 //Tank model to store temp values, chemical readings
 Tank myTank;
-
-
 
 
 //HTTPClient to send messages to server
@@ -52,23 +54,46 @@ ESP8266WebServer server(80);
 
 // FUNCTION DECLARATIONS
 
+//TODO: LEARN HOW TO GET PARAMS FROM PCB DEVICE
+void getParam(char param) {
+  return;
+}
+
+
 //Send message to device to request Temperature
-void getTemp();
+void getTemp(){
+  getParam('T');
+}
 
 //Send message to device to request pH
-void getpH();
+void getpH() {
+  getParam('P');
+}
 
 //Send message to device to request Ammonia
-void getAmmonia();
+void getAmmonia() {
+  getParam('A');
+}
 
 //Send message to device to request Nitrate/Nitrite
-void getNitrates();
+void getNitrates(){
+  getParam('N');
+}
 
 //Send message to server with Temperature data
-void sendTemp();
+void sendTemp(){
+  int num = myTank.temperature;
+  itoa(num,buffer,10); 
+  sendMessageToServer('T');
+  
+}
 
 //Send message to server with pH data
-void sendpH();
+void sendpH(){
+  int num = myTank.pH;
+  itoa(num,buffer,10); 
+  sendMessageToServer('P');
+}
 
 //Send message to server with Ammonia data
 void sendAmmonia();
@@ -87,7 +112,13 @@ void handleCheckRequest();
 
 void setup() {
   Serial.begin(115200);
-  WiFi.mode(WIFI_AP_STA);
+
+  //Set up initial Tank Parameters
+  myTank.temperature = 500;
+  myTank.pH = 400;
+
+  
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid);
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("WiFi Connect Failed! Rebooting...");
@@ -101,21 +132,38 @@ void setup() {
   
   server.begin();
 
-  Serial.print("Open http://");
+
+  //WiFi.softAPConfig(ip, gateway, subnet);
+  //WiFi.softAP(ssid2);
+
+  Serial.print("Local: ");
+  Serial.print(WiFi.localIP());
+  
+  /**Serial.print("Open http://");
   Serial.print(WiFi.localIP());
   Serial.println("/ in your browser to see it working");
+
 
   Serial.print(" Setting softAP config ");
   Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
   Serial.print(" Setting softAP   " );
   Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
 
-  Serial.print("Soft AP IP Addr is  ");
-  Serial.println(WiFi.softAPIP());
+  Serial.print("Soft AP IP Addr is  "); **/
+ // Serial.println(WiFi.softAPIP());
 }
 
 void handleParamRequest() {
+
+  //Check PCB for Temp
+  getTemp();
+  //Check PCB for pH
+  getpH();
+  Serial.println("In handler");
   server.send(200, "text/plain", "fetching Temp and pH vals");
+
+  sendTemp();
+  
 }
 
 void handleCheckRequest() {
@@ -128,10 +176,11 @@ void loop() {
 
   if(WiFi.status()== WL_CONNECTED) {   //Check WiFi connection status
  
-   http.begin("http://35.6.158.8:5000/fromTank/sendRando");      //Specify request destination
+   http.begin("http://35.6.191.190:5000/fromTank/sendRando");      //Specify request destination
    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
    int num  = random(0,10); 
    itoa(num,buffer,10); 
+
     
    int httpCode = http.POST(buffer);                   //Send the request
    String payload = http.getString();                  //Get the response payload
@@ -155,27 +204,30 @@ void loop() {
 void sendMessageToServer(char param) { //Sends whatever is in buffer to server
 
  if(WiFi.status()== WL_CONNECTED) {   //Check WiFi connection status
+    String ip_address = SERVER_ADDR;
+
+    String url_address =  String("http://" + ip_address + ":5000");
 
     switch (param) { // Send different HTTP request depending on param character
       
         case 'R': { // Random Number
-             http.begin("http://192.168.1.162:5000/fromTank/sendRando" );  
+             http.begin(url_address + "/fromTank/sendRando" );  
              break;  
         }
         case 'P': { // pH value
-             http.begin("http://192.168.1.162:5000/fromTank/sendpH" );   
+             http.begin(url_address + "/fromTank/sendpH" );   
              break; 
         }
         case 'T':{ // Temperature Value
-             http.begin("http://192.168.1.162:5000/fromTank/sendTemp" );   
+             http.begin(url_address + "/fromTank/sendTemp" );   
              break; 
         }
         case 'A':{ // Ammonia Reading
-             http.begin("http://192.168.1.162:5000/fromTank/sendAmmonia" );
+             http.begin(url_address + "/fromTank/sendAmmonia" );
              break;    
         }
         case 'N':{ // Nitrate/Nitrite Reading
-             http.begin("http://192.168.1.162:5000/fromTank/sendNitrate" );   
+             http.begin(url_address + "/fromTank/sendNitrate" );   
              break; 
       
         }  
@@ -197,12 +249,4 @@ void sendMessageToServer(char param) { //Sends whatever is in buffer to server
     Serial.println("Error in WiFi connection");   
  }
   
-}
-
-
-
-
-
-void getParam(char param) {
-  return;
 }
