@@ -13,6 +13,7 @@
 
 #define rxPin 2
 #define txPin 3
+#define relay 4
 #define wifiRst 10
 
 void fromWifi();
@@ -22,6 +23,7 @@ int tempValue = 0;
 int ammoniaValue = 0;
 int nitrateValue = 0;
 int nitriteValue = 0;
+int tempThreshold = 25;
 
 char colorToRead = 'a';
 bool alreadyStarted = false;
@@ -43,6 +45,7 @@ void setup() {
 	// initialize serial communication at 115200 bits per second:
 	serial.begin(115200);
 	pinMode(wifiRst, OUTPUT);
+	pinMode(relay, OUTPUT);
 	Serial.begin(115200);
 	while (!serial) {
 		; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
@@ -55,23 +58,24 @@ void setup() {
 	CS.begin();
 	addColors();
 	setupLED();
-	Serial.print("Starting setup");
+	//Serial.println("Starting setup");
 	
 	setLED(Blue);
   
 	// initialize pH sensor
-	phInit();
+	//phInit();
  
 	// TODO: Not sure how Wifi module indicates that it is getting data - replace that with the interrupt from pin2 
 	attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
 	
 	if (xSerialSemaphoreColorSensor == NULL)
 	{
-		xSerialSemaphoreColorSensor = xSemaphoreCreateBinary();
-		if (xSerialSemaphoreColorSensor != NULL )
+		//xSerialSemaphoreColorSensor = xSemaphoreCreateBinary();
+		vSemaphoreCreateBinary(xSerialSemaphoreColorSensor);
+		/*if (xSerialSemaphoreColorSensor != NULL )
 		{
 			xSemaphoreGive(xSerialSemaphoreColorSensor);	
-		}
+		} */
 		
 	}
 
@@ -156,7 +160,7 @@ void TaskColorSensor(void *pvParameters)
 				nitriteValue = ScanColor() * 100;
 			}
 			setLED(Off);	  
-			xSemaphoreGive( xSerialSemaphoreColorSensor );
+			//xSemaphoreGive( xSerialSemaphoreColorSensor );
 		}
 		vTaskDelay(1); // 1 tick delay between reads for stability*/
 	}
@@ -186,7 +190,14 @@ void TaskPHandTemperature(void *pvParameters)
 	tempValue = measureTemp() * 100;
 	//Serial.print("t\n");
 	//Serial.print(tempValue);
-	
+
+	// RELAY LOGIC (switching on 0.5 above and below temperature threshold)
+	if (tempValue < (tempThreshold + 0.5)) {
+		digitalWrite(relay, HIGH);
+	} else if (tempValue > (tempThreshold + 0.5)) {
+		digitalWrite(relay, LOW);
+	}
+	                             
 	delay(100);
 	setLED(Off);
     // check pH and temp every 15 min
@@ -210,7 +221,7 @@ void fromWifi()
 	}
 	if (alreadyStarted){
 		action = 'a';
-		Serial.println("already started");
+		//Serial.println("already started");
 		++count;
 		//Serial.println(count);
 		if (count == 10)
@@ -224,12 +235,14 @@ void fromWifi()
 	{
 	case 'p':
 	{
-		Serial.println("inside case color");
+		//Serial.println("inside case color");
 		colorToRead = 'a';
 		alreadyStarted = true;
-		static BaseType_t xHigherPriorityTaskWoken;
-		xHigherPriorityTaskWoken = pdFALSE;
-		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
+		//static BaseType_t xHigherPriorityTaskWoken;
+		//xHigherPriorityTaskWoken = pdFALSE;
+
+		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, pdFALSE);
+
 		/*setLED(White);
 		Serial.println("checking color");
 		//if (colorToRead == 'a')
@@ -268,6 +281,7 @@ void fromWifi()
 		serial.write(nitrateValue);
 		delay(200);
 		setLED(Off);
+		break;
 	}
 	default:
 		break;

@@ -8,11 +8,11 @@ OneWire ds(TEMP_PIN); // Temp sensor on pin 7
 /* measureTemp() returns the measured temperature in degrees Celsius */
 float measureTemp() {
 	byte i;
-	byte present = 0;
-	byte type_s;
+	//byte present = 0;
+	//byte type_s;
 	byte data[12];
 	byte addr[8];
-	float celsius, fahrenheit;
+	float celsius; //, fahrenheit;
 	
 	ds.reset_search();
 	delay(250);
@@ -25,7 +25,8 @@ float measureTemp() {
 //	Serial.println();
 	
 	// the first ROM byte indicates which chip
-	switch (addr[0]) {
+	//type_s = 0;
+	/*switch (addr[0]) {
 		case 0x10:
 		//Serial.println("  Chip = DS18S20");  // or old DS1820
 		type_s = 1;
@@ -41,7 +42,7 @@ float measureTemp() {
 		default:
 		Serial.println("Device is not a DS18x20 family device.");
 		return -1;
-	}
+	} */
 
 	ds.reset();
 	ds.select(addr);
@@ -50,7 +51,7 @@ float measureTemp() {
 	delay(1000);     // maybe 750ms is enough, maybe not
 	// we might do a ds.depower() here, but the reset will take care of it.
 	
-	present = ds.reset();
+	//present = ds.reset();
 	ds.select(addr);
 	ds.write(0xBE);         // Read Scratchpad
 
@@ -70,8 +71,11 @@ float measureTemp() {
 	// because the result is a 16 bit signed integer, it should
 	// be stored to an "int16_t" type, which is always 16 bits
 	// even when compiled on a 32 bit processor.
-	int16_t raw = (data[1] << 8) | data[0];
+	//int16_t raw = (data[1] << 8) | data[0];
+
+	/*
 	if (type_s) {
+		
 		raw = raw << 3; // 9 bit resolution default
 		if (data[7] == 0x10) {
 			// "count remain" gives full 12 bit resolution
@@ -85,7 +89,10 @@ float measureTemp() {
 		else if (cfg == 0x40) raw = raw & ~1; // 11 bit res, 375 ms
 		//// default is 12 bit resolution, 750 ms conversion time
 	}
-	celsius = (float)raw / 16.0;
+	*/
+	
+	celsius = (float)((data[1] << 8) | data[0]) / 16.0;
+
 	//fahrenheit = celsius * 1.8 + 32.0;
 	//Serial.print("  Temperature = ");
 	//Serial.print(celsius);

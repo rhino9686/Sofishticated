@@ -1,5 +1,5 @@
 phSensor.d phSensor.o: .././phSensor.cpp .././phSensor.h \
- .././DFRobot_PH.h ..\\..\ArduinoCore\include\core/Arduino.h \
+ ..\\..\ArduinoCore\include\core/Arduino.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
@@ -33,12 +33,9 @@ phSensor.d phSensor.o: .././phSensor.cpp .././phSensor.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  ..\\..\ArduinoCore\include\core/Arduino.h \
- ..\\..\ArduinoCore\include\variants\standard/pins_arduino.h \
- ..\include\libraries\EEPROM\src/EEPROM.h
+ ..\\..\ArduinoCore\include\variants\standard/pins_arduino.h
 
 .././phSensor.h:
-
-.././DFRobot_PH.h:
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -109,5 +106,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
 ..\\..\ArduinoCore\include\variants\standard/pins_arduino.h:
-
-..\include\libraries\EEPROM\src/EEPROM.h:

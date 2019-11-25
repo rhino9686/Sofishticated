@@ -540,6 +540,7 @@ uint8_t OneWire::crc8(const uint8_t *addr, uint8_t len)
 }
 #endif
 
+/*
 #if ONEWIRE_CRC16
 bool OneWire::check_crc16(const uint8_t* input, uint16_t len, const uint8_t* inverted_crc, uint16_t crc)
 {
@@ -576,5 +577,6 @@ uint16_t OneWire::crc16(const uint8_t* input, uint16_t len, uint16_t crc)
     return crc;
 }
 #endif
+*/
 
 #endif

@@ -54,8 +54,7 @@ main.d main.o: .././main.cpp ..\\..\ArduinoCore\include\core/Arduino.h \
  .././OneWire_direct_regtype.h .././color_sensor.h \
  ..\\..\ArduinoCore\include\libraries\MD_TCS230/MD_TCS230.h \
  ..\\..\ArduinoCore\include\libraries\freqcount/FreqCount.h \
- .././indicatorLED.h .././phSensor.h .././DFRobot_PH.h \
- ..\include\libraries\EEPROM\src/EEPROM.h
+ .././indicatorLED.h .././phSensor.h
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -176,7 +175,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././indicatorLED.h:
 
 .././phSensor.h:
-
-.././DFRobot_PH.h:
-
-..\include\libraries\EEPROM\src/EEPROM.h:
