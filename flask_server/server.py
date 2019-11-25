@@ -6,9 +6,7 @@ app = Flask(__name__)
 
 ## Setup tank construct
 myTank = Tank()
-
 myTank.rando = 3
-
 
 ## define Wi-Fi chip IP address
 
@@ -19,8 +17,8 @@ WIFI_IP = "35.6.179.38"
 def hello():
     return "Hello from server!"
 
-## handler for tank making a PUT request for temperature 
-@app.route("/fromTank/sendTemp")
+## handler for tank making a POST request for temperature 
+@app.route("/fromTank/sendTemp", methods = ['POST'])
 def getTempFromTank():
     tempStr = str(request.data)
     temperatureStr = tempStr[2] ## check this val
@@ -28,33 +26,27 @@ def getTempFromTank():
     return "temp received" #return val is meaningless
 
 ## handler for tank making a PUT request for pH
-@app.route("/fromTank/sendpH")
+@app.route("/fromTank/sendpH", methods = ['POST'])
 def getPhFromTank():
     phStr = str(request.data)
     phValStr = phStr[2] ##check this val
     return "pH retrieved"
 
-@app.route("/fromTank/sendAmmonia")
+# handler for tank sending Ammonia value
+@app.route("/fromTank/sendAmmonia", methods = ['POST'])
 def getAmmoniaFromTank():
     ammonStr = str(request.data)
     ammonValStr = ammonStr[2] ##check this val
     return "pH retrieved from tank"
 
-@app.route("/fromTank/sendNitrate")
+# handler for tank sending Nitrate value
+@app.route("/fromTank/sendNitrate", methods = ['POST'])
 def getNitrateFromTank():
     nitStr = str(request.data)
     nitrateStr = nitStr[2] ##check this val
     return "pH retrieved from tank"
 
-
-## handler for tank making a GET request to know if it's time to check chemicals 
-@app.route("/fromTank/check")
-def checkTankChemicals():
-    return "Y"
-
-
-
-## handler for tank making a GET request to know if it's time to check chemicals 
+## handler for tank sending a random number to server
 @app.route("/fromTank/sendRando", methods = ['POST'])
 def getRando():
     randStr = str(request.data)
@@ -63,8 +55,6 @@ def getRando():
     ##myTank.rando = int(numStr)
     ##print(myTank.rando)
     return "checking tank chemicals"
-
-
 
 @app.route("/fromApp/requestTemp",methods = ['POST'])
 def sendTempToApp():
@@ -84,15 +74,22 @@ def sendRandoToApp():
     print("Returning rand val " + myRandStr)
     return jsonify({"randVal": myRandStr})
 
-@app.route("/fromApp/requestCheck")
+@app.route("/fromApp/requestAmmonia",methods = ['POST'])
+def sendAmmoToApp():
+    myRandStr = str(myTank.getAmmo())
+    print("Returning rand val " + myRandStr)
+    return jsonify({"ammo": myRandStr})
+
+
+# handler for app prompting a server check
+@app.route("/fromApp/requestCheck", methods = ['POST'])
 def promptChipForVals():
     dest_url = "http://" + WIFI_IP + ":5000/requestVals"
-
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
-    response = request.post(dest_url, data=data, headers=headers)
-    return jsonify({"data": "data_requested"})
-
+    det = str(3)
+   ## response = request.post(dest_url, data=data, headers=headers)
+    return jsonify({"check": det})
 
 
 if __name__ == "__main__":

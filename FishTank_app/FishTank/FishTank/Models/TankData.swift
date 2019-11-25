@@ -142,7 +142,7 @@ final class TankProfile: ObservableObject {
         self.userName = "Robert"
         
        // let piServerAdress = "192.168.1.166"
-        let laptopServerAddress = "35.6.191.190"
+        let laptopServerAddress = "35.6.134.190"
         let server = laptopServerAddress
         messenger = Messenger(ipAddress: server)
         

@@ -22,6 +22,7 @@ final class Messenger {
     @Published var nitriteVal: Double = 0
     
     
+    
     //IP Address of target server
     private var ipAddress: String
     //Port number of target server
@@ -126,7 +127,6 @@ final class Messenger {
                              self.parseNitrite(param: param, httpResult: HttpResult)
                         }
                         
-                        
                         print("Result -> \(String(describing: result))")
                     
                     }
@@ -138,7 +138,6 @@ final class Messenger {
             
             //This is for testing the server connection
             task.resume()
-            usleep(200000)
             return HttpResult
         } catch {
             print(error)
@@ -184,12 +183,11 @@ final class Messenger {
     
     
     func refreshParams() {
- 
-       let _ = self.requestCheck()
+        var _ = self.requestCheck()
        //Delay here Somehow? Flag var to know when vals are live?
-        
-       var _ = self.requestPh()
-       var _ = self.requestTemp()
+        usleep(2000000)
+        var _ = self.requestPh()
+        var _ = self.requestTemp()
     }
     
     
@@ -246,7 +244,6 @@ final class Messenger {
     //Function to parse and update Nitrite levels
     func parseNitrite(param: String, httpResult: String ) {
         // Make sure that the httpString value contains an actual number
-       // print(httpResult)
         
         let numDouble: Double? = Double(httpResult)
             
@@ -254,6 +251,7 @@ final class Messenger {
            self.nitriteVal = (numDouble!)
         }
     }
+    
     
     
     func setIPAdress(ipAddress_in: String) {
