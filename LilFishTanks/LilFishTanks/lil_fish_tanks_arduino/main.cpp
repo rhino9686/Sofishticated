@@ -191,10 +191,10 @@ void TaskPHandTemperature(void *pvParameters)
 	//Serial.print("t\n");
 	//Serial.print(tempValue);
 
-	// RELAY LOGIC (switching on 0.5 above and below temperature threshold)
-	if (tempValue < (tempThreshold + 0.5)) {
+	// RELAY LOGIC (switching on 0.5 C above and below temperature threshold)
+	if (tempValue < (tempThreshold - 50)) {
 		digitalWrite(relay, HIGH);
-	} else if (tempValue > (tempThreshold + 0.5)) {
+	} else if (tempValue > (tempThreshold + 50)) {
 		digitalWrite(relay, LOW);
 	}
 	                             
