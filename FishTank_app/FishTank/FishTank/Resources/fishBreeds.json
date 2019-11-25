@@ -61,5 +61,14 @@
            "imageName": "cory_catfish"
     },
     
+    {
+           "breedName": "Danio",
+           "maxTemp": 78,
+           "minTemp": 70,
+           "maxPh": 8.0,
+           "minPh": 7.0,
+           "imageName": "danios"
+    },
+    
 
 ]

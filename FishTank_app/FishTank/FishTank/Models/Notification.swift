@@ -15,11 +15,12 @@ import UserNotifications
 struct Notification {
     var id: String
     var title: String
-    //var datetime: DateComponents
+    var fishID: Int?
+    var repeats: Bool
 }
 
 class LocalNotificationManager {
-    var notifications = [Notification]()
+   @Published var notifications = [Notification]()
     
     
     private func requestAuthorization() {
@@ -70,8 +71,37 @@ class LocalNotificationManager {
     }
     
     func addNotification(title: String) -> Void {
-        notifications.append(Notification(id: UUID().uuidString, title: title))
+        self.notifications.append(Notification(id: UUID().uuidString, title: title, repeats: false))
     }
+    
+    func addNotification(note: Notification) -> Void {
+        self.notifications.append(note)
+    }
+    
+    func clearNotifications() {
+        self.notifications.removeAll(keepingCapacity: true)
+    }
+    
+    func removeNotification(id_in: String) {
+        
+        if self.notifications.isEmpty {
+            return
+        }
+        
+        var index = -1
+        
+        for i in 0...self.notifications.count - 1 {
+            if (self.notifications[i].id == id_in) {
+                index = i
+            }
+        }
+        if ( index < 0) {
+            return
+        }
+        self.notifications.remove(at: index)
+        
+    }
+    
     
     
 

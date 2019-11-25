@@ -19,6 +19,7 @@ final class TankProfile: ObservableObject {
     
     @Published var userName: String
     
+    
     //Our HTTPClient
     let messenger: Messenger
     
@@ -33,6 +34,9 @@ final class TankProfile: ObservableObject {
     
     //array to use later, store in persistent memory
     @Published var currentResidents: [FishProfile]
+    
+    @Published var notifyMan = LocalNotificationManager()
+    
     
     //Counter variable to give each fish a unique ID
     var idCounter: Int
@@ -187,10 +191,9 @@ final class TankProfile: ObservableObject {
     
 
     
-    
     // Function to set the IP address for the messenger server
-    func SetServer() {
-        return
+    func SetServer(ipAddress: String) {
+        self.messenger.setIPAdress(ipAddress_in: ipAddress)
     }
     
     

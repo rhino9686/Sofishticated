@@ -81,10 +81,8 @@ struct AllTestingView: View {
                     
                 }
                 
-               Spacer()
-                
-
-                
+                Spacer()
+            
                 Button(action: nextStep) {
                     if self.index == self.phases.count - 1 {
                         Text("Finish")
@@ -103,7 +101,6 @@ struct AllTestingView: View {
     func initAmmonia() {
         self.index = self.index + 0
     }
-    
     
     
     func nextStep() {

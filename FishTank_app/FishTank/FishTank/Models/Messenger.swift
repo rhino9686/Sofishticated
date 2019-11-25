@@ -255,4 +255,10 @@ final class Messenger {
         }
     }
     
+    
+    func setIPAdress(ipAddress_in: String) {
+        self.ipAddress = ipAddress_in
+    }
+    
+    
 }

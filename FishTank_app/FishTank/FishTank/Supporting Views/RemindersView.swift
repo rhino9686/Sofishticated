@@ -9,15 +9,22 @@
 import SwiftUI
 
 struct RemindersView: View {
-    
-    let notifications = LocalNotificationManager()
-    
-    
+    var fish: FishProfile?
+    @EnvironmentObject var tankData: TankProfile
     
     var body: some View {
         
-        VStack {
-            Text("Reminders")
+        List{
+            
+            ForEach(self.tankData.notifyMan.notifications, id: \.id) { notification in
+                
+              //  if (self.fish == nil || self.fish.id == notification.fishID) {
+                    Text(notification.title)
+             //   }
+                
+
+            }.padding(.top, 6)
+            
             
             Button(action: addNotifications) {
                     Text("Add Reminder")
@@ -28,9 +35,6 @@ struct RemindersView: View {
             
     }
     
-    func addReminder() {
-        notifications.schedule()
-    }
 
     func addNotifications() {
         
@@ -42,8 +46,8 @@ struct RemindersView: View {
 //            Notification(id: "reminder-2", title: "Ask Bob from accounting", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 1)),
 //            Notification(id: "reminder-3", title: "Send postcard to mom", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 2))
 //        ]
-        notifications.addNotification(title: "Remember the milk!")
-        notifications.schedule()
+        self.tankData.notifyMan.addNotification(title: "Feed fish!")
+        self.tankData.notifyMan.schedule()
         
     }
     
@@ -53,5 +57,6 @@ struct RemindersView: View {
 struct RemindersView_Previews: PreviewProvider {
     static var previews: some View {
         RemindersView()
+        .environmentObject(TankProfile())
     }
 }

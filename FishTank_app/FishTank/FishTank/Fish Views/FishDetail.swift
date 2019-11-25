@@ -78,7 +78,7 @@ struct FishDetail: View {
                 
             ScrollView{
                 
-             NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
+             NavigationLink(destination: RemindersView()) {
                 HStack {
                      Text("Reminders")
                          .fontWeight(.semibold)
@@ -86,7 +86,7 @@ struct FishDetail: View {
                  }
              }.padding(.leading).padding(.top)
                 
-               NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
+                NavigationLink(destination: FishFactsView(fish: fish)) {
                     HStack {
                         Text("Breed Facts")
                             .fontWeight(.semibold)

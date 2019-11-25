@@ -18,7 +18,6 @@ struct TankHome: View {
             List {
                 
                 Divider()
-                
  
                 Section(header: Text("Conditions")) {
                     TankStatsView().environmentObject(self.tankData)
@@ -61,9 +60,8 @@ struct TankHome: View {
                 }
                 
                 
-                NavigationLink(destination:
-                        AddFishView()
-                                .environmentObject(self.tankData)
+                NavigationLink(destination: AddFishView()
+                .environmentObject(self.tankData)
                 ) {
                     Text("+ Add New fish")
                         .font(.footnote)
@@ -72,7 +70,9 @@ struct TankHome: View {
                 
                 Divider()
 
-                NavigationLink(destination: RemindersView()) {
+                NavigationLink(destination: RemindersView()
+                 .environmentObject(self.tankData)
+                ) {
                     Text("Reminders")
                     .fontWeight(.semibold)
                 }
