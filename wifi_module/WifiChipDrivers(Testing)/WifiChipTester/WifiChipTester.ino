@@ -46,7 +46,7 @@ void loop() {
   }
 
 
-   http.begin("http://35.6.191.190:5000/fromTank/sendRando");      //Specify request destination
+   http.begin("http://35.6.134.190:5000/fromTank/sendRando");      //Specify request destination
    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
 
     
@@ -61,7 +61,7 @@ void loop() {
     Serial.println("Error in WiFi connection");   
  
  }
-  delay(3000);  //Send a request every 30 seconds
+  delay(3000);  //Send a request every 3 seconds
 
 
 

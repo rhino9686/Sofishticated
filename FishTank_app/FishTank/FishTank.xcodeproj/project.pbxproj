@@ -91,7 +91,7 @@
 		41AECDDF235634F20091A1BA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		41AF6B23235E2B8B005BA174 /* RemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
 		41C162AC235E39AA00413584 /* AddFishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFishView.swift; sourceTree = "<group>"; };
-		41C616702351464C003DADD8 /* FishTank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishTank.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41C616702351464C003DADD8 /* SoFishticated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoFishticated.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C616732351464C003DADD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C616752351464C003DADD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		41C616792351464D003DADD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		41C616712351464C003DADD8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41C616702351464C003DADD8 /* FishTank.app */,
+				41C616702351464C003DADD8 /* SoFishticated.app */,
 				41C616862351464E003DADD8 /* FishTankTests.xctest */,
 				41C616912351464E003DADD8 /* FishTankUITests.xctest */,
 			);
@@ -275,7 +275,7 @@
 			);
 			name = FishTank;
 			productName = FishTank;
-			productReference = 41C616702351464C003DADD8 /* FishTank.app */;
+			productReference = 41C616702351464C003DADD8 /* SoFishticated.app */;
 			productType = "com.apple.product-type.application";
 		};
 		41C616852351464E003DADD8 /* FishTankTests */ = {
@@ -596,7 +596,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = EECS473.FishTank;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoFishticated;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -616,7 +616,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = EECS473.FishTank;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SoFishticated;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

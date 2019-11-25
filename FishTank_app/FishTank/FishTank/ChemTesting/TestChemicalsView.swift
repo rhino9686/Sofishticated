@@ -15,7 +15,6 @@ struct TestChemicalsView: View {
     
     let ammoniaStr = "Ammonia naturally builds up from your fishes' uneaten food and solid waste. It's good to test for it occasionally."
     
-    
     let nitrateStr = "Nitrates and Nitrites naturally occur from the Ammonia breaking down, you should test for them too."
     
     
@@ -59,10 +58,6 @@ struct TestChemicalsView: View {
                         .fontWeight(.heavy)
                    }
                 
-//                NavigationLink(destination: NitriteTestingView()) {
-//                    Text("Check Nitrites")
-//                        .fontWeight(.heavy)
-//                   }
             
                 Spacer()
                 

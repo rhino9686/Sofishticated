@@ -11,16 +11,11 @@ import SwiftUI
 import EventKit
 import UserNotifications
 
-//Our reminder class. Might just use EKEvent if it has all necessary stuff
-class Reminder {
-    var reminderTitle: String = ""
-}
-
 
 struct Notification {
-    var id:String
-    var title:String
-    var datetime:DateComponents
+    var id: String
+    var title: String
+    //var datetime: DateComponents
 }
 
 class LocalNotificationManager {
@@ -60,7 +55,8 @@ class LocalNotificationManager {
             content.title    = notification.title
             content.sound    = .default
 
-            let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
+           // let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20 , repeats: false)
 
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
 
@@ -72,6 +68,12 @@ class LocalNotificationManager {
             }
         }
     }
+    
+    func addNotification(title: String) -> Void {
+        notifications.append(Notification(id: UUID().uuidString, title: title))
+    }
+    
+    
 
 } //LocalNotificationManager
 
