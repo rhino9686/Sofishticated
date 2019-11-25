@@ -10,11 +10,12 @@ import SwiftUI
 
 struct RemindersView: View {
     var body: some View {
-        VStack {
-            Text("Reminders")
+        List {
+            Text("Hi")
                 .font(.title)
             Spacer()
         }
+    .navigationBarTitle("Reminders")
             
     }
 }

@@ -16,11 +16,11 @@ let wifiServerAddress = "192.168.1.107"
 
 
 struct TestConnectionView: View {
-    @State var testString = "not yeeted "
+    @State var testString = "fetch random value"
     let myMessenger = Messenger(ipAddress: laptopServerAddress)
     
     func updateTest() {
-        testString = "yeet"
+        testString = "fetch"
         
         let string = myMessenger.requestRando()
         testString = string

@@ -32,11 +32,11 @@ struct AddFishView: View {
                 Section(header: Text("Type of Fish")) {
                     
                    VStack {
-                        Picker(selection: $type, label: Text("Types")) {
+                        Picker(selection: $type, label: Text("")) {
                             ForEach(tankData.breeds, id: \.self){ breed in
                                 Text(breed.breedName)
                             }
-                        }
+                    }.pickerStyle(WheelPickerStyle())
                     }
                 }
 

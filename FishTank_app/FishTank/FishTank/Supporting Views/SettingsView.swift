@@ -13,18 +13,19 @@ struct SettingsView: View {
     @EnvironmentObject var tankData: TankProfile
     
     var body: some View {
+        
             List {
                 
-            Section(header: Text("Your Name")) {
-                    TextField("Enter name", text: $tankData.userName)
-            }
+                Section(header: Text("Your Name")) {
+                        TextField("Enter name", text: $tankData.userName)
+                }
                 
-            ToggleTempView(inFar: $tankData.inFahrenheight)
+                ToggleTempView(inFar: $tankData.inFahrenheight)
                 
-            NavigationLink(destination: TestConnectionView()) {
-                     Text("Test Wifi Connection")
-                     .fontWeight(.semibold)
-                 }
+                NavigationLink(destination: TestConnectionView()) {
+                         Text("Test Wifi Connection")
+                         .fontWeight(.semibold)
+                     }
                 
                 NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
                      Text("Reset Tank")
@@ -34,7 +35,6 @@ struct SettingsView: View {
             }
             .navigationBarTitle(Text("Settings"))
         
-    
     }
 }
 
@@ -51,9 +51,15 @@ struct ToggleTempView: View {
                     
                     Spacer()
                     Group {
-                        Text("Celcius / Fahrenheit")
-                            .font(.footnote)
-   
+                        if inFar {
+                            Text("Fahrenheit")
+                                  .font(.footnote)
+                        }
+                        else {
+                            Text("Celcius")
+                                  .font(.footnote)
+                        }
+  
                     }.padding(.trailing)
 
                 }

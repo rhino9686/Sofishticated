@@ -18,6 +18,7 @@ struct TankHome: View {
             List {
                 
                 Divider()
+                
  
                 Section(header: Text("Conditions")) {
                     TankStatsView().environmentObject(self.tankData)

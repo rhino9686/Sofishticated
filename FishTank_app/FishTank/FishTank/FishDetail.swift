@@ -16,40 +16,95 @@ struct FishDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack {
-            HStack {
-                if self.mode?.wrappedValue == .active {
-                    Button("Cancel") {
-                        self.mode?.animation().wrappedValue = .inactive
-                    }
+        
+           VStack{
+                    
+                HStack {
+                      if self.mode?.wrappedValue == .active {
+                          Button("Cancel") {
+                              self.mode?.animation().wrappedValue = .inactive
+                          }
+                      }
+                      
+                     Spacer()
+                      
+                      EditButton()
                 }
+                .padding(.trailing).padding(.leading)
                 
-                Spacer()
                 
-                EditButton()
-            }.padding(.trailing).padding(.leading)
-            
-            FittedImage(image: fish.image, width: 300, height: 300)
-            
-            Divider()
-    
-            HStack {
-                Text(fish.breedData!.breedName)
-                    .font(.headline)
-                Spacer()
+  
+                FittedImage(image: fish.image, width: 200, height: 200)
+                
+                Divider()
+        
+                HStack {
+                    Text("I'm a \(fish.breedData!.breedName)!")
+                        .font(.headline)
+                    Spacer()
+                }
+                .padding(.top, 6)
+                .padding(.leading)
+                Divider()
+                HStack {
+                    Text("Preferred Living Conditions")
+                    Spacer()
+                }.padding()
+          
+                HStack {
+                    Text("pH range: ")
+                        .font(.callout)
+                    
+                    Text("\(fish.breedData!.minpHStr) -\(fish.breedData!.maxpHStr)")
+                        .font(.footnote)
+                    
+                    Spacer()
+                }
+                .padding(.top, 6)
+                .padding(.leading)
+                
+                
+                HStack {
+                    Text("Temperature range: ")
+                        .font(.callout)
+                    
+                    Text("\(fish.breedData!.minTempStr) - \(fish.breedData!.maxTempStr) ° F")
+                        .font(.footnote)
+                    
+                    Spacer()
+                }
+                .padding(.top, 6)
+                .padding(.leading)
+                
+                
+            ScrollView{
+                
+             NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
+                HStack {
+                     Text("Reminders")
+                         .fontWeight(.semibold)
+                     Spacer()
+                 }
+             }.padding(.leading).padding(.top)
+                
+               NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
+                    HStack {
+                        Text("Breed Facts")
+                            .fontWeight(.semibold)
+                        Spacer()
+                    }
+               }.padding(.leading).padding(.top)
             }
-            .padding(.top, 6)
-            .padding(.leading)
-            Spacer()
-            
-            if self.mode?.wrappedValue == .inactive {
-               
-              } else {
-                  Button("Remove from Tank") {
-                    self.removeFishFromTank()
-                  }
-              }
-            
+                
+           //     Spacer()
+                
+                if self.mode?.wrappedValue == .active {
+                      
+                         Button("Remove from Tank") {
+                           self.removeFishFromTank()
+                         }.padding()
+                     }
+                
         }
         .navigationBarTitle(Text(fish.name))
     }

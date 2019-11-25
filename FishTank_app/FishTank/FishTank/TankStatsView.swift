@@ -16,6 +16,7 @@ struct TankStatsView: View {
     @State var currentTempStr = "70"
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "3 hours ago"
+    @State var overallHealth = "Good"
     
     //Timer to get the "last time checked" to update by itself
     let timer = Timer.publish(every: 20, on: .main, in: .common).autoconnect()
@@ -27,6 +28,7 @@ struct TankStatsView: View {
         self.currentTempStr = self.tankData.currentTemp
         self.currentpHStr = self.tankData.currentpHStr
         self.lastTimeChecked = self.tankData.lastTimeChecked
+        self.overallHealth = self.tankData.category
     }
     
     var body: some View {
@@ -73,7 +75,6 @@ struct TankStatsView: View {
        
             HStack {
                 Text("Temperature: ")
-             //   let format = String(format: " %.2f ", self.tankData.currentTempF)
                 Text("\(self.currentTempStr)")
                     .foregroundColor(Color.blue)
 

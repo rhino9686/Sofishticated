@@ -61,6 +61,22 @@ struct FishBreedData: Hashable, Codable {
     var imageName: String = "goldfish"
     
     
+    var maxTempStr: String {
+        return String(format: " %.0f", self.maxTemp)
+    }
+    
+    var minTempStr: String {
+        return String(format: " %.0f", self.minTemp)
+    }
+    
+    var maxpHStr: String {
+        return String(format: " %.2f", self.maxPh)
+    }
+    
+    var minpHStr: String {
+        return String(format: " %.2f", self.minPh)
+    }
+    
     //Constructor to easily create a breed packet
     init(_ breed: String, _ maxTempIn: Double, _ minTempIn: Double, _ maxPhIn: Double, _ minPhIn: Double ) {
         breedName = breed

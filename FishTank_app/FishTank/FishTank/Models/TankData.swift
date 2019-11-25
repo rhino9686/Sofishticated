@@ -23,7 +23,7 @@ final class TankProfile: ObservableObject {
     let messenger: Messenger
     
     //Boolean to show whether we are showing tank temp in F or C
-    var inFahrenheight = true;
+    @Published var inFahrenheight = true;
     
     //Placeholder array of fish
     var placeHolderFish = fishData
@@ -109,15 +109,20 @@ final class TankProfile: ObservableObject {
 
     }
     
-    var category: Health {
+    var category: String {
         //Will need more robust logic
         if self.messenger.currentTempF > 0 {
-            return Health.good
+            return String(Health.good.rawValue)
         }
         else {
-            return Health.ok
+            return String(Health.ok.rawValue)
         }
     }
+    
+    var warningMessage: String {
+        return "Yikes"
+    }
+    
     
     enum Health: String, CaseIterable, Codable, Hashable {
         case good = "Good"
