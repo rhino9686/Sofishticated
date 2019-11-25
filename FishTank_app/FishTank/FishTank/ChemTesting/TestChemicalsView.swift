@@ -26,12 +26,16 @@ struct TestChemicalsView: View {
                 Text(self.testEverythingStr)
                   .font(.footnote)
             
-                NavigationLink(destination: AllTestingView()) {
+            
+                NavigationLink(destination: AllTestingView()
+                    .environmentObject(self.tankData)
+                ) {
                       Text("Check Everything")
                           .fontWeight(.heavy)
                   }
             
                 Spacer()
+            
             
                 Text(self.ammoniaStr)
                     .font(.footnote)
@@ -40,27 +44,31 @@ struct TestChemicalsView: View {
                     Text("Check Ammonia")
                         .fontWeight(.heavy)
                    }
+                
+                Text("Ammonia Levels:")
+                    .font(.footnote)
             
                 Spacer()
-            
+    
                 Text(self.nitrateStr)
                     .font(.footnote)
             
+             
                 NavigationLink(destination: NitrateTestingView()) {
                     Text("Check Nitrates")
                         .fontWeight(.heavy)
                    }
                 
-                NavigationLink(destination: NitriteTestingView()) {
-                    Text("Check Nitrites")
-                        .fontWeight(.heavy)
-                   }
+//                NavigationLink(destination: NitriteTestingView()) {
+//                    Text("Check Nitrites")
+//                        .fontWeight(.heavy)
+//                   }
             
                 Spacer()
                 
             }
-        .navigationBarTitle(Text("Chemicals")
-        .font(.headline))
+            .navigationBarTitle(Text("Chemicals")
+                            .font(.headline))
         }
 
 }

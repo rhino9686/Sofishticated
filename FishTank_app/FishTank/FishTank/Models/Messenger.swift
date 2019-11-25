@@ -13,9 +13,14 @@ import SwiftUI
 final class Messenger {
     
     //Published vars to change and send out the data to observers
-    @Published var currentTempF: Double = 0
+    @Published var currentTempF: Double = 76
     @Published var currentPh: Double = 7.0
     @Published var lastCheckedTimeInMins = 3
+    
+    @Published var ammoniaVal: Double = 0
+    @Published var nitrateVal: Double = 0
+    @Published var nitriteVal: Double = 0
+    
     
     //IP Address of target server
     private var ipAddress: String
@@ -30,7 +35,7 @@ final class Messenger {
         self.ipAddress = ipAddress
     }
     
-    
+    //TODO: Remove this placeholder function
      func printMessagesForUser() -> Void {
         
         let json = ["user":"larry"]
@@ -63,7 +68,7 @@ final class Messenger {
         }
     }
     
-    
+    //Our generic HTTP Request Function
     func sendRequest(param: String, route: String) -> String  {
         
         let json = ["query":param]
@@ -111,6 +116,17 @@ final class Messenger {
                         else if param == "temp" {
                             self.parseTemp(param: param, httpResult: HttpResult)
                         }
+                        else if param == "ammo" {
+                            self.parseAmmo(param: param, httpResult: HttpResult)
+                        }
+                        else if param == "nitrate" {
+                             self.parseNitrate(param: param, httpResult: HttpResult)
+                        }
+                        else if param == "nitrite" {
+                             self.parseNitrite(param: param, httpResult: HttpResult)
+                        }
+                        
+                        
                         print("Result -> \(String(describing: result))")
                     
                     }
@@ -154,10 +170,24 @@ final class Messenger {
         return sendRequest(param: "temp", route: "/fromApp/requestTemp")
     }
     
+    func requestAmmonia() -> String {
+        return sendRequest(param: "ammo", route: "/fromApp/requestAmmonia")
+    }
+    
+    func requestNitrate() -> String {
+        return sendRequest(param: "nitrate", route: "/fromApp/requestNitrate")
+    }
+    
+    func requestNitrite() -> String {
+         return sendRequest(param: "nitrite", route: "/fromApp/requestNitrite")
+     }
+    
     
     func refreshParams() {
  
        let _ = self.requestCheck()
+       //Delay here Somehow? Flag var to know when vals are live?
+        
        var _ = self.requestPh()
        var _ = self.requestTemp()
     }
@@ -175,6 +205,7 @@ final class Messenger {
         }
     }
     
+    //Function to parse and update Temperature from tank
     func parseTemp(param: String, httpResult: String ) {
         // Make sure that the httpString value contains an actual number
        // print(httpResult)
@@ -185,6 +216,42 @@ final class Messenger {
            //Here we make the final correction to make the number a decimal
            let trueTemp = numDouble! / 100
            self.currentTempF = (trueTemp)
+        }
+    }
+    
+    //Function to parse and update Ammonia levels
+    func parseAmmo(param: String, httpResult: String ) {
+        // Make sure that the httpString value contains an actual number
+       // print(httpResult)
+        
+        let numDouble: Double? = Double(httpResult)
+            
+        if (numDouble != nil) {
+           self.ammoniaVal = (numDouble!)
+        }
+    }
+    
+    //Function to parse and update Nitrate levels
+    func parseNitrate(param: String, httpResult: String ) {
+        // Make sure that the httpString value contains an actual number
+       // print(httpResult)
+        
+        let numDouble: Double? = Double(httpResult)
+            
+        if (numDouble != nil) {
+           self.nitrateVal = (numDouble!)
+        }
+    }
+    
+    //Function to parse and update Nitrite levels
+    func parseNitrite(param: String, httpResult: String ) {
+        // Make sure that the httpString value contains an actual number
+       // print(httpResult)
+        
+        let numDouble: Double? = Double(httpResult)
+            
+        if (numDouble != nil) {
+           self.nitriteVal = (numDouble!)
         }
     }
     
