@@ -25,6 +25,7 @@ int nitriteValue = 0;
 
 char colorToRead = 'a';
 bool alreadyStarted = false;
+int count = 0;
 
 // task definitions
 void TaskColorSensor( void *pvParameters );
@@ -41,7 +42,8 @@ SoftwareSerial serial(rxPin, txPin);
 void setup() {  
 	// initialize serial communication at 115200 bits per second:
 	serial.begin(115200);
-   pinMode(wifiRst, OUTPUT);
+	pinMode(wifiRst, OUTPUT);
+	Serial.begin(115200);
 	while (!serial) {
 		; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
 	}
@@ -53,9 +55,9 @@ void setup() {
 	CS.begin();
 	addColors();
 	setupLED();
-	serial.print("Starting setup");
+	Serial.print("Starting setup");
 	
-	setLED(Green);
+	setLED(Blue);
   
 	// initialize pH sensor
 	phInit();
@@ -67,18 +69,21 @@ void setup() {
 	{
 		xSerialSemaphoreColorSensor = xSemaphoreCreateBinary();
 		if (xSerialSemaphoreColorSensor != NULL )
-		xSemaphoreGive(xSerialSemaphoreColorSensor);
+		{
+			xSemaphoreGive(xSerialSemaphoreColorSensor);	
+		}
+		
 	}
 
 
 	// Now set up two tasks to run independently.
-	/*xTaskCreate(
+	xTaskCreate(
 	TaskColorSensor
 	,  (const portCHAR *)"ColorSensor"
 	,  128
 	,  NULL
 	,  2
-	,  &xColorSensor );*/
+	,  &xColorSensor );
 
 	xTaskCreate(
 	TaskPHandTemperature
@@ -88,14 +93,13 @@ void setup() {
 	,  2
 	,  &xPHandTemperature );
 	
-	//vTaskSuspend(xColorSensor);
 	
 	delay(1000);
 	setLED(Off);
-	//calibratePH(25);
-	serial.print("Inside setup");
+	//Serial.print("Inside setup");
 
 	// Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
+	vTaskStartScheduler();
 }
 
 void loop()
@@ -115,17 +119,19 @@ void TaskColorSensor(void *pvParameters)
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	for (;;) // A Task shall never return or exit.
 	{
-		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
+		//Serial.println("Inside dead task");
+		//vTaskDelayUntil( &xLastWakeTime, 500 / portTICK_PERIOD_MS );
+		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 100 ) == pdTRUE )
 		{
 			setLED(White);
-			serial.println("checking color");
+			//Serial.println("checking color");
 			if (colorToRead == 'a')
 			{
 				
 				
 				//while (findTestStrip());
 				//setLED(Green);
-				delay(250); // let user see LED and stop moving before measuring
+				delay(1000); // let user see LED and stop moving before measuring
 				
 				typeToRead = AMMONIA;
 				ammoniaValue = ScanColor() * 100;
@@ -144,7 +150,7 @@ void TaskColorSensor(void *pvParameters)
 				
 				typeToRead = NITRITE;
 				while (findTestStrip());
-				setLED(Blue);
+				//setLED(Blue);
 				delay(250);
 				
 				nitriteValue = ScanColor() * 100;
@@ -152,7 +158,7 @@ void TaskColorSensor(void *pvParameters)
 			setLED(Off);	  
 			xSemaphoreGive( xSerialSemaphoreColorSensor );
 		}
-		vTaskDelay(1); // 1 tick delay between reads for stability
+		vTaskDelay(1); // 1 tick delay between reads for stability*/
 	}
 }
 
@@ -168,23 +174,23 @@ void TaskPHandTemperature(void *pvParameters)
 	// Gets pH value
 	//delay(500);
 	setLED(Green);
-	serial.print("p\n");
+	//Serial.print("p\n");
 	phValue = calcPH() * 100;
-	serial.print("\npH Value:");
-	serial.print(phValue);
+	//Serial.print("\npH Value:");
+	//Serial.print(phValue);
 	delay(250);
 	setLED(Off);
 	
 	setLED(Red);
 	// Gets temperature value in Celsius
 	tempValue = measureTemp() * 100;
-	serial.write("t\n");
-	serial.print(tempValue);
+	//Serial.print("t\n");
+	//Serial.print(tempValue);
 	
 	delay(100);
 	setLED(Off);
     // check pH and temp every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 1000 / portTICK_PERIOD_MS );
+    vTaskDelayUntil( &xLastWakeTime, 10000 / portTICK_PERIOD_MS );
   }
 }
 
@@ -202,19 +208,42 @@ void fromWifi()
 			action = serial.read();
 		}
 	}
-	if (alreadyStarted)
-		action = 'p';
+	if (alreadyStarted){
+		action = 'a';
+		Serial.println("already started");
+		++count;
+		//Serial.println(count);
+		if (count == 10)
+		{
+			count = 0;
+			action = 'p';
+		}
+	}
 
 	switch(action)
 	{
 	case 'p':
 	{
-		serial.print("inside case color");
+		Serial.println("inside case color");
 		colorToRead = 'a';
 		alreadyStarted = true;
 		static BaseType_t xHigherPriorityTaskWoken;
 		xHigherPriorityTaskWoken = pdFALSE;
 		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
+		/*setLED(White);
+		Serial.println("checking color");
+		//if (colorToRead == 'a')
+		//{
+			
+			
+			//while (findTestStrip());
+			//setLED(Green);
+			delay(500); // let user see LED and stop moving before measuring
+			
+			//typeToRead = AMMONIA;
+			//ammoniaValue = ScanColor() * 100;
+		//}
+		setLED(Off);*/
 		break;
 	}
 	case 'n':
@@ -225,7 +254,7 @@ void fromWifi()
 	}
 	case 'a':
 	{
-		serial.print("inside case print");
+		serial.println("inside case print");
 		setLED(Blue);
 		serial.write("ph:");
 		serial.write(phValue);

@@ -24,11 +24,11 @@ float calcPH()
 	float voltage = analogRead(PH_PIN);
 	float slope = (7.0 - 4.0)/(neutralVoltage - acidVoltage);
 	float intercept = 7.0-(slope * neutralVoltage);
-	Serial.write("Neutral Voltage:");
+	/*Serial.write("Neutral Voltage:");
 	Serial.print(neutralVoltage);
 	Serial.write("\nAcid Voltage:");
 	Serial.print(acidVoltage);
 	Serial.write("\nVoltage Measured:");
-	Serial.print(voltage);
+	Serial.print(voltage);*/
 	return (slope * voltage) + intercept;
 }

@@ -111,6 +111,8 @@
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
       <Value>..\include\libraries\SoftwareSerial\src</Value>
+      <Value>..\include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite</Value>
+      <Value>..\include\libraries\FreeRTOS\src</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -149,6 +151,8 @@
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
       <Value>..\include\libraries\SoftwareSerial\src</Value>
+      <Value>..\include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite</Value>
+      <Value>..\include\libraries\FreeRTOS\src</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -211,6 +215,8 @@
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
       <Value>..\include\libraries\SoftwareSerial\src</Value>
+      <Value>..\include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite</Value>
+      <Value>..\include\libraries\FreeRTOS\src</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -249,6 +255,8 @@
       <Value>..\include\libraries\MD_TCS230\examples\ColorMatch_TCS230</Value>
       <Value>..\include\libraries\MD_TCS230\src</Value>
       <Value>..\include\libraries\SoftwareSerial\src</Value>
+      <Value>..\include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite</Value>
+      <Value>..\include\libraries\FreeRTOS\src</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -284,6 +292,60 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\EEPROM\src\EEPROM.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite\GA_Header.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\Arduino_FreeRTOS.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\croutine.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\event_groups.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\FreeRTOSConfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\FreeRTOSVariant.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\list.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\message_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\mpu_wrappers.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\portable.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\portmacro.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\projdefs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\queue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\semphr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\stack_macros.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\stream_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\src\timers.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\MD_TCS230\examples\ColorMatch_TCS230\ColorMatch - Original.h">
@@ -323,6 +385,36 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="phSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\croutine.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\event_groups.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\heap_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\list.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\port.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\queue.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\stream_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\tasks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\timers.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\src\variantHooks.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\libraries\MD_TCS230\src\MD_TCS230.cpp">
@@ -564,6 +656,10 @@
     <Folder Include="include\libraries\" />
     <Folder Include="include\libraries\EEPROM\" />
     <Folder Include="include\libraries\EEPROM\src\" />
+    <Folder Include="include\libraries\FreeRTOS\" />
+    <Folder Include="include\libraries\FreeRTOS\examples\" />
+    <Folder Include="include\libraries\FreeRTOS\examples\GoldilocksAnalogueTestSuite\" />
+    <Folder Include="include\libraries\FreeRTOS\src\" />
     <Folder Include="include\libraries\MD_TCS230\" />
     <Folder Include="include\libraries\MD_TCS230\docs\" />
     <Folder Include="include\libraries\MD_TCS230\docs\search\" />
@@ -574,6 +670,8 @@
     <Folder Include="include\libraries\SoftwareSerial\src\" />
     <Folder Include="src\" />
     <Folder Include="src\libraries\" />
+    <Folder Include="src\libraries\FreeRTOS\" />
+    <Folder Include="src\libraries\FreeRTOS\src\" />
     <Folder Include="src\libraries\MD_TCS230\" />
     <Folder Include="src\libraries\MD_TCS230\docs\" />
     <Folder Include="src\libraries\MD_TCS230\docs\search\" />
