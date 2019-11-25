@@ -9,34 +9,50 @@
 import SwiftUI
 
 struct TestChemicalsView: View {
-        @EnvironmentObject var tankData: TankProfile
+    @EnvironmentObject var tankData: TankProfile
+    
+    let ammoniaStr = "Ammonia naturally builds up from your fishes' uneaten food and solid waste. It's good to test for it occasionally."
+    
+    
+    let nitrateStr = "Nitrates and Nitrites naturally occur from the Ammonia breaking down, you should test for them too."
+    
+    
     
     var body: some View {
         
-        VStack {
+        List {
                 Spacer()
+                NavigationLink(destination: AllTestingView()) {
+                      Text("Check Everything")
+                          .fontWeight(.heavy)
+                  }
+            
+                Spacer()
+            
+                Text(self.ammoniaStr)
+                    .font(.footnote)
+            
+                NavigationLink(destination: AmmoniaTestingView()) {
+                       Text("Check Ammonia")
+                   }
+            
+                Spacer()
+            
+                Text(self.nitrateStr)
+                    .font(.footnote)
+            
+                NavigationLink(destination: NitrateTestingView()) {
+                       Text("Check Nitrates")
+                   }
                 
-                Button(action: {
-                    
-                }) {Text("Check Nitrates")}
-                
-                Spacer()
-            
-                Button(action: {
-                    
-                }) {Text("Check Nitrites")}
+                NavigationLink(destination: NitriteTestingView()) {
+                       Text("Check Nitrites")
+                   }
             
                 Spacer()
-            
-                Button(action: {
-                    
-                }) {Text("Check Ammonia")}
-            
-                Spacer()
-            
                 
             }
-        .navigationBarTitle(Text("Test Chemical Levels")
+        .navigationBarTitle(Text("Chemicals")
         .font(.headline))
         }
 

@@ -33,7 +33,7 @@
            "minTemp": 78,
            "maxPh": 7.8,
            "minPh": 6.8,
-           "imageName": "tetra"
+           "imageName": "angelfish"
     },
     {
            "breedName": "Nerite Snail",
@@ -43,7 +43,27 @@
            "minPh": 8.1,
            "imageName": "nerite"
     },
+    {
+           "breedName": "Barb",
+           "maxTemp": 80,
+           "minTemp": 75,
+           "maxPh": 7.8,
+           "minPh": 6.8,
+           "imageName": "barb"
+    },
 
-
+    {
+           "breedName": "Corydoras Catfish",
+           "maxTemp": 80,
+           "minTemp": 74,
+           "maxPh": 8.0,
+           "minPh": 7.0,
+           "imageName": "cory_catfish"
+    },
+    
+    
+    
+    
+  
 
 ]

@@ -33,8 +33,7 @@ struct FishDetail: View {
                 .padding(.trailing).padding(.leading)
                 
                 
-  
-                FittedImage(image: fish.image, width: 200, height: 200)
+                FittedImage(image: fish.image, width: 250, height: 200)
                 
                 Divider()
         
@@ -128,18 +127,24 @@ struct FittedImage: View
     let height: CGFloat
 
     var body: some View {
-        VStack {
-            image
-                .resizable()
-                .aspectRatio(1, contentMode: .fill)
-        }
-        .frame(width: width, height: height)
-        .clipShape(
-            RoundedRectangle(cornerRadius: 20))
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 1)
-        )
+        
+        HStack {
+            VStack {
+                image
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fill)
+            }
+            .frame(width: width, height: height)
+            .clipShape(
+                RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            
+            Spacer()
+        }.padding()
+
     }
 }
 
