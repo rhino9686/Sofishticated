@@ -148,7 +148,7 @@ struct ContentView: View {
 struct AddFishView_Previews: PreviewProvider {
     @State static var myTank = TankProfile()
     static var previews: some View {
-        AddFishView(/**tankData: $myTank*/)
+        AddFishView()
         .environmentObject(self.myTank)
     }
 }

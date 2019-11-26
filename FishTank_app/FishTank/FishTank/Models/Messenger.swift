@@ -181,11 +181,15 @@ final class Messenger {
          return sendRequest(param: "nitrite", route: "/fromApp/requestNitrite")
      }
     
+    func sendResetCommand() -> String {
+        return sendRequest(param: "reset", route: "/fromApp/sendResetCommand")
+    }
+    
     
     func refreshParams() {
         var _ = self.requestCheck()
        //Delay here Somehow? Flag var to know when vals are live?
-        usleep(2000000)
+        usleep(2000000) // delay for 2 seconds?
         var _ = self.requestPh()
         var _ = self.requestTemp()
     }
@@ -194,7 +198,6 @@ final class Messenger {
     func parsePh(param: String, httpResult: String ) {
         
         let numDouble: Double? = Double(httpResult)
-            
         if (numDouble != nil) {
             //Here we make the final correction to make the number a decimal
             let truepH = numDouble! / 100
@@ -251,7 +254,6 @@ final class Messenger {
            self.nitriteVal = (numDouble!)
         }
     }
-    
     
     
     func setIPAdress(ipAddress_in: String) {

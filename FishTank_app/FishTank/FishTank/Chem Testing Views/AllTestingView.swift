@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AllTestingView: View {
     @EnvironmentObject var tankData : TankProfile
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var index: Int = 0
     let phases = [0, 1, 2, 3, 4, 5]
     let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"]
@@ -32,39 +33,37 @@ struct AllTestingView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
-                
                 Spacer()
                 
                 Group {
                     //First Step
                     if self.index == 0 {
-                        VStack {
-                            Text("Ammonia Testing")
+                       VStack {
+                            Text("Ammonia Test")
+                            Text("Dip the Ammonia Test strip into your tank")
+                                .font(.caption)
+                        
+                            Text("and hold it for 3 seconds")
+                                .font(.caption)
+                         
+                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
                             
-                            Button(action:{ self.initAmmonia()
+                            Button(action:{ self.sendAmmoniaTestCmd()
                                             self.nextStep()
                             }) {
-                                    Text("Start Ammonia Test")
+                                    Text("Next Step")
     
                             }.padding()
                         }
-                        
-                        
-                        
                     }
                     else if self.index == 1 {
                         VStack {
-                            Text("Insert Test Strip into Tank")
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
-                            
-                            Button(action:{ self.initAmmonia()
+                            Button(action:{ self.getAmmoniaVal()
                                             self.nextStep()
-                            }) {
-                                    Text("Get Value from tank")
-    
+                                }) {
+                                    Text("Read Value Ammonia Value")
+        
                             }.padding()
-                            
-                            
                         }
                     }
                     else if self.index == 2 {
@@ -83,33 +82,39 @@ struct AllTestingView: View {
                 
                 Spacer()
             
-                Button(action: nextStep) {
-                    if self.index == self.phases.count - 1 {
-                        Text("Finish")
-                        
-                    }
-                    else {
-                        Text("Next Step")
-                    }
-        
-                    }.buttonStyle(PlainButtonStyle()).padding()
+//                Button(action: nextStep) {
+//                    if self.index == self.phases.count - 1 {
+//                        Text("Finish")
+//                    }
+//                    else {
+//                        Text("Next Step")
+//                    }
+//        
+//                }.buttonStyle(PlainButtonStyle()).padding(.bottom)
                 
             }
         }
     }
     
-    func initAmmonia() {
-        self.index = self.index + 0
-    }
     
     
     func nextStep() {
+        if self.index == self.phases.count - 1 {
+            self.presentationMode.wrappedValue.dismiss()
+            return
+        }
         self.index = (self.index + 1) % self.phases.count
     }
     
+    // Tells the chip to initiate a color sensor test for Ammonia
+    func sendAmmoniaTestCmd() {
+        return
+    }
     
-    
-    
+    //
+    func getAmmoniaVal() {
+        return
+    }
     
 }
 
