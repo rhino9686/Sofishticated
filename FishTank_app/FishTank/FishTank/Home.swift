@@ -12,6 +12,7 @@ let lightGrey = Color(red: (220/255), green: (220/255), blue: (220/255), opacity
 
 struct TankHome: View {
     @EnvironmentObject var tankData: TankProfile
+    @State var resetModalDisplayed = false
     
     var body: some View {
         NavigationView {
@@ -35,7 +36,6 @@ struct TankHome: View {
                 }
                 
         
-                
                 Section(header: Text("Residents")) {
                     ForEach(tankData.placeHolderFish, id: \.self) { fish in
                             NavigationLink(
@@ -77,7 +77,7 @@ struct TankHome: View {
                     .fontWeight(.semibold)
                 }
                 
-                NavigationLink(destination: SettingsView()
+                NavigationLink(destination: SettingsView(resetModal: $resetModalDisplayed)
                     .environmentObject(self.tankData)
                 ) {
                     Text("Settings")
@@ -88,7 +88,15 @@ struct TankHome: View {
                 
             }
             .navigationBarTitle(Text(" \(self.tankData.userName)'s Tank"))
-        }
+        
+            .sheet(isPresented: $resetModalDisplayed) {
+                SetupView(onDismiss: {
+                    self.resetModalDisplayed = false
+                })
+            }
+            
+    }
+        
 
     }
 }

@@ -12,14 +12,17 @@ struct SetupView: View {
     @EnvironmentObject var tankData : TankProfile
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    var onDismiss: () -> ()
+    
+    //Variable to hold the User's name
     @State private var userName: String = ""
     
     @State private var wifiName: String = ""
     @State private var wifiPassword: String = ""
     
     @State var index: Int = 0
-    let phases = [0, 1, 2, 3, 4, 5]
-    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"]
+    let phases = [0, 1, 2, 3, 4]
+    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
     
     var body: some View {
         ZStack {
@@ -67,7 +70,7 @@ struct SetupView: View {
                          
                             FittedImage(image: Image("placeholder"), width: 220, height: 280)
                             
-                            Button(action:{ self.sendAmmoniaTestCmd()
+                            Button(action:{
                                             self.nextStep()
                             }) {
                                     Text("Next Step")
@@ -102,16 +105,11 @@ struct SetupView: View {
                     }
                     
                     else if self.index == 4 {
-                        VStack {
-                            Text("Done!")
-                            Button(action:{ self.sendAmmoniaTestCmd()
-                                            self.nextStep()
-                            }) {
-                                Text("Launch FishTank")
-
-                            }.padding()
-
+                                            
+                        Button(action: { self.onDismiss() }) {
+                            Text("Dismiss")
                         }
+                        
                     }
                     
                 }
@@ -141,20 +139,16 @@ struct SetupView: View {
         self.index = (self.index + 1) % self.phases.count
     }
     
-    // Tells the chip to initiate a color sensor test for Ammonia
-    func sendAmmoniaTestCmd() {
-        return
-    }
-    
-    //
-    func getAmmoniaVal() {
-        return
-    }
-    
 }
 
 struct SetupView_Previews: PreviewProvider {
+    
+   static var i = 0
+    
+    
     static var previews: some View {
-        SetupView()
+        SetupView(onDismiss: {
+            self.i += 1
+        })
     }
 }

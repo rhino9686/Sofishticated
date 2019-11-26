@@ -10,7 +10,11 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Binding var resetModal: Bool
     @EnvironmentObject var tankData: TankProfile
+    
+    //Controls exiting the view
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
@@ -27,14 +31,21 @@ struct SettingsView: View {
                          .fontWeight(.semibold)
                      }
                 
-                NavigationLink(destination: ResetTankView(ipAddress_in: "000")) {
-                     Text("Reset Tank")
-                     .fontWeight(.semibold)
-                 }
+                Button(action: resetTank) {
+                        Text("Reset Tank")
+                       .fontWeight(.semibold)
+
+                }
+                
                 
             }
             .navigationBarTitle(Text("Settings"))
         
+    }
+    
+    func resetTank() {
+        self.resetModal = true
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
 
@@ -73,10 +84,10 @@ struct ToggleTempView: View {
 
 
 struct SettingsView_Previews: PreviewProvider {
-    @State static var tank = TankProfile()
+    @State static var modalDisplayed: Bool = true
     
     static var previews: some View {
-        SettingsView()
-        .environmentObject(tank)
+        SettingsView(resetModal: $modalDisplayed)
+        .environmentObject(TankProfile())
     }
 }
