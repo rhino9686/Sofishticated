@@ -7,7 +7,7 @@
 #include <ESP8266HTTPClient.h>
 
 // Change this depending on what the current IP address is for the server
-#define SERVER_ADDR "35.6.191.190"
+#define SERVER_ADDR "35.6.134.190"
 
 
 #ifndef STASSID
@@ -32,8 +32,7 @@ const char* password = "password";
 bool SETUP_MODE = false; //This will determine if the Wifi module will be hosting it's own access point or not
 
 //Message buffer for HTTP Data
-char buffer[10];
-
+String buffer;
 
 
 //Tank model to store temp values, chemical readings
@@ -54,15 +53,28 @@ ESP8266WebServer server(80);
 
 // FUNCTION DECLARATIONS
 
-//TODO: LEARN HOW TO GET PARAMS FROM PCB DEVICE
+//TODO: Test that this actually works
 void getParam(char param) {
-  return;
-}
 
+  //Send Param request to PCB
+   Serial.write("p");
+   if (Serial.available()) {
+   delay(100); //allows all serial sent to be received together
+   
+   while(Serial.available() ) {
+     buffer = Serial.readString();
+   }
+
+   sendMessageToServer(param);
+  
+
+  }
+ }
 
 //Send message to device to request Temperature
 void getTemp(){
   getParam('T');
+  
 }
 
 //Send message to device to request pH
@@ -83,7 +95,7 @@ void getNitrates(){
 //Send message to server with Temperature data
 void sendTemp(){
   int num = myTank.temperature;
-  itoa(num,buffer,10); 
+  buffer = String(num);
   sendMessageToServer('T');
   
 }
@@ -91,9 +103,10 @@ void sendTemp(){
 //Send message to server with pH data
 void sendpH(){
   int num = myTank.pH;
-  itoa(num,buffer,10); 
+  buffer = String(num);
   sendMessageToServer('P');
 }
+
 
 //Send message to server with Ammonia data
 void sendAmmonia();
@@ -110,95 +123,8 @@ void handleParamRequest();
 //Handles when the server wants to check Nitrate and Ammonia vals
 void handleCheckRequest();
 
-void setup() {
-  Serial.begin(115200);
-
-  //Set up initial Tank Parameters
-  myTank.temperature = 500;
-  myTank.pH = 400;
-
-  
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid);
-  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("WiFi Connect Failed! Rebooting...");
-    delay(1000);
-    ESP.restart();
-  }
-  ArduinoOTA.begin();
-  
-    //Handler for http requests for requests
-    server.on("/requestVals", handleParamRequest);
-  
-  server.begin();
 
 
-  //WiFi.softAPConfig(ip, gateway, subnet);
-  //WiFi.softAP(ssid2);
-
-  Serial.print("Local: ");
-  Serial.print(WiFi.localIP());
-  
-  /**Serial.print("Open http://");
-  Serial.print(WiFi.localIP());
-  Serial.println("/ in your browser to see it working");
-
-
-  Serial.print(" Setting softAP config ");
-  Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
-  Serial.print(" Setting softAP   " );
-  Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
-
-  Serial.print("Soft AP IP Addr is  "); **/
- // Serial.println(WiFi.softAPIP());
-}
-
-void handleParamRequest() {
-
-  //Check PCB for Temp
-  getTemp();
-  //Check PCB for pH
-  getpH();
-  Serial.println("In handler");
-  server.send(200, "text/plain", "fetching Temp and pH vals");
-
-  sendTemp();
-  
-}
-
-void handleCheckRequest() {
-  server.send(200, "text/plain", "checking chemical levels");
-}
-
-
-void loop() {
-  server.handleClient();
-
-  if(WiFi.status()== WL_CONNECTED) {   //Check WiFi connection status
- 
-   http.begin("http://35.6.191.190:5000/fromTank/sendRando");      //Specify request destination
-   http.addHeader("Content-Type", "text/plain");  //Specify content-type header
-   int num  = random(0,10); 
-   itoa(num,buffer,10); 
-
-    
-   int httpCode = http.POST(buffer);                   //Send the request
-   String payload = http.getString();                  //Get the response payload
- 
-   Serial.println(httpCode);   //Print HTTP return code
-   //Serial.println(payload);    //Print request response payload
- 
-   http.end();  //Close connection
- 
- }else {
- 
-    Serial.println("Error in WiFi connection");   
- 
- }
-  delay(3000);  //Send a request every 30 seconds
-
-  
-}
 
 
 void sendMessageToServer(char param) { //Sends whatever is in buffer to server
@@ -248,5 +174,80 @@ void sendMessageToServer(char param) { //Sends whatever is in buffer to server
  
     Serial.println("Error in WiFi connection");   
  }
+}
+
+
+
+void setup() {
+  Serial.begin(115200);
+
+  //Set up initial Tank Parameters
+  myTank.temperature = 5000;
+  myTank.pH = 400;
+
+  
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid);
+  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("WiFi Connect Failed! Rebooting...");
+    delay(1000);
+    ESP.restart();
+  }
+  ArduinoOTA.begin();
+  
+    //Handler for http requests for requests
+    server.on("/requestVals", handleParamRequest);
+  
+  server.begin();
+
+
+  //WiFi.softAPConfig(ip, gateway, subnet);
+  //WiFi.softAP(ssid2);
+
+  Serial.print("Local: ");
+  Serial.print(WiFi.localIP());
+  
+  /**Serial.print("Open http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/ in your browser to see it working");
+
+
+  Serial.print(" Setting softAP config ");
+  Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
+  Serial.print(" Setting softAP   " );
+  Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
+
+  Serial.print("Soft AP IP Addr is  "); **/
+ // Serial.println(WiFi.softAPIP());
+}
+
+void handleParamRequest() {
+
+  Serial.println("Fetching Temp and pH!");
+  //Check PCB for Temp
+   //getTemp();
+  //Check PCB for pH
+  // getpH();
+
+  server.send(200, "text/plain", "fetching Temp and pH vals");
+
+  sendTemp();
+  sendpH();
+}
+
+void handleCheckRequest() {
+  Serial.println("Starting chemical tests!");
+
+  server.send(200, "text/plain", "checking chemical levels");
+}
+
+
+void loop() {
+  server.handleClient();
+
+  //sendpH();
+ // sendTemp();
+
+  delay(3000);  //Send a request every 3 seconds
   
 }

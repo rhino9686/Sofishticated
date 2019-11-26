@@ -20,11 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let myTank = TankProfile()
+        
+        // let piServerAdress = "192.168.1.166"
+         let laptopServerAddress = "35.6.134.190"
+        
+        let myTank = TankProfile(ipAddressInput: laptopServerAddress)
         let contentView = TankHome()
             .environmentObject(myTank)
                     
-
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

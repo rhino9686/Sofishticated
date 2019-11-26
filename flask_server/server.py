@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, redirect
 from tank import Tank
 from random import random
+import requests
 ## Setup Server
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ myTank.rando = 3
 
 ## define Wi-Fi chip IP address
 
-WIFI_IP = "35.6.179.38"
+WIFI_IP = "35.6.190.156"
 
 # Home route, use to check connection with a code?
 @app.route("/", methods = ['POST'])
@@ -21,17 +22,18 @@ def hello():
 @app.route("/fromTank/sendTemp", methods = ['POST'])
 def getTempFromTank():
     tempStr = str(request.data)
-    temperatureStr = tempStr[2] ## check this val
-    print("Temp received from tank: " + tempStr)
-
+    temperatureStr = tempStr[2:6] ## check this val
+    print("Temp received from tank: " + temperatureStr)
+    myTank.setTemp(int(temperatureStr)) 
     return "temp received" #return val is meaningless
 
 # handler for tank sending pH value
 @app.route("/fromTank/sendpH", methods = ['POST'])
 def getPhFromTank():
     phStr = str(request.data)
-    phValStr = phStr[2] ##check this val
-    print("pH received from tank: " + phStr)
+    phValStr = phStr[2:5] ##check this val
+    myTank.setPH(int(phValStr)) 
+    print("pH received from tank: " + phValStr)
     return "pH received"
 
 # handler for tank sending Ammonia value
@@ -39,6 +41,7 @@ def getPhFromTank():
 def getAmmoniaFromTank():
     ammonStr = str(request.data)
     ammonValStr = ammonStr[2] ##check this val
+   
     return "pH retrieved from tank"
 
 # handler for tank sending Nitrate value
@@ -90,27 +93,27 @@ def sendAmmoToApp():
 # handler for app prompting a server check
 @app.route("/fromApp/requestCheck", methods = ['POST'])
 def promptChipForVals():
-    dest_url = "http://" + WIFI_IP + ":5000/requestVals"
+    dest_url = "http://" + WIFI_IP + "/requestVals"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
     det = str(3)
-   ## response = request.post(dest_url, data=data, headers=headers)
+    response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"check": det})
 
 # handler for app prompting a serverChem check
 @app.route("/fromApp/requestChemCheck", methods = ['POST'])
 def promptChipForChemVals():
-    dest_url = "http://" + WIFI_IP + ":5000/requestChemCheck"
+    dest_url = "http://" + WIFI_IP + "/requestChemCheck"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
     det = str(4)
-   ## response = request.post(dest_url, data=data, headers=headers)
+   ## response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"check": det})
 
 # handler for app prompting a serverChem check
-@app.route("/fromApp/requestChemCheck", methods = ['POST'])
+@app.route("/fromApp/requestReset", methods = ['POST'])
 def sendResetCommand():
-    dest_url = "http://" + WIFI_IP + ":5000/requestChemCheck"
+    dest_url = "http://" + WIFI_IP + ":5000/requestReset"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
     det = str(4)

@@ -189,7 +189,7 @@ final class Messenger {
     func refreshParams() {
         var _ = self.requestCheck()
        //Delay here Somehow? Flag var to know when vals are live?
-        usleep(2000000) // delay for 2 seconds?
+        usleep(200000) // delay for 2 seconds?
         var _ = self.requestPh()
         var _ = self.requestTemp()
     }
