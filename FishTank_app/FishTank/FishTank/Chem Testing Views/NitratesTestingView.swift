@@ -1,5 +1,5 @@
 //
-//  TestingView.swift
+//  NitrateTestingView.swift
 //  FishTank
 //
 //  Created by Robert Cecil on 11/24/19.
@@ -8,12 +8,13 @@
 
 import SwiftUI
 
-struct AllTestingView: View {
+struct NitratesTestingView: View {
     @EnvironmentObject var tankData : TankProfile
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var index: Int = 0
-    let phases = [0, 1, 2, 3, 4, 5]
-    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"]
+    
+    let phases = [0, 1, 2, 3]
+    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4" ]
     
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct AllTestingView: View {
             Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)).edgesIgnoringSafeArea(.top)
             
             VStack {
-                Text("Testing Everything")
+                Text("Testing Nitrates and Nitrites")
                     .fontWeight(.heavy)
                 
                 Picker(selection: $index, label: Text("")) {
@@ -39,8 +40,8 @@ struct AllTestingView: View {
                     //First Step
                     if self.index == 0 {
                        VStack {
-                            Text("Ammonia Test")
-                            Text("Dip the Ammonia Test strip into your tank")
+                            Text("Nitrate Test")
+                            Text("Dip the nitrate Test strip into your tank")
                                 .font(.caption)
                         
                             Text("and hold it still, for 2 seconds")
@@ -55,58 +56,62 @@ struct AllTestingView: View {
     
                             }.padding()
                         }
-                    }
+                    }//if
+                        
                     else if self.index == 1 {
                         VStack {
                             Button(action:{ self.getAmmoniaVal()
                                             self.nextStep()
                                 }) {
-                                    Text("Read Value Ammonia Value")
+                                    Text("Read Value Nitrate Value")
         
                             }.padding()
                         }
-                    }
-                    else if self.index == 2 {
-                       VStack {
-                        Text("Nitrate Test")
-                        Text("Dip the Nitrate/Nitrite Test strip into your tank")
-                            .font(.caption)
-                    
-                        Text("and hold it still, for 2 seconds")
-                            .font(.caption)
-                     
-                        FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                    }//if
                         
-                        Button(action:{ self.sendAmmoniaTestCmd()
-                                        self.nextStep()
-                        }) {
-                                Text("Next Step")
+                    else if self.index == 2 {
+                          VStack {
+                            Text("Nitrate Test")
+                            Text("Dip the nitrate Test strip into your tank")
+                                .font(.caption)
+                        
+                            Text("and hold it still, for 2 seconds")
+                                .font(.caption)
+                         
+                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            
+                            Button(action:{ self.sendAmmoniaTestCmd()
+                                            self.nextStep()
+                            }) {
+                                    Text("Next Step")
 
-                        }.padding()
-                    }
-                    }
+                            }.padding()
+                        }
+                    }//if
                     
                     else if self.index == 3 {
-                        Text("Step 4")
-                    }
-                    
-                    else if self.index == 4 {
-                        Text("Step 5")
-                    }
-                    
+                       VStack {
+                            Button(action:{ self.getAmmoniaVal()
+                                            self.nextStep()
+                                }) {
+                                    Text("Read Value Nitrate Value")
+        
+                            }.padding()
+                        }
+                    }//if
                 }
                 
                 Spacer()
             
-                Button(action: nextStep) {
-                    if self.index == self.phases.count - 1 {
-                        Text("Finish")
-                    }
-                    else {
-                        Text("Next Step")
-                    }
-        
-                }.buttonStyle(PlainButtonStyle()).padding(.bottom)
+                    Button(action: nextStep) {
+                        if self.index == self.phases.count - 1 {
+                            Text("Finish")
+                        }
+                        else {
+                            Text("Next Step")
+                        }
+    
+                    }.buttonStyle(PlainButtonStyle()).padding(.bottom)
                 
             }
         }
@@ -134,9 +139,8 @@ struct AllTestingView: View {
     
 }
 
-struct AllTestingView_Previews: PreviewProvider {
+struct NitratesTestingView_Previews: PreviewProvider {
     static var previews: some View {
-        AllTestingView()
-        .environmentObject(TankProfile())
+        NitratesTestingView()
     }
 }

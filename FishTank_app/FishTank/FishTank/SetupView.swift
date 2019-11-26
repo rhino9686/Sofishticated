@@ -1,27 +1,31 @@
 //
-//  TestingView.swift
+//  SetupView.swift
 //  FishTank
 //
-//  Created by Robert Cecil on 11/24/19.
+//  Created by Robert Cecil on 11/26/19.
 //  Copyright © 2019 Robert Cecil. All rights reserved.
 //
 
 import SwiftUI
 
-struct AllTestingView: View {
+struct SetupView: View {
     @EnvironmentObject var tankData : TankProfile
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State private var userName: String = ""
+    
+    @State private var wifiName: String = ""
+    @State private var wifiPassword: String = ""
+    
     @State var index: Int = 0
     let phases = [0, 1, 2, 3, 4, 5]
     let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"]
     
     var body: some View {
         ZStack {
-            
-            Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)).edgesIgnoringSafeArea(.top)
-            
+            //Find same color as form and enter it as background color
             VStack {
-                Text("Testing Everything")
+                Text("Set up your Fish Tank" )
                     .fontWeight(.heavy)
                 
                 Picker(selection: $index, label: Text("")) {
@@ -39,11 +43,26 @@ struct AllTestingView: View {
                     //First Step
                     if self.index == 0 {
                        VStack {
-                            Text("Ammonia Test")
-                            Text("Dip the Ammonia Test strip into your tank")
-                                .font(.caption)
-                        
-                            Text("and hold it still, for 2 seconds")
+                            Text("Name")
+                            Form {
+                                Section(header: Text("Your Name")) {
+                                       TextField("Enter name", text: $userName)
+                                }
+                                
+                                Button(action:{
+                                                self.nextStep()
+                                }) {
+                                        Text("Set")
+        
+                                }//.padding()
+                            }.padding(.bottom, 10)
+
+                        }
+                    }
+                    else if self.index == 1 {
+                           VStack {
+                            Text("Connect to the tank WiFi")
+                            Text("open up Settings and connect to FishTank")
                                 .font(.caption)
                          
                             FittedImage(image: Image("placeholder"), width: 220, height: 280)
@@ -52,46 +71,47 @@ struct AllTestingView: View {
                                             self.nextStep()
                             }) {
                                     Text("Next Step")
-    
-                            }.padding()
-                        }
-                    }
-                    else if self.index == 1 {
-                        VStack {
-                            Button(action:{ self.getAmmoniaVal()
-                                            self.nextStep()
-                                }) {
-                                    Text("Read Value Ammonia Value")
-        
+
                             }.padding()
                         }
                     }
                     else if self.index == 2 {
-                       VStack {
-                        Text("Nitrate Test")
-                        Text("Dip the Nitrate/Nitrite Test strip into your tank")
-                            .font(.caption)
-                    
-                        Text("and hold it still, for 2 seconds")
-                            .font(.caption)
-                     
-                        FittedImage(image: Image("placeholder"), width: 220, height: 280)
-                        
-                        Button(action:{ self.sendAmmoniaTestCmd()
-                                        self.nextStep()
-                        }) {
-                                Text("Next Step")
+                          VStack {
+                               Text("Enter your home's wifi and password")
+                               Form {
+                                    Section(header: Text("Network Name")) {
+                                          TextField("Enter name", text: $wifiName)
+                                    }
+                                    Section(header: Text("Network Password")) {
+                                           TextField("Enter name", text: $wifiPassword)
+                                    }
+                                   
+                                   Button(action:{
+                                                   self.nextStep()
+                                   }) {
+                                           Text("Check")
+           
+                                   }//.padding()
+                               }.padding(.bottom, 10)
 
-                        }.padding()
-                    }
+                           }
                     }
                     
                     else if self.index == 3 {
-                        Text("Step 4")
+                        Text("All good! Switch back to your home network now")
                     }
                     
                     else if self.index == 4 {
-                        Text("Step 5")
+                        VStack {
+                            Text("Done!")
+                            Button(action:{ self.sendAmmoniaTestCmd()
+                                            self.nextStep()
+                            }) {
+                                Text("Launch FishTank")
+
+                            }.padding()
+
+                        }
                     }
                     
                 }
@@ -111,7 +131,6 @@ struct AllTestingView: View {
             }
         }
     }
-    
     
     
     func nextStep() {
@@ -134,9 +153,8 @@ struct AllTestingView: View {
     
 }
 
-struct AllTestingView_Previews: PreviewProvider {
+struct SetupView_Previews: PreviewProvider {
     static var previews: some View {
-        AllTestingView()
-        .environmentObject(TankProfile())
+        SetupView()
     }
 }

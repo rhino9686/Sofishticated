@@ -53,7 +53,7 @@ struct TestChemicalsView: View {
                     .font(.footnote)
             
              
-                NavigationLink(destination: NitrateTestingView()) {
+                NavigationLink(destination: NitratesTestingView()) {
                     Text("Check Nitrates")
                         .fontWeight(.heavy)
                    }
