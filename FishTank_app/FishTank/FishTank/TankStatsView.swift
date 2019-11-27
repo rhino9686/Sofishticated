@@ -48,7 +48,6 @@ struct TankStatsView: View {
             .padding(.top)
     
             
-            
             HStack {
                 Text("Last checked: \(self.lastTimeChecked)")
                     .onReceive(timer) { input in
@@ -90,7 +89,6 @@ struct TankStatsView: View {
                     .foregroundColor(Color.blue)
                 Spacer()
             }
-           
             .padding(.top)
             
         }

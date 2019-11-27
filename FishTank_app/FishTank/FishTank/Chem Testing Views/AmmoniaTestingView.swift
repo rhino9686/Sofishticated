@@ -13,6 +13,8 @@ struct AmmoniaTestingView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var index: Int = 0
     
+    @State var AmmoniaVal = "";
+    
     let phases = [0, 1, 2, 3]
     let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4" ]
     
@@ -49,45 +51,65 @@ struct AmmoniaTestingView: View {
                          
                             FittedImage(image: Image("placeholder"), width: 220, height: 280)
                             
-                            Button(action:{ self.sendAmmoniaTestCmd()
-                                            self.nextStep()
+                            Button(action:{ self.nextStep()
                             }) {
                                     Text("Next Step")
     
                             }.padding()
                         }
                     }
+                    //Second Step
                     else if self.index == 1 {
                         VStack {
-                            Button(action:{ self.getAmmoniaVal()
+                            
+                            Text("Insert Test strip into sensor slot")
+                                .font(.caption)
+                            
+                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            
+                            Button(action:{ self.sendAmmoniaTestCmd()
                                             self.nextStep()
-                                }) {
-                                    Text("Read Value Ammonia Value")
+                            }) {
+                                    Text("Start test")
         
                             }.padding()
                         }
                     }
+                    // Third Step
                     else if self.index == 2 {
-                        Text("Step 3")
+                        VStack {
+                            
+                            Text("Wait a couple seconds and retrieve the Value" )
+                                .font(.caption)
+                            
+                            Button(action:{ self.getAmmoniaVal()
+                                            self.nextStep()
+                            }) {
+                                    Text("Read Ammonia Value")
+        
+                            }.padding()
+                            
+                        }
                     }
                     
                     else if self.index == 3 {
-                        Text("Step 4")
+                        
+                        VStack {
+                            
+                            Text("All Done")
+        
+                            Button(action:{ self.getAmmoniaVal()
+                                            self.nextStep()
+                            }) {
+                                    Text("Return to Testing Screen")
+        
+                            }.padding()
+                            
+                        }
                     }
-                    
                 }
                 
                 Spacer()
-            
-//                Button(action: nextStep) {
-//                    if self.index == self.phases.count - 1 {
-//                        Text("Finish")
-//                    }
-//                    else {
-//                        Text("Next Step")
-//                    }
-//
-//                }.buttonStyle(PlainButtonStyle()).padding(.bottom)
                 
             }
         }
@@ -105,11 +127,13 @@ struct AmmoniaTestingView: View {
     
     // Tells the chip to initiate a color sensor test for Ammonia
     func sendAmmoniaTestCmd() {
+        self.tankData.promptAmmoniaTest()
         return
     }
     
-    //
+    // Tells the chip to get the resultant value from the color sensor test for Ammonia
     func getAmmoniaVal() {
+         self.tankData.getAmmoniaVal()
         return
     }
     

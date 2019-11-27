@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4105E101238EE8FB00A4A39F /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105E100238EE8FB00A4A39F /* AddReminderView.swift */; };
+		4105E103238F089600A4A39F /* TankStatsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105E102238F089600A4A39F /* TankStatsDetailView.swift */; };
 		410FE232235BC4E800F69F43 /* FishRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FE231235BC4E800F69F43 /* FishRow.swift */; };
 		410FE235235BC58700F69F43 /* goldfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 410FE233235BC58700F69F43 /* goldfish.jpg */; };
 		41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41194B782375EBCE005BF9EF /* LivingConfig.swift */; };
@@ -68,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4105E100238EE8FB00A4A39F /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
+		4105E102238F089600A4A39F /* TankStatsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankStatsDetailView.swift; sourceTree = "<group>"; };
 		410FE231235BC4E800F69F43 /* FishRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishRow.swift; sourceTree = "<group>"; };
 		410FE233235BC58700F69F43 /* goldfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldfish.jpg; sourceTree = "<group>"; };
 		41194B782375EBCE005BF9EF /* LivingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivingConfig.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			children = (
 				41E35CD4236FCE9800B45147 /* SettingsView.swift */,
 				41AF6B23235E2B8B005BA174 /* RemindersView.swift */,
+				4105E100238EE8FB00A4A39F /* AddReminderView.swift */,
 				41596097238C7ABD00FEC167 /* ReminderDetailView.swift */,
 				41E2144C2370EB3F0050433E /* TestConnectionView.swift */,
 				414C40EF23899A14009D6C4A /* ResetTankView.swift */,
@@ -235,6 +240,7 @@
 				415ADCE9238D8A560020BAA1 /* SetupView.swift */,
 				413BF50523673F9B0081F5CB /* Home.swift */,
 				416B8668235CF72400C36ED7 /* TankStatsView.swift */,
+				4105E102238F089600A4A39F /* TankStatsDetailView.swift */,
 				41C616792351464D003DADD8 /* Assets.xcassets */,
 				41596094238C784F00FEC167 /* Fish Views */,
 				41AA8579238AEC8400F7F1F7 /* Chem Testing Views */,
@@ -436,8 +442,10 @@
 				41E35CD5236FCE9800B45147 /* SettingsView.swift in Sources */,
 				41C616762351464C003DADD8 /* SceneDelegate.swift in Sources */,
 				416B866B235CF84B00C36ED7 /* TankData.swift in Sources */,
+				4105E101238EE8FB00A4A39F /* AddReminderView.swift in Sources */,
 				417A8526235E019D00C00E8C /* FishDetail.swift in Sources */,
 				41902E7D2378F1A300309949 /* Notification.swift in Sources */,
+				4105E103238F089600A4A39F /* TankStatsDetailView.swift in Sources */,
 				413BF50623673F9B0081F5CB /* Home.swift in Sources */,
 				412DCBB8238B640400DA969A /* NitratesTestingView.swift in Sources */,
 				41AA857B238AECB400F7F1F7 /* TestChemicalsView.swift in Sources */,

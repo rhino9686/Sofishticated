@@ -133,11 +133,8 @@ def promptChipForNitrite():
     return jsonify({"check": det})
 
 
-
-
-
 # handler for app prompting a reset of the tank's settings
-@app.route("/fromApp/requestReset", methods = ['POST'])
+@app.route("/fromApp/requestReset", methods =['POST'])
 def sendResetCommand():
     dest_url = "http://" + WIFI_IP + "/requestReset"
     headers = {'Content-type': 'text/html; charset=UTF-8'}

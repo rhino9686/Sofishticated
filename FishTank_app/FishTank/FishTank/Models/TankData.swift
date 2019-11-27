@@ -32,10 +32,20 @@ final class TankProfile: ObservableObject {
     //Array of FishBreeds
     var breeds = fishBreedData
     
-    //array to use later, store in persistent memory
+    //Array to use later, store in persistent memory
     @Published var currentResidents: [FishProfile]
     
     @Published var notifyMan = LocalNotificationManager()
+    
+    
+    //Running Max/Min Temps accounting for all fish
+    @State var maxTemp: Double = 80
+    @State var minTemp: Double = 0
+    
+    
+    //Running Max/Min pH vals accounting for all fish
+    @State var maxpH: Double = 14
+    @State var minpH: Double = 0
     
     
     //Counter variable to give each fish a unique ID
@@ -64,6 +74,52 @@ final class TankProfile: ObservableObject {
         return String(format: " %.2f", pH)
     }
     
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Functions to update and fetch values using the HTTP Messenger
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    func updateParams() {
+        self.messenger.refreshParams()
+        self.lastTime = self.getNow()
+    }
+    
+    
+    
+    func promptAmmoniaTest() {
+       let _ = self.messenger.promptAmmonia()
+    }
+    
+    func getAmmoniaVal() {
+        let _ = self.messenger.requestAmmonia()
+    }
+    
+    
+    
+    func promptNitrateTest() {
+        let _ = self.messenger.promptNitrate()
+    }
+    
+    func getNitrateVal() {
+        let _ = self.messenger.requestNitrate()
+    }
+    
+    
+    func promptNitriteTest() {
+        let _ = self.messenger.promptNitrite()
+    }
+    
+    func getNitriteVal() {
+        let _ = self.messenger.requestNitrite()
+    }
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Functions to manage the "Last time checked" displayed
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     // time since tank was checked last (in minutes)
     var lastCheckedTimeInMins = 3
     
@@ -79,17 +135,10 @@ final class TankProfile: ObservableObject {
         return (hour * 60) + minutes
     }
     
-    func updateParams() {
-        print("reached tank")
-        self.messenger.refreshParams()
-        self.lastTime = self.getNow()
-    }
-    
     func updateDelta() {
         self.lastCheckedTimeInMins = self.getNow() - self.lastTime;
         return
     }
-    
     
     var lastTimeChecked: String {
         updateDelta()
@@ -166,7 +215,21 @@ final class TankProfile: ObservableObject {
     
     //Adds a new fish to the tank
     func addFish(fishEntry fish: FishProfile){
+
         self.currentResidents.append(fish)
+        
+        // Update overall temp range accordingly
+        self.maxTemp = min(self.maxTemp, fish.breedData!.maxTemp)
+        self.minTemp = max(self.minTemp,  fish.breedData!.minTemp)
+        
+        
+        // Update overall pH range accordingly
+        self.maxpH = min(self.maxpH, fish.breedData!.maxPh)
+        self.minpH = max(self.minpH,  fish.breedData!.minPh)
+        
+        //Send data to tank
+        let _ = self.messenger.sendTempRangeAvg(max: maxTemp, min: minTemp)
+        
     }
     
     //Removes a fish from the tank by id

@@ -11,7 +11,7 @@ import SwiftUI
 struct TestChemicalsView: View {
     @EnvironmentObject var tankData: TankProfile
     
-    let testEverythingStr = "Get it all done in one fell swoop"
+    let testEverythingStr = "Regularly check chemical buildup in your tank"
     
     let ammoniaStr = "Ammonia naturally builds up from your fishes' uneaten food and solid waste. It's good to test for it occasionally."
     
@@ -21,20 +21,13 @@ struct TestChemicalsView: View {
     var body: some View {
         
         List {
-   
-                Text(self.testEverythingStr)
-                  .font(.footnote)
-            
-            
-                NavigationLink(destination: AllTestingView()
-                    .environmentObject(self.tankData)
-                ) {
-                      Text("Check Everything")
-                          .fontWeight(.heavy)
-                  }
             
                 Spacer()
+   
+                Text(self.testEverythingStr)
+                  .font(.subheadline)
             
+                Spacer()
             
                 Text(self.ammoniaStr)
                     .font(.footnote)

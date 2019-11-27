@@ -67,7 +67,7 @@ struct AddFishView: View {
         
     }
     
-    func checkCompatibility() {
+    func checkCompatibility() -> Bool {
         var compatible = true
         let res = self.tankData.currentResidents
         
@@ -94,7 +94,9 @@ struct AddFishView: View {
         }
         if !compatible {
             showingAlert = true
+            return false
         }
+        return true
  
     }
     
@@ -109,8 +111,11 @@ struct AddFishView: View {
             self.errorMsg = "Please select a type of fish"
             return false
         }
-        self.checkCompatibility()
-        return true
+        
+        if (!self.checkCompatibility() ){
+            return false
+        }
+        return trues
     }
     
     

@@ -212,6 +212,14 @@ final class Messenger {
      }
     
     
+     // Tells the tank the new average temp range to try and match with the heater
+    func sendTempRangeAvg(max: Double, min: Double) -> String {
+        
+        let myMax = (max * 50) + (min * 50)
+        return sendRequest(param: "max: \(myMax)", route: "/fromApp/sendAvg")
+    }
+    
+    
     
     func sendResetCommand() -> String {
         return sendRequest(param: "reset", route: "/fromApp/sendResetCommand")

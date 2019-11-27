@@ -26,8 +26,19 @@ struct RemindersView: View {
             }.padding(.top, 6)
             
             
+            
+            NavigationLink(destination: AddReminderView()
+                .environmentObject(self.tankData)
+            ) {
+                Text("Add Reminder")
+                .fontWeight(.semibold)
+            }
+            .padding(.top)
+            
+            
+            
             Button(action: addNotifications) {
-                    Text("Add Reminder")
+                  Text("Dummy Test")
 
             }.padding()
         }
