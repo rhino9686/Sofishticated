@@ -2,6 +2,10 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+color_sensor.cpp
+
+tempSensor.cpp
+
 DFRobot_PH.cpp
 
 main.cpp
