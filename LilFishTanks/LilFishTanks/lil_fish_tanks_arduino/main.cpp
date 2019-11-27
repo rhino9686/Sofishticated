@@ -87,7 +87,7 @@ void setup() {
 	,  128
 	,  NULL
 	,  2
-	,  &xColorSensor );
+	,  &xColorSensor ); 
 
 	xTaskCreate(
 	TaskPHandTemperature
@@ -201,7 +201,7 @@ void TaskPHandTemperature(void *pvParameters)
 	delay(100);
 	setLED(Off);
     // check pH and temp every 15 min
-    vTaskDelayUntil( &xLastWakeTime, 10000 / portTICK_PERIOD_MS );
+    vTaskDelayUntil( &xLastWakeTime, 5000 / portTICK_PERIOD_MS );
   }
 }
 

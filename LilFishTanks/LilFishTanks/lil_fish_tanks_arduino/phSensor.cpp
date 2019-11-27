@@ -1,8 +1,8 @@
 #include "phSensor.h"
 
 //DFRobot_PH ph;
-float neutralVoltage = 397.0;
-float acidVoltage = 324.0;
+float neutralVoltage = 404.0;
+float acidVoltage = 166.0;
 
 
 float calcPH()
@@ -15,6 +15,6 @@ float calcPH()
 	Serial.write("\nAcid Voltage:");
 	Serial.print(acidVoltage);
 	Serial.write("\nVoltage Measured:");
-	Serial.print(voltage);*/
+	Serial.print(voltage);  */
 	return (slope * voltage) + intercept;
 }
