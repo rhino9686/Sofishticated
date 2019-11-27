@@ -57,7 +57,7 @@ ESP8266WebServer server(80);
 void getParam(char param) {
 
   //Send Param request to PCB
-   Serial.write("p");
+   Serial.write(param);
    if (Serial.available()) {
    delay(100); //allows all serial sent to be received together
    
@@ -67,7 +67,6 @@ void getParam(char param) {
 
    sendMessageToServer(param);
   
-
   }
  }
 
@@ -122,8 +121,6 @@ void handleParamRequest();
 
 //Handles when the server wants to check Nitrate and Ammonia vals
 void handleCheckRequest();
-
-
 
 
 
@@ -201,6 +198,7 @@ void setup() {
   server.begin();
 
 
+
   //WiFi.softAPConfig(ip, gateway, subnet);
   //WiFi.softAP(ssid2);
 
@@ -220,6 +218,12 @@ void setup() {
   Serial.print("Soft AP IP Addr is  "); **/
  // Serial.println(WiFi.softAPIP());
 }
+
+
+
+///
+//These are event handlers we attach to different server routes.
+///
 
 void handleParamRequest() {
 
@@ -241,12 +245,43 @@ void handleCheckRequest() {
   server.send(200, "text/plain", "checking chemical levels");
 }
 
+void handleAmmonRequest() {
+
+  server.send(200, "text/plain", "checking Ammonia color test");
+}
+void handleNitrateRequest() {
+
+  server.send(200, "text/plain", "checking Nitrate color test");
+}
+
+
+//// SETUP MODE ///////////////////////////////////////////////////////////
+void switchToSetupMode() {
+  SETUP_MODE = true;
+
+  WiFi.mode(WIFI_AP_STA);
+  
+  Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
+  Serial.print(" Setting softAP   " );
+  Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
+
+  
+  return;
+}
+
+void switchToOperationalMode() {
+  WiFi.softAPdisconnect(true);
+  WiFi.mode(WIFI_STA);
+
+  return;
+}
+
+////////////////////////////////////////////////////////////////////////////
+
 
 void loop() {
-  server.handleClient();
 
-  //sendpH();
- // sendTemp();
+  server.handleClient();
 
   delay(3000);  //Send a request every 3 seconds
   

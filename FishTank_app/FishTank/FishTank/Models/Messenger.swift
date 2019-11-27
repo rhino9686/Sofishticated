@@ -106,7 +106,7 @@ final class Messenger {
                 
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
-                    if result != nil {
+                    if result != nil && (param != "null") {
                         let Val = result?[param] as! String
                         
                         HttpResult = Val
@@ -147,17 +147,14 @@ final class Messenger {
     }
     
     
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Getting the Basic values from tank
+    //////////////////////// ///////////////////////////////////////////////////////////////////////////////////////
     
+    //Requests a random number
     func requestRando() -> String {
         return sendRequest(param: "randVal", route: "/fromApp/requestRando")
     }
-    
-    
-    // Requests the Tanks's pH from the server
-    func requestCheck() -> String {
-         return sendRequest(param: "check", route: "/fromApp/requestCheck")
-    }
-    
     
     // Requests the Tanks's pH from the server
     func requestPh() -> String {
@@ -169,17 +166,52 @@ final class Messenger {
         return sendRequest(param: "temp", route: "/fromApp/requestTemp")
     }
     
+    // Tells the tank to read the latest temp and pH vals from sensors
+    func requestCheck() -> String {
+         return sendRequest(param: "check", route: "/fromApp/requestCheck")
+    }
+    
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Drivers to get Color sensor tests from Tank
+    //////////////////////// ///////////////////////////////////////////////////////////////////////////////////////
+
+    
+    // Tells the tank to start reading for Ammonia strip color
+    func promptAmmonia() -> String {
+        return sendRequest(param: "null", route: "/fromApp/promptAmmonia")
+    }
+
+    // Tells the tank to actually read the ammonia value
     func requestAmmonia() -> String {
         return sendRequest(param: "ammo", route: "/fromApp/requestAmmonia")
     }
     
+    
+    
+    
+    // Tells the tank to start reading for Ammonia Color
+    func promptNitrate() -> String {
+        return sendRequest(param: "null", route: "/fromApp/promptNitrate")
+    }
+    
+    // Tells the tank to actually read the Nitrate value
     func requestNitrate() -> String {
         return sendRequest(param: "nitrate", route: "/fromApp/requestNitrate")
     }
     
+    
+    // Tells the tank to start reading for Ammonia Color
+    func promptNitrite() -> String {
+        return sendRequest(param: "null", route: "/fromApp/promptNitrite")
+    }
+    
+    // Tells the tank to actually read the Nitrite value
     func requestNitrite() -> String {
          return sendRequest(param: "nitrite", route: "/fromApp/requestNitrite")
      }
+    
+    
     
     func sendResetCommand() -> String {
         return sendRequest(param: "reset", route: "/fromApp/sendResetCommand")

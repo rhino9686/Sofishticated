@@ -41,7 +41,6 @@ def getPhFromTank():
 def getAmmoniaFromTank():
     ammonStr = str(request.data)
     ammonValStr = ammonStr[2] ##check this val
-   
     return "pH retrieved from tank"
 
 # handler for tank sending Nitrate value
@@ -56,9 +55,9 @@ def getNitrateFromTank():
 def getRando():
     randStr = str(request.data)
     print(randStr)
-    ##numStr = randStr[2]
-    ##myTank.rando = int(numStr)
-    ##print(myTank.rando)
+    numStr = randStr[2]
+    myTank.rando = int(numStr)
+    print(myTank.rando)
     return "random number received"
 
 # handler for app requesting a temperature reading
@@ -90,7 +89,7 @@ def sendAmmoToApp():
     return jsonify({"ammo": myRandStr})
 
 
-# handler for app prompting a server check
+# handler for app prompting the Wi-fi chip to send temp/pH
 @app.route("/fromApp/requestCheck", methods = ['POST'])
 def promptChipForVals():
     dest_url = "http://" + WIFI_IP + "/requestVals"
@@ -100,24 +99,51 @@ def promptChipForVals():
     response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"check": det})
 
-# handler for app prompting a serverChem check
-@app.route("/fromApp/requestChemCheck", methods = ['POST'])
-def promptChipForChemVals():
-    dest_url = "http://" + WIFI_IP + "/requestChemCheck"
+
+# handler for app prompting an Ammonia Test
+@app.route("/fromApp/promptAmmonia", methods = ['POST'])
+def promptChipForAmmonia():
+    dest_url = "http://" + WIFI_IP + "/promptAmmonia"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
     det = str(4)
-   ## response = requests.post(dest_url, data=data, headers=headers)
+    response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"check": det})
 
-# handler for app prompting a serverChem check
+
+# handler for app prompting an Nitrate Test
+@app.route("/fromApp/promptNitrate", methods = ['POST'])
+def promptChipForNitrate():
+    dest_url = "http://" + WIFI_IP + "/promptNitrate"
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "blank"
+    det = str(5)
+    response = requests.post(dest_url, data=data, headers=headers)
+    return jsonify({"check": det})
+
+
+# handler for app prompting an Nitrite Test
+@app.route("/fromApp/promptNitrite", methods = ['POST'])
+def promptChipForNitrite():
+    dest_url = "http://" + WIFI_IP + "/promptNitrite"
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "blank"
+    det = str(5)
+    response = requests.post(dest_url, data=data, headers=headers)
+    return jsonify({"check": det})
+
+
+
+
+
+# handler for app prompting a reset of the tank's settings
 @app.route("/fromApp/requestReset", methods = ['POST'])
 def sendResetCommand():
-    dest_url = "http://" + WIFI_IP + ":5000/requestReset"
+    dest_url = "http://" + WIFI_IP + "/requestReset"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "blank"
     det = str(4)
-   ## response = request.post(dest_url, data=data, headers=headers)
+    response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"reset": det})
 
 

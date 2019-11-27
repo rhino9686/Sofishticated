@@ -8,9 +8,14 @@
 
 bool SETUP_MODE = false;
 
+char testVals[4] = { 'T', 'P', 'A', 'N' };
+
+int i = 0;
+
+
 //Message buffer for HTTP Data
 char buffer[10];
-String str;
+String str = "Empty";
 
 //HTTPClient to send messages to Server
 HTTPClient http;    
@@ -35,8 +40,13 @@ void loop() {
   
  if(WiFi.status()== WL_CONNECTED) {   //Check WiFi connection status
 
-  //Send Param request to PCB
-   Serial.write("p");
+
+   char sendToTank = testVals[i];
+
+   i = (i + 1) % 4; 
+
+   //Send Param request to PCB
+   Serial.write(sendToTank);
 
     if (Serial.available()) {
     delay(100); //allows all serial sent to be received together
