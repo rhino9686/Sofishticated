@@ -30,6 +30,13 @@ final class TankProfile: ObservableObject {
     //Placeholder array of fish
     var placeHolderFish = fishData
     
+    //Array of Temperature history over time - in FarenHeit
+    @Published var tempHistory: [Double]
+    
+    //Array of pH history over time
+    @Published var pHHistory: [Double]
+    
+    
     //Array of FishBreeds
     var breeds = fishBreedData
     
@@ -41,8 +48,8 @@ final class TankProfile: ObservableObject {
     
     
     //Running Max/Min Temps accounting for all fish
-    @State var maxTemp: Double = 80
-    @State var minTemp: Double = 0
+    var maxTemp: Double = 80
+    var minTemp: Double = 0
     
     
     //Running Max/Min pH vals accounting for all fish
@@ -74,6 +81,36 @@ final class TankProfile: ObservableObject {
         let pH = self.messenger.currentPh
         return String(format: " %.2f", pH)
     }
+    
+    var maxTempStr_F: String {
+        let maxT = self.maxTemp
+        return String(format: "%.0f", maxT)
+    }
+      
+    var minTempStr_F: String {
+        let minT = self.minTemp
+        return String(format: " %.0f",minT)
+    }
+      
+    var maxTempStr_C: String {
+      let maxTempC = Double((self.maxTemp - 32) * 5.0 / 9.0)
+      return String(format: " %.0f", maxTempC)
+    }
+      
+    var minTempStr_C: String {
+          let minTempC = Double((self.minTemp - 32) * 5.0 / 9.0)
+          return String(format: " %.0f", minTempC)
+    }
+      
+    var maxpHStr: String {
+         let maxP = self.maxpH
+         return String(format: " %.2f", maxP)
+    }
+      
+      var minpHStr: String {
+         let minP = self.minpH
+          return String(format: " %.2f", minP)
+      }
     
     
     
@@ -161,18 +198,39 @@ final class TankProfile: ObservableObject {
 
     }
     
-    var category: String {
-        //Will need more robust logic
-        if self.messenger.currentTempF > 0 {
-            return String(Health.good.rawValue)
-        }
-        else {
-            return String(Health.ok.rawValue)
-        }
-    }
+    @State var currentWarning: String = ""
     
-    var warningMessage: String {
-        return "Yikes"
+    var category: String {
+        
+        //Temperature checking
+        if (messenger.currentTempF > maxTemp ||
+            messenger.currentTempF < minTemp ) {
+            
+            self.currentWarning = " Temperature is out of range!"
+            return String(Health.bad.rawValue)
+        }
+            
+        //pH checking
+        if (messenger.currentPh > maxpH ||
+            messenger.currentPh < minpH ) {
+            
+            self.currentWarning = " pH is out of range!"
+            return String(Health.bad.rawValue)
+        }
+    
+        //Ammonia Checking
+        
+        
+        //Nitrate Checking
+        
+        
+        //Nitrite Checking
+            
+            
+        
+        self.currentWarning = ""
+        return String(Health.good.rawValue)
+        
     }
     
     
@@ -193,6 +251,9 @@ final class TankProfile: ObservableObject {
         let laptopServerAddress = "35.6.134.190"
         let server = laptopServerAddress
         messenger = Messenger(ipAddress: server)
+        //TODO: Remove placeholder data
+        tempHistory = [70, 69 ,68, 75, 76, 80, 25, 34]
+        pHHistory = [4.00, 7.6, 8.0, 7.8, 6.9 ]
         
     }
     
@@ -202,6 +263,10 @@ final class TankProfile: ObservableObject {
         self.idCounter = 0
         self.userName = "Robert"
         messenger = Messenger(ipAddress: ipAddressInput)
+        
+        tempHistory = [70, 69 ,68, 75, 76, 80, 25, 34]
+        pHHistory = [4.00, 7.6, 8.0, 7.8, 6.9 ]
+        
     }
     
     //This is for assigning unique ID's for fish
@@ -217,19 +282,60 @@ final class TankProfile: ObservableObject {
 
         self.currentResidents.append(fish)
         
-        // Update overall temp range accordingly
-        self.maxTemp = min(self.maxTemp, fish.breedData!.maxTemp)
-        self.minTemp = max(self.minTemp,  fish.breedData!.minTemp)
+        let newMaxT = fish.breedData!.maxTemp
+        let newMinT = fish.breedData!.minTemp
+        let newMaxP = fish.breedData!.maxPh
+        let newMinP = fish.breedData!.minPh
         
-        
-        // Update overall pH range accordingly
-        self.maxpH = min(self.maxpH, fish.breedData!.maxPh)
-        self.minpH = max(self.minpH,  fish.breedData!.minPh)
+        addRange(newMaxT, newMinT, newMaxP, newMinP)
         
         //Send data to tank
         let _ = self.messenger.sendTempRangeAvg(max: maxTemp, min: minTemp)
         
     }
+    
+    
+    func addRange(_ newMaxTempIn: Double, _ newMinTempIn: Double, _ newMaxpHIn: Double,
+                 _ newMinpHIn: Double) {
+        
+        // Update overall temp range accordingly
+        let newMax = [self.maxTemp, newMaxTempIn].min()
+        self.maxTemp = newMax!
+
+        let newMin = [self.minTemp, newMinTempIn].max()
+        self.minTemp = newMin!
+        
+        // Update overall pH range accordingly
+        let newMaxpH = [self.maxpH, newMaxpHIn].min()
+        self.maxpH = newMaxpH!
+        
+        let newMinpH = [self.minpH, newMinpHIn].max()
+        self.minpH = newMinpH!
+        
+    }
+    
+    
+    func recalculateRanges() {
+        self.maxTemp = 90
+        self.minTemp = 0
+        
+        for fish in self.currentResidents {
+            
+            let newMaxT = fish.breedData!.maxTemp
+            let newMinT = fish.breedData!.minTemp
+            let newMaxP = fish.breedData!.maxPh
+            let newMinP = fish.breedData!.minPh
+            
+            addRange(newMaxT, newMinT, newMaxP, newMinP)
+            
+        }
+        
+        //Send data to tank
+        let _ = self.messenger.sendTempRangeAvg(max: maxTemp, min: minTemp)
+        
+    }
+    
+    
     
     //Removes a fish from the tank by id
     func removeFish(id: Int) {
@@ -249,6 +355,8 @@ final class TankProfile: ObservableObject {
             return
         }
         self.currentResidents.remove(at: index)
+        
+        recalculateRanges()
     }
     
 

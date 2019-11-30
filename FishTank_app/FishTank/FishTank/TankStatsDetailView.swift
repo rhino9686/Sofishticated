@@ -14,21 +14,11 @@ struct TankStatsDetailView: View {
     var body: some View {
         List {
             
-            
-        Section(header: Text("Snapshot")) {
-                        
-                         
-            // Divider()
-             NavigationLink(destination:
-                 TestChemicalsView()
-                            .environmentObject(self.tankData)
-             ) {
-                 Text("Check Chemicals")
-                     .font(.footnote)
-                     .fontWeight(.bold)
-             }.padding(5).padding(.top, 7).padding(.bottom, 7)
-             
-         }
+        HStack {
+            Text("My temp range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
+            Spacer()
+        }
+
             
         Section(header: Text("Temperature History")) {
                          

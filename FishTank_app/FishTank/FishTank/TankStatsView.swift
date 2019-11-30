@@ -45,7 +45,7 @@ struct TankStatsView: View {
                 Text("Health: ")
                     .font(.title)
                     .fontWeight(.medium)
-                Text("Good")
+                Text(overallHealth)
                     .font(.title)
                     .foregroundColor(healthColor)
                 Spacer()
