@@ -10,9 +10,17 @@ import SwiftUI
 
 struct TankStatsDetailView: View {
     @EnvironmentObject var tankData : TankProfile
+    @State var index: Int = 1
+    
+    let phases = [0, 1]
+    let phaseNames = ["Temperature History", "pH History"]
+    
+    let myData: [Double] = [56.4, 54.7]
     
     var body: some View {
         List {
+            
+            
             
         HStack {
             
@@ -34,19 +42,22 @@ struct TankStatsDetailView: View {
 
             Spacer()
         }
-            
-        
-            
-        Section(header: Text("Temperature History")) {
-                         
-            FittedImage(image: Image("placeholder"), width: 150, height: 250)
+         
+        Spacer()
+    
+        NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "Temperature")
+   
+        ) {
+            Text("Temperature History")
+            .fontWeight(.semibold)
         }
-            
-            
-        Section(header: Text("pH History")) {
-            FittedImage(image: Image("placeholder"), width: 150, height: 250)
-             
-        }
+
+         NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "pH")
+    
+         ) {
+             Text("pH History")
+             .fontWeight(.semibold)
+         }
             
         }
        .navigationBarTitle("Tank Details")

@@ -198,8 +198,17 @@ final class TankProfile: ObservableObject {
 
     }
     
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Functions to manage the Overall health and temp, pH colors
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
     var currentWarning: String = ""
     var healthColor: Color = .green
+    var tempColor: Color = .blue
+    var pHColor: Color = .blue
     
     var category: String {
         
@@ -209,6 +218,7 @@ final class TankProfile: ObservableObject {
             
             self.currentWarning = " Temperature is out of range!"
             self.healthColor = .red
+            self.tempColor = .red
             return String(Health.bad.rawValue)
         }
             
@@ -218,6 +228,7 @@ final class TankProfile: ObservableObject {
             
             self.currentWarning = " pH is out of range!"
             self.healthColor = .yellow
+            self.pHColor = .red
             return String(Health.bad.rawValue)
         }
     
@@ -257,7 +268,7 @@ final class TankProfile: ObservableObject {
         messenger = Messenger(ipAddress: server)
         //TODO: Remove placeholder data
         tempHistory = [70, 69 ,68, 75, 76, 80, 25, 34]
-        pHHistory = [4.00, 7.6, 8.0, 7.8, 6.9 ]
+        pHHistory = [4.00, 7.6, 8.0, 7.8, 6.9, 5.7, 3.4, 6.5]
         
     }
     
@@ -268,7 +279,7 @@ final class TankProfile: ObservableObject {
         self.userName = "Robert"
         messenger = Messenger(ipAddress: ipAddressInput)
         
-        tempHistory = [70, 69 ,68, 75, 76, 80, 25, 34]
+        tempHistory = [70, 69 ,68, 75, 76, 80, 85, 76]
         pHHistory = [4.00, 7.6, 8.0, 7.8, 6.9 ]
         
     }

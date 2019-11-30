@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4105E101238EE8FB00A4A39F /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105E100238EE8FB00A4A39F /* AddReminderView.swift */; };
 		4105E103238F089600A4A39F /* TankStatsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4105E102238F089600A4A39F /* TankStatsDetailView.swift */; };
+		410D3BC3239309B9005E07F8 /* ParamHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */; };
 		410FE232235BC4E800F69F43 /* FishRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FE231235BC4E800F69F43 /* FishRow.swift */; };
 		410FE235235BC58700F69F43 /* goldfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 410FE233235BC58700F69F43 /* goldfish.jpg */; };
 		41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41194B782375EBCE005BF9EF /* LivingConfig.swift */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		4105E100238EE8FB00A4A39F /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		4105E102238F089600A4A39F /* TankStatsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankStatsDetailView.swift; sourceTree = "<group>"; };
+		410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamHistoryView.swift; sourceTree = "<group>"; };
 		410FE231235BC4E800F69F43 /* FishRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishRow.swift; sourceTree = "<group>"; };
 		410FE233235BC58700F69F43 /* goldfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldfish.jpg; sourceTree = "<group>"; };
 		41194B782375EBCE005BF9EF /* LivingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivingConfig.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				413BF50523673F9B0081F5CB /* Home.swift */,
 				416B8668235CF72400C36ED7 /* TankStatsView.swift */,
 				4105E102238F089600A4A39F /* TankStatsDetailView.swift */,
+				410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */,
 				41C616792351464D003DADD8 /* Assets.xcassets */,
 				41596094238C784F00FEC167 /* Fish Views */,
 				41AA8579238AEC8400F7F1F7 /* Chem Testing Views */,
@@ -442,6 +445,7 @@
 				412DCBBC238B643900DA969A /* AmmoniaTestingView.swift in Sources */,
 				4128BA73235547DE00C55044 /* CircleImage.swift in Sources */,
 				4128BA7523554BD900C55044 /* MapView.swift in Sources */,
+				410D3BC3239309B9005E07F8 /* ParamHistoryView.swift in Sources */,
 				41596098238C7ABD00FEC167 /* ReminderDetailView.swift in Sources */,
 				41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */,
 				415ADCEA238D8A560020BAA1 /* SetupView.swift in Sources */,
@@ -784,8 +788,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.2;
+				kind = revision;
+				revision = fd14ca2327671b212263cf0d429e08dbd45a02f3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
