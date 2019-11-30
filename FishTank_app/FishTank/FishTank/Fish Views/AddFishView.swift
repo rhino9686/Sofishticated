@@ -100,8 +100,9 @@ struct AddFishView: View {
  
     }
     
-    
+    //function for basic form validation
     func checkValidity() -> Bool{
+        
         if self.name == "" {
             self.errorMsg = "Please enter a valid name for your fish"
             return false
@@ -115,7 +116,7 @@ struct AddFishView: View {
         if (!self.checkCompatibility() ){
             return false
         }
-        return trues
+        return true
     }
     
     

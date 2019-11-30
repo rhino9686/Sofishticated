@@ -17,6 +17,7 @@ The model for a fishtank.
 
 final class TankProfile: ObservableObject {
     
+    //Name of the person using the App, changed in settings and Reset View
     @Published var userName: String
     
     
@@ -35,6 +36,7 @@ final class TankProfile: ObservableObject {
     //Array to use later, store in persistent memory
     @Published var currentResidents: [FishProfile]
     
+    //Our Notification Handler class
     @Published var notifyMan = LocalNotificationManager()
     
     
@@ -65,7 +67,6 @@ final class TankProfile: ObservableObject {
             let currentTempC = Int((tempDouble - 32) * 5.0 / 9.0)
             return String(currentTempC) + " ° C"
         }
-        
     }
     
     //Current pH formatted to 2 decimal places in a string
@@ -85,8 +86,7 @@ final class TankProfile: ObservableObject {
         self.lastTime = self.getNow()
     }
     
-    
-    
+
     func promptAmmoniaTest() {
        let _ = self.messenger.promptAmmonia()
     }
@@ -94,7 +94,6 @@ final class TankProfile: ObservableObject {
     func getAmmoniaVal() {
         let _ = self.messenger.requestAmmonia()
     }
-    
     
     
     func promptNitrateTest() {
@@ -258,9 +257,6 @@ final class TankProfile: ObservableObject {
     func SetServer(ipAddress: String) {
         self.messenger.setIPAdress(ipAddress_in: ipAddress)
     }
-    
-    
-    
     
 }
 

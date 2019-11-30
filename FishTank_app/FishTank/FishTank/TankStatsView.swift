@@ -11,12 +11,19 @@ import SwiftUI
 let myGrey = Color(red: (30/255), green: (30/255), blue: (30/255), opacity: 1.0)
 
 struct TankStatsView: View {
-    
+    //Our tank Data packet
     @EnvironmentObject var tankData: TankProfile
+    
+    //String vars to display things easier
     @State var currentTempStr = "70"
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "3 hours ago"
     @State var overallHealth = "Good"
+    
+    //Colors to dislpay things, to show health of system
+    @State var healthColor: Color = .green
+    @State var tempColor: Color = .blue
+    @State var pHColor: Color = .blue
     
     //Timer to get the "last time checked" to update by itself
     let timer = Timer.publish(every: 20, on: .main, in: .common).autoconnect()
@@ -40,9 +47,7 @@ struct TankStatsView: View {
                     .fontWeight(.medium)
                 Text("Good")
                     .font(.title)
-                    .foregroundColor(Color.green)
-                    .padding(.top)
-                    .padding(.bottom)
+                    .foregroundColor(healthColor)
                 Spacer()
             }
             .padding(.top)
@@ -57,39 +62,38 @@ struct TankStatsView: View {
                 
                 Spacer()
 
-                Group {
-                    Button(action: {
-                       
-                    }, label: {
-                        Image(systemName: "arrow.clockwise")
-                    })
-                        .foregroundColor(Color.white)
-                        .padding(10)
-                    .background(myGrey)
-                    .onTapGesture {  self.update() } //This updates all params
-                    .cornerRadius(5)
-                }.padding(.trailing)
-
+                Button(action: {
+                   
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                    .foregroundColor(Color.white)
+                    .padding(10)
+                .background(myGrey)
+                .onTapGesture {  self.update() } //This updates Temp, pH, time
+                .cornerRadius(5)
+                .padding(.trailing)
+                
             }
        
             HStack {
                 Text("Temperature: ")
                 Text("\(self.currentTempStr)")
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(tempColor)
 
                 Spacer()
             }
-            .padding(.top)
+            .padding(.top, 5)
      
             
             //pH label
             HStack {
                 Text("pH balance: ")
                 Text("\(self.tankData.currentpHStr)")
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(pHColor)
                 Spacer()
             }
-            .padding(.top)
+            .padding(.top).padding(.bottom)
             
         }
         .padding(.leading, 6)
