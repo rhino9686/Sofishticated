@@ -15,10 +15,27 @@ struct TankStatsDetailView: View {
         List {
             
         HStack {
-            Text("My temp range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
+            
+            Group {
+                if tankData.inFahrenheight {
+                    Text("Temperature range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
+                }
+                else {
+                    Text("Temperature range: \(tankData.minTempStr_C)- \(tankData.maxTempStr_C) °C")
+                }
+            }
+
             Spacer()
         }
+        
+        HStack {
+            
+            Text("pH range: \(tankData.minpHStr)- \(tankData.maxpHStr)")
 
+            Spacer()
+        }
+            
+        
             
         Section(header: Text("Temperature History")) {
                          

@@ -36,6 +36,7 @@ struct TankStatsView: View {
         self.currentpHStr = self.tankData.currentpHStr
         self.lastTimeChecked = self.tankData.lastTimeChecked
         self.overallHealth = self.tankData.category
+        self.healthColor = self.tankData.healthColor
     }
     
     var body: some View {

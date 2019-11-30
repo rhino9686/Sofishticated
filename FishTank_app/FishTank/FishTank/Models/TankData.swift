@@ -53,8 +53,8 @@ final class TankProfile: ObservableObject {
     
     
     //Running Max/Min pH vals accounting for all fish
-    @State var maxpH: Double = 14
-    @State var minpH: Double = 0
+    var maxpH: Double = 14
+    var minpH: Double = 0
     
     
     //Counter variable to give each fish a unique ID
@@ -198,7 +198,8 @@ final class TankProfile: ObservableObject {
 
     }
     
-    @State var currentWarning: String = ""
+    var currentWarning: String = ""
+    var healthColor: Color = .green
     
     var category: String {
         
@@ -207,6 +208,7 @@ final class TankProfile: ObservableObject {
             messenger.currentTempF < minTemp ) {
             
             self.currentWarning = " Temperature is out of range!"
+            self.healthColor = .red
             return String(Health.bad.rawValue)
         }
             
@@ -215,6 +217,7 @@ final class TankProfile: ObservableObject {
             messenger.currentPh < minpH ) {
             
             self.currentWarning = " pH is out of range!"
+            self.healthColor = .yellow
             return String(Health.bad.rawValue)
         }
     
@@ -229,6 +232,7 @@ final class TankProfile: ObservableObject {
             
         
         self.currentWarning = ""
+        self.healthColor = .green
         return String(Health.good.rawValue)
         
     }
@@ -295,8 +299,7 @@ final class TankProfile: ObservableObject {
     }
     
     
-    func addRange(_ newMaxTempIn: Double, _ newMinTempIn: Double, _ newMaxpHIn: Double,
-                 _ newMinpHIn: Double) {
+    func addRange(_ newMaxTempIn: Double, _ newMinTempIn: Double, _ newMaxpHIn: Double, _ newMinpHIn: Double) {
         
         // Update overall temp range accordingly
         let newMax = [self.maxTemp, newMaxTempIn].min()
@@ -318,6 +321,8 @@ final class TankProfile: ObservableObject {
     func recalculateRanges() {
         self.maxTemp = 90
         self.minTemp = 0
+        self.maxpH = 14.00
+        self.minpH = 0
         
         for fish in self.currentResidents {
             
@@ -327,7 +332,6 @@ final class TankProfile: ObservableObject {
             let newMinP = fish.breedData!.minPh
             
             addRange(newMaxT, newMinT, newMaxP, newMinP)
-            
         }
         
         //Send data to tank
