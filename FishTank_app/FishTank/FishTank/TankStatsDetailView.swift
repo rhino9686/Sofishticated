@@ -12,7 +12,42 @@ struct TankStatsDetailView: View {
     @EnvironmentObject var tankData : TankProfile
     
     var body: some View {
-        Text("Hello, World!")
+        List {
+            
+            
+        Section(header: Text("Snapshot")) {
+                        
+                         
+            // Divider()
+             NavigationLink(destination:
+                 TestChemicalsView()
+                            .environmentObject(self.tankData)
+             ) {
+                 Text("Check Chemicals")
+                     .font(.footnote)
+                     .fontWeight(.bold)
+             }.padding(5).padding(.top, 7).padding(.bottom, 7)
+             
+         }
+            
+        Section(header: Text("Temperature History")) {
+                         
+            FittedImage(image: Image("placeholder"), width: 150, height: 250)
+        }
+            
+            
+        Section(header: Text("pH History")) {
+            FittedImage(image: Image("placeholder"), width: 150, height: 250)
+             
+        }
+            
+        }
+       .navigationBarTitle("Tank Details")
+        
+        
+        
+        
+
     }
 }
 

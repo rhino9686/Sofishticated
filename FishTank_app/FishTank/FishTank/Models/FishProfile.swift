@@ -80,8 +80,6 @@ struct FishBreedData: Hashable, Codable {
         return String(format: " %.0f", minTempC)
     }
     
-    
-    
     var maxpHStr: String {
         return String(format: " %.2f", self.maxPh)
     }
