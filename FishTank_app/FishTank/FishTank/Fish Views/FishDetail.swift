@@ -67,8 +67,18 @@ struct FishDetail: View {
                     Text("Temperature range: ")
                         .font(.callout)
                     
-                    Text("\(fish.breedData!.minTempStr) - \(fish.breedData!.maxTempStr) ° F")
-                        .font(.footnote)
+                    Group {
+                        if self.tankData.inFahrenheight {
+                            Text("\(fish.breedData!.minTempStr_F) - \(fish.breedData!.maxTempStr_F) °F")
+                                .font(.footnote)
+                        }
+                        else {
+                            
+                            Text("\(fish.breedData!.minTempStr_C) - \(fish.breedData!.maxTempStr_C) °C")
+                                .font(.footnote)
+                        }
+                    }
+
                     
                     Spacer()
                 }

@@ -60,14 +60,27 @@ struct FishBreedData: Hashable, Codable {
 
     var imageName: String = "goldfish"
     
+    //Computed property strings to get values with truncated decimals
     
-    var maxTempStr: String {
+    var maxTempStr_F: String {
         return String(format: " %.0f", self.maxTemp)
     }
     
-    var minTempStr: String {
+    var minTempStr_F: String {
         return String(format: " %.0f", self.minTemp)
     }
+    
+    var maxTempStr_C: String {
+        let maxTempC = Double((self.maxTemp - 32) * 5.0 / 9.0)
+        return String(format: " %.0f", maxTempC)
+    }
+    
+    var minTempStr_C: String {
+        let minTempC = Double((self.minTemp - 32) * 5.0 / 9.0)
+        return String(format: " %.0f", minTempC)
+    }
+    
+    
     
     var maxpHStr: String {
         return String(format: " %.2f", self.maxPh)

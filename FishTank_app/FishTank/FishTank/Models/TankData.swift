@@ -61,11 +61,11 @@ final class TankProfile: ObservableObject {
            
         if inFahrenheight {
             let tempInt = Int(tempDouble)
-            return String(tempInt) + " ° F"
+            return String(tempInt) + " °F"
         }
         else {
             let currentTempC = Int((tempDouble - 32) * 5.0 / 9.0)
-            return String(currentTempC) + " ° C"
+            return String(currentTempC) + " °C"
         }
     }
     

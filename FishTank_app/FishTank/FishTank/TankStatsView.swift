@@ -15,7 +15,7 @@ struct TankStatsView: View {
     @EnvironmentObject var tankData: TankProfile
     
     //String vars to display things easier
-    @State var currentTempStr = "70"
+    @State var currentTempStr = "70 °F"
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "3 hours ago"
     @State var overallHealth = "Good"
@@ -95,6 +95,20 @@ struct TankStatsView: View {
             }
             .padding(.top).padding(.bottom)
             
+            NavigationLink(destination:
+                TankStatsDetailView()
+                           .environmentObject(self.tankData)
+            ) {
+                Text("Details")
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.green)
+            }
+            
+            
+            
+            
+            
         }
         .padding(.leading, 6)
     }
@@ -106,6 +120,6 @@ struct TankStatsView_Previews: PreviewProvider {
         
         TankStatsView()
         .environmentObject(TankProfile())
-        .previewLayout(.fixed(width: 350, height: 250))
+        .previewLayout(.fixed(width: 350, height: 350))
     }
 }
