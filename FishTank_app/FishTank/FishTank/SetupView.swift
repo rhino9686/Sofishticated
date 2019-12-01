@@ -21,8 +21,8 @@ struct SetupView: View {
     @State private var wifiPassword: String = ""
     
     @State var index: Int = 0
-    let phases = [0, 1, 2, 3, 4]
-    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
+    let phases = [0, 1, 2, 3]
+    let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4"]
     
     var body: some View {
         ZStack {
@@ -52,9 +52,7 @@ struct SetupView: View {
                                        TextField("Enter name", text: $userName)
                                 }
                                 
-                                Button(action:{
-                                                self.nextStep()
-                                }) {
+                                Button(action: self.validateName) {
                                         Text("Set")
         
                                 }//.padding()
@@ -64,18 +62,15 @@ struct SetupView: View {
                     }
                     else if self.index == 1 {
                            VStack {
-                            Text("Connect to the tank WiFi")
-                            Text("open up Settings and connect to FishTank")
+                             Text("Connect to the tank WiFi")
+                             Text("open up Settings and connect to FishTank")
                                 .font(.caption)
                          
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                             FittedImage(image: Image("placeholder"), width: 220, height: 280)
                             
-                            Button(action:{
-                                            self.nextStep()
-                            }) {
+                             Button(action: self.nextStep) {
                                     Text("Next Step")
-
-                            }.padding()
+                             }.padding()
                         }
                     }
                     else if self.index == 2 {
@@ -89,19 +84,21 @@ struct SetupView: View {
                                            TextField("Enter name", text: $wifiPassword)
                                     }
                                    
-                                   Button(action:{
-                                                   self.nextStep()
-                                   }) {
+                                Button(action: self.validateWifiPassword) {
                                            Text("Check")
-           
-                                   }//.padding()
+                                   }
                                }.padding(.bottom, 10)
 
                            }
                     }
                     
                     else if self.index == 3 {
-                        Text("All good! Switch back to your home network now")
+                        VStack {
+                            Text("All good! Switch back to your home network.")
+                            Button(action: self.nextStep) {
+                                Text("Finish")
+                            }
+                        }
                     }
                     
                     else if self.index == 4 {
@@ -116,15 +113,15 @@ struct SetupView: View {
                 
                 Spacer()
             
-                Button(action: nextStep) {
-                    if self.index == self.phases.count - 1 {
-                        Text("Finish")
-                    }
-                    else {
-                        Text("Next Step")
-                    }
-        
-                }.buttonStyle(PlainButtonStyle()).padding(.bottom)
+//                Button(action: nextStep) {
+//                    if self.index == self.phases.count - 1 {
+//                        Text("Finish")
+//                    }
+//                    else {
+//                        Text("Next Step")
+//                    }
+//
+//                }.buttonStyle(PlainButtonStyle()).padding(.bottom)
                 
             }
         }
@@ -133,10 +130,27 @@ struct SetupView: View {
     
     func nextStep() {
         if self.index == self.phases.count - 1 {
-            self.presentationMode.wrappedValue.dismiss()
+            submit()
             return
         }
         self.index = (self.index + 1) % self.phases.count
+    }
+    
+    func validateName() {
+        
+        nextStep()
+    }
+    
+    
+    func validateWifiPassword() {
+        nextStep()
+        return
+    }
+    
+    func submit() {
+        self.tankData.clearFish()
+        self.tankData.userName = self.userName
+        self.onDismiss()
     }
     
 }

@@ -19,45 +19,54 @@ struct TankStatsDetailView: View {
     
     var body: some View {
         List {
+        
+            HStack {
+                Text("Current Temperature: \(tankData.currentTemp) " )
+                Spacer()
+            }
+            
+            HStack {
+                Text("Current pH: \(tankData.currentpHStr) " )
+                Spacer()
+            }
             
             
-            
-        HStack {
-            
-            Group {
-                if tankData.inFahrenheight {
-                    Text("Temperature range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
+            HStack {
+                
+                Group {
+                    if tankData.inFahrenheight {
+                        Text("Temperature range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
+                    }
+                    else {
+                        Text("Temperature range: \(tankData.minTempStr_C)- \(tankData.maxTempStr_C) °C")
+                    }
                 }
-                else {
-                    Text("Temperature range: \(tankData.minTempStr_C)- \(tankData.maxTempStr_C) °C")
-                }
+
+                Spacer()
+            }
+        
+            HStack {
+                
+                Text("pH range: \(tankData.minpHStr)- \(tankData.maxpHStr)")
+
+                Spacer()
+            }
+             
+            Spacer()
+    
+            NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "Temperature")
+       
+            ) {
+                Text("Temperature History")
+                .fontWeight(.semibold)
             }
 
-            Spacer()
-        }
+             NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "pH")
         
-        HStack {
-            
-            Text("pH range: \(tankData.minpHStr)- \(tankData.maxpHStr)")
-
-            Spacer()
-        }
-         
-        Spacer()
-    
-        NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "Temperature")
-   
-        ) {
-            Text("Temperature History")
-            .fontWeight(.semibold)
-        }
-
-         NavigationLink(destination: ParamHistoryView(tankData: tankData, param: "pH")
-    
-         ) {
-             Text("pH History")
-             .fontWeight(.semibold)
-         }
+             ) {
+                 Text("pH History")
+                 .fontWeight(.semibold)
+             }
             
         }
        .navigationBarTitle("Tank Details")

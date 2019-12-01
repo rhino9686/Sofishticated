@@ -94,6 +94,7 @@ struct TankHome: View {
                 SetupView(onDismiss: {
                     self.resetModalDisplayed = false
                 })
+                    .environmentObject(self.tankData)
             }
             
     }

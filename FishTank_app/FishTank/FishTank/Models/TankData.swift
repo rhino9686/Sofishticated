@@ -120,6 +120,13 @@ final class TankProfile: ObservableObject {
     
     func updateParams() {
         self.messenger.refreshParams()
+        
+        //Test that this works
+        self.tempHistory.append(messenger.currentTempF)
+        self.pHHistory.append(messenger.currentPh)
+        
+        //Add a shadow Celcius temp history
+        
         self.lastTime = self.getNow()
     }
     
@@ -374,6 +381,10 @@ final class TankProfile: ObservableObject {
         recalculateRanges()
     }
     
+    func clearFish() {
+        self.currentResidents.removeAll()
+        recalculateRanges()
+    }
 
     
     // Function to set the IP address for the messenger server
