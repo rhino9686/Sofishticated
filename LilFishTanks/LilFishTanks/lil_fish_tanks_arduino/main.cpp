@@ -1,7 +1,4 @@
-﻿/*Begining of Auto generated code by Atmel studio */
-#include <Arduino.h>
-/*End of auto generated code by Atmel studio */
-
+﻿#include <Arduino.h>
 #include <Arduino_FreeRTOS.h>
 #include <SoftwareSerial.h>
 #include <semphr.h>
@@ -74,13 +71,13 @@ void setup() {
 	,  2
 	,  &xColorSensor ); 
 
-	/*xTaskCreate(
+	xTaskCreate(
 	TaskPHandTemperature
 	,  (const portCHAR *) "PHandTemperature"
 	,  128
 	,  NULL
 	,  2
-	,  &xPHandTemperature );*/
+	,  &xPHandTemperature );
 
 	// Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
 	vTaskStartScheduler();
@@ -103,8 +100,8 @@ void TaskColorSensor(void *pvParameters)
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	for (;;) // A Task shall never return or exit.
 	{
-		//if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 100 ) == pdTRUE )
-		//{
+		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 100 ) == pdTRUE )
+		{
 			setLED(White);
 			switch (colorToRead)
 			{
@@ -139,9 +136,9 @@ void TaskColorSensor(void *pvParameters)
 				}
 			}
 			setLED(Off);	  
-			//xSemaphoreGive( xSerialSemaphoreColorSensor );
-		//}
-		vTaskDelay(3000); // 1 tick delay between reads for stability*/
+			xSemaphoreGive( xSerialSemaphoreColorSensor );
+		}
+		vTaskDelay(1); // 1 tick delay between reads for stability*/
 	}
 }
 
