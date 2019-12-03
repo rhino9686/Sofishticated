@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, redirect
-from tank import Tank
+from tank import Tank, convertToFahrenheit
 from random import random
 import requests
 ## Setup Server
@@ -11,7 +11,7 @@ myTank.rando = 3
 
 ## define Wi-Fi chip IP address
 
-WIFI_IP = "35.6.190.156"
+WIFI_IP = "35.6.179.38"
 
 # Home route, use to check connection with a code?
 @app.route("/", methods = ['POST'])
@@ -22,18 +22,21 @@ def hello():
 @app.route("/fromTank/sendTemp", methods = ['POST'])
 def getTempFromTank():
     tempStr = str(request.data)
-    temperatureStr = tempStr[2:6] ## check this val
-    print("Temp received from tank: " + temperatureStr)
-    myTank.setTemp(int(temperatureStr)) 
+    temperatureStr = tempStr[7:11] ## check this val
+    celciusNum = int(temperatureStr)
+    farNum = convertToFahrenheit(celciusNum)
+
+    print( "Temp: " + temperatureStr)
+    myTank.setTemp(farNum) 
     return "temp received" #return val is meaningless
 
 # handler for tank sending pH value
 @app.route("/fromTank/sendpH", methods = ['POST'])
 def getPhFromTank():
     phStr = str(request.data)
-    phValStr = phStr[2:5] ##check this val
+    phValStr = phStr[5:8] ##check this val
     myTank.setPH(int(phValStr)) 
-    print("pH received from tank: " + phValStr)
+    print("pH: " + phValStr)
     return "pH received"
 
 # handler for tank sending Ammonia value
@@ -56,8 +59,8 @@ def getRando():
     randStr = str(request.data)
     print(randStr)
     numStr = randStr[2]
-    myTank.rando = int(numStr)
-    print(myTank.rando)
+   ## myTank.rando = int(numStr)
+   ## print(myTank.rando)
     return "random number received"
 
 # handler for app requesting a temperature reading

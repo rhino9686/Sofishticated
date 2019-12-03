@@ -88,7 +88,10 @@ struct FishDetail: View {
                 
             ScrollView{
                 
-             NavigationLink(destination: RemindersView()) {
+                NavigationLink(destination: RemindersView(fish: fish)
+                    .environmentObject(self.tankData)
+                
+                ) {
                 HStack {
                      Text("Reminders")
                          .fontWeight(.semibold)

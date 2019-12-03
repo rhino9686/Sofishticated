@@ -12,7 +12,6 @@
 		410D3BC3239309B9005E07F8 /* ParamHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */; };
 		410FE232235BC4E800F69F43 /* FishRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FE231235BC4E800F69F43 /* FishRow.swift */; };
 		410FE235235BC58700F69F43 /* goldfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 410FE233235BC58700F69F43 /* goldfish.jpg */; };
-		41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41194B782375EBCE005BF9EF /* LivingConfig.swift */; };
 		41194B7B2375EE90005BF9EF /* betta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7A2375EE90005BF9EF /* betta.jpg */; };
 		41194B7D2375EF9B005BF9EF /* tetra.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7C2375EF9B005BF9EF /* tetra.jpg */; };
 		4128BA73235547DE00C55044 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128BA72235547DE00C55044 /* CircleImage.swift */; };
@@ -26,6 +25,7 @@
 		413BF50623673F9B0081F5CB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BF50523673F9B0081F5CB /* Home.swift */; };
 		41453C1F2392EEC60052DF18 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 41453C1E2392EEC60052DF18 /* SwiftUICharts */; };
 		414C40F023899A14009D6C4A /* ResetTankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C40EF23899A14009D6C4A /* ResetTankView.swift */; };
+		415658D32395772A00B21CB3 /* guppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 415658D22395772A00B21CB3 /* guppy.jpg */; };
 		41596093238C71AE00FEC167 /* danios.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41596092238C71AE00FEC167 /* danios.jpg */; };
 		41596096238C78D600FEC167 /* FishFactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41596095238C78D600FEC167 /* FishFactsView.swift */; };
 		41596098238C7ABD00FEC167 /* ReminderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41596097238C7ABD00FEC167 /* ReminderDetailView.swift */; };
@@ -77,7 +77,6 @@
 		410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamHistoryView.swift; sourceTree = "<group>"; };
 		410FE231235BC4E800F69F43 /* FishRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishRow.swift; sourceTree = "<group>"; };
 		410FE233235BC58700F69F43 /* goldfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldfish.jpg; sourceTree = "<group>"; };
-		41194B782375EBCE005BF9EF /* LivingConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivingConfig.swift; sourceTree = "<group>"; };
 		41194B7A2375EE90005BF9EF /* betta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = betta.jpg; sourceTree = "<group>"; };
 		41194B7C2375EF9B005BF9EF /* tetra.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tetra.jpg; sourceTree = "<group>"; };
 		4128BA72235547DE00C55044 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 		412DCBC3238B6BF600DA969A /* angelfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = angelfish.jpg; sourceTree = "<group>"; };
 		413BF50523673F9B0081F5CB /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		414C40EF23899A14009D6C4A /* ResetTankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTankView.swift; sourceTree = "<group>"; };
+		415658D22395772A00B21CB3 /* guppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guppy.jpg; sourceTree = "<group>"; };
 		41596092238C71AE00FEC167 /* danios.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = danios.jpg; sourceTree = "<group>"; };
 		41596095238C78D600FEC167 /* FishFactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishFactsView.swift; sourceTree = "<group>"; };
 		41596097238C7ABD00FEC167 /* ReminderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailView.swift; sourceTree = "<group>"; };
@@ -179,7 +179,6 @@
 				41AECDDF235634F20091A1BA /* Data.swift */,
 				416B866A235CF84B00C36ED7 /* TankData.swift */,
 				41F42EA523615108000B9182 /* Messenger.swift */,
-				41194B782375EBCE005BF9EF /* LivingConfig.swift */,
 				41902E7C2378F1A300309949 /* Notification.swift */,
 			);
 			path = Models;
@@ -207,6 +206,7 @@
 				412DCBC3238B6BF600DA969A /* angelfish.jpg */,
 				41194B7A2375EE90005BF9EF /* betta.jpg */,
 				41194B7C2375EF9B005BF9EF /* tetra.jpg */,
+				415658D22395772A00B21CB3 /* guppy.jpg */,
 				41E35CD2236FCB7300B45147 /* seaSnail.jpg */,
 				410FE233235BC58700F69F43 /* goldfish.jpg */,
 				41AECDDD235633450091A1BA /* fishData.json */,
@@ -399,6 +399,7 @@
 				41194B7B2375EE90005BF9EF /* betta.jpg in Resources */,
 				412DCBC2238B699200DA969A /* cory_catfish.jpg in Resources */,
 				41C616802351464D003DADD8 /* LaunchScreen.storyboard in Resources */,
+				415658D32395772A00B21CB3 /* guppy.jpg in Resources */,
 				41AECDDE235633450091A1BA /* fishData.json in Resources */,
 				41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */,
 				41C6167D2351464D003DADD8 /* Preview Assets.xcassets in Resources */,
@@ -447,7 +448,6 @@
 				4128BA7523554BD900C55044 /* MapView.swift in Sources */,
 				410D3BC3239309B9005E07F8 /* ParamHistoryView.swift in Sources */,
 				41596098238C7ABD00FEC167 /* ReminderDetailView.swift in Sources */,
-				41194B792375EBCE005BF9EF /* LivingConfig.swift in Sources */,
 				415ADCEA238D8A560020BAA1 /* SetupView.swift in Sources */,
 				41AECDDC235632250091A1BA /* FishProfile.swift in Sources */,
 				41AF6B24235E2B8B005BA174 /* RemindersView.swift in Sources */,

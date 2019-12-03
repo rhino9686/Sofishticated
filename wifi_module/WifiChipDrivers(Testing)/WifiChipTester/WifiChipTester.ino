@@ -8,7 +8,7 @@
 
 bool SETUP_MODE = false;
 
-char testVals[4] = { 'T', 'P', 'A', 'N' };
+char testVals[2] = { 'T', 'p' };
 
 int i = 0;
 
@@ -43,11 +43,11 @@ void loop() {
 
    char sendToTank = testVals[i];
 
-   i = (i + 1) % 4; 
+   i = (i + 1) % 2; 
 
    //Send Param request to PCB
-   Serial.write(sendToTank);
-
+    Serial.write(sendToTank);
+    delay(50);
     if (Serial.available()) {
     delay(100); //allows all serial sent to be received together
     while(Serial.available() ) {
@@ -56,7 +56,7 @@ void loop() {
   }
 
 
-   http.begin("http://35.6.134.190:5000/fromTank/sendRando");      //Specify request destination
+   http.begin("http://35.6.151.235:5000/fromTank/sendRando");      //Specify request destination
    http.addHeader("Content-Type", "text/plain");  //Specify content-type header
 
     
@@ -71,7 +71,7 @@ void loop() {
     Serial.println("Error in WiFi connection");   
  
  }
-  delay(3000);  //Send a request every 3 seconds
+  delay(6000);  //Send a request every 3 seconds
 
 
 

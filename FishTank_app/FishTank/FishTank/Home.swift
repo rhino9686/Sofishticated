@@ -56,7 +56,25 @@ struct TankHome: View {
                             ){
                                 FishRow(fishProfile: fish)
                         }
+                        
+                        
+                        
                     }.padding(.top, 6)
+                    
+                    
+                    ForEach(tankData.notifyMan.notifications, id: \.self) { notification in
+                        
+                        NavigationLink(destination: ReminderDetailView(reminder: notification)
+                            .environmentObject(self.tankData)
+                        ) {
+                            Text(notification.title)
+                            .fontWeight(.semibold)
+                        }
+
+                    }
+                    
+                    
+                    
                     
                 }
                 

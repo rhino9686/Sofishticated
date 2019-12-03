@@ -44,7 +44,7 @@ final class TankProfile: ObservableObject {
     @Published var currentResidents: [FishProfile]
     
     //Our Notification Handler class
-    @Published var notifyMan = LocalNotificationManager()
+    var notifyMan = LocalNotificationManager()
     
     
     //Running Max/Min Temps accounting for all fish
@@ -259,7 +259,7 @@ final class TankProfile: ObservableObject {
     enum Health: String, CaseIterable, Codable, Hashable {
         case good = "Good"
         case ok = "Ok"
-        case bad = "Bad"
+        case bad = "Unhealthy"
         case terrible = "Terrible"
     }
     

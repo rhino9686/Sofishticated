@@ -46,4 +46,7 @@ class Tank:
 
         
         
-        
+def convertToFahrenheit(numCelcius):
+    numCelcius = numCelcius / 100
+    numFar = (9/5)*numCelcius + 32
+    return numFar * 100

@@ -7,7 +7,7 @@
 #include <ESP8266HTTPClient.h>
 
 // Change this depending on what the current IP address is for the server
-#define SERVER_ADDR "35.6.134.190"
+#define SERVER_ADDR "35.6.151.235"
 
 
 #ifndef STASSID
@@ -17,8 +17,8 @@
 
 struct Tank {
   //We store everything as a integer here, will be the actual value multiplied by 100 to get 2 decimal places
-  int temperature;
-  int pH;
+  String temperature;
+  String pH;
   int ammoniaReading;
   int nitrateReading;
 };
@@ -32,7 +32,7 @@ const char* password = "password";
 bool SETUP_MODE = false; //This will determine if the Wifi module will be hosting it's own access point or not
 
 //Message buffer for HTTP Data
-String buffer;
+String buffer = "";
 
 
 //Tank model to store temp values, chemical readings
@@ -58,6 +58,7 @@ void getParam(char param) {
 
   //Send Param request to PCB
    Serial.write(param);
+   delay(50);
    if (Serial.available()) {
    delay(100); //allows all serial sent to be received together
    
@@ -65,7 +66,7 @@ void getParam(char param) {
      buffer = Serial.readString();
    }
 
-   sendMessageToServer(param);
+   //sendMessageToServer(param);
   
   }
  }
@@ -73,12 +74,19 @@ void getParam(char param) {
 //Send message to device to request Temperature
 void getTemp(){
   getParam('T');
-  
+
+  if(buffer != "") {
+      myTank.temperature = buffer;
+  }
 }
 
 //Send message to device to request pH
 void getpH() {
   getParam('P');
+
+    if(buffer != "") {
+      myTank.pH = buffer;
+  }
 }
 
 //Send message to device to request Ammonia
@@ -91,18 +99,23 @@ void getNitrates(){
   getParam('N');
 }
 
+//Send message to device to request Nitrate/Nitrite
+void getChems(){
+  getParam('c');
+}
+
+
+
 //Send message to server with Temperature data
 void sendTemp(){
-  int num = myTank.temperature;
-  buffer = String(num);
+  buffer = myTank.temperature;
   sendMessageToServer('T');
   
 }
 
 //Send message to server with pH data
 void sendpH(){
-  int num = myTank.pH;
-  buffer = String(num);
+  buffer = myTank.pH;
   sendMessageToServer('P');
 }
 
@@ -149,11 +162,17 @@ void sendMessageToServer(char param) { //Sends whatever is in buffer to server
              http.begin(url_address + "/fromTank/sendAmmonia" );
              break;    
         }
-        case 'N':{ // Nitrate/Nitrite Reading
+        case 'N':{ // Nitrate Reading
              http.begin(url_address + "/fromTank/sendNitrate" );   
              break; 
       
         }  
+        case 'n':{ // Nitrite Reading
+             http.begin(url_address + "/fromTank/sendNitrite" );   
+             break; 
+      
+        } 
+        
         
     }
       
@@ -179,8 +198,8 @@ void setup() {
   Serial.begin(115200);
 
   //Set up initial Tank Parameters
-  myTank.temperature = 5000;
-  myTank.pH = 400;
+  myTank.temperature = "";
+  myTank.pH = "";
 
   
   WiFi.mode(WIFI_STA);
@@ -194,6 +213,8 @@ void setup() {
   
     //Handler for http requests for requests
     server.on("/requestVals", handleParamRequest);
+    server.on("/promptAmmonia", handleAmmonRequest);
+    server.on("/promptNitrate",handleNitrateRequest);
   
   server.begin();
 
@@ -227,7 +248,7 @@ void setup() {
 
 void handleParamRequest() {
 
-  Serial.println("Fetching Temp and pH!");
+  //Serial.println("Fetching Temp and pH!");
   //Check PCB for Temp
    //getTemp();
   //Check PCB for pH
@@ -235,12 +256,16 @@ void handleParamRequest() {
 
   server.send(200, "text/plain", "fetching Temp and pH vals");
 
+  getTemp();
   sendTemp();
+
+  getpH();
   sendpH();
+ buffer = "";
 }
 
 void handleCheckRequest() {
-  Serial.println("Starting chemical tests!");
+ // Serial.println("Starting chemical tests!");
 
   server.send(200, "text/plain", "checking chemical levels");
 }
@@ -254,6 +279,11 @@ void handleNitrateRequest() {
   server.send(200, "text/plain", "checking Nitrate color test");
 }
 
+void handleNitriteRequest() {
+
+  server.send(200, "text/plain", "checking Nitrite color test");
+}
+
 
 //// SETUP MODE ///////////////////////////////////////////////////////////
 void switchToSetupMode() {
@@ -262,7 +292,7 @@ void switchToSetupMode() {
   WiFi.mode(WIFI_AP_STA);
   
   Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
-  Serial.print(" Setting softAP   " );
+  Serial.print(" Setting softAP " );
   Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
 
   

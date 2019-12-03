@@ -14,36 +14,45 @@ struct RemindersView: View {
     
     var body: some View {
         
-        List{
-            
-            ForEach(self.tankData.notifyMan.notifications, id: \.id) { notification in
-                
-              //  if (self.fish == nil || self.fish.id == notification.fishID) {
-                    Text(notification.title)
-             //   }
-                
-
-            }.padding(.top, 6)
-            
-            
-            
-            NavigationLink(destination: AddReminderView()
-                .environmentObject(self.tankData)
-            ) {
-                Text("Add Reminder")
-                .fontWeight(.semibold)
+        Group {
+            if fish != nil {
+               PersonalRemindersView()
+                .navigationBarTitle("Reminders for \(fish!.name)")
             }
-            .padding(.top)
-            
-            
-            
-            Button(action: addNotifications) {
-                  Text("Dummy Test")
+            else {
+                   List{
+                       ForEach(self.tankData.notifyMan.notifications, id: \.self) { notification in
+                           
+                           NavigationLink(destination: ReminderDetailView(reminder: notification)
+                               .environmentObject(self.tankData)
+                           ) {
+                               Text(notification.title)
+                               .fontWeight(.semibold)
+                           }
 
-            }.padding()
-        }
-    .navigationBarTitle("Reminders")
+                       }.padding(.top, 6)
+                       
+                       NavigationLink(destination: AddReminderView()
+                           .environmentObject(self.tankData)
+                       ) {
+                           Text("Add Reminder")
+                           .fontWeight(.semibold)
+                       }
+                       .padding(.top)
+                       
+                       
+                       
+                       Button(action: addNotifications) {
+                             Text("Dummy Test")
+
+                       }.padding()
+                   }
+                .navigationBarTitle("Reminders")
+            }
             
+        }
+        
+        
     }
     
 
@@ -64,6 +73,18 @@ struct RemindersView: View {
     
     
 }
+
+
+struct PersonalRemindersView: View {
+    
+    var body: some View {
+        Text("Hello")
+        
+    }
+    
+    
+}
+
 
 struct RemindersView_Previews: PreviewProvider {
     static var previews: some View {

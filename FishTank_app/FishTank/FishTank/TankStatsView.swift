@@ -19,6 +19,7 @@ struct TankStatsView: View {
     @State var currentpHStr = "6.03"
     @State var lastTimeChecked = "3 hours ago"
     @State var overallHealth = "Good"
+    @State var warningString = ""
     
     //Colors to dislpay things, to show health of system
     @State var healthColor: Color = .green
@@ -37,6 +38,7 @@ struct TankStatsView: View {
         self.lastTimeChecked = self.tankData.lastTimeChecked
         self.overallHealth = self.tankData.category
         self.healthColor = self.tankData.healthColor
+        self.warningString = self.tankData.currentWarning
     }
     
     var body: some View {
@@ -52,7 +54,13 @@ struct TankStatsView: View {
                 Spacer()
             }
             .padding(.top)
-    
+            HStack {
+                Text(self.warningString)
+                    .font(.footnote)
+                    .foregroundColor(.yellow)
+                Spacer()
+            }.padding(.top,3)
+            
             
             HStack {
                 Text("Last checked: \(self.lastTimeChecked)")

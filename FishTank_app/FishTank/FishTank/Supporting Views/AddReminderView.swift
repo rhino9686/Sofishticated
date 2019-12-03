@@ -17,6 +17,8 @@ struct AddReminderView: View {
     @State private var title: String = ""
     @State private var type: String = "Feed"
     @State private var errorMsg: String = ""
+    @State private var repeats: Bool = false
+    @State private var date: Date = Date()
     
     let reminderTypes = ["Feed", "Cleaning", "Checking Tank Chemicals"]
 
@@ -39,6 +41,17 @@ struct AddReminderView: View {
                     }
                 }
 
+                Section(header: Text("Date")) {
+                        
+                    DatePicker("What date?", selection: $date)
+                }
+                    
+                Section(header: Text("")) {
+                    
+                    Toggle("Repeats Daily?", isOn: $repeats)
+                }
+                
+            
                 Section(header: Text(errorMsg)
                     .foregroundColor(Color.red)) {
                     Button(action: {
@@ -92,8 +105,6 @@ struct AddReminderView: View {
         
         return true
     }
-    
-    
     
     
 }

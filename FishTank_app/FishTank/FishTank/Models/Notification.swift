@@ -12,15 +12,17 @@ import EventKit
 import UserNotifications
 
 
-struct Notification {
+struct Notification: Hashable {
     var id: String
     var title: String
     var fishID: Int?
     var repeats: Bool
+    var datetime: DateComponents?
 }
 
 class LocalNotificationManager {
-   @Published var notifications = [Notification]()
+    
+    @Published var notifications: [Notification]
     
     
     private func requestAuthorization() {
@@ -50,8 +52,7 @@ class LocalNotificationManager {
     
     private func scheduleNotifications()
     {
-        for notification in notifications
-        {
+        for notification in notifications {
             let content      = UNMutableNotificationContent()
             content.title    = notification.title
             content.sound    = .default
@@ -103,7 +104,9 @@ class LocalNotificationManager {
     }
     
     
-    
+    init() {
+        self.notifications = [Notification]()
+    }
 
 } //LocalNotificationManager
 

@@ -10,47 +10,62 @@ import SwiftUI
 
 struct TankStatsDetailView: View {
     @EnvironmentObject var tankData : TankProfile
-    @State var index: Int = 1
     
-    let phases = [0, 1]
-    let phaseNames = ["Temperature History", "pH History"]
     
     let myData: [Double] = [56.4, 54.7]
     
     var body: some View {
         List {
+            
+            HStack {
+                Text("Health: ")
+                    .font(.title)
+                    .fontWeight(.medium)
+                Text(self.tankData.category)
+                    .font(.title)
+                    .foregroundColor(self.tankData.healthColor)
+                Spacer()
+            }
+            .padding(.top)
+            
+            HStack {
+                Text(self.tankData.currentWarning)
+                    .font(.footnote)
+                    .foregroundColor(.yellow)
+                Spacer()
+            }.padding(.top,3)
+            
+            
         
             HStack {
-                Text("Current Temperature: \(tankData.currentTemp) " )
+                Text("Current Temp:" )
+                    .font(.callout)
+                Text("\(tankData.currentTemp) ")
                 Spacer()
-            }
-            
-            HStack {
-                Text("Current pH: \(tankData.currentpHStr) " )
-                Spacer()
-            }
-            
-            
-            HStack {
-                
                 Group {
-                    if tankData.inFahrenheight {
-                        Text("Temperature range: \(tankData.minTempStr_F)- \(tankData.maxTempStr_F) °F")
-                    }
-                    else {
-                        Text("Temperature range: \(tankData.minTempStr_C)- \(tankData.maxTempStr_C) °C")
-                    }
+                       if tankData.inFahrenheight {
+                           Text("Ideal range: \(tankData.minTempStr_F) - \(tankData.maxTempStr_F) °F")
+                               .font(.caption)
+                       }
+                       else {
+                           Text("Ideal range: \(tankData.minTempStr_C) - \(tankData.maxTempStr_C) °C")
+                               .font(.caption)
+                       }
                 }
-
-                Spacer()
             }
         
+            
+            
             HStack {
-                
-                Text("pH range: \(tankData.minpHStr)- \(tankData.maxpHStr)")
-
+                Text("Current pH:" )
+                    .font(.callout)
+                Text("\(tankData.currentpHStr)")
                 Spacer()
+                Text("Ideal pH range: \(tankData.minpHStr) - \(tankData.maxpHStr)")
+                    .font(.caption)
             }
+            
+    
              
             Spacer()
     
@@ -70,9 +85,6 @@ struct TankStatsDetailView: View {
             
         }
        .navigationBarTitle("Tank Details")
-        
-        
-        
         
 
     }

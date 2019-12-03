@@ -36,43 +36,15 @@ final class Messenger {
         self.ipAddress = ipAddress
     }
     
-    //TODO: Remove this placeholder function
-     func printMessagesForUser() -> Void {
-        
-        let json = ["user":"larry"]
-        
-        do {
-            
-            let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-            let url = URL(string: "http://0.0.0.0:5000/api/get_messages")!
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            request.httpBody = jsonData
-            
-            
-            let task = URLSession.shared.dataTask(with: request){ data, response, error in
-                if error != nil{
-                    print("Error -> \(String(describing: error))")
-                    return
-                }
-                do {
-                    let result = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String:AnyObject]
-                    print("Result -> \(String(describing: result))")
-                } catch {
-                    print("Error -> \(error)")
-                }
-            }
-            task.resume()
-        } catch {
-            print(error)
-        }
-    }
-    
     //Our generic HTTP Request Function
     func sendRequest(param: String, route: String) -> String  {
+        return sendRequestWithKey(key: "query", param: param, route: route)
+    }
+    
+    //Our HTTP Request Function with customizeable key
+    func sendRequestWithKey(key: String, param: String, route: String) -> String  {
         
-        let json = ["query":param]
+        let json = [key:param]
         
         var HttpResult: String = "Nothing received"
         
@@ -147,6 +119,10 @@ final class Messenger {
     }
     
     
+    
+    
+    
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Getting the Basic values from tank
     //////////////////////// ///////////////////////////////////////////////////////////////////////////////////////
@@ -214,9 +190,16 @@ final class Messenger {
     
      // Tells the tank the new average temp range to try and match with the heater
     func sendTempRangeAvg(max: Double, min: Double) -> String {
-        
-        let myMax = (max * 50) + (min * 50)
-        return sendRequest(param: "max: \(myMax)", route: "/fromApp/sendAvg")
+        let myAvg = (max * 50) + (min * 50)
+        return sendRequestWithKey(key: "avg",param: "\(myAvg)", route: "/fromApp/sendAvg")
+    }
+    
+    func sendWifiSSID(ssid: String) -> String {
+        return sendRequestWithKey(key: "wifi", param: ssid, route: "/fromApp/sendWifiName")
+    }
+    
+    func sendWifiPassword(pass: String) -> String {
+        return sendRequestWithKey(key: "password", param: pass, route: "/fromApp/sendWifiPassWord")
     }
     
     

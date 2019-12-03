@@ -9,12 +9,35 @@
 import SwiftUI
 
 struct ReminderDetailView: View {
+    @EnvironmentObject var tankData: TankProfile
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var reminder: Notification
     var fish: FishProfile?
     
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Text(reminder.title)
+                .font(.largeTitle)
+            
+           Spacer()
+            
+           Button(action:{ self.removeNote()
+                            
+            }) {
+                    Text("Delete Reminder")
+
+            }.padding()
+            
+        }
     }
+    
+    func removeNote() {
+        self.tankData.notifyMan.removeNotification(id_in: reminder.id)
+        self.presentationMode.wrappedValue.dismiss()
+        return
+    }
+    
 }
 
 struct ReminderDetailView_Previews: PreviewProvider {
@@ -22,5 +45,6 @@ struct ReminderDetailView_Previews: PreviewProvider {
         ReminderDetailView(reminder:
             Notification(id: "fefefef", title: "Clean Tank", fishID: nil, repeats: false),
                            fish: nil)
+        .environmentObject(TankProfile())
     }
 }

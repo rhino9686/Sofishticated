@@ -17,6 +17,9 @@ struct SetupView: View {
     //Variable to hold the User's name
     @State private var userName: String = ""
     
+    @State var nameValidationText: String = "Your name"
+    
+    
     @State private var wifiName: String = ""
     @State private var wifiPassword: String = ""
     
@@ -30,6 +33,7 @@ struct SetupView: View {
             VStack {
                 Text("Set up your Fish Tank" )
                     .fontWeight(.heavy)
+                    .padding()
                 
                 Picker(selection: $index, label: Text("")) {
                     ForEach(self.phases, id: \.self){
@@ -48,7 +52,7 @@ struct SetupView: View {
                        VStack {
                             Text("Name")
                             Form {
-                                Section(header: Text("Your Name")) {
+                                Section(header: Text(nameValidationText)) {
                                        TextField("Enter name", text: $userName)
                                 }
                                 
@@ -95,8 +99,9 @@ struct SetupView: View {
                     else if self.index == 3 {
                         VStack {
                             Text("All good! Switch back to your home network.")
+                            Text("Welcome to your tank!").padding()
                             Button(action: self.nextStep) {
-                                Text("Finish")
+                                Text("Finish").padding()
                             }
                         }
                     }
@@ -137,8 +142,12 @@ struct SetupView: View {
     }
     
     func validateName() {
-        
-        nextStep()
+        if self.userName == "" {
+            self.nameValidationText = "Please enter a valid name"
+        }
+        else {
+           nextStep()
+        }
     }
     
     
