@@ -3,6 +3,7 @@
 #include <SoftwareSerial.h>
 #include <semphr.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "tempSensor.h"
 #include "color_sensor.h"
 #include "indicatorLED.h"
@@ -23,6 +24,9 @@ int nitriteValue = 20;
 int tempThreshold = 2500;
 
 char colorToRead = 'S';
+bool setTemp = false;
+int thresh = 0;
+int setTempCounter = 0;
 
 // task definitions
 void TaskColorSensor( void *pvParameters );
@@ -154,7 +158,6 @@ void TaskPHandTemperature(void *pvParameters)
 		phValue = calcPH() * 100;
 		// Gets temperature value in Celsius
 		tempValue = measureTemp() * 100;
-		//Serial.println("check temp");
 
 		// RELAY LOGIC (switching on 0.5 C above and below temperature threshold)
 		if (tempValue < (tempThreshold - 50)) {
@@ -173,16 +176,35 @@ void fromWifi()
 {
 	char action = '\0';
 	// check for data from Wifi
-	if (serial.available())
+	delay(50);
+	if (serial.available() > 0)
 	{
 		delay(100); // allows all serial sent to be received together
-		while (serial.available())
+		Serial.println(serial.available());
+		while (serial.available() > 0)
 		{
-			action = serial.read();
+			char c = serial.read();
+			char str[] = {c, '\0'};
+			// currently updating temperature threshold - read in int values
+			if (setTemp) {
+				thresh *= 10;
+				thresh += atoi(str);
+				++setTempCounter;
+			}
+			// reading a regular action character
+			else
+			{
+				action = c;
+			}
 		}
 	}
-	Serial.println ("Action:");
-	Serial.print(action);
+	
+	// found all temp threshold values
+	if (setTempCounter == 4)
+	{
+		tempThreshold = thresh;
+		setTemp = false;
+	}
 
 	static BaseType_t xHigherPriorityTaskWoken;
 	xHigherPriorityTaskWoken = pdFALSE;
@@ -191,21 +213,18 @@ void fromWifi()
 	{
 	case 'A':
 	{
-		Serial.println("inside ammonia");
 		colorToRead = 'A';
 		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
 		break;
 	}
 	case 'n':
 	{
-		Serial.println("inside nitrite");
 		colorToRead = 'n';
 		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
 		break;
 	}
 	case 'N':
 	{
-		Serial.println("inside nitrate");
 		colorToRead = 'N';
 		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
 		break;
@@ -223,21 +242,22 @@ void fromWifi()
 	}
 	case 'P':
 	{
-		Serial.println("inside ph");
 		serial.write("ph:");
 		serial.print(phValue);
 		break;
 	}
 	case 'T':
 	{
-		setLED(Green);
-		Serial.println("inside temp");
 		serial.write("temp:");
 		serial.print(tempValue);
 		break;
 	}
 	case 'S':
 	{
+		// set up to read ints for threshold
+		setTemp = true;
+		setTempCounter = 0;
+		thresh = 0;
 		break;
 	}
 	default:
