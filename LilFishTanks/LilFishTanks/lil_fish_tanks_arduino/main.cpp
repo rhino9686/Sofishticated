@@ -17,12 +17,12 @@ void fromWifi();
 
 long phValue = 0;
 int tempValue = 0;
-int ammoniaValue = 0;
-int nitrateValue = 0;
-int nitriteValue = 0;
+int ammoniaValue = 10;
+int nitrateValue = 15;
+int nitriteValue = 20;
 int tempThreshold = 2500;
 
-char colorToRead = 'A';
+char colorToRead = 'S';
 
 // task definitions
 void TaskColorSensor( void *pvParameters );
@@ -54,11 +54,13 @@ void setup() {
 	setupLED();
  
 	// create interrupt to be triggered by Wifi module
-	//attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
+	attachInterrupt(digitalPinToInterrupt(2), fromWifi, RISING);
 	
 	if (xSerialSemaphoreColorSensor == NULL)
 	{
-		vSemaphoreCreateBinary(xSerialSemaphoreColorSensor);		
+		vSemaphoreCreateBinary(xSerialSemaphoreColorSensor);	
+		if ( ( xSerialSemaphoreColorSensor ) != NULL ) {
+			xSemaphoreGive( ( xSerialSemaphoreColorSensor ) ); }
 	}
 
 
@@ -100,43 +102,40 @@ void TaskColorSensor(void *pvParameters)
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	for (;;) // A Task shall never return or exit.
 	{
-		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 100 ) == pdTRUE )
+		if ( xSemaphoreTake( xSerialSemaphoreColorSensor, ( TickType_t ) 1 ) == pdTRUE )
 		{
-			setLED(White);
 			switch (colorToRead)
 			{
 				case 'A':
 				{
 					while (findTestStrip(AMMONIA));
 					setLED(Red);
-					delay(1000); // allow user to see LED and stop moving test strip
-					
+					delay(250);
 					ammoniaValue = ScanColor(AMMONIA) * 100;
-					break;
-				}
-				case 'N':
-				{
-					while (findTestStrip(NITRITE));
-					setLED(Blue);
-					delay(1000);  // allow user to see LED and stop moving test strip
-					
-					nitriteValue = ScanColor(NITRITE) * 100;
+					delay(250);
 					break;
 				}
 				case 'n':
 				{
+					while (findTestStrip(NITRITE));
+					setLED(Blue);
+					delay(250);
+					nitriteValue = ScanColor(NITRITE) * 100;
+					delay(250);
+					break;
+				}
+				case 'N':
+				{
 					while (findTestStrip(NITRATE));
 					setLED(Green);
-					delay(1000); // allow user to see LED and stop moving test strip
-
-					nitrateValue = ScanColor(NITRATE) * 100;
-					
+					delay(250); // allow user to see LED and stop moving test strip
+					nitrateValue = ScanColor(NITRATE) * 100;					
+					delay(250);
 					setLED(Off);
 					break;
 				}
 			}
 			setLED(Off);	  
-			xSemaphoreGive( xSerialSemaphoreColorSensor );
 		}
 		vTaskDelay(1); // 1 tick delay between reads for stability*/
 	}
@@ -155,6 +154,7 @@ void TaskPHandTemperature(void *pvParameters)
 		phValue = calcPH() * 100;
 		// Gets temperature value in Celsius
 		tempValue = measureTemp() * 100;
+		//Serial.println("check temp");
 
 		// RELAY LOGIC (switching on 0.5 C above and below temperature threshold)
 		if (tempValue < (tempThreshold - 50)) {
@@ -163,7 +163,7 @@ void TaskPHandTemperature(void *pvParameters)
 		else if (tempValue > (tempThreshold + 50)) {
 			digitalWrite(relay, LOW);
 		}
-    // check pH and temp every 5 min
+    // check pH and temp every 5 sec
     vTaskDelayUntil( &xLastWakeTime, 5000 / portTICK_PERIOD_MS );
   }
 }
@@ -171,7 +171,6 @@ void TaskPHandTemperature(void *pvParameters)
 
 void fromWifi()
 {
-	int i = 0;
 	char action = '\0';
 	// check for data from Wifi
 	if (serial.available())
@@ -182,46 +181,68 @@ void fromWifi()
 			action = serial.read();
 		}
 	}
+	Serial.println ("Action:");
+	Serial.print(action);
+
+	static BaseType_t xHigherPriorityTaskWoken;
+	xHigherPriorityTaskWoken = pdFALSE;
 
 	switch(action)
 	{
 	case 'A':
 	{
+		Serial.println("inside ammonia");
 		colorToRead = 'A';
-		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, pdFALSE);
-		serial.write("ammonia:");
-		serial.write(ammoniaValue);
-		break;
-	}
-	case 'N':
-	{
-		colorToRead = 'N';
-		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, pdFALSE);
-		serial.write("nitrate:");
-		serial.write(nitrateValue);
+		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
 		break;
 	}
 	case 'n':
 	{
+		Serial.println("inside nitrite");
 		colorToRead = 'n';
-		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, pdFALSE);
-		serial.write("nitrite:");
-		serial.write(nitriteValue);
+		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
 		break;
 	}
-	case 'p':
+	case 'N':
 	{
+		Serial.println("inside nitrate");
+		colorToRead = 'N';
+		xSemaphoreGiveFromISR(xSerialSemaphoreColorSensor, &xHigherPriorityTaskWoken);
+		break;
+	}
+	case 'C':
+	{
+		serial.write("ammonia:");
+		serial.print(ammoniaValue);
+		serial.write("   nitrate:");
+		serial.print(nitrateValue);
+		serial.write("   nitrite:");
+		serial.print(nitriteValue);
+		serial.write("   ");
+		break;
+	}
+	case 'P':
+	{
+		Serial.println("inside ph");
 		serial.write("ph:");
-		serial.write(phValue);
+		serial.print(phValue);
 		break;
 	}
 	case 'T':
 	{
+		setLED(Green);
+		Serial.println("inside temp");
 		serial.write("temp:");
-		serial.write(tempValue);
+		serial.print(tempValue);
+		break;
+	}
+	case 'S':
+	{
 		break;
 	}
 	default:
 		break;
 	}
+	delay(500);
+	setLED(Off);
 }

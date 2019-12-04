@@ -46,6 +46,8 @@ D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o (main)
 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
                               src/libraries/SoftwareSerial/src/SoftwareSerial.o (_ZN5Print5writeEPKhj)
+D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+                              main.o (attachInterrupt)
 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
                               DFRobot_PH.o (millis)
 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
@@ -190,8 +192,7 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text._Z8fromWifiv
-                0x00000000       0xf2 main.o
+ .data.White    0x00000000        0x6 main.o
  .data.Yellow   0x00000000        0x6 main.o
  .data.Magenta  0x00000000        0x6 main.o
  .data.Cyan     0x00000000        0x6 main.o
@@ -278,8 +279,6 @@ Discarded input sections
                 0x00000000       0x34 src/libraries/FreeRTOS/src/queue.o
  .text.hot.xQueueGiveMutexRecursive
                 0x00000000       0x44 src/libraries/FreeRTOS/src/queue.o
- .text.hot.xQueueGiveFromISR
-                0x00000000       0x46 src/libraries/FreeRTOS/src/queue.o
  .text.hot.xQueueTakeMutexRecursive
                 0x00000000       0x48 src/libraries/FreeRTOS/src/queue.o
  .text.hot.xQueuePeek
@@ -584,6 +583,11 @@ Discarded input sections
                 0x00000000       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
  .rodata._ZTV5Print
                 0x00000000        0xc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .text          0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .data          0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .bss           0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .text.detachInterrupt
+                0x00000000       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
  .text          0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
  .data          0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
  .bss           0x00000000        0x0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
@@ -1010,7 +1014,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x47f8
+.text           0x00000000     0x4ae0
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -1102,7 +1106,6 @@ END GROUP
  *(.text)
  .text          0x00000168        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000168                __vector_22
-                0x00000168                __vector_1
                 0x00000168                __vector_24
                 0x00000168                __vector_12
                 0x00000168                __bad_interrupt
@@ -1112,7 +1115,6 @@ END GROUP
                 0x00000168                __vector_13
                 0x00000168                __vector_17
                 0x00000168                __vector_9
-                0x00000168                __vector_2
                 0x00000168                __vector_21
                 0x00000168                __vector_15
                 0x00000168                __vector_8
@@ -1155,523 +1157,539 @@ END GROUP
                 0x00000a60       0x48 main.o
                 0x00000a60                _Z6setLED8LEDColor
  .text._Z15TaskColorSensorPv
-                0x00000aa8      0x186 main.o
+                0x00000aa8      0x16c main.o
                 0x00000aa8                _Z15TaskColorSensorPv
  .text._Z8setupLEDv
-                0x00000c2e       0x34 main.o
-                0x00000c2e                _Z8setupLEDv
- .text.setup    0x00000c62       0xc4 main.o
-                0x00000c62                setup
- .text.loop     0x00000d26        0x2 main.o
-                0x00000d26                loop
+                0x00000c14       0x34 main.o
+                0x00000c14                _Z8setupLEDv
+ .text.setup    0x00000c48       0xec main.o
+                0x00000c48                setup
+ .text.loop     0x00000d34        0x2 main.o
+                0x00000d34                loop
  .text.startup._GLOBAL__sub_I_Red
-                0x00000d28        0xe main.o
+                0x00000d36        0xe main.o
  .text.exit._GLOBAL__sub_D_Red
-                0x00000d36        0x8 main.o
+                0x00000d44        0x8 main.o
+ .text._Z8fromWifiv
+                0x00000d4c      0x1b6 main.o
+                0x00000d4c                _Z8fromWifiv
  .text._ZN7OneWire5resetEv
-                0x00000d3e       0x7e OneWire.o
-                0x00000d3e                _ZN7OneWire5resetEv
+                0x00000f02       0x7e OneWire.o
+                0x00000f02                _ZN7OneWire5resetEv
  .text._ZN7OneWire9write_bitEh
-                0x00000dbc       0x66 OneWire.o
-                0x00000dbc                _ZN7OneWire9write_bitEh
+                0x00000f80       0x66 OneWire.o
+                0x00000f80                _ZN7OneWire9write_bitEh
  .text._ZN7OneWire8read_bitEv
-                0x00000e22       0x56 OneWire.o
-                0x00000e22                _ZN7OneWire8read_bitEv
+                0x00000fe6       0x56 OneWire.o
+                0x00000fe6                _ZN7OneWire8read_bitEv
  .text._ZN7OneWire5writeEhh
-                0x00000e78       0x68 OneWire.o
-                0x00000e78                _ZN7OneWire5writeEhh
+                0x0000103c       0x68 OneWire.o
+                0x0000103c                _ZN7OneWire5writeEhh
  .text._ZN7OneWire4readEv
-                0x00000ee0       0x38 OneWire.o
-                0x00000ee0                _ZN7OneWire4readEv
+                0x000010a4       0x38 OneWire.o
+                0x000010a4                _ZN7OneWire4readEv
  .text._ZN7OneWire6selectEPKh
-                0x00000f18       0x3e OneWire.o
-                0x00000f18                _ZN7OneWire6selectEPKh
+                0x000010dc       0x3e OneWire.o
+                0x000010dc                _ZN7OneWire6selectEPKh
  .text._ZN7OneWire12reset_searchEv
-                0x00000f56       0x18 OneWire.o
-                0x00000f56                _ZN7OneWire12reset_searchEv
+                0x0000111a       0x18 OneWire.o
+                0x0000111a                _ZN7OneWire12reset_searchEv
  .text._ZN7OneWire5beginEh
-                0x00000f6e       0x46 OneWire.o
-                0x00000f6e                _ZN7OneWire5beginEh
+                0x00001132       0x46 OneWire.o
+                0x00001132                _ZN7OneWire5beginEh
  .text._ZN7OneWire6searchEPhb
-                0x00000fb4      0x10e OneWire.o
-                0x00000fb4                _ZN7OneWire6searchEPhb
+                0x00001178      0x10e OneWire.o
+                0x00001178                _ZN7OneWire6searchEPhb
  .text._ZN7OneWire4crc8EPKhh
-                0x000010c2       0x30 OneWire.o
-                0x000010c2                _ZN7OneWire4crc8EPKhh
+                0x00001286       0x30 OneWire.o
+                0x00001286                _ZN7OneWire4crc8EPKhh
  .text._Z6calcPHv
-                0x000010f2       0xae phSensor.o
-                0x000010f2                _Z6calcPHv
+                0x000012b6       0xae phSensor.o
+                0x000012b6                _Z6calcPHv
  .text.hot.pvPortMalloc
-                0x000011a0       0x26 src/libraries/FreeRTOS/src/heap_3.o
-                0x000011a0                pvPortMalloc
+                0x00001364       0x26 src/libraries/FreeRTOS/src/heap_3.o
+                0x00001364                pvPortMalloc
  .text.hot.vPortFree
-                0x000011c6       0x22 src/libraries/FreeRTOS/src/heap_3.o
-                0x000011c6                vPortFree
+                0x0000138a       0x22 src/libraries/FreeRTOS/src/heap_3.o
+                0x0000138a                vPortFree
  .text.hot.vListInitialise
-                0x000011e8       0x1c src/libraries/FreeRTOS/src/list.o
-                0x000011e8                vListInitialise
+                0x000013ac       0x1c src/libraries/FreeRTOS/src/list.o
+                0x000013ac                vListInitialise
  .text.hot.vListInitialiseItem
-                0x00001204        0x8 src/libraries/FreeRTOS/src/list.o
-                0x00001204                vListInitialiseItem
+                0x000013c8        0x8 src/libraries/FreeRTOS/src/list.o
+                0x000013c8                vListInitialiseItem
  .text.hot.vListInsertEnd
-                0x0000120c       0x42 src/libraries/FreeRTOS/src/list.o
-                0x0000120c                vListInsertEnd
+                0x000013d0       0x42 src/libraries/FreeRTOS/src/list.o
+                0x000013d0                vListInsertEnd
  .text.hot.vListInsert
-                0x0000124e       0x70 src/libraries/FreeRTOS/src/list.o
-                0x0000124e                vListInsert
+                0x00001412       0x70 src/libraries/FreeRTOS/src/list.o
+                0x00001412                vListInsert
  .text.hot.uxListRemove
-                0x000012be       0x48 src/libraries/FreeRTOS/src/list.o
-                0x000012be                uxListRemove
+                0x00001482       0x48 src/libraries/FreeRTOS/src/list.o
+                0x00001482                uxListRemove
  .text.hot.pxPortInitialiseStack
-                0x00001306       0xd8 src/libraries/FreeRTOS/src/port.o
-                0x00001306                pxPortInitialiseStack
+                0x000014ca       0xd8 src/libraries/FreeRTOS/src/port.o
+                0x000014ca                pxPortInitialiseStack
  .text.hot.xPortStartScheduler
-                0x000013de       0x70 src/libraries/FreeRTOS/src/port.o
-                0x000013de                xPortStartScheduler
+                0x000015a2       0x70 src/libraries/FreeRTOS/src/port.o
+                0x000015a2                xPortStartScheduler
  .text.hot.vPortYield
-                0x0000144e       0xb2 src/libraries/FreeRTOS/src/port.o
-                0x0000144e                vPortYield
+                0x00001612       0xb2 src/libraries/FreeRTOS/src/port.o
+                0x00001612                vPortYield
  .text.hot.vPortYieldFromTick
-                0x00001500       0xba src/libraries/FreeRTOS/src/port.o
-                0x00001500                vPortYieldFromTick
+                0x000016c4       0xba src/libraries/FreeRTOS/src/port.o
+                0x000016c4                vPortYieldFromTick
  .text.hot.__vector_6
-                0x000015ba        0x6 src/libraries/FreeRTOS/src/port.o
-                0x000015ba                __vector_6
+                0x0000177e        0x6 src/libraries/FreeRTOS/src/port.o
+                0x0000177e                __vector_6
  .text.hot.prvIsQueueEmpty
-                0x000015c0       0x16 src/libraries/FreeRTOS/src/queue.o
+                0x00001784       0x16 src/libraries/FreeRTOS/src/queue.o
  .text.hot.prvCopyDataToQueue
-                0x000015d6       0xa6 src/libraries/FreeRTOS/src/queue.o
+                0x0000179a       0xa6 src/libraries/FreeRTOS/src/queue.o
  .text.hot.prvCopyDataFromQueue
-                0x0000167c       0x34 src/libraries/FreeRTOS/src/queue.o
+                0x00001840       0x34 src/libraries/FreeRTOS/src/queue.o
  .text.hot.prvUnlockQueue
-                0x000016b0       0x7c src/libraries/FreeRTOS/src/queue.o
+                0x00001874       0x7c src/libraries/FreeRTOS/src/queue.o
  .text.hot.xQueueGenericReset
-                0x0000172c       0x7e src/libraries/FreeRTOS/src/queue.o
-                0x0000172c                xQueueGenericReset
+                0x000018f0       0x7e src/libraries/FreeRTOS/src/queue.o
+                0x000018f0                xQueueGenericReset
  .text.hot.xQueueGenericCreate
-                0x000017aa       0x50 src/libraries/FreeRTOS/src/queue.o
-                0x000017aa                xQueueGenericCreate
+                0x0000196e       0x50 src/libraries/FreeRTOS/src/queue.o
+                0x0000196e                xQueueGenericCreate
  .text.hot.xQueueGenericSend
-                0x000017fa      0x12c src/libraries/FreeRTOS/src/queue.o
-                0x000017fa                xQueueGenericSend
+                0x000019be      0x12c src/libraries/FreeRTOS/src/queue.o
+                0x000019be                xQueueGenericSend
  .text.hot.xQueueGenericSendFromISR
-                0x00001926       0x5e src/libraries/FreeRTOS/src/queue.o
-                0x00001926                xQueueGenericSendFromISR
+                0x00001aea       0x5e src/libraries/FreeRTOS/src/queue.o
+                0x00001aea                xQueueGenericSendFromISR
+ .text.hot.xQueueGiveFromISR
+                0x00001b48       0x46 src/libraries/FreeRTOS/src/queue.o
+                0x00001b48                xQueueGiveFromISR
  .text.hot.xQueueReceive
-                0x00001984      0x124 src/libraries/FreeRTOS/src/queue.o
-                0x00001984                xQueueReceive
+                0x00001b8e      0x124 src/libraries/FreeRTOS/src/queue.o
+                0x00001b8e                xQueueReceive
  .text.hot.xQueueSemaphoreTake
-                0x00001aa8      0x184 src/libraries/FreeRTOS/src/queue.o
-                0x00001aa8                xQueueSemaphoreTake
+                0x00001cb2      0x184 src/libraries/FreeRTOS/src/queue.o
+                0x00001cb2                xQueueSemaphoreTake
  .text.hot.vQueueWaitForMessageRestricted
-                0x00001c2c       0x38 src/libraries/FreeRTOS/src/queue.o
-                0x00001c2c                vQueueWaitForMessageRestricted
+                0x00001e36       0x38 src/libraries/FreeRTOS/src/queue.o
+                0x00001e36                vQueueWaitForMessageRestricted
  .text.prvResetNextTaskUnblockTime
-                0x00001c64       0x36 src/libraries/FreeRTOS/src/tasks.o
+                0x00001e6e       0x36 src/libraries/FreeRTOS/src/tasks.o
  .text.hot.prvAddCurrentTaskToDelayedList
-                0x00001c9a       0xb8 src/libraries/FreeRTOS/src/tasks.o
+                0x00001ea4       0xb8 src/libraries/FreeRTOS/src/tasks.o
  .text.prvIdleTask
-                0x00001d52       0x5c src/libraries/FreeRTOS/src/tasks.o
+                0x00001f5c       0x5c src/libraries/FreeRTOS/src/tasks.o
  .text.hot.xTaskCreate
-                0x00001dae      0x218 src/libraries/FreeRTOS/src/tasks.o
-                0x00001dae                xTaskCreate
+                0x00001fb8      0x218 src/libraries/FreeRTOS/src/tasks.o
+                0x00001fb8                xTaskCreate
  .text.hot.vTaskStartScheduler
-                0x00001fc6       0x5c src/libraries/FreeRTOS/src/tasks.o
-                0x00001fc6                vTaskStartScheduler
+                0x000021d0       0x5c src/libraries/FreeRTOS/src/tasks.o
+                0x000021d0                vTaskStartScheduler
  .text.hot.vTaskSuspendAll
-                0x00002022        0xc src/libraries/FreeRTOS/src/tasks.o
-                0x00002022                vTaskSuspendAll
+                0x0000222c        0xc src/libraries/FreeRTOS/src/tasks.o
+                0x0000222c                vTaskSuspendAll
  .text.hot.xTaskGetTickCount
-                0x0000202e       0x14 src/libraries/FreeRTOS/src/tasks.o
-                0x0000202e                xTaskGetTickCount
+                0x00002238       0x14 src/libraries/FreeRTOS/src/tasks.o
+                0x00002238                xTaskGetTickCount
  .text.hot.xTaskIncrementTick
-                0x00002042      0x158 src/libraries/FreeRTOS/src/tasks.o
-                0x00002042                xTaskIncrementTick
+                0x0000224c      0x158 src/libraries/FreeRTOS/src/tasks.o
+                0x0000224c                xTaskIncrementTick
  .text.hot.xTaskResumeAll
-                0x0000219a       0xde src/libraries/FreeRTOS/src/tasks.o
-                0x0000219a                xTaskResumeAll
+                0x000023a4       0xde src/libraries/FreeRTOS/src/tasks.o
+                0x000023a4                xTaskResumeAll
  .text.hot.vTaskDelayUntil
-                0x00002278       0x70 src/libraries/FreeRTOS/src/tasks.o
-                0x00002278                vTaskDelayUntil
+                0x00002482       0x70 src/libraries/FreeRTOS/src/tasks.o
+                0x00002482                vTaskDelayUntil
  .text.hot.vTaskDelay
-                0x000022e8       0x2a src/libraries/FreeRTOS/src/tasks.o
-                0x000022e8                vTaskDelay
+                0x000024f2       0x2a src/libraries/FreeRTOS/src/tasks.o
+                0x000024f2                vTaskDelay
  .text.hot.vTaskSwitchContext
-                0x00002312       0xbc src/libraries/FreeRTOS/src/tasks.o
-                0x00002312                vTaskSwitchContext
+                0x0000251c       0xbc src/libraries/FreeRTOS/src/tasks.o
+                0x0000251c                vTaskSwitchContext
  .text.hot.vTaskPlaceOnEventList
-                0x000023ce       0x22 src/libraries/FreeRTOS/src/tasks.o
-                0x000023ce                vTaskPlaceOnEventList
+                0x000025d8       0x22 src/libraries/FreeRTOS/src/tasks.o
+                0x000025d8                vTaskPlaceOnEventList
  .text.hot.vTaskPlaceOnEventListRestricted
-                0x000023f0       0x30 src/libraries/FreeRTOS/src/tasks.o
-                0x000023f0                vTaskPlaceOnEventListRestricted
+                0x000025fa       0x30 src/libraries/FreeRTOS/src/tasks.o
+                0x000025fa                vTaskPlaceOnEventListRestricted
  .text.hot.xTaskRemoveFromEventList
-                0x00002420       0x80 src/libraries/FreeRTOS/src/tasks.o
-                0x00002420                xTaskRemoveFromEventList
+                0x0000262a       0x80 src/libraries/FreeRTOS/src/tasks.o
+                0x0000262a                xTaskRemoveFromEventList
  .text.hot.vTaskInternalSetTimeOutState
-                0x000024a0       0x16 src/libraries/FreeRTOS/src/tasks.o
-                0x000024a0                vTaskInternalSetTimeOutState
+                0x000026aa       0x16 src/libraries/FreeRTOS/src/tasks.o
+                0x000026aa                vTaskInternalSetTimeOutState
  .text.hot.xTaskCheckForTimeOut
-                0x000024b6       0x66 src/libraries/FreeRTOS/src/tasks.o
-                0x000024b6                xTaskCheckForTimeOut
+                0x000026c0       0x66 src/libraries/FreeRTOS/src/tasks.o
+                0x000026c0                xTaskCheckForTimeOut
  .text.hot.vTaskMissedYield
-                0x0000251c        0x8 src/libraries/FreeRTOS/src/tasks.o
-                0x0000251c                vTaskMissedYield
+                0x00002726        0x8 src/libraries/FreeRTOS/src/tasks.o
+                0x00002726                vTaskMissedYield
  .text.hot.xTaskGetSchedulerState
-                0x00002524       0x1c src/libraries/FreeRTOS/src/tasks.o
-                0x00002524                xTaskGetSchedulerState
+                0x0000272e       0x1c src/libraries/FreeRTOS/src/tasks.o
+                0x0000272e                xTaskGetSchedulerState
  .text.hot.xTaskPriorityInherit
-                0x00002540       0xc6 src/libraries/FreeRTOS/src/tasks.o
-                0x00002540                xTaskPriorityInherit
+                0x0000274a       0xc6 src/libraries/FreeRTOS/src/tasks.o
+                0x0000274a                xTaskPriorityInherit
  .text.hot.xTaskPriorityDisinherit
-                0x00002606       0x74 src/libraries/FreeRTOS/src/tasks.o
-                0x00002606                xTaskPriorityDisinherit
+                0x00002810       0x74 src/libraries/FreeRTOS/src/tasks.o
+                0x00002810                xTaskPriorityDisinherit
  .text.hot.vTaskPriorityDisinheritAfterTimeout
-                0x0000267a       0x8e src/libraries/FreeRTOS/src/tasks.o
-                0x0000267a                vTaskPriorityDisinheritAfterTimeout
+                0x00002884       0x8e src/libraries/FreeRTOS/src/tasks.o
+                0x00002884                vTaskPriorityDisinheritAfterTimeout
  .text.hot.pvTaskIncrementMutexHeldCount
-                0x00002708       0x24 src/libraries/FreeRTOS/src/tasks.o
-                0x00002708                pvTaskIncrementMutexHeldCount
+                0x00002912       0x24 src/libraries/FreeRTOS/src/tasks.o
+                0x00002912                pvTaskIncrementMutexHeldCount
  .text.hot.prvCheckForValidListAndQueue
-                0x0000272c       0x52 src/libraries/FreeRTOS/src/timers.o
+                0x00002936       0x52 src/libraries/FreeRTOS/src/timers.o
  .text.hot.prvInsertTimerInActiveList
-                0x0000277e       0x54 src/libraries/FreeRTOS/src/timers.o
+                0x00002988       0x54 src/libraries/FreeRTOS/src/timers.o
  .text.hot.xTimerCreateTimerTask
-                0x000027d2       0x40 src/libraries/FreeRTOS/src/timers.o
-                0x000027d2                xTimerCreateTimerTask
+                0x000029dc       0x40 src/libraries/FreeRTOS/src/timers.o
+                0x000029dc                xTimerCreateTimerTask
  .text.hot.xTimerGenericCommand
-                0x00002812       0x7e src/libraries/FreeRTOS/src/timers.o
-                0x00002812                xTimerGenericCommand
+                0x00002a1c       0x7e src/libraries/FreeRTOS/src/timers.o
+                0x00002a1c                xTimerGenericCommand
  .text.hot.prvSwitchTimerLists
-                0x00002890       0xa2 src/libraries/FreeRTOS/src/timers.o
+                0x00002a9a       0xa2 src/libraries/FreeRTOS/src/timers.o
  .text.hot.prvTimerTask
-                0x00002932      0x206 src/libraries/FreeRTOS/src/timers.o
+                0x00002b3c      0x206 src/libraries/FreeRTOS/src/timers.o
  .text.initVariant
-                0x00002b38        0xa src/libraries/FreeRTOS/src/variantHooks.o
-                0x00002b38                initVariant
+                0x00002d42        0xa src/libraries/FreeRTOS/src/variantHooks.o
+                0x00002d42                initVariant
  .text.vApplicationIdleHook
-                0x00002b42       0x12 src/libraries/FreeRTOS/src/variantHooks.o
-                0x00002b42                vApplicationIdleHook
+                0x00002d4c       0x12 src/libraries/FreeRTOS/src/variantHooks.o
+                0x00002d4c                vApplicationIdleHook
  .text.vApplicationMallocFailedHook
-                0x00002b54       0x1a src/libraries/FreeRTOS/src/variantHooks.o
-                0x00002b54                vApplicationMallocFailedHook
+                0x00002d5e       0x1a src/libraries/FreeRTOS/src/variantHooks.o
+                0x00002d5e                vApplicationMallocFailedHook
  .text.vApplicationStackOverflowHook
-                0x00002b6e       0x1a src/libraries/FreeRTOS/src/variantHooks.o
-                0x00002b6e                vApplicationStackOverflowHook
+                0x00002d78       0x1a src/libraries/FreeRTOS/src/variantHooks.o
+                0x00002d78                vApplicationStackOverflowHook
  .text._ZN9MD_TCS23010initialiseEv
-                0x00002b88       0x4e src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002b88                _ZN9MD_TCS23010initialiseEv
+                0x00002d92       0x4e src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002d92                _ZN9MD_TCS23010initialiseEv
  .text._ZN9MD_TCS230C2Ehhh
-                0x00002bd6       0x28 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002bd6                _ZN9MD_TCS230C1Ehhh
-                0x00002bd6                _ZN9MD_TCS230C2Ehhh
+                0x00002de0       0x28 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002de0                _ZN9MD_TCS230C1Ehhh
+                0x00002de0                _ZN9MD_TCS230C2Ehhh
  .text._ZN9MD_TCS230D2Ev
-                0x00002bfe        0x2 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002bfe                _ZN9MD_TCS230D2Ev
-                0x00002bfe                _ZN9MD_TCS230D1Ev
+                0x00002e08        0x2 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002e08                _ZN9MD_TCS230D2Ev
+                0x00002e08                _ZN9MD_TCS230D1Ev
  .text._ZN9MD_TCS2309setFilterEh
-                0x00002c00       0x4c src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002c00                _ZN9MD_TCS2309setFilterEh
+                0x00002e0a       0x4c src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002e0a                _ZN9MD_TCS2309setFilterEh
  .text._ZN9MD_TCS23013setFrequency2Eh
-                0x00002c4c       0x4c src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002c4c                _ZN9MD_TCS23013setFrequency2Eh
+                0x00002e56       0x4c src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002e56                _ZN9MD_TCS23013setFrequency2Eh
  .text._ZN9MD_TCS2309setEnableEb
-                0x00002c98       0x22 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002c98                _ZN9MD_TCS2309setEnableEb
+                0x00002ea2       0x22 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002ea2                _ZN9MD_TCS2309setEnableEb
  .text._ZN9MD_TCS2305beginEv
-                0x00002cba       0x56 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002cba                _ZN9MD_TCS2305beginEv
+                0x00002ec4       0x56 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002ec4                _ZN9MD_TCS2305beginEv
  .text._ZN9MD_TCS2306getRGBEP9colorData
-                0x00002d10       0x20 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002d10                _ZN9MD_TCS2306getRGBEP9colorData
+                0x00002f1a       0x20 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002f1a                _ZN9MD_TCS2306getRGBEP9colorData
  .text._ZN9MD_TCS23017RGBTransformationEv
-                0x00002d30       0xb8 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002d30                _ZN9MD_TCS23017RGBTransformationEv
+                0x00002f3a       0xb8 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002f3a                _ZN9MD_TCS23017RGBTransformationEv
  .text._ZN9MD_TCS2307readFSMEh
-                0x00002de8       0xbc src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002de8                _ZN9MD_TCS2307readFSMEh
+                0x00002ff2       0xbc src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00002ff2                _ZN9MD_TCS2307readFSMEh
  .text._ZN9MD_TCS2304readEv
-                0x00002ea4       0x14 src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002ea4                _ZN9MD_TCS2304readEv
+                0x000030ae       0x14 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x000030ae                _ZN9MD_TCS2304readEv
  .text._ZN9MD_TCS2309availableEv
-                0x00002eb8       0x1c src/libraries/MD_TCS230/src/MD_TCS230.o
-                0x00002eb8                _ZN9MD_TCS2309availableEv
+                0x000030c2       0x1c src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x000030c2                _ZN9MD_TCS2309availableEv
  .text._ZN5Print17availableForWriteEv
-                0x00002ed4        0x6 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002ed4                _ZN5Print17availableForWriteEv
+                0x000030de        0x6 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000030de                _ZN5Print17availableForWriteEv
  .text._ZN14SoftwareSerial4readEv
-                0x00002eda       0x42 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002eda                _ZN14SoftwareSerial4readEv
+                0x000030e4       0x42 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000030e4                _ZN14SoftwareSerial4readEv
  .text._ZN14SoftwareSerial5writeEh
-                0x00002f1c       0xa0 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002f1c                _ZN14SoftwareSerial5writeEh
+                0x00003126       0xa0 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00003126                _ZN14SoftwareSerial5writeEh
  .text._ZN14SoftwareSerial5flushEv
-                0x00002fbc        0x2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002fbc                _ZN14SoftwareSerial5flushEv
+                0x000031c6        0x2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000031c6                _ZN14SoftwareSerial5flushEv
  .text._ZN14SoftwareSerial4peekEv
-                0x00002fbe       0x30 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002fbe                _ZN14SoftwareSerial4peekEv
+                0x000031c8       0x30 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000031c8                _ZN14SoftwareSerial4peekEv
  .text._ZN14SoftwareSerial9availableEv
-                0x00002fee       0x30 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00002fee                _ZN14SoftwareSerial9availableEv
+                0x000031f8       0x30 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000031f8                _ZN14SoftwareSerial9availableEv
  .text._ZN14SoftwareSerial13stopListeningEv
-                0x0000301e       0x2c src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x0000301e                _ZN14SoftwareSerial13stopListeningEv
+                0x00003228       0x2c src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00003228                _ZN14SoftwareSerial13stopListeningEv
  .text._ZN14SoftwareSerial6listenEv
-                0x0000304a       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x0000304a                _ZN14SoftwareSerial6listenEv
+                0x00003254       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00003254                _ZN14SoftwareSerial6listenEv
  .text.__vector_3
-                0x0000309c       0xf4 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x0000309c                __vector_5
-                0x0000309c                __vector_4
-                0x0000309c                __vector_3
+                0x000032a6       0xf4 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000032a6                __vector_5
+                0x000032a6                __vector_4
+                0x000032a6                __vector_3
  .text._ZN14SoftwareSerialD2Ev
-                0x00003190        0xe src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00003190                _ZN14SoftwareSerialD1Ev
-                0x00003190                _ZN14SoftwareSerialD2Ev
+                0x0000339a        0xe src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x0000339a                _ZN14SoftwareSerialD1Ev
+                0x0000339a                _ZN14SoftwareSerialD2Ev
  .text._ZN14SoftwareSerial5setTXEh
-                0x0000319e       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x0000319e                _ZN14SoftwareSerial5setTXEh
+                0x000033a8       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000033a8                _ZN14SoftwareSerial5setTXEh
  .text._ZN14SoftwareSerial5setRXEh
-                0x000031f0       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x000031f0                _ZN14SoftwareSerial5setRXEh
+                0x000033fa       0x52 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000033fa                _ZN14SoftwareSerial5setRXEh
  .text._ZN14SoftwareSerialC2Ehhb
-                0x00003242       0x56 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00003242                _ZN14SoftwareSerialC1Ehhb
-                0x00003242                _ZN14SoftwareSerialC2Ehhb
+                0x0000344c       0x56 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x0000344c                _ZN14SoftwareSerialC1Ehhb
+                0x0000344c                _ZN14SoftwareSerialC2Ehhb
  .text._ZN14SoftwareSerial5beginEl
-                0x00003298      0x11c src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00003298                _ZN14SoftwareSerial5beginEl
+                0x000034a2      0x11c src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x000034a2                _ZN14SoftwareSerial5beginEl
  .text.avr-libc.fplib
-                0x000033b4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x000033b4                __subsf3
-                0x000033b6                __addsf3
+                0x000035be        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x000035be                __subsf3
+                0x000035c0                __addsf3
  .text.avr-libc.fplib
-                0x000033c2       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x000033e4                __addsf3x
+                0x000035cc       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x000035ee                __addsf3x
  .text.avr-libc.fplib
-                0x0000348e        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x0000348e                __nesf2
-                0x0000348e                __eqsf2
-                0x0000348e                __cmpsf2
-                0x0000348e                __ltsf2
-                0x0000348e                __lesf2
+                0x00003698        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x00003698                __nesf2
+                0x00003698                __eqsf2
+                0x00003698                __cmpsf2
+                0x00003698                __ltsf2
+                0x00003698                __lesf2
  .text.avr-libc.fplib
-                0x00003498        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00003498                __divsf3
+                0x000036a2        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000036a2                __divsf3
  .text.avr-libc.fplib
-                0x000034a0       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x000034c0                __divsf3x
-                0x000034c6                __divsf3_pse
+                0x000036aa       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000036ca                __divsf3x
+                0x000036d0                __divsf3_pse
  .text.avr-libc.fplib
-                0x0000357c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
-                0x0000357c                __fixsfsi
+                0x00003786        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x00003786                __fixsfsi
  .text.avr-libc.fplib
-                0x0000358a       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x0000358a                __fixunssfsi
+                0x00003794       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00003794                __fixunssfsi
  .text.avr-libc.fplib
-                0x000035e8       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x000035e8                __floatunsisf
-                0x000035ec                __floatsisf
+                0x000037f2       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000037f2                __floatunsisf
+                0x000037f6                __floatsisf
  .text.avr-libc.fplib
-                0x00003662       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00003662                __fp_cmp
+                0x0000386c       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x0000386c                __fp_cmp
  .text.avr-libc.fplib
-                0x000036aa        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x000036aa                __fp_inf
+                0x000038b4        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x000038b4                __fp_inf
  .text.avr-libc.fplib
-                0x000036b6        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x000036b6                __fp_nan
+                0x000038c0        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x000038c0                __fp_nan
  .text.avr-libc.fplib
-                0x000036bc        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x000036bc                __fp_pscA
+                0x000038c6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x000038c6                __fp_pscA
  .text.avr-libc.fplib
-                0x000036ca        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x000036ca                __fp_pscB
+                0x000038d4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x000038d4                __fp_pscB
  .text.avr-libc.fplib
-                0x000036d8       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x000036d8                __fp_round
+                0x000038e2       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x000038e2                __fp_round
  .text.avr-libc.fplib
-                0x000036fa       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x000036fa                __fp_split3
-                0x0000370a                __fp_splitA
+                0x00003904       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00003904                __fp_split3
+                0x00003914                __fp_splitA
  .text.avr-libc.fplib
-                0x0000373e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x0000373e                __fp_zero
-                0x00003740                __fp_szero
+                0x00003948        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00003948                __fp_zero
+                0x0000394a                __fp_szero
  .text.avr-libc.fplib
-                0x0000374c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x0000374c                __mulsf3
+                0x00003956        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00003956                __mulsf3
  .text.avr-libc.fplib
-                0x00003754       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00003772                __mulsf3x
-                0x00003778                __mulsf3_pse
+                0x0000395e       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x0000397c                __mulsf3x
+                0x00003982                __mulsf3_pse
  .text._ZN14HardwareSerial9availableEv
-                0x00003826       0x18 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x00003826                _ZN14HardwareSerial9availableEv
+                0x00003a30       0x18 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003a30                _ZN14HardwareSerial9availableEv
  .text._ZN14HardwareSerial4peekEv
-                0x0000383e       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0000383e                _ZN14HardwareSerial4peekEv
+                0x00003a48       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003a48                _ZN14HardwareSerial4peekEv
  .text._ZN14HardwareSerial4readEv
-                0x0000385a       0x28 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0000385a                _ZN14HardwareSerial4readEv
+                0x00003a64       0x28 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003a64                _ZN14HardwareSerial4readEv
  .text._ZN14HardwareSerial17availableForWriteEv
-                0x00003882       0x1e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x00003882                _ZN14HardwareSerial17availableForWriteEv
+                0x00003a8c       0x1e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003a8c                _ZN14HardwareSerial17availableForWriteEv
  .text._Z14serialEventRunv
-                0x000038a0       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x000038a0                _Z14serialEventRunv
+                0x00003aaa       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003aaa                _Z14serialEventRunv
  .text._ZN14HardwareSerial17_tx_udr_empty_irqEv
-                0x000038bc       0x44 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x000038bc                _ZN14HardwareSerial17_tx_udr_empty_irqEv
+                0x00003ac6       0x44 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003ac6                _ZN14HardwareSerial17_tx_udr_empty_irqEv
  .text._ZN14HardwareSerial5writeEh
-                0x00003900       0x9a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x00003900                _ZN14HardwareSerial5writeEh
+                0x00003b0a       0x9a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003b0a                _ZN14HardwareSerial5writeEh
  .text._ZN14HardwareSerial5flushEv
-                0x0000399a       0x44 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0000399a                _ZN14HardwareSerial5flushEv
+                0x00003ba4       0x44 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003ba4                _ZN14HardwareSerial5flushEv
  .text._ZN14HardwareSerial5beginEmh
-                0x000039de       0xca D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x000039de                _ZN14HardwareSerial5beginEmh
+                0x00003be8       0xca D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00003be8                _ZN14HardwareSerial5beginEmh
  .text.__vector_18
-                0x00003aa8       0x64 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x00003aa8                __vector_18
+                0x00003cb2       0x64 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00003cb2                __vector_18
  .text.__vector_19
-                0x00003b0c       0x4c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x00003b0c                __vector_19
+                0x00003d16       0x4c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00003d16                __vector_19
  .text._Z17Serial0_availablev
-                0x00003b58       0x14 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x00003b58                _Z17Serial0_availablev
+                0x00003d62       0x14 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00003d62                _Z17Serial0_availablev
  .text.startup._GLOBAL__sub_I___vector_18
-                0x00003b6c       0x5a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00003d76       0x5a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .text.startup.main
-                0x00003bc6       0x1e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
-                0x00003bc6                main
+                0x00003dd0       0x1e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
+                0x00003dd0                main
  .text._ZN5Print5writeEPKhj
-                0x00003be4       0x54 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003be4                _ZN5Print5writeEPKhj
+                0x00003dee       0x54 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003dee                _ZN5Print5writeEPKhj
  .text._ZN5Print5printEPK19__FlashStringHelper
-                0x00003c38       0x48 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003c38                _ZN5Print5printEPK19__FlashStringHelper
+                0x00003e42       0x48 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003e42                _ZN5Print5printEPK19__FlashStringHelper
  .text._ZN5Print5printEPKc
-                0x00003c80        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003c80                _ZN5Print5printEPKc
+                0x00003e8a        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003e8a                _ZN5Print5printEPKc
  .text._ZN5Print5printEc
-                0x00003c84        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003c84                _ZN5Print5printEc
+                0x00003e8e        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003e8e                _ZN5Print5printEc
  .text._ZN5Print7printlnEv
-                0x00003c92        0x8 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003c92                _ZN5Print7printlnEv
+                0x00003e9c        0x8 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003e9c                _ZN5Print7printlnEv
  .text._ZN5Print7printlnEPKc
-                0x00003c9a       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003c9a                _ZN5Print7printlnEPKc
+                0x00003ea4       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003ea4                _ZN5Print7printlnEPKc
  .text._ZN5Print11printNumberEmh
-                0x00003cbe       0x92 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003cbe                _ZN5Print11printNumberEmh
+                0x00003ec8       0x92 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003ec8                _ZN5Print11printNumberEmh
  .text._ZN5Print5printEmi
-                0x00003d50       0x1a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003d50                _ZN5Print5printEmi
+                0x00003f5a       0x1a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003f5a                _ZN5Print5printEmi
  .text._ZN5Print5printEhi
-                0x00003d6a        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003d6a                _ZN5Print5printEhi
+                0x00003f74        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003f74                _ZN5Print5printEhi
  .text._ZN5Print7printlnEhi
-                0x00003d78       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003d78                _ZN5Print7printlnEhi
+                0x00003f82       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003f82                _ZN5Print7printlnEhi
  .text._ZN5Print5printEli
-                0x00003d9c       0x90 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003d9c                _ZN5Print5printEli
+                0x00003fa6       0x90 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00003fa6                _ZN5Print5printEli
  .text._ZN5Print5printEii
-                0x00003e2c        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00003e2c                _ZN5Print5printEii
+                0x00004036        0xe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00004036                _ZN5Print5printEii
+ .text.nothing  0x00004044        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .text.attachInterrupt
+                0x00004046       0x40 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+                0x00004046                attachInterrupt
+ .text.__vector_1
+                0x00004086       0x4e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+                0x00004086                __vector_1
+ .text.__vector_2
+                0x000040d4       0x4e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+                0x000040d4                __vector_2
  .text.__vector_16
-                0x00003e3a       0x94 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00003e3a                __vector_16
- .text.micros   0x00003ece       0x4a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00003ece                micros
- .text.delay    0x00003f18       0x78 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00003f18                delay
+                0x00004122       0x94 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00004122                __vector_16
+ .text.micros   0x000041b6       0x4a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x000041b6                micros
+ .text.delay    0x00004200       0x78 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00004200                delay
  .text.delayMicroseconds
-                0x00003f90       0x16 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00003f90                delayMicroseconds
- .text.init     0x00003fa6       0x76 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00003fa6                init
+                0x00004278       0x16 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00004278                delayMicroseconds
+ .text.init     0x0000428e       0x76 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x0000428e                init
  .text.analogRead
-                0x0000401c       0x3a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
-                0x0000401c                analogRead
+                0x00004304       0x3a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+                0x00004304                analogRead
  .text.analogWrite
-                0x00004056       0xbe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
-                0x00004056                analogWrite
+                0x0000433e       0xbe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+                0x0000433e                analogWrite
  .text.turnOffPWM
-                0x00004114       0x52 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .text.pinMode  0x00004166       0x78 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
-                0x00004166                pinMode
+                0x000043fc       0x52 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .text.pinMode  0x0000444e       0x78 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+                0x0000444e                pinMode
  .text.digitalWrite
-                0x000041de       0x5e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
-                0x000041de                digitalWrite
+                0x000044c6       0x5e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+                0x000044c6                digitalWrite
  .text._ZN14FreqCountClass5beginEj
-                0x0000423c       0xf0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
-                0x0000423c                _ZN14FreqCountClass5beginEj
+                0x00004524       0xf0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00004524                _ZN14FreqCountClass5beginEj
  .text._ZN14FreqCountClass9availableEv
-                0x0000432c        0x6 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
-                0x0000432c                _ZN14FreqCountClass9availableEv
+                0x00004614        0x6 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00004614                _ZN14FreqCountClass9availableEv
  .text._ZN14FreqCountClass4readEv
-                0x00004332       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
-                0x00004332                _ZN14FreqCountClass4readEv
+                0x0000461a       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x0000461a                _ZN14FreqCountClass4readEv
  .text._ZN14FreqCountClass3endEv
-                0x0000434e       0x2e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
-                0x0000434e                _ZN14FreqCountClass3endEv
+                0x00004636       0x2e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00004636                _ZN14FreqCountClass3endEv
  .text.__vector_7
-                0x0000437c       0xec D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
-                0x0000437c                __vector_7
- .text.__empty  0x00004468        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
-                0x00004468                yield
+                0x00004664       0xec D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00004664                __vector_7
+ .text.__empty  0x00004750        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+                0x00004750                yield
  .text.libgcc.div
-                0x0000446a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
-                0x0000446a                _div
-                0x0000446a                __divmodhi4
+                0x00004752       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodhi4.o)
+                0x00004752                _div
+                0x00004752                __divmodhi4
  .text.libgcc.div
-                0x00004492       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00004492                __udivmodsi4
+                0x0000477a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000477a                __udivmodsi4
  .text.libgcc.div
-                0x000044d6       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x000044d6                __divmodsi4
+                0x000047be       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x000047be                __divmodsi4
  .text.libgcc.div
-                0x00004504       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x00004504                __negsi2
- .text.libgcc   0x00004514        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00004514                __tablejump2__
+                0x000047ec       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x000047ec                __negsi2
+ .text.libgcc   0x000047fc        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x000047fc                __tablejump2__
  .text.libgcc.mul
-                0x00004520       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00004520                __muluhisi3
+                0x00004808       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x00004808                __muluhisi3
  .text.libgcc.div
-                0x00004536       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
-                0x00004536                __udivmodhi4
+                0x0000481e       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000481e                __udivmodhi4
  .text.libgcc.mul
-                0x0000455e       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x0000455e                __umulhisi3
+                0x00004846       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00004846                __umulhisi3
  .text.avr-libc
-                0x0000457c      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(malloc.o)
-                0x0000457c                malloc
-                0x000046ac                free
+                0x00004864      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(malloc.o)
+                0x00004864                malloc
+                0x00004994                free
  .text.avr-libc
-                0x000047be       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy.o)
-                0x000047be                memcpy
+                0x00004aa6       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                0x00004aa6                memcpy
  .text.avr-libc
-                0x000047d0        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x000047d0                memset
-                0x000047de                . = ALIGN (0x2)
+                0x00004ab8        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00004ab8                memset
+                0x00004ac6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000047de        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000047de                _exit
-                0x000047de                exit
+ .fini9         0x00004ac6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00004ac6                _exit
+                0x00004ac6                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
  *(.fini7)
  *(.fini7)
  *(.fini6)
- .fini6         0x000047de       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_dtors.o)
-                0x000047de                __do_global_dtors
+ .fini6         0x00004ac6       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_dtors.o)
+                0x00004ac6                __do_global_dtors
  *(.fini6)
  *(.fini5)
  *(.fini5)
@@ -1684,11 +1702,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000047f4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00004adc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000047f8                _etext = .
+                0x00004ae0                _etext = .
 
-.data           0x00800100      0x13c load address 0x000047f8
+.data           0x00800100      0x194 load address 0x00004ae0
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(malloc.o)
@@ -1708,8 +1726,15 @@ END GROUP
  .data.tempThreshold
                 0x0080011b        0x2 main.o
                 0x0080011b                tempThreshold
- .data.White    0x0080011d        0x6 main.o
-                0x0080011d                White
+ .data.nitriteValue
+                0x0080011d        0x2 main.o
+                0x0080011d                nitriteValue
+ .data.nitrateValue
+                0x0080011f        0x2 main.o
+                0x0080011f                nitrateValue
+ .data.ammoniaValue
+                0x00800121        0x2 main.o
+                0x00800121                ammoniaValue
  .data.Blue     0x00800123        0x6 main.o
                 0x00800123                Blue
  .data.Green    0x00800129        0x6 main.o
@@ -1722,212 +1747,205 @@ END GROUP
  .data.neutralVoltage
                 0x00800139        0x4 phSensor.o
                 0x00800139                neutralVoltage
+ .data.intFunc  0x0080013d        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
  .data.analog_reference
-                0x0080013d        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
-                0x0080013d                analog_reference
+                0x00800141        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+                0x00800141                analog_reference
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x0080013e       0x66 color_sensor.o
+ .rodata        0x00800142       0x66 color_sensor.o
  *(.rodata*)
  .rodata.str1.1
-                0x008001a4       0x12 color_sensor.o
+                0x008001a8       0x12 color_sensor.o
                                  0x14 (size before relaxing)
  .rodata.str1.1
-                0x008001b6       0x42 main.o
+                0x008001ba       0x97 main.o
  .rodata.str1.1
-                0x008001f8        0x5 src/libraries/FreeRTOS/src/tasks.o
+                0x00800251        0x5 src/libraries/FreeRTOS/src/tasks.o
  .rodata.str1.1
-                0x008001fd        0x8 src/libraries/FreeRTOS/src/timers.o
+                0x00800256        0x8 src/libraries/FreeRTOS/src/timers.o
  .rodata._ZZN9MD_TCS2307readFSMEhE3seq
-                0x00800205        0x3 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x0080025e        0x3 src/libraries/MD_TCS230/src/MD_TCS230.o
  .rodata._ZTV14SoftwareSerial
-                0x00800208       0x12 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00800208                _ZTV14SoftwareSerial
+                0x00800261       0x12 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00800261                _ZTV14SoftwareSerial
  .rodata._ZTV14HardwareSerial
-                0x0080021a       0x12 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0080021a                _ZTV14HardwareSerial
+                0x00800273       0x12 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00800273                _ZTV14HardwareSerial
  .rodata.str1.1
-                0x0080022c        0xf D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00800285        0xf D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
  *(.gnu.linkonce.r*)
-                0x0080023c                . = ALIGN (0x2)
- *fill*         0x0080023b        0x1 
-                0x0080023c                _edata = .
-                0x0080023c                PROVIDE (__data_end, .)
+                0x00800294                . = ALIGN (0x2)
+                0x00800294                _edata = .
+                0x00800294                PROVIDE (__data_end, .)
 
-.bss            0x0080023c      0x2c8
-                0x0080023c                PROVIDE (__bss_start, .)
+.bss            0x00800294      0x2c3
+                0x00800294                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.CS        0x0080023c       0x2f color_sensor.o
-                0x0080023c                CS
+ .bss.CS        0x00800294       0x2f color_sensor.o
+                0x00800294                CS
  .bss.typeToRead
-                0x0080026b        0x1 color_sensor.o
-                0x0080026b                typeToRead
+                0x008002c3        0x1 color_sensor.o
+                0x008002c3                typeToRead
  .bss.blueScanned
-                0x0080026c        0x1 color_sensor.o
-                0x0080026c                blueScanned
+                0x008002c4        0x1 color_sensor.o
+                0x008002c4                blueScanned
  .bss.redScanned
-                0x0080026d        0x1 color_sensor.o
-                0x0080026d                redScanned
+                0x008002c5        0x1 color_sensor.o
+                0x008002c5                redScanned
  .bss.greenScanned
-                0x0080026e        0x1 color_sensor.o
-                0x0080026e                greenScanned
- .bss.c         0x0080026f        0xa color_sensor.o
-                0x0080026f                c
- .bss.rgb       0x00800279        0x3 color_sensor.o
-                0x00800279                rgb
- .bss.Nitrate   0x0080027c       0x46 color_sensor.o
-                0x0080027c                Nitrate
- .bss.Nitrite   0x008002c2       0x46 color_sensor.o
-                0x008002c2                Nitrite
- .bss.Ammonia   0x00800308       0x32 color_sensor.o
-                0x00800308                Ammonia
- .bss.ds        0x0080033a        0xe tempSensor.o
-                0x0080033a                ds
- .bss.serial    0x00800348       0x1f main.o
-                0x00800348                serial
+                0x008002c6        0x1 color_sensor.o
+                0x008002c6                greenScanned
+ .bss.c         0x008002c7        0xa color_sensor.o
+                0x008002c7                c
+ .bss.rgb       0x008002d1        0x3 color_sensor.o
+                0x008002d1                rgb
+ .bss.Nitrate   0x008002d4       0x46 color_sensor.o
+                0x008002d4                Nitrate
+ .bss.Nitrite   0x0080031a       0x46 color_sensor.o
+                0x0080031a                Nitrite
+ .bss.Ammonia   0x00800360       0x32 color_sensor.o
+                0x00800360                Ammonia
+ .bss.ds        0x00800392        0xe tempSensor.o
+                0x00800392                ds
+ .bss._ZZ8fromWifivE24xHigherPriorityTaskWoken
+                0x008003a0        0x1 main.o
+ .bss.serial    0x008003a1       0x1f main.o
+                0x008003a1                serial
  .bss.xPHandTemperature
-                0x00800367        0x2 main.o
-                0x00800367                xPHandTemperature
+                0x008003c0        0x2 main.o
+                0x008003c0                xPHandTemperature
  .bss.xColorSensor
-                0x00800369        0x2 main.o
-                0x00800369                xColorSensor
+                0x008003c2        0x2 main.o
+                0x008003c2                xColorSensor
  .bss.xSerialSemaphoreColorSensor
-                0x0080036b        0x2 main.o
-                0x0080036b                xSerialSemaphoreColorSensor
- .bss.nitriteValue
-                0x0080036d        0x2 main.o
-                0x0080036d                nitriteValue
- .bss.nitrateValue
-                0x0080036f        0x2 main.o
-                0x0080036f                nitrateValue
- .bss.ammoniaValue
-                0x00800371        0x2 main.o
-                0x00800371                ammoniaValue
+                0x008003c4        0x2 main.o
+                0x008003c4                xSerialSemaphoreColorSensor
  .bss.tempValue
-                0x00800373        0x2 main.o
-                0x00800373                tempValue
- .bss.phValue   0x00800375        0x4 main.o
-                0x00800375                phValue
- .bss.Off       0x00800379        0x6 main.o
-                0x00800379                Off
+                0x008003c6        0x2 main.o
+                0x008003c6                tempValue
+ .bss.phValue   0x008003c8        0x4 main.o
+                0x008003c8                phValue
+ .bss.Off       0x008003cc        0x6 main.o
+                0x008003cc                Off
  .bss.uxSchedulerSuspended
-                0x0080037f        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d2        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xIdleTaskHandle
-                0x00800380        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d3        0x2 src/libraries/FreeRTOS/src/tasks.o
  .bss.xNextTaskUnblockTime
-                0x00800382        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d5        0x2 src/libraries/FreeRTOS/src/tasks.o
  .bss.uxTaskNumber
-                0x00800384        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d7        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xNumOfOverflows
-                0x00800385        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d8        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xYieldPending
-                0x00800386        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003d9        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.uxPendedTicks
-                0x00800387        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003da        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xSchedulerRunning
-                0x00800388        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003db        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.uxTopReadyPriority
-                0x00800389        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003dc        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xTickCount
-                0x0080038a        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x008003dd        0x2 src/libraries/FreeRTOS/src/tasks.o
  .bss.uxCurrentNumberOfTasks
-                0x0080038c        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003df        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xSuspendedTaskList
-                0x0080038d        0x9 src/libraries/FreeRTOS/src/tasks.o
+                0x008003e0        0x9 src/libraries/FreeRTOS/src/tasks.o
  .bss.uxDeletedTasksWaitingCleanUp
-                0x00800396        0x1 src/libraries/FreeRTOS/src/tasks.o
+                0x008003e9        0x1 src/libraries/FreeRTOS/src/tasks.o
  .bss.xTasksWaitingTermination
-                0x00800397        0x9 src/libraries/FreeRTOS/src/tasks.o
+                0x008003ea        0x9 src/libraries/FreeRTOS/src/tasks.o
  .bss.xPendingReadyList
-                0x008003a0        0x9 src/libraries/FreeRTOS/src/tasks.o
+                0x008003f3        0x9 src/libraries/FreeRTOS/src/tasks.o
  .bss.pxOverflowDelayedTaskList
-                0x008003a9        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x008003fc        0x2 src/libraries/FreeRTOS/src/tasks.o
  .bss.pxDelayedTaskList
-                0x008003ab        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x008003fe        0x2 src/libraries/FreeRTOS/src/tasks.o
  .bss.xDelayedTaskList2
-                0x008003ad        0x9 src/libraries/FreeRTOS/src/tasks.o
+                0x00800400        0x9 src/libraries/FreeRTOS/src/tasks.o
  .bss.xDelayedTaskList1
-                0x008003b6        0x9 src/libraries/FreeRTOS/src/tasks.o
+                0x00800409        0x9 src/libraries/FreeRTOS/src/tasks.o
  .bss.pxReadyTasksLists
-                0x008003bf       0x24 src/libraries/FreeRTOS/src/tasks.o
+                0x00800412       0x24 src/libraries/FreeRTOS/src/tasks.o
  .bss.pxCurrentTCB
-                0x008003e3        0x2 src/libraries/FreeRTOS/src/tasks.o
-                0x008003e3                pxCurrentTCB
+                0x00800436        0x2 src/libraries/FreeRTOS/src/tasks.o
+                0x00800436                pxCurrentTCB
  .bss.xLastTime.2412
-                0x008003e5        0x2 src/libraries/FreeRTOS/src/timers.o
+                0x00800438        0x2 src/libraries/FreeRTOS/src/timers.o
  .bss.xTimerTaskHandle
-                0x008003e7        0x2 src/libraries/FreeRTOS/src/timers.o
+                0x0080043a        0x2 src/libraries/FreeRTOS/src/timers.o
  .bss.xTimerQueue
-                0x008003e9        0x2 src/libraries/FreeRTOS/src/timers.o
+                0x0080043c        0x2 src/libraries/FreeRTOS/src/timers.o
  .bss.pxOverflowTimerList
-                0x008003eb        0x2 src/libraries/FreeRTOS/src/timers.o
+                0x0080043e        0x2 src/libraries/FreeRTOS/src/timers.o
  .bss.pxCurrentTimerList
-                0x008003ed        0x2 src/libraries/FreeRTOS/src/timers.o
+                0x00800440        0x2 src/libraries/FreeRTOS/src/timers.o
  .bss.xActiveTimerList2
-                0x008003ef        0x9 src/libraries/FreeRTOS/src/timers.o
+                0x00800442        0x9 src/libraries/FreeRTOS/src/timers.o
  .bss.xActiveTimerList1
-                0x008003f8        0x9 src/libraries/FreeRTOS/src/timers.o
+                0x0080044b        0x9 src/libraries/FreeRTOS/src/timers.o
  .bss._ZZN9MD_TCS2307readFSMEhE7currCol
-                0x00800401        0x1 src/libraries/MD_TCS230/src/MD_TCS230.o
+                0x00800454        0x1 src/libraries/MD_TCS230/src/MD_TCS230.o
  .bss._ZN14SoftwareSerial20_receive_buffer_headE
-                0x00800402        0x1 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00800402                _ZN14SoftwareSerial20_receive_buffer_headE
+                0x00800455        0x1 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00800455                _ZN14SoftwareSerial20_receive_buffer_headE
  .bss._ZN14SoftwareSerial20_receive_buffer_tailE
-                0x00800403        0x1 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00800403                _ZN14SoftwareSerial20_receive_buffer_tailE
+                0x00800456        0x1 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00800456                _ZN14SoftwareSerial20_receive_buffer_tailE
  .bss._ZN14SoftwareSerial15_receive_bufferE
-                0x00800404       0x40 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00800404                _ZN14SoftwareSerial15_receive_bufferE
+                0x00800457       0x40 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00800457                _ZN14SoftwareSerial15_receive_bufferE
  .bss._ZN14SoftwareSerial13active_objectE
-                0x00800444        0x2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
-                0x00800444                _ZN14SoftwareSerial13active_objectE
- .bss.Serial    0x00800446       0x9d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x00800446                Serial
+                0x00800497        0x2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+                0x00800497                _ZN14SoftwareSerial13active_objectE
+ .bss.Serial    0x00800499       0x9d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00800499                Serial
  .bss.timer0_fract
-                0x008004e3        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00800536        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
  .bss.timer0_millis
-                0x008004e4        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x008004e4                timer0_millis
+                0x00800537        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00800537                timer0_millis
  .bss.timer0_overflow_count
-                0x008004e8        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x008004e8                timer0_overflow_count
+                0x0080053b        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x0080053b                timer0_overflow_count
  .bss._ZL10gate_index
-                0x008004ec        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x0080053f        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL11gate_length
-                0x008004ee        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800541        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL11count_ready
-                0x008004f0        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800543        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL12count_output
-                0x008004f1        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800544        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL10count_prev
-                0x008004f5        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800548        0x4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL9count_msw
-                0x008004f9        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x0080054c        0x2 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL11startTCCR2B
-                0x008004fb        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x0080054e        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL10saveTCCR2B
-                0x008004fc        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x0080054f        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL10saveTCCR2A
-                0x008004fd        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800550        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL10saveTCCR1B
-                0x008004fe        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800551        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  .bss._ZL10saveTCCR1A
-                0x008004ff        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00800552        0x1 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
  *(COMMON)
- COMMON         0x00800500        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(malloc.o)
-                0x00800500                __brkval
-                0x00800502                __flp
-                0x00800504                PROVIDE (__bss_end, .)
-                0x000047f8                __data_load_start = LOADADDR (.data)
-                0x00004934                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800553        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(malloc.o)
+                0x00800553                __brkval
+                0x00800555                __flp
+                0x00800557                PROVIDE (__bss_end, .)
+                0x00004ae0                __data_load_start = LOADADDR (.data)
+                0x00004c74                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800504        0x0
+.noinit         0x00800557        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800504                _end = .
-                0x00800504                PROVIDE (__heap_start, .)
+                0x00800557                _end = .
+                0x00800557                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1987,6 +2005,7 @@ END GROUP
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
  .comment       0x00000030       0x31 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
@@ -2014,7 +2033,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x9d8
+.debug_aranges  0x00000000      0xa18
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x50 color_sensor.o
@@ -2053,101 +2072,106 @@ END GROUP
  .debug_aranges
                 0x000007c8      0x100 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
  .debug_aranges
-                0x000008c8       0x48 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x000008c8       0x40 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
  .debug_aranges
-                0x00000910       0x30 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+                0x00000908       0x48 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
  .debug_aranges
-                0x00000940       0x38 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+                0x00000950       0x30 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
  .debug_aranges
-                0x00000978       0x40 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+                0x00000980       0x38 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
  .debug_aranges
-                0x000009b8       0x20 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+                0x000009b8       0x40 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_aranges
+                0x000009f8       0x20 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x13e37
+.debug_info     0x00000000    0x14241
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0xd87 color_sensor.o
  .debug_info    0x0000137b      0x7a6 tempSensor.o
- .debug_info    0x00001b21      0xef5 main.o
- .debug_info    0x00002a16      0xf20 OneWire.o
- .debug_info    0x00003936      0x1f2 phSensor.o
- .debug_info    0x00003b28      0x1a7 src/libraries/FreeRTOS/src/heap_3.o
- .debug_info    0x00003ccf      0x2e0 src/libraries/FreeRTOS/src/list.o
- .debug_info    0x00003faf      0x28b src/libraries/FreeRTOS/src/port.o
- .debug_info    0x0000423a     0x1820 src/libraries/FreeRTOS/src/queue.o
- .debug_info    0x00005a5a     0x2102 src/libraries/FreeRTOS/src/tasks.o
- .debug_info    0x00007b5c     0x1083 src/libraries/FreeRTOS/src/timers.o
- .debug_info    0x00008bdf      0x330 src/libraries/FreeRTOS/src/variantHooks.o
- .debug_info    0x00008f0f     0x1018 src/libraries/MD_TCS230/src/MD_TCS230.o
- .debug_info    0x00009f27     0x28f2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
- .debug_info    0x0000c819     0x1f64 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
- .debug_info    0x0000e77d     0x1b16 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_info    0x00010293      0x237 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
- .debug_info    0x000104ca     0x28ff D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_info    0x00012dc9      0x2cb D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_info    0x00013094      0x26d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_info    0x00013301      0x5fe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_info    0x000138ff      0x4fa D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
- .debug_info    0x00013df9       0x3e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_info    0x00001b21     0x10e3 main.o
+ .debug_info    0x00002c04      0xf20 OneWire.o
+ .debug_info    0x00003b24      0x1f2 phSensor.o
+ .debug_info    0x00003d16      0x1a7 src/libraries/FreeRTOS/src/heap_3.o
+ .debug_info    0x00003ebd      0x2e0 src/libraries/FreeRTOS/src/list.o
+ .debug_info    0x0000419d      0x28b src/libraries/FreeRTOS/src/port.o
+ .debug_info    0x00004428     0x1820 src/libraries/FreeRTOS/src/queue.o
+ .debug_info    0x00005c48     0x2102 src/libraries/FreeRTOS/src/tasks.o
+ .debug_info    0x00007d4a     0x1083 src/libraries/FreeRTOS/src/timers.o
+ .debug_info    0x00008dcd      0x330 src/libraries/FreeRTOS/src/variantHooks.o
+ .debug_info    0x000090fd     0x1018 src/libraries/MD_TCS230/src/MD_TCS230.o
+ .debug_info    0x0000a115     0x28f2 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+ .debug_info    0x0000ca07     0x1f64 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_info    0x0000e96b     0x1b16 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_info    0x00010481      0x237 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
+ .debug_info    0x000106b8     0x28ff D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_info    0x00012fb7      0x21c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_info    0x000131d3      0x2cb D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_info    0x0001349e      0x26d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_info    0x0001370b      0x5fe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_info    0x00013d09      0x4fa D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_info    0x00014203       0x3e D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
-.debug_abbrev   0x00000000     0x3fab
+.debug_abbrev   0x00000000     0x4091
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x393 color_sensor.o
  .debug_abbrev  0x00000935      0x245 tempSensor.o
- .debug_abbrev  0x00000b7a      0x3bf main.o
- .debug_abbrev  0x00000f39      0x34d OneWire.o
- .debug_abbrev  0x00001286       0xe5 phSensor.o
- .debug_abbrev  0x0000136b      0x115 src/libraries/FreeRTOS/src/heap_3.o
- .debug_abbrev  0x00001480       0xff src/libraries/FreeRTOS/src/list.o
- .debug_abbrev  0x0000157f      0x158 src/libraries/FreeRTOS/src/port.o
- .debug_abbrev  0x000016d7      0x2d5 src/libraries/FreeRTOS/src/queue.o
- .debug_abbrev  0x000019ac      0x35e src/libraries/FreeRTOS/src/tasks.o
- .debug_abbrev  0x00001d0a      0x2f8 src/libraries/FreeRTOS/src/timers.o
- .debug_abbrev  0x00002002      0x18d src/libraries/FreeRTOS/src/variantHooks.o
- .debug_abbrev  0x0000218f      0x39f src/libraries/MD_TCS230/src/MD_TCS230.o
- .debug_abbrev  0x0000252e      0x60b src/libraries/SoftwareSerial/src/SoftwareSerial.o
- .debug_abbrev  0x00002b39      0x4b7 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
- .debug_abbrev  0x00002ff0      0x3ce D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_abbrev  0x000033be      0x12d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
- .debug_abbrev  0x000034eb      0x47a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_abbrev  0x00003965      0x146 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_abbrev  0x00003aab      0x16b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_abbrev  0x00003c16      0x15b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_abbrev  0x00003d71      0x210 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
- .debug_abbrev  0x00003f81       0x2a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_abbrev  0x00000b7a      0x3a9 main.o
+ .debug_abbrev  0x00000f23      0x34d OneWire.o
+ .debug_abbrev  0x00001270       0xe5 phSensor.o
+ .debug_abbrev  0x00001355      0x115 src/libraries/FreeRTOS/src/heap_3.o
+ .debug_abbrev  0x0000146a       0xff src/libraries/FreeRTOS/src/list.o
+ .debug_abbrev  0x00001569      0x158 src/libraries/FreeRTOS/src/port.o
+ .debug_abbrev  0x000016c1      0x2d5 src/libraries/FreeRTOS/src/queue.o
+ .debug_abbrev  0x00001996      0x35e src/libraries/FreeRTOS/src/tasks.o
+ .debug_abbrev  0x00001cf4      0x2f8 src/libraries/FreeRTOS/src/timers.o
+ .debug_abbrev  0x00001fec      0x18d src/libraries/FreeRTOS/src/variantHooks.o
+ .debug_abbrev  0x00002179      0x39f src/libraries/MD_TCS230/src/MD_TCS230.o
+ .debug_abbrev  0x00002518      0x60b src/libraries/SoftwareSerial/src/SoftwareSerial.o
+ .debug_abbrev  0x00002b23      0x4b7 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_abbrev  0x00002fda      0x3ce D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_abbrev  0x000033a8      0x12d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
+ .debug_abbrev  0x000034d5      0x47a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_abbrev  0x0000394f       0xfc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_abbrev  0x00003a4b      0x146 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_abbrev  0x00003b91      0x16b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_abbrev  0x00003cfc      0x15b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_abbrev  0x00003e57      0x210 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_abbrev  0x00004067       0x2a D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
-.debug_line     0x00000000     0x6a85
+.debug_line     0x00000000     0x6c73
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x4fd color_sensor.o
  .debug_line    0x00000630      0x1ee tempSensor.o
- .debug_line    0x0000081e      0x57e main.o
- .debug_line    0x00000d9c      0x6c8 OneWire.o
- .debug_line    0x00001464      0x12f phSensor.o
- .debug_line    0x00001593      0x1b7 src/libraries/FreeRTOS/src/heap_3.o
- .debug_line    0x0000174a      0x21c src/libraries/FreeRTOS/src/list.o
- .debug_line    0x00001966      0x33c src/libraries/FreeRTOS/src/port.o
- .debug_line    0x00001ca2      0xb7e src/libraries/FreeRTOS/src/queue.o
- .debug_line    0x00002820     0x126a src/libraries/FreeRTOS/src/tasks.o
- .debug_line    0x00003a8a      0x54c src/libraries/FreeRTOS/src/timers.o
- .debug_line    0x00003fd6      0x27a src/libraries/FreeRTOS/src/variantHooks.o
- .debug_line    0x00004250      0x666 src/libraries/MD_TCS230/src/MD_TCS230.o
- .debug_line    0x000048b6      0x7f9 src/libraries/SoftwareSerial/src/SoftwareSerial.o
- .debug_line    0x000050af      0x4c4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
- .debug_line    0x00005573      0x28c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_line    0x000057ff      0x165 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
- .debug_line    0x00005964      0x685 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_line    0x00005fe9      0x299 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_line    0x00006282      0x20f D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_line    0x00006491      0x252 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_line    0x000066e3      0x361 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
- .debug_line    0x00006a44       0x41 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_line    0x0000081e      0x5cc main.o
+ .debug_line    0x00000dea      0x6c8 OneWire.o
+ .debug_line    0x000014b2      0x12f phSensor.o
+ .debug_line    0x000015e1      0x1b7 src/libraries/FreeRTOS/src/heap_3.o
+ .debug_line    0x00001798      0x21c src/libraries/FreeRTOS/src/list.o
+ .debug_line    0x000019b4      0x33c src/libraries/FreeRTOS/src/port.o
+ .debug_line    0x00001cf0      0xb7e src/libraries/FreeRTOS/src/queue.o
+ .debug_line    0x0000286e     0x126a src/libraries/FreeRTOS/src/tasks.o
+ .debug_line    0x00003ad8      0x54c src/libraries/FreeRTOS/src/timers.o
+ .debug_line    0x00004024      0x27a src/libraries/FreeRTOS/src/variantHooks.o
+ .debug_line    0x0000429e      0x666 src/libraries/MD_TCS230/src/MD_TCS230.o
+ .debug_line    0x00004904      0x7f9 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+ .debug_line    0x000050fd      0x4c4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_line    0x000055c1      0x28c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_line    0x0000584d      0x165 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
+ .debug_line    0x000059b2      0x685 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_line    0x00006037      0x1a0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_line    0x000061d7      0x299 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_line    0x00006470      0x20f D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_line    0x0000667f      0x252 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_line    0x000068d1      0x361 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_line    0x00006c32       0x41 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
-.debug_frame    0x00000000     0x1d84
+.debug_frame    0x00000000     0x1e78
  *(.debug_frame)
  .debug_frame   0x00000000       0xbc color_sensor.o
  .debug_frame   0x000000bc       0x58 tempSensor.o
@@ -2167,85 +2191,89 @@ END GROUP
  .debug_frame   0x00001640       0xe0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .debug_frame   0x00001720       0x54 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
  .debug_frame   0x00001774      0x3ac D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_frame   0x00001b20       0xc4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_frame   0x00001be4       0x54 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_frame   0x00001c38       0x7c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_frame   0x00001cb4       0xac D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
- .debug_frame   0x00001d60       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_frame   0x00001b20       0xf4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_frame   0x00001c14       0xc4 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_frame   0x00001cd8       0x54 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_frame   0x00001d2c       0x7c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_frame   0x00001da8       0xac D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_frame   0x00001e54       0x24 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
-.debug_str      0x00000000     0x4ad7
+.debug_str      0x00000000     0x4b59
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x864 color_sensor.o
                                 0x947 (size before relaxing)
  .debug_str     0x00000a6c      0x2db tempSensor.o
                                 0x5f8 (size before relaxing)
- .debug_str     0x00000d47      0x3e9 main.o
-                                0x890 (size before relaxing)
- .debug_str     0x00001130      0x155 OneWire.o
+ .debug_str     0x00000d47      0x402 main.o
+                                0x8f9 (size before relaxing)
+ .debug_str     0x00001149      0x155 OneWire.o
                                 0x6c6 (size before relaxing)
- .debug_str     0x00001285       0x50 phSensor.o
+ .debug_str     0x0000129e       0x50 phSensor.o
                                 0x2fb (size before relaxing)
- .debug_str     0x000012d5      0x169 src/libraries/FreeRTOS/src/heap_3.o
+ .debug_str     0x000012ee      0x169 src/libraries/FreeRTOS/src/heap_3.o
                                 0x295 (size before relaxing)
- .debug_str     0x0000143e      0x142 src/libraries/FreeRTOS/src/list.o
+ .debug_str     0x00001457      0x142 src/libraries/FreeRTOS/src/list.o
                                 0x360 (size before relaxing)
- .debug_str     0x00001580      0x12a src/libraries/FreeRTOS/src/port.o
+ .debug_str     0x00001599      0x12a src/libraries/FreeRTOS/src/port.o
                                 0x34c (size before relaxing)
- .debug_str     0x000016aa      0x628 src/libraries/FreeRTOS/src/queue.o
+ .debug_str     0x000016c3      0x628 src/libraries/FreeRTOS/src/queue.o
                                 0xa09 (size before relaxing)
- .debug_str     0x00001cd2      0x8f9 src/libraries/FreeRTOS/src/tasks.o
+ .debug_str     0x00001ceb      0x8f9 src/libraries/FreeRTOS/src/tasks.o
                                 0xf2c (size before relaxing)
- .debug_str     0x000025cb      0x414 src/libraries/FreeRTOS/src/timers.o
+ .debug_str     0x000025e4      0x414 src/libraries/FreeRTOS/src/timers.o
                                 0x8b5 (size before relaxing)
- .debug_str     0x000029df       0x93 src/libraries/FreeRTOS/src/variantHooks.o
+ .debug_str     0x000029f8       0x93 src/libraries/FreeRTOS/src/variantHooks.o
                                 0x3e4 (size before relaxing)
- .debug_str     0x00002a72      0x12d src/libraries/MD_TCS230/src/MD_TCS230.o
+ .debug_str     0x00002a8b      0x12d src/libraries/MD_TCS230/src/MD_TCS230.o
                                 0x7d3 (size before relaxing)
- .debug_str     0x00002b9f     0x14d1 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+ .debug_str     0x00002bb8     0x14ed src/libraries/SoftwareSerial/src/SoftwareSerial.o
                                0x197e (size before relaxing)
- .debug_str     0x00004070      0x412 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_str     0x000040a5      0x412 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
                                0x1659 (size before relaxing)
- .debug_str     0x00004482       0x47 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_str     0x000044b7       0x47 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
                                0x144c (size before relaxing)
- .debug_str     0x000044c9       0x37 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
+ .debug_str     0x000044fe       0x37 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
                                 0x2f8 (size before relaxing)
- .debug_str     0x00004500      0x300 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_str     0x00004535      0x2db D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
                                0x1286 (size before relaxing)
- .debug_str     0x00004800       0x65 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_str     0x00004810       0x78 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+                                0x27b (size before relaxing)
+ .debug_str     0x00004888       0x5f D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
                                 0x28e (size before relaxing)
- .debug_str     0x00004865       0x5b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_str     0x000048e7       0x5b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
                                 0x292 (size before relaxing)
- .debug_str     0x000048c0       0x4b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_str     0x00004942       0x4b D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
                                 0x2f3 (size before relaxing)
- .debug_str     0x0000490b      0x1b0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_str     0x0000498d      0x1b0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
                                 0x502 (size before relaxing)
- .debug_str     0x00004abb       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_str     0x00004b3d       0x1c D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
                                 0x183 (size before relaxing)
 
-.debug_loc      0x00000000     0xb349
+.debug_loc      0x00000000     0xb58a
  *(.debug_loc)
  .debug_loc     0x00000000      0x35b color_sensor.o
  .debug_loc     0x0000035b      0x14c tempSensor.o
- .debug_loc     0x000004a7      0x200 main.o
- .debug_loc     0x000006a7     0x1112 OneWire.o
- .debug_loc     0x000017b9      0x101 phSensor.o
- .debug_loc     0x000018ba      0x112 src/libraries/FreeRTOS/src/heap_3.o
- .debug_loc     0x000019cc      0x1d7 src/libraries/FreeRTOS/src/list.o
- .debug_loc     0x00001ba3      0x288 src/libraries/FreeRTOS/src/port.o
- .debug_loc     0x00001e2b     0x1b17 src/libraries/FreeRTOS/src/queue.o
- .debug_loc     0x00003942     0x24ae src/libraries/FreeRTOS/src/tasks.o
- .debug_loc     0x00005df0      0xadc src/libraries/FreeRTOS/src/timers.o
- .debug_loc     0x000068cc       0xb6 src/libraries/FreeRTOS/src/variantHooks.o
- .debug_loc     0x00006982      0xde2 src/libraries/MD_TCS230/src/MD_TCS230.o
- .debug_loc     0x00007764      0xc96 src/libraries/SoftwareSerial/src/SoftwareSerial.o
- .debug_loc     0x000083fa      0x4dc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
- .debug_loc     0x000088d6      0x1b0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_loc     0x00008a86     0x1c87 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_loc     0x0000a70d      0x28d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_loc     0x0000a99a       0xfe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_loc     0x0000aa98      0x5fc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_loc     0x0000b094      0x2b5 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_loc     0x000004a7      0x20c main.o
+ .debug_loc     0x000006b3     0x1112 OneWire.o
+ .debug_loc     0x000017c5      0x101 phSensor.o
+ .debug_loc     0x000018c6      0x112 src/libraries/FreeRTOS/src/heap_3.o
+ .debug_loc     0x000019d8      0x1d7 src/libraries/FreeRTOS/src/list.o
+ .debug_loc     0x00001baf      0x288 src/libraries/FreeRTOS/src/port.o
+ .debug_loc     0x00001e37     0x1b17 src/libraries/FreeRTOS/src/queue.o
+ .debug_loc     0x0000394e     0x24ae src/libraries/FreeRTOS/src/tasks.o
+ .debug_loc     0x00005dfc      0xadc src/libraries/FreeRTOS/src/timers.o
+ .debug_loc     0x000068d8       0xb6 src/libraries/FreeRTOS/src/variantHooks.o
+ .debug_loc     0x0000698e      0xde2 src/libraries/MD_TCS230/src/MD_TCS230.o
+ .debug_loc     0x00007770      0xc96 src/libraries/SoftwareSerial/src/SoftwareSerial.o
+ .debug_loc     0x00008406      0x4dc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_loc     0x000088e2      0x1b0 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_loc     0x00008a92     0x1c87 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_loc     0x0000a719      0x235 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_loc     0x0000a94e      0x28d D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_loc     0x0000abdb       0xfe D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_loc     0x0000acd9      0x5fc D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_loc     0x0000b2d5      0x2b5 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -2265,7 +2293,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x940
+.debug_ranges   0x00000000      0x970
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x40 color_sensor.o
  .debug_ranges  0x00000040       0x18 tempSensor.o
@@ -2285,11 +2313,12 @@ END GROUP
  .debug_ranges  0x00000708       0x38 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .debug_ranges  0x00000740       0x20 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(main.o)
  .debug_ranges  0x00000760      0x120 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_ranges  0x00000880       0x38 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_ranges  0x000008b8       0x20 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
- .debug_ranges  0x000008d8       0x28 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
- .debug_ranges  0x00000900       0x30 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
- .debug_ranges  0x00000930       0x10 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
+ .debug_ranges  0x00000880       0x30 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_ranges  0x000008b0       0x38 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_ranges  0x000008e8       0x20 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_ranges  0x00000908       0x28 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_ranges  0x00000930       0x30 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(FreqCount.o)
+ .debug_ranges  0x00000960       0x10 D:\Users\Celine\ONEDRI~1.EDU\DOCUME~1\Schule\UNIVER~1\EECS47~1\Project\LIL_FI~1\LILFIS~1\LILFIS~1\ARDUIN~1\Debug\libArduinoCore.a(hooks.o)
 
 .debug_macro
  *(.debug_macro)
