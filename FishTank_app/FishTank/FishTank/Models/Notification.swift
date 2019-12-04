@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import EventKit
+import Combine
 import UserNotifications
 
 
@@ -20,10 +21,9 @@ struct Notification: Hashable {
     var datetime: DateComponents?
 }
 
-class LocalNotificationManager {
+class LocalNotificationManager: ObservableObject {
     
     @Published var notifications: [Notification]
-    
     
     private func requestAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in

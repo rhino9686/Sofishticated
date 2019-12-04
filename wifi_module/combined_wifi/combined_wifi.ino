@@ -19,7 +19,7 @@ struct Tank {
   //We store everything as a integer here, will be the actual value multiplied by 100 to get 2 decimal places
   String temperature;
   String pH;
-  int ammoniaReading;
+  String ammoniaReading;
   int nitrateReading;
 };
 
@@ -101,7 +101,10 @@ void getNitrates(){
 
 //Send message to device to request Nitrate/Nitrite
 void getChems(){
-  getParam('c');
+  getParam('C');
+    if(buffer != "") {
+      myTank.ammoniaReading = buffer;
+  }
 }
 
 
@@ -121,7 +124,10 @@ void sendpH(){
 
 
 //Send message to server with Ammonia data
-void sendAmmonia();
+void sendAmmonia(){
+  buffer = myTank.ammoniaReading;
+  sendMessageToServer('A');
+}
 
 //Send message to server with Nitrate/Nitrite data
 void getNitrates();
@@ -213,7 +219,8 @@ void setup() {
   
     //Handler for http requests for requests
     server.on("/requestVals", handleParamRequest);
-    server.on("/promptAmmonia", handleAmmonRequest);
+    server.on("/promptAmmonia",handleAmmonPrompt);
+    server.on("/requestAmmonia", handleAmmonRequest);
     server.on("/promptNitrate",handleNitrateRequest);
   
   server.begin();
@@ -270,10 +277,21 @@ void handleCheckRequest() {
   server.send(200, "text/plain", "checking chemical levels");
 }
 
-void handleAmmonRequest() {
+void handleAmmonPrompt() {
+
+  getAmmonia();
 
   server.send(200, "text/plain", "checking Ammonia color test");
 }
+
+void handleAmmonRequest() {
+
+  getChems();
+  sendAmmonia();
+
+  server.send(200, "text/plain", "returning Ammonia val");
+}
+
 void handleNitrateRequest() {
 
   server.send(200, "text/plain", "checking Nitrate color test");

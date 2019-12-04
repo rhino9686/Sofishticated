@@ -82,6 +82,23 @@ final class TankProfile: ObservableObject {
         return String(format: " %.2f", pH)
     }
     
+    var ammoniaStat: String {
+        let ammonia = self.messenger.ammoniaVal
+        
+        if ammonia == 0 {
+            return "Good"
+        }
+        else {
+            return "Unhealthy"
+        }
+    }
+    
+    var ammoniaNum: String {
+        let ammonia = self.messenger.ammoniaVal
+        return String(format: " %.0f", ammonia)
+    }
+    
+    
     var maxTempStr_F: String {
         let maxT = self.maxTemp
         return String(format: "%.0f", maxT)

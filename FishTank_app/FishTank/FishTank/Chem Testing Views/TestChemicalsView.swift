@@ -37,8 +37,12 @@ struct TestChemicalsView: View {
                         .fontWeight(.heavy)
                    }
                 
-                Text("Ammonia Levels:")
-                    .font(.footnote)
+                HStack {
+                    Text("Ammonia Levels:")
+                        .font(.footnote)
+                    Text("\(self.tankData.ammoniaNum)")
+                }
+            
             
                 Spacer()
     

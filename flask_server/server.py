@@ -44,6 +44,8 @@ def getPhFromTank():
 def getAmmoniaFromTank():
     ammonStr = str(request.data)
     ammonValStr = ammonStr[2] ##check this val
+    testStr = "b'ammonia:-100nitrate:15nitrite:20'"
+    print (ammonStr)
     return "pH retrieved from tank"
 
 # handler for tank sending Nitrate value
@@ -87,9 +89,12 @@ def sendRandoToApp():
 # handler for app requesting an Ammonia reading 
 @app.route("/fromApp/requestAmmonia",methods = ['POST'])
 def sendAmmoToApp():
-    myRandStr = str(myTank.getAmmo())
-    print("Returning rand val " + myRandStr)
-    return jsonify({"ammo": myRandStr})
+    dest_url = "http://" + WIFI_IP + "/requestAmmonia"
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "blank"
+    response = requests.post(dest_url, data=data, headers=headers)
+    ammonStr = str(request.data)
+    return jsonify({"ammo": "-3"})
 
 
 # handler for app prompting the Wi-fi chip to send temp/pH

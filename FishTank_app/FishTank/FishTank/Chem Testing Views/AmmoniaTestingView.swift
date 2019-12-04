@@ -46,10 +46,10 @@ struct AmmoniaTestingView: View {
                             Text("Dip the Ammonia Test strip into your tank")
                                 .font(.caption)
                         
-                            Text("and hold it for 3 seconds")
+                            Text("and hold it for 2 seconds")
                                 .font(.caption)
                          
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            FittedImage(image: Image("Ammonia"), width: 220, height: 280)
                             
                             Button(action:{ self.nextStep()
                             }) {
@@ -64,8 +64,10 @@ struct AmmoniaTestingView: View {
                             
                             Text("Insert Test strip into sensor slot")
                                 .font(.caption)
+                            Text("with colored side facing down")
+                                .font(.caption)
                             
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            FittedImage(image: Image("face_down"), width: 220, height: 280)
                             
                             Button(action:{ self.sendAmmoniaTestCmd()
                                             self.nextStep()
