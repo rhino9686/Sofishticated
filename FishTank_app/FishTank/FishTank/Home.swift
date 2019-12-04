@@ -38,14 +38,14 @@ struct TankHome: View {
                 
         
                 Section(header: Text("Residents")) {
-                    ForEach(tankData.placeHolderFish, id: \.self) { fish in
-                            NavigationLink(
-                                destination: FishDetail(fish: fish)
-                                    .environmentObject(self.tankData)
-                            ){
-                                FishRow(fishProfile: fish)
-                        }
-                    }.padding(.top, 6)
+//                    ForEach(tankData.placeHolderFish, id: \.self) { fish in
+//                            NavigationLink(
+//                                destination: FishDetail(fish: fish)
+//                                    .environmentObject(self.tankData)
+//                            ){
+//                                FishRow(fishProfile: fish)
+//                        }
+//                    }.padding(.top, 6)
                     
                     ForEach(tankData.currentResidents, id: \.self) { fish in
                         

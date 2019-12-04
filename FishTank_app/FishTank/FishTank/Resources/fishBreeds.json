@@ -106,6 +106,19 @@
     "fishFact2": "Guppies have smaller stomachs and prefer to eat two small meals per day instead of one large one",
     "fishFact3": "Guppies are omnivores and enjoy a diet of meat and vegetables, they can also enjoy a stable diet eating fish flakes",
     "fishFact4": "Guppies are also known as Rainbow Fish"
+  },
+  
+  {
+    "breedName": "Apple Snail",
+    "maxTemp": 82,
+    "minTemp": 65,
+    "maxPh": 8.0,
+    "minPh": 7.0,
+    "imageName": "appleSnail",
+    "fishFact1": "In captivity, as well as eating vegetables and fish food pellets, apple snails will also eat other foods if they are available",
+    "fishFact2": "In the 1980s, Pomacea canaliculata was introduced in Taiwan to start an escargot industry",
+    "fishFact3": "Instead of becoming a valuable food source, the introduced snails escaped and became a serious threat to rice production and the native ecosystems",
+    "fishFact4": "In captivity, apple snails are most active at night. During the day they usually retreat to somewhere shaded"
   }
     
 

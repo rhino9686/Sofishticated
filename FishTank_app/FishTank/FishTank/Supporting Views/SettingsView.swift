@@ -37,6 +37,14 @@ struct SettingsView: View {
 
                 }
                 
+                Button(action: addDenizens) {
+                    Text("Add 473 Fish")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.blue)
+
+                }
+                
                 
             }
             .navigationBarTitle(Text("Settings"))
@@ -47,6 +55,48 @@ struct SettingsView: View {
         self.resetModal = true
         self.presentationMode.wrappedValue.dismiss()
     }
+    
+    func addDenizens() {
+        
+        
+        // Tetra #1
+        var terry = FishProfile(name_in: "Terry", id_in: 74, img_in: "tetra")
+        terry.breedData = self.tankData.breeds[2]
+        tankData.addFish(fishEntry: terry)
+        
+        
+        //Sea snail
+        var kingKong = FishProfile(name_in: "King Kong", id_in: 73, img_in: "appleSnail")
+        kingKong.breedData = self.tankData.breeds[9]
+        tankData.addFish(fishEntry: kingKong)
+        
+        
+        // Tetra #2
+        var bubbles = FishProfile(name_in: "Bubbles", id_in: 75, img_in: "tetra")
+        bubbles.breedData = self.tankData.breeds[2]
+        tankData.addFish(fishEntry: bubbles)
+        
+        
+        //Danio
+        var daniel = FishProfile(name_in: "Daniel", id_in: 76, img_in: "danios")
+        daniel.breedData = self.tankData.breeds[7]
+        tankData.addFish(fishEntry: daniel)
+        
+        // Tetra #3
+        var finn = FishProfile(name_in: "Finn", id_in: 75, img_in: "tetra")
+        finn.breedData = self.tankData.breeds[2]
+        tankData.addFish(fishEntry: finn)
+        
+        
+        // Tetra #4
+        var chet = FishProfile(name_in: "Chet", id_in: 75, img_in: "tetra")
+        chet.breedData = self.tankData.breeds[2]
+        tankData.addFish(fishEntry: chet)
+        
+        
+    }
+    
+    
 }
 
 struct ToggleTempView: View {
