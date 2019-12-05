@@ -51,7 +51,8 @@ struct AmmoniaTestingView: View {
                          
                             FittedImage(image: Image("Ammonia"), width: 220, height: 280)
                             
-                            Button(action:{ self.nextStep()
+                            Button(action:{  self.sendAmmoniaTestCmd()
+                                             self.nextStep()
                             }) {
                                     Text("Next Step")
     
@@ -66,10 +67,12 @@ struct AmmoniaTestingView: View {
                                 .font(.caption)
                             Text("with colored side facing down")
                                 .font(.caption)
+                            Text("until the LED turns green")
+                                                         .font(.caption)
                             
                             FittedImage(image: Image("face_down"), width: 220, height: 280)
                             
-                            Button(action:{ self.sendAmmoniaTestCmd()
+                            Button(action:{ self.getAmmoniaVal()
                                             self.nextStep()
                             }) {
                                     Text("Start test")
@@ -84,8 +87,7 @@ struct AmmoniaTestingView: View {
                             Text("Wait a couple seconds and retrieve the Value" )
                                 .font(.caption)
                             
-                            Button(action:{ self.getAmmoniaVal()
-                                            self.nextStep()
+                            Button(action:{ self.nextStep()
                             }) {
                                     Text("Read Ammonia Value")
         
@@ -100,7 +102,7 @@ struct AmmoniaTestingView: View {
                             
                             Text("All Done")
         
-                            Button(action:{ self.getAmmoniaVal()
+                            Button(action:{
                                             self.nextStep()
                             }) {
                                     Text("Return to Testing Screen")

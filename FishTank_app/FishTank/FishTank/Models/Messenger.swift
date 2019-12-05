@@ -17,9 +17,9 @@ final class Messenger {
     @Published var currentPh: Double = 7.0
     @Published var lastCheckedTimeInMins = 3
     
-    @Published var ammoniaVal: Double = 0
-    @Published var nitrateVal: Double = 0
-    @Published var nitriteVal: Double = 0
+    @Published var ammoniaVal: Double = -1
+    @Published var nitrateVal: Double = -1
+    @Published var nitriteVal: Double = -1
     
     
     
@@ -44,7 +44,7 @@ final class Messenger {
     //Our HTTP Request Function with customizeable key
     func sendRequestWithKey(key: String, param: String, route: String) -> String  {
         
-        let json = [key:param]
+        let json = [param: key]
         
         var HttpResult: String = "Nothing received"
         
@@ -164,10 +164,9 @@ final class Messenger {
     }
     
     
-    
-    
     // Tells the tank to start reading for Ammonia Color
     func promptNitrate() -> String {
+        print("nitrate")
         return sendRequest(param: "null", route: "/fromApp/promptNitrate")
     }
     
@@ -191,15 +190,15 @@ final class Messenger {
      // Tells the tank the new average temp range to try and match with the heater
     func sendTempRangeAvg(max: Double, min: Double) -> String {
         let myAvg = (max * 50) + (min * 50)
-        return sendRequestWithKey(key: "avg",param: "\(myAvg)", route: "/fromApp/sendAvg")
+        return sendRequestWithKey(key: "  \(myAvg)  ", param: "avg", route: "/fromApp/sendAvg")
     }
     
     func sendWifiSSID(ssid: String) -> String {
-        return sendRequestWithKey(key: "wifi", param: ssid, route: "/fromApp/sendWifiName")
+        return sendRequestWithKey(key: ssid, param: "wifi", route: "/fromApp/sendWifiName")
     }
     
     func sendWifiPassword(pass: String) -> String {
-        return sendRequestWithKey(key: "password", param: pass, route: "/fromApp/sendWifiPassWord")
+        return sendRequestWithKey(key: pass, param: "password", route: "/fromApp/sendWifiPassWord")
     }
     
     
@@ -249,9 +248,9 @@ final class Messenger {
        // print(httpResult)
         
         let numDouble: Double? = Double(httpResult)
-            
+        let trueAmmon = numDouble!
         if (numDouble != nil) {
-           self.ammoniaVal = (numDouble!)
+           self.ammoniaVal = trueAmmon
         }
     }
     
@@ -261,9 +260,9 @@ final class Messenger {
        // print(httpResult)
         
         let numDouble: Double? = Double(httpResult)
-            
+        let trueNitrate = numDouble!
         if (numDouble != nil) {
-           self.nitrateVal = (numDouble!)
+           self.nitrateVal = trueNitrate
         }
     }
     
@@ -272,9 +271,9 @@ final class Messenger {
         // Make sure that the httpString value contains an actual number
         
         let numDouble: Double? = Double(httpResult)
-            
+        let trueNitrite = numDouble!
         if (numDouble != nil) {
-           self.nitriteVal = (numDouble!)
+           self.nitriteVal = trueNitrite
         }
     }
     

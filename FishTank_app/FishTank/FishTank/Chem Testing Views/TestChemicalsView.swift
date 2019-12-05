@@ -17,20 +17,30 @@ struct TestChemicalsView: View {
     
     let nitrateStr = "Nitrates and Nitrites naturally occur from the Ammonia breaking down, you should test for them too."
     
+    @State var ammoniaVal: String = "0"
+    @State var nitrateVal: String = "0"
+    @State var nitriteVal: String = "0"
+    
+    
+    func update() {
+        self.ammoniaVal  =  "\(self.tankData.ammoniaNum)"
+        self.nitrateVal  =  "\(self.tankData.nitrateNum)"
+        self.nitriteVal  =  "\(self.tankData.nitriteNum)"
+    }
+    
     
     var body: some View {
         
         List {
-            
-                Spacer()
    
                 Text(self.testEverythingStr)
                   .font(.subheadline)
+                    .padding().foregroundColor(.gray)
             
                 Spacer()
             
                 Text(self.ammoniaStr)
-                    .font(.footnote)
+                    .font(.footnote).foregroundColor(.gray)
             
                 NavigationLink(destination: AmmoniaTestingView()) {
                     Text("Check Ammonia")
@@ -40,28 +50,58 @@ struct TestChemicalsView: View {
                 HStack {
                     Text("Ammonia Levels:")
                         .font(.footnote)
-                    Text("\(self.tankData.ammoniaNum)")
+                    Text(self.ammoniaVal).font(.footnote)
                 }
             
-            
-                Spacer()
     
                 Text(self.nitrateStr)
-                    .font(.footnote)
+                    .font(.footnote).foregroundColor(.gray)
             
              
                 NavigationLink(destination: NitratesTestingView()) {
                     Text("Check Nitrates")
                         .fontWeight(.heavy)
                    }
-                
             
-                Spacer()
+                HStack {
+                    Text("Nitrate Levels:")
+                        .font(.footnote)
+                    Text(self.nitrateVal).font(.footnote)
+                }
+                HStack {
+                    Text("Nitrite Levels:")
+                        .font(.footnote)
+                    Text(self.nitriteVal).font(.footnote)
+                }
+            
+            
+                HStack {
+                    Text("Refresh ")
+                        .font(.footnote)
+                    
+                    Spacer()
+
+                    Button(action: {
+                       
+                    }, label: {
+                        Image(systemName: "arrow.clockwise")
+                    })
+                        .foregroundColor(Color.white)
+                        .padding(10)
+                    .background(myGrey)
+                    .onTapGesture {  self.update() } //This updates stuff
+                    .cornerRadius(5)
+                    .padding(.trailing)
+                    
+                }
+            
                 
             }
             .navigationBarTitle(Text("Chemicals")
                             .font(.headline))
         }
+    
+
 
 }
 

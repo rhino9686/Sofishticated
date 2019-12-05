@@ -38,7 +38,7 @@ struct SettingsView: View {
                 }
                 
                 Button(action: addDenizens) {
-                    Text("Add 473 Fish")
+                    Text("Add fish in tank")
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.blue)
@@ -58,6 +58,7 @@ struct SettingsView: View {
     
     func addDenizens() {
         
+        self.tankData.sendingTempRange = false
         
         // Tetra #1
         var terry = FishProfile(name_in: "Terry", id_in: 74, img_in: "tetra")
@@ -87,6 +88,7 @@ struct SettingsView: View {
         finn.breedData = self.tankData.breeds[2]
         tankData.addFish(fishEntry: finn)
         
+        self.tankData.sendingTempRange = true
         
         // Tetra #4
         var chet = FishProfile(name_in: "Chet", id_in: 75, img_in: "tetra")

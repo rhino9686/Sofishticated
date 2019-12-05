@@ -41,15 +41,15 @@ struct NitratesTestingView: View {
                     if self.index == 0 {
                        VStack {
                             Text("Nitrate Test")
-                            Text("Dip the nitrate Test strip into your tank")
+                            Text("Dip the nitrate Test strip into your tank and hold still for 2 seconds")
                                 .font(.caption)
                         
-                            Text("and hold it still, for 2 seconds")
+                            Text("Remove and wait for 60 seconds")
                                 .font(.caption)
                          
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            FittedImage(image: Image("Nitrates"), width: 220, height: 280)
                             
-                            Button(action:{ self.sendAmmoniaTestCmd()
+                            Button(action:{ self.sendNitrateTestCmd()
                                             self.nextStep()
                             }) {
                                     Text("Next Step")
@@ -60,10 +60,21 @@ struct NitratesTestingView: View {
                         
                     else if self.index == 1 {
                         VStack {
-                            Button(action:{ self.getAmmoniaVal()
+                            
+                            Text("Insert test strip into sensor slot")
+                                .font(.caption)
+                            Text("with colored side facing down")
+                                .font(.caption)
+                            Text("until the LED turns green")
+                                .font(.caption)
+                            
+                            FittedImage(image: Image("face_down"), width: 220, height: 280)
+                            
+                            Button(action:{ self.sendNitriteTestCmd()
+                                            self.getNitrateVal()
                                             self.nextStep()
                                 }) {
-                                    Text("Read Value Nitrate Value")
+                                    Text("Read Nitrate Value")
         
                             }.padding()
                         }
@@ -71,19 +82,19 @@ struct NitratesTestingView: View {
                         
                     else if self.index == 2 {
                           VStack {
-                            Text("Nitrate Test")
-                            Text("Dip the nitrate Test strip into your tank")
+                            Text("Nitrite Test")
+                            Text("Now push test strip in further")
                                 .font(.caption)
                         
-                            Text("and hold it still, for 2 seconds")
+                            Text("until LED turns blue")
                                 .font(.caption)
                          
-                            FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                            FittedImage(image: Image("face_down"), width: 220, height: 280)
                             
-                            Button(action:{ self.sendAmmoniaTestCmd()
+                            Button(action:{ self.getNitriteVal()
                                             self.nextStep()
                             }) {
-                                    Text("Next Step")
+                                    Text("Read Nitrite Value")
 
                             }.padding()
                         }
@@ -91,10 +102,12 @@ struct NitratesTestingView: View {
                     
                     else if self.index == 3 {
                        VStack {
-                            Button(action:{ self.getAmmoniaVal()
+                            Text("All Done")
+                        
+                            Button(action:{
                                             self.nextStep()
                                 }) {
-                                    Text("Read Value Nitrate Value")
+                                    Text("Return to Testing screen")
         
                             }.padding()
                         }
@@ -103,15 +116,6 @@ struct NitratesTestingView: View {
                 
                 Spacer()
             
-                    Button(action: nextStep) {
-                        if self.index == self.phases.count - 1 {
-                            Text("Finish")
-                        }
-                        else {
-                            Text("Next Step")
-                        }
-    
-                    }.buttonStyle(PlainButtonStyle()).padding(.bottom)
                 
             }
         }
@@ -127,15 +131,30 @@ struct NitratesTestingView: View {
         self.index = (self.index + 1) % self.phases.count
     }
     
-    // Tells the chip to initiate a color sensor test for Ammonia
-    func sendAmmoniaTestCmd() {
+    // Tells the chip to initiate a color sensor test for Nitrate
+    func sendNitrateTestCmd() {
+        self.tankData.promptNitrateTest()
         return
     }
     
-    //
-    func getAmmoniaVal() {
+    // Tells the chip to return the nitrate color sensor value
+    func getNitrateVal() {
+        self.tankData.getNitrateVal()
         return
     }
+    
+    // Tells the chip to initiate a color sensor test for Nitrate
+    func sendNitriteTestCmd() {
+        self.tankData.promptNitriteTest()
+        return
+    }
+    
+    // Tells the chip to return the nitrate color sensor value
+    func getNitriteVal() {
+        self.tankData.getNitriteVal()
+        return
+    }
+    
     
 }
 

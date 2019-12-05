@@ -24,6 +24,8 @@ final class TankProfile: ObservableObject {
     //Our HTTPClient
     let messenger: Messenger
     
+    var sendingTempRange: Bool = true
+    
     //Boolean to show whether we are showing tank temp in F or C
     @Published var inFahrenheight = true;
     
@@ -49,7 +51,7 @@ final class TankProfile: ObservableObject {
     
     //Running Max/Min Temps accounting for all fish
     var maxTemp: Double = 80
-    var minTemp: Double = 0
+    var minTemp: Double = 50
     
     
     //Running Max/Min pH vals accounting for all fish
@@ -96,6 +98,17 @@ final class TankProfile: ObservableObject {
     var ammoniaNum: String {
         let ammonia = self.messenger.ammoniaVal
         return String(format: " %.0f", ammonia)
+    }
+    
+    
+    var nitrateNum: String {
+        let nitrate = self.messenger.nitrateVal
+        return String(format: " %.0f", nitrate)
+    }
+    
+    var nitriteNum: String {
+        let nitrite = self.messenger.nitriteVal
+        return String(format: " %.0f", nitrite)
     }
     
     
@@ -329,7 +342,9 @@ final class TankProfile: ObservableObject {
         addRange(newMaxT, newMinT, newMaxP, newMinP)
         
         //Send data to tank
-        let _ = self.messenger.sendTempRangeAvg(max: maxTemp, min: minTemp)
+        if self.sendingTempRange {
+            let _ = self.messenger.sendTempRangeAvg(max: maxTemp, min: minTemp)
+        }
         
     }
     
@@ -355,7 +370,7 @@ final class TankProfile: ObservableObject {
     
     func recalculateRanges() {
         self.maxTemp = 90
-        self.minTemp = 0
+        self.minTemp = 50
         self.maxpH = 14.00
         self.minpH = 0
         

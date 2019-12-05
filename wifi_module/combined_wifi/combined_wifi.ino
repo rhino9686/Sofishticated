@@ -7,7 +7,7 @@
 #include <ESP8266HTTPClient.h>
 
 // Change this depending on what the current IP address is for the server
-#define SERVER_ADDR "35.6.151.235"
+#define SERVER_ADDR "35.6.184.166"
 
 
 #ifndef STASSID
@@ -19,7 +19,7 @@ struct Tank {
   //We store everything as a integer here, will be the actual value multiplied by 100 to get 2 decimal places
   String temperature;
   String pH;
-  String ammoniaReading;
+  String chemReadings;
   int nitrateReading;
 };
 
@@ -94,16 +94,23 @@ void getAmmonia() {
   getParam('A');
 }
 
-//Send message to device to request Nitrate/Nitrite
-void getNitrates(){
+//Send message to device to request Nitrate
+void getNitrate(){
   getParam('N');
 }
+
+//Send message to device to request Nitrate
+void getNitrite(){
+  getParam('n');
+}
+
+
 
 //Send message to device to request Nitrate/Nitrite
 void getChems(){
   getParam('C');
     if(buffer != "") {
-      myTank.ammoniaReading = buffer;
+      myTank.chemReadings = buffer;
   }
 }
 
@@ -124,9 +131,9 @@ void sendpH(){
 
 
 //Send message to server with Ammonia data
-void sendAmmonia(){
-  buffer = myTank.ammoniaReading;
-  sendMessageToServer('A');
+void sendChems(){
+  buffer = myTank.chemReadings;
+  sendMessageToServer('C');
 }
 
 //Send message to server with Nitrate/Nitrite data
@@ -140,6 +147,7 @@ void handleParamRequest();
 
 //Handles when the server wants to check Nitrate and Ammonia vals
 void handleCheckRequest();
+
 
 
 
@@ -164,8 +172,8 @@ void sendMessageToServer(char param) { //Sends whatever is in buffer to server
              http.begin(url_address + "/fromTank/sendTemp" );   
              break; 
         }
-        case 'A':{ // Ammonia Reading
-             http.begin(url_address + "/fromTank/sendAmmonia" );
+        case 'C':{ // Ammonia Reading
+             http.begin(url_address + "/fromTank/sendChems" );
              break;    
         }
         case 'N':{ // Nitrate Reading
@@ -219,9 +227,11 @@ void setup() {
   
     //Handler for http requests for requests
     server.on("/requestVals", handleParamRequest);
-    server.on("/promptAmmonia",handleAmmonPrompt);
-    server.on("/requestAmmonia", handleAmmonRequest);
-    server.on("/promptNitrate",handleNitrateRequest);
+    server.on("/promptAmmonia", handleAmmonPrompt);
+    server.on("/requestChems", handleChemRequest);
+    server.on("/promptNitrate", handleNitratePrompt);
+    server.on("/promptNitrite", handleNitritePrompt);
+    server.on("/sendAvg", getAvgTemp);
   
   server.begin();
 
@@ -255,12 +265,6 @@ void setup() {
 
 void handleParamRequest() {
 
-  //Serial.println("Fetching Temp and pH!");
-  //Check PCB for Temp
-   //getTemp();
-  //Check PCB for pH
-  // getpH();
-
   server.send(200, "text/plain", "fetching Temp and pH vals");
 
   getTemp();
@@ -272,7 +276,7 @@ void handleParamRequest() {
 }
 
 void handleCheckRequest() {
- // Serial.println("Starting chemical tests!");
+
 
   server.send(200, "text/plain", "checking chemical levels");
 }
@@ -284,23 +288,59 @@ void handleAmmonPrompt() {
   server.send(200, "text/plain", "checking Ammonia color test");
 }
 
-void handleAmmonRequest() {
+void handleChemRequest() {
 
   getChems();
-  sendAmmonia();
+  sendChems();
 
-  server.send(200, "text/plain", "returning Ammonia val");
+  server.send(200, "text/plain", "returning Chemical vals");
 }
+
+void handleNitratePrompt() {
+  getNitrate();
+
+  server.send(200, "text/plain", "checking Nitrate color test");
+}
+
 
 void handleNitrateRequest() {
 
   server.send(200, "text/plain", "checking Nitrate color test");
 }
 
+void handleNitritePrompt() {
+  getNitrite();
+  
+  server.send(200, "text/plain", "checking Nitrite color test");
+}
+
+
 void handleNitriteRequest() {
 
   server.send(200, "text/plain", "checking Nitrite color test");
 }
+
+void getAvgTemp() {
+
+     if (server.hasArg("plain")== false){ //Check if body received
+          server.send(200, "text/plain", "Body not received");
+          return;
+
+    }
+  String message = server.arg("plain");
+
+  String avgTempInt = message.substring(11, 15);
+  String g = "S" + avgTempInt;
+  //Serial.print(g);
+
+  for( int i = 0; i < g.length(); i++) {
+    Serial.write(g[i]);
+    delay(20);
+  }
+
+  server.send(200, "text/plain", "got avg temp!");
+}
+
 
 
 //// SETUP MODE ///////////////////////////////////////////////////////////
@@ -331,6 +371,6 @@ void loop() {
 
   server.handleClient();
 
-  delay(3000);  //Send a request every 3 seconds
+  delay(3000);  //
   
 }

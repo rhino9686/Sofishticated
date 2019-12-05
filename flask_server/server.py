@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, redirect
-from tank import Tank, convertToFahrenheit
+from tank import Tank, convertToFahrenheit, parseChemStr, parseTempAvg
 from random import random
 import requests
 ## Setup Server
@@ -23,11 +23,13 @@ def hello():
 def getTempFromTank():
     tempStr = str(request.data)
     temperatureStr = tempStr[7:11] ## check this val
-    celciusNum = int(temperatureStr)
-    farNum = convertToFahrenheit(celciusNum)
-
+    try:
+        celciusNum = int(temperatureStr)
+        farNum = convertToFahrenheit(celciusNum)
+        myTank.setTemp(farNum) 
+    except:
+         print( "Temp: " + temperatureStr)
     print( "Temp: " + temperatureStr)
-    myTank.setTemp(farNum) 
     return "temp received" #return val is meaningless
 
 # handler for tank sending pH value
@@ -35,18 +37,27 @@ def getTempFromTank():
 def getPhFromTank():
     phStr = str(request.data)
     phValStr = phStr[5:8] ##check this val
-    myTank.setPH(int(phValStr)) 
+    try:
+        myTank.setPH(int(phValStr)) 
+    except:
+        print(phValStr)
+
     print("pH: " + phValStr)
     return "pH received"
 
 # handler for tank sending Ammonia value
-@app.route("/fromTank/sendAmmonia", methods = ['POST'])
-def getAmmoniaFromTank():
-    ammonStr = str(request.data)
-    ammonValStr = ammonStr[2] ##check this val
-    testStr = "b'ammonia:-100nitrate:15nitrite:20'"
-    print (ammonStr)
-    return "pH retrieved from tank"
+@app.route("/fromTank/sendChems", methods = ['POST'])
+def getChemsFromTank():
+    chemStr = str(request.data)
+    try:
+        ammonia, nitrate, nitrite = parseChemStr(chemStr)
+        print(ammonia)
+        myTank.setNitrite(nitrite)
+        myTank.setNitrate(nitrate)
+        myTank.setAmmo(ammonia)
+    except:
+        "chem vals didn't line up for int indexing"
+    return "chems retrieved from tank"
 
 # handler for tank sending Nitrate value
 @app.route("/fromTank/sendNitrate", methods = ['POST'])
@@ -89,12 +100,34 @@ def sendRandoToApp():
 # handler for app requesting an Ammonia reading 
 @app.route("/fromApp/requestAmmonia",methods = ['POST'])
 def sendAmmoToApp():
-    dest_url = "http://" + WIFI_IP + "/requestAmmonia"
+    dest_url = "http://" + WIFI_IP + "/requestChems"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
-    data = "blank"
+    data = "ff"
     response = requests.post(dest_url, data=data, headers=headers)
-    ammonStr = str(request.data)
-    return jsonify({"ammo": "-3"})
+    ammoniaRes = myTank.getAmmo()
+    return jsonify({"ammo": str(ammoniaRes)})
+
+# handler for app requesting an Nitrate reading 
+@app.route("/fromApp/requestNitrate",methods = ['POST'])
+def sendNitrateToApp():
+    dest_url = "http://" + WIFI_IP + "/requestChems"
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "ff"
+    response = requests.post(dest_url, data=data, headers=headers)
+    nitrateRes = myTank.getNitrate()
+    return jsonify({"nitrate": str(nitrateRes)})
+
+
+# handler for app requesting an Nitrite reading 
+@app.route("/fromApp/requestNitrite",methods = ['POST'])
+def sendNitriteToApp():
+    dest_url = "http://" + WIFI_IP + "/requestChems"
+    headers = {'Content-type': 'text/html; charset=UTF-8'}
+    data = "ff"
+    response = requests.post(dest_url, data=data, headers=headers)
+    nitriteRes = myTank.getNitrite()
+    return jsonify({"nitrite": str(nitriteRes)})
+
 
 
 # handler for app prompting the Wi-fi chip to send temp/pH
@@ -150,6 +183,20 @@ def sendResetCommand():
     det = str(4)
     response = requests.post(dest_url, data=data, headers=headers)
     return jsonify({"reset": det})
+
+
+# handler for app sending a new temp range
+@app.route("/fromApp/sendAvg", methods =['POST'])
+def sendTempAvgToTank():
+    dest_url = "http://" + WIFI_IP + "/sendAvg"
+    headers = {'Content-type': 'application/json', 'Accept':'text/plain'}
+    rawTempData = str(request.data)
+    myTempStr = parseTempAvg(rawTempData)
+    data = {"temp": myTempStr}
+
+    det = str(4)
+    response = requests.post(dest_url, json=data, headers=headers)
+    return jsonify({"avg": det})
 
 
 if __name__ == "__main__":
