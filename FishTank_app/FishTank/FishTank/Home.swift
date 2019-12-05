@@ -12,6 +12,7 @@ let lightGrey = Color(red: (220/255), green: (220/255), blue: (220/255), opacity
 
 struct TankHome: View {
     @EnvironmentObject var tankData: TankProfile
+    @EnvironmentObject var noteCenter: LocalNotificationManager
     @State var resetModalDisplayed = false
     
     var body: some View {
@@ -38,14 +39,6 @@ struct TankHome: View {
                 
         
                 Section(header: Text("Residents")) {
-//                    ForEach(tankData.placeHolderFish, id: \.self) { fish in
-//                            NavigationLink(
-//                                destination: FishDetail(fish: fish)
-//                                    .environmentObject(self.tankData)
-//                            ){
-//                                FishRow(fishProfile: fish)
-//                        }
-//                    }.padding(.top, 6)
                     
                     ForEach(tankData.currentResidents, id: \.self) { fish in
                         
@@ -53,6 +46,7 @@ struct TankHome: View {
                             NavigationLink(
                                 destination: FishDetail(fish: fish)
                                     .environmentObject(self.tankData)
+                                    .environmentObject(self.noteCenter)
                             ){
                                 FishRow(fishProfile: fish)
                         }
@@ -60,21 +54,6 @@ struct TankHome: View {
                         
                         
                     }.padding(.top, 6)
-                    
-                    
-                    ForEach(tankData.notifyMan.notifications, id: \.self) { notification in
-                        
-                        NavigationLink(destination: ReminderDetailView(reminder: notification)
-                            .environmentObject(self.tankData)
-                        ) {
-                            Text(notification.title)
-                            .fontWeight(.semibold)
-                        }
-
-                    }
-                    
-                    
-                    
                     
                 }
                 
@@ -90,7 +69,7 @@ struct TankHome: View {
                 Divider()
 
                 NavigationLink(destination: RemindersView()
-                 .environmentObject(self.tankData)
+                 .environmentObject(self.noteCenter)
                 ) {
                     Text("Reminders")
                     .fontWeight(.semibold)
@@ -126,6 +105,7 @@ struct TankHome_Previews: PreviewProvider {
     static var previews: some View {
         TankHome()
          .environmentObject(TankProfile())
+         .environmentObject(LocalNotificationManager())
     }
 }
 

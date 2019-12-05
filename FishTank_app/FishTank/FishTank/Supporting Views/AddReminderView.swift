@@ -10,7 +10,9 @@ import SwiftUI
 
 struct AddReminderView: View {
     
-    @EnvironmentObject var tankData: TankProfile
+    @EnvironmentObject var noteCenter: LocalNotificationManager
+    
+    var onDismiss: () -> ()
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -61,8 +63,8 @@ struct AddReminderView: View {
                             print("created new reminder")
                             self.addReminder()
                             //This goes back to the home view
-                            self.presentationMode.wrappedValue.dismiss()
-                            
+                          //  self.presentationMode.wrappedValue.dismiss()
+                            self.onDismiss()
                         }
 
                     }) {
@@ -91,8 +93,8 @@ struct AddReminderView: View {
     //            datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 1)),
     //            Notification(id: "reminder-3", title: "Send postcard to mom", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 2))
     //        ]
-            self.tankData.notifyMan.addNotification(title: self.title)
-            self.tankData.notifyMan.schedule()
+            noteCenter.addNotification(title: self.title)
+            noteCenter.schedule()
             
         }
     
@@ -110,7 +112,13 @@ struct AddReminderView: View {
 }
 
 struct AddReminderView_Previews: PreviewProvider {
+    
+    static var i = 1
+    
     static var previews: some View {
-        AddReminderView()
+        AddReminderView(onDismiss: {
+            self.i += 1
+        })
+        .environmentObject(LocalNotificationManager())
     }
 }

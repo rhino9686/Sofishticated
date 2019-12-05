@@ -25,8 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          let laptopServerAddress = "35.6.184.166"
         
         let myTank = TankProfile(ipAddressInput: laptopServerAddress)
+        let notes = LocalNotificationManager()
         let contentView = TankHome()
             .environmentObject(myTank)
+            .environmentObject(notes)
                     
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -10,21 +10,25 @@ import SwiftUI
 
 struct RemindersView: View {
     var fish: FishProfile?
-    @EnvironmentObject var tankData: TankProfile
+    
+    @State var i = 1
+    @State var modalDisplayed: Bool =  false
+    
+    @EnvironmentObject var noteCenter: LocalNotificationManager
     
     var body: some View {
         
         Group {
             if fish != nil {
-               PersonalRemindersView()
+               PersonalRemindersView(noteCenter: noteCenter)
                 .navigationBarTitle("Reminders for \(fish!.name)")
             }
             else {
                    List{
-                       ForEach(self.tankData.notifyMan.notifications, id: \.self) { notification in
+                       ForEach(self.noteCenter.notifications, id: \.self) { notification in
                            
                            NavigationLink(destination: ReminderDetailView(reminder: notification)
-                               .environmentObject(self.tankData)
+                               .environmentObject(self.noteCenter)
                            ) {
                                Text(notification.title)
                                .fontWeight(.semibold)
@@ -32,27 +36,39 @@ struct RemindersView: View {
 
                        }.padding(.top, 6)
                        
-                       NavigationLink(destination: AddReminderView()
-                           .environmentObject(self.tankData)
-                       ) {
-                           Text("Add Reminder")
-                           .fontWeight(.semibold)
-                       }
-                       .padding(.top)
-                       
-                       
-                       
-                       Button(action: addNotifications) {
-                             Text("Dummy Test")
+//                       NavigationLink(destination: AddReminderView(onDismiss: incr)
+//                           .environmentObject(self.noteCenter)
+//                       ) {
 
-                       }.padding()
+//                       }
+//                       .padding(.top)
+                    
+                        Button(action: {
+                            self.modalDisplayed = true
+                        }){
+                            Text("+ Add Reminder")
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.blue)
+                        }
+                
                    }
                 .navigationBarTitle("Reminders")
+
             }
             
         }
-        
-        
+            .sheet(isPresented: $modalDisplayed) {
+                AddReminderView(onDismiss: {
+                    self.modalDisplayed = false
+                })
+                .environmentObject(self.noteCenter)
+            }
+            
+    }
+    
+    func incr() {
+        i = i + 1
     }
     
 
@@ -66,8 +82,8 @@ struct RemindersView: View {
 //            Notification(id: "reminder-2", title: "Ask Bob from accounting", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 1)),
 //            Notification(id: "reminder-3", title: "Send postcard to mom", datetime: DateComponents(calendar: Calendar.current, year: 2019, month: 4, day: 22, hour: 17, minute: 2))
 //        ]
-        self.tankData.notifyMan.addNotification(title: "Feed fish!")
-        self.tankData.notifyMan.schedule()
+        self.noteCenter.addNotification(title: "Feed fish!")
+        self.noteCenter.schedule()
         
     }
     
@@ -76,10 +92,38 @@ struct RemindersView: View {
 
 
 struct PersonalRemindersView: View {
+    @State var noteCenter: LocalNotificationManager
+    
+    @State var i = 1
     
     var body: some View {
-        Text("Hello")
+         List{
+         ForEach(self.noteCenter.notifications, id: \.self) { notification in
+             
+             NavigationLink(destination: ReminderDetailView(reminder: notification)
+                 .environmentObject(self.noteCenter)
+             ) {
+                 Text(notification.title)
+                 .fontWeight(.semibold)
+             }
+
+         }.padding(.top, 6)
+         
+         NavigationLink(destination: AddReminderView(onDismiss: incr)
+             .environmentObject(self.noteCenter)
+         ) {
+             Text("Add Reminder")
+             .fontWeight(.semibold)
+         }
+         .padding(.top)
+         
+         
+     }
         
+    }
+    
+    func incr() {
+        self.i = self.i + 1
     }
     
     
@@ -87,8 +131,11 @@ struct PersonalRemindersView: View {
 
 
 struct RemindersView_Previews: PreviewProvider {
+    
+   
+    
     static var previews: some View {
         RemindersView()
-        .environmentObject(TankProfile())
+        .environmentObject(LocalNotificationManager())
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SetupView: View {
     @EnvironmentObject var tankData : TankProfile
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    //@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var onDismiss: () -> ()
     

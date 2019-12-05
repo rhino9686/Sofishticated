@@ -45,10 +45,6 @@ final class TankProfile: ObservableObject {
     //Array to use later, store in persistent memory
     @Published var currentResidents: [FishProfile]
     
-    //Our Notification Handler class
-    var notifyMan = LocalNotificationManager()
-    
-    
     //Running Max/Min Temps accounting for all fish
     var maxTemp: Double = 80
     var minTemp: Double = 50
@@ -100,7 +96,6 @@ final class TankProfile: ObservableObject {
         return String(format: " %.0f", ammonia)
     }
     
-    
     var nitrateNum: String {
         let nitrate = self.messenger.nitrateVal
         return String(format: " %.0f", nitrate)
@@ -112,6 +107,7 @@ final class TankProfile: ObservableObject {
     }
     
     
+    //All these string formatter values are required to truncate the decimal place
     var maxTempStr_F: String {
         let maxT = self.maxTemp
         return String(format: "%.0f", maxT)
@@ -269,22 +265,13 @@ final class TankProfile: ObservableObject {
             return String(Health.bad.rawValue)
         }
     
-        //Ammonia Checking
-        
-        
-        //Nitrate Checking
-        
-        
-        //Nitrite Checking
-            
-            
+       //We won't consider Chemical readings in this case, just confine them to their page
         
         self.currentWarning = ""
         self.healthColor = .green
         return String(Health.good.rawValue)
         
     }
-    
     
     enum Health: String, CaseIterable, Codable, Hashable {
         case good = "Good"
@@ -309,7 +296,7 @@ final class TankProfile: ObservableObject {
         
     }
     
-    // Extra constructor for variable IP address
+    // Extra constructor for variable IP address - This one is used in main app
     init( ipAddressInput: String ) {
         currentResidents = [FishProfile]()
         self.idCounter = 0
@@ -329,7 +316,7 @@ final class TankProfile: ObservableObject {
     }
     
     
-    //Adds a new fish to the tank
+    //Adds a new fish to the tank, updates temperature range accordingly
     func addFish(fishEntry fish: FishProfile){
 
         self.currentResidents.append(fish)
@@ -348,7 +335,7 @@ final class TankProfile: ObservableObject {
         
     }
     
-    
+    //
     func addRange(_ newMaxTempIn: Double, _ newMinTempIn: Double, _ newMaxpHIn: Double, _ newMinpHIn: Double) {
         
         // Update overall temp range accordingly
@@ -367,7 +354,7 @@ final class TankProfile: ObservableObject {
         
     }
     
-    
+    //Sets back to defaults and then narrows down fish by fish again
     func recalculateRanges() {
         self.maxTemp = 90
         self.minTemp = 50

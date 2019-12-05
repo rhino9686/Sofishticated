@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ReminderDetailView: View {
-    @EnvironmentObject var tankData: TankProfile
+    @EnvironmentObject var noteCenter: LocalNotificationManager
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var reminder: Notification
@@ -33,7 +33,7 @@ struct ReminderDetailView: View {
     }
     
     func removeNote() {
-        self.tankData.notifyMan.removeNotification(id_in: reminder.id)
+        self.noteCenter.removeNotification(id_in: reminder.id)
         self.presentationMode.wrappedValue.dismiss()
         return
     }
@@ -43,8 +43,8 @@ struct ReminderDetailView: View {
 struct ReminderDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ReminderDetailView(reminder:
-            Notification(id: "fefefef", title: "Clean Tank", fishID: nil, repeats: false),
+            Notification(id: "37636", title: "Clean Tank", fishID: nil, repeats: false),
                            fish: nil)
-        .environmentObject(TankProfile())
+        .environmentObject(LocalNotificationManager())
     }
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct FishDetail: View {
     @State var fish: FishProfile
     @EnvironmentObject var tankData: TankProfile
+    @EnvironmentObject var noteCenter: LocalNotificationManager
     
     @Environment(\.editMode) var mode
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -166,5 +167,6 @@ struct FishDetail_Previews: PreviewProvider {
     static var previews: some View {
         FishDetail(fish: fishData[1])
         .environmentObject(TankProfile())
+        .environmentObject(LocalNotificationManager())
     }
 }
