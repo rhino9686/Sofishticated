@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view that provides the window contents.
         
         // let piServerAdress = "192.168.1.166"
-         let laptopServerAddress = "35.6.184.166"
+         let laptopServerAddress = "35.6.173.80"
         
         let myTank = TankProfile(ipAddressInput: laptopServerAddress)
         let notes = LocalNotificationManager()

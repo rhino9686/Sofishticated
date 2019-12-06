@@ -17,15 +17,17 @@ struct TestChemicalsView: View {
     
     let nitrateStr = "Nitrates and Nitrites naturally occur from the Ammonia breaking down, you should test for them too."
     
-    @State var ammoniaVal: String = "0"
-    @State var nitrateVal: String = "0"
-    @State var nitriteVal: String = "0"
+    @State var ammoniaVal: String = "Not tested"
+    @State var nitrateVal: String = "Not tested"
+    @State var nitriteVal: String = "Not tested"
     
     
     func update() {
-        self.ammoniaVal  =  "\(self.tankData.ammoniaNum)"
-        self.nitrateVal  =  "\(self.tankData.nitrateNum)"
-        self.nitriteVal  =  "\(self.tankData.nitriteNum)"
+        self.tankData.getChems()
+        
+        self.ammoniaVal  =  "\(self.tankData.ammoniaStat)"
+        self.nitrateVal  =  "\(self.tankData.nitrateStat)"
+        self.nitriteVal  =  "\(self.tankData.nitriteStat)"
     }
     
     
@@ -51,6 +53,7 @@ struct TestChemicalsView: View {
                     Text("Ammonia Levels:")
                         .font(.footnote)
                     Text(self.ammoniaVal).font(.footnote)
+                        .foregroundColor(tankData.ammonColor)
                 }
             
     
@@ -67,11 +70,13 @@ struct TestChemicalsView: View {
                     Text("Nitrate Levels:")
                         .font(.footnote)
                     Text(self.nitrateVal).font(.footnote)
+                    .foregroundColor(tankData.nitrateColor)
                 }
                 HStack {
                     Text("Nitrite Levels:")
                         .font(.footnote)
                     Text(self.nitriteVal).font(.footnote)
+                    .foregroundColor(tankData.nitriteColor)
                 }
             
             

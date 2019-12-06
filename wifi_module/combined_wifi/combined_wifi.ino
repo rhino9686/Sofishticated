@@ -7,7 +7,7 @@
 #include <ESP8266HTTPClient.h>
 
 // Change this depending on what the current IP address is for the server
-#define SERVER_ADDR "35.6.184.166"
+#define SERVER_ADDR "35.6.173.80"
 
 
 #ifndef STASSID
@@ -276,7 +276,6 @@ void handleParamRequest() {
 }
 
 void handleCheckRequest() {
-
 
   server.send(200, "text/plain", "checking chemical levels");
 }

@@ -7,7 +7,7 @@
 
 ESP8266WebServer server;
 uint8_t pin_led = 13;
-char* ssid = "MadiWifi";
+char* ssid = "FishTank";
 char* password = "password";
 
 
@@ -27,7 +27,7 @@ void setup() {
   Serial.print(" Setting softAP config    ");
   Serial.println(WiFi.softAPConfig(ip, gateway, subnet) ? "Ready" : "Failed!");
   Serial.print(" Setting softAP   " );
-  Serial.println(WiFi.softAP(ssid, password) ? "Ready" : "Failed!");
+  Serial.println(WiFi.softAP(ssid) ? "Ready" : "Failed!");
 
   Serial.print("Soft AP IP Addr is  ");
   Serial.println(WiFi.softAPIP());

@@ -67,7 +67,7 @@ struct AmmoniaTestingView: View {
                                 .font(.caption)
                             Text("with colored side facing down")
                                 .font(.caption)
-                            Text("until the LED turns green")
+                            Text("until the LED turns red")
                                                          .font(.caption)
                             
                             FittedImage(image: Image("face_down"), width: 220, height: 280)

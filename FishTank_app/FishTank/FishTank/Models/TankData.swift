@@ -80,16 +80,51 @@ final class TankProfile: ObservableObject {
         return String(format: " %.2f", pH)
     }
     
+    var ammonColor: Color = .green
+    var nitrateColor: Color = .green
+    var nitriteColor: Color = .green
+    
+    
     var ammoniaStat: String {
         let ammonia = self.messenger.ammoniaVal
         
         if ammonia == 0 {
+            ammonColor = .green
             return "Good"
         }
         else {
-            return "Unhealthy"
+            ammonColor = .yellow
+            return "Light levels detected"
         }
     }
+    
+    var nitrateStat: String {
+        let nitrate = self.messenger.nitrateVal
+        
+        if nitrate == 0 {
+            nitrateColor = .green
+            return "Good"
+        }
+        else {
+            nitrateColor = .green
+            return "Good"
+        }
+    }
+    
+    var nitriteStat: String {
+        let nitrite = self.messenger.nitriteVal
+        
+        if nitrite == 0 {
+            nitriteColor = .green
+            return "Good"
+        }
+        else {
+            nitriteColor = .red
+            return "heavy levels detected"
+        }
+    }
+    
+    
     
     var ammoniaNum: String {
         let ammonia = self.messenger.ammoniaVal
@@ -182,6 +217,14 @@ final class TankProfile: ObservableObject {
     func getNitriteVal() {
         let _ = self.messenger.requestNitrite()
     }
+    
+    func getChems() {
+        let _ = self.messenger.requestAmmonia()
+        let _ = self.messenger.requestNitrate()
+        let _ = self.messenger.requestNitrite()
+    
+    }
+    
     
     
     //////////////////////////////////////////////////////////////////////////////////////////////////

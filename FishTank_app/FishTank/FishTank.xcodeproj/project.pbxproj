@@ -18,7 +18,6 @@
 		4128BA7523554BD900C55044 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128BA7423554BD900C55044 /* MapView.swift */; };
 		412DCBB8238B640400DA969A /* NitratesTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DCBB7238B640400DA969A /* NitratesTestingView.swift */; };
 		412DCBBC238B643900DA969A /* AmmoniaTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DCBBB238B643900DA969A /* AmmoniaTestingView.swift */; };
-		412DCBBE238B664100DA969A /* AllTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DCBBD238B664100DA969A /* AllTestingView.swift */; };
 		412DCBC0238B698100DA969A /* barb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 412DCBBF238B698100DA969A /* barb.jpg */; };
 		412DCBC2238B699200DA969A /* cory_catfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 412DCBC1238B699200DA969A /* cory_catfish.jpg */; };
 		412DCBC4238B6BF600DA969A /* angelfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 412DCBC3238B6BF600DA969A /* angelfish.jpg */; };
@@ -33,7 +32,6 @@
 		416B8669235CF72400C36ED7 /* TankStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B8668235CF72400C36ED7 /* TankStatsView.swift */; };
 		416B866B235CF84B00C36ED7 /* TankData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B866A235CF84B00C36ED7 /* TankData.swift */; };
 		417A8526235E019D00C00E8C /* FishDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A8525235E019D00C00E8C /* FishDetail.swift */; };
-		418873872398017900909AB5 /* appleSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 418873862398017900909AB5 /* appleSnail.jpg */; };
 		41902E7D2378F1A300309949 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41902E7C2378F1A300309949 /* Notification.swift */; };
 		41AA857B238AECB400F7F1F7 /* TestChemicalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA857A238AECB400F7F1F7 /* TestChemicalsView.swift */; };
 		41AECDDC235632250091A1BA /* FishProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AECDDB235632250091A1BA /* FishProfile.swift */; };
@@ -53,6 +51,7 @@
 		41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41E35CD2236FCB7300B45147 /* seaSnail.jpg */; };
 		41E35CD5236FCE9800B45147 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E35CD4236FCE9800B45147 /* SettingsView.swift */; };
 		41F42EA623615108000B9182 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F42EA523615108000B9182 /* Messenger.swift */; };
+		CB0C080A239951FF00ACEAD5 /* appleSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +83,6 @@
 		4128BA7423554BD900C55044 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		412DCBB7238B640400DA969A /* NitratesTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitratesTestingView.swift; sourceTree = "<group>"; };
 		412DCBBB238B643900DA969A /* AmmoniaTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmmoniaTestingView.swift; sourceTree = "<group>"; };
-		412DCBBD238B664100DA969A /* AllTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTestingView.swift; sourceTree = "<group>"; };
 		412DCBBF238B698100DA969A /* barb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barb.jpg; sourceTree = "<group>"; };
 		412DCBC1238B699200DA969A /* cory_catfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cory_catfish.jpg; sourceTree = "<group>"; };
 		412DCBC3238B6BF600DA969A /* angelfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = angelfish.jpg; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		416B8668235CF72400C36ED7 /* TankStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankStatsView.swift; sourceTree = "<group>"; };
 		416B866A235CF84B00C36ED7 /* TankData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankData.swift; sourceTree = "<group>"; };
 		417A8525235E019D00C00E8C /* FishDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishDetail.swift; sourceTree = "<group>"; };
-		418873862398017900909AB5 /* appleSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = appleSnail.jpg; sourceTree = "<group>"; };
 		41902E7C2378F1A300309949 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		41AA857A238AECB400F7F1F7 /* TestChemicalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChemicalsView.swift; sourceTree = "<group>"; };
 		41AECDDB235632250091A1BA /* FishProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishProfile.swift; sourceTree = "<group>"; };
@@ -124,6 +121,7 @@
 		41E35CD2236FCB7300B45147 /* seaSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = seaSnail.jpg; sourceTree = "<group>"; };
 		41E35CD4236FCE9800B45147 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		41F42EA523615108000B9182 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
+		CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = appleSnail.jpg; path = ../../../../../../../appleSnail.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				41AA857A238AECB400F7F1F7 /* TestChemicalsView.swift */,
-				412DCBBD238B664100DA969A /* AllTestingView.swift */,
 				412DCBB7238B640400DA969A /* NitratesTestingView.swift */,
 				412DCBBB238B643900DA969A /* AmmoniaTestingView.swift */,
 			);
@@ -207,8 +204,8 @@
 				412DCBC1238B699200DA969A /* cory_catfish.jpg */,
 				412DCBC3238B6BF600DA969A /* angelfish.jpg */,
 				41194B7A2375EE90005BF9EF /* betta.jpg */,
+				CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */,
 				41194B7C2375EF9B005BF9EF /* tetra.jpg */,
-				418873862398017900909AB5 /* appleSnail.jpg */,
 				415658D22395772A00B21CB3 /* guppy.jpg */,
 				41E35CD2236FCB7300B45147 /* seaSnail.jpg */,
 				410FE233235BC58700F69F43 /* goldfish.jpg */,
@@ -405,7 +402,7 @@
 				415658D32395772A00B21CB3 /* guppy.jpg in Resources */,
 				41AECDDE235633450091A1BA /* fishData.json in Resources */,
 				41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */,
-				418873872398017900909AB5 /* appleSnail.jpg in Resources */,
+				CB0C080A239951FF00ACEAD5 /* appleSnail.jpg in Resources */,
 				41C6167D2351464D003DADD8 /* Preview Assets.xcassets in Resources */,
 				41C6167A2351464D003DADD8 /* Assets.xcassets in Resources */,
 				412DCBC0238B698100DA969A /* barb.jpg in Resources */,
@@ -444,7 +441,6 @@
 				41C616742351464C003DADD8 /* AppDelegate.swift in Sources */,
 				41596096238C78D600FEC167 /* FishFactsView.swift in Sources */,
 				41E2144D2370EB3F0050433E /* TestConnectionView.swift in Sources */,
-				412DCBBE238B664100DA969A /* AllTestingView.swift in Sources */,
 				410FE232235BC4E800F69F43 /* FishRow.swift in Sources */,
 				414C40F023899A14009D6C4A /* ResetTankView.swift in Sources */,
 				412DCBBC238B643900DA969A /* AmmoniaTestingView.swift in Sources */,

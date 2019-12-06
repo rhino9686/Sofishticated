@@ -113,7 +113,7 @@ def sendNitrateToApp():
     dest_url = "http://" + WIFI_IP + "/requestChems"
     headers = {'Content-type': 'text/html; charset=UTF-8'}
     data = "ff"
-    response = requests.post(dest_url, data=data, headers=headers)
+   ## response = requests.post(dest_url, data=data, headers=headers)
     nitrateRes = myTank.getNitrate()
     return jsonify({"nitrate": str(nitrateRes)})
 

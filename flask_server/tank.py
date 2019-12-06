@@ -52,15 +52,22 @@ def convertToFahrenheit(numCelcius):
     numFar = (9/5)*numCelcius + 32
     return numFar * 100
 
-def parseChemStr(str):
-    ammonia = str[10:13]
-    #print(ammonia)
+def parseChemStr(stri):
+    print("entire: " + stri)
+    strArr =  stri.split(':')
 
-    nitrate = str[23:25]
-    #print(nitrate)
+    ammon = strArr[1]
+    nitr = strArr[2]
+    trite = strArr[3]
 
-    nitrite = str[36:38]
-    #print(nitrite)
+    ammonia = stri[10:13]
+    print("ammonia: " +ammonia)
+
+    nitrate = stri[24:27]
+    print("nitrate: " +nitrate)
+
+    nitrite = stri[39:41]
+    print("nitrite: " + nitrite)
 
     return int(ammonia), int(nitrate), int(nitrite)
 
