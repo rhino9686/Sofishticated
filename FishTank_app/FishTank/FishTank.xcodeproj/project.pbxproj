@@ -12,6 +12,7 @@
 		410D3BC3239309B9005E07F8 /* ParamHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */; };
 		410FE232235BC4E800F69F43 /* FishRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410FE231235BC4E800F69F43 /* FishRow.swift */; };
 		410FE235235BC58700F69F43 /* goldfish.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 410FE233235BC58700F69F43 /* goldfish.jpg */; };
+		4115B547239D71FD00938E75 /* appleSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4115B546239D71FD00938E75 /* appleSnail.jpg */; };
 		41194B7B2375EE90005BF9EF /* betta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7A2375EE90005BF9EF /* betta.jpg */; };
 		41194B7D2375EF9B005BF9EF /* tetra.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41194B7C2375EF9B005BF9EF /* tetra.jpg */; };
 		4128BA73235547DE00C55044 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4128BA72235547DE00C55044 /* CircleImage.swift */; };
@@ -51,7 +52,6 @@
 		41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41E35CD2236FCB7300B45147 /* seaSnail.jpg */; };
 		41E35CD5236FCE9800B45147 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E35CD4236FCE9800B45147 /* SettingsView.swift */; };
 		41F42EA623615108000B9182 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F42EA523615108000B9182 /* Messenger.swift */; };
-		CB0C080A239951FF00ACEAD5 /* appleSnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +77,7 @@
 		410D3BC2239309B9005E07F8 /* ParamHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamHistoryView.swift; sourceTree = "<group>"; };
 		410FE231235BC4E800F69F43 /* FishRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishRow.swift; sourceTree = "<group>"; };
 		410FE233235BC58700F69F43 /* goldfish.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldfish.jpg; sourceTree = "<group>"; };
+		4115B546239D71FD00938E75 /* appleSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = appleSnail.jpg; path = ../../../../../../../soFISHticated/appleSnail.jpg; sourceTree = "<group>"; };
 		41194B7A2375EE90005BF9EF /* betta.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = betta.jpg; sourceTree = "<group>"; };
 		41194B7C2375EF9B005BF9EF /* tetra.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tetra.jpg; sourceTree = "<group>"; };
 		4128BA72235547DE00C55044 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		41E35CD2236FCB7300B45147 /* seaSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = seaSnail.jpg; sourceTree = "<group>"; };
 		41E35CD4236FCE9800B45147 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		41F42EA523615108000B9182 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
-		CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = appleSnail.jpg; path = ../../../../../../../appleSnail.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +204,7 @@
 				412DCBC1238B699200DA969A /* cory_catfish.jpg */,
 				412DCBC3238B6BF600DA969A /* angelfish.jpg */,
 				41194B7A2375EE90005BF9EF /* betta.jpg */,
-				CB0C0809239951FF00ACEAD5 /* appleSnail.jpg */,
+				4115B546239D71FD00938E75 /* appleSnail.jpg */,
 				41194B7C2375EF9B005BF9EF /* tetra.jpg */,
 				415658D22395772A00B21CB3 /* guppy.jpg */,
 				41E35CD2236FCB7300B45147 /* seaSnail.jpg */,
@@ -402,7 +402,7 @@
 				415658D32395772A00B21CB3 /* guppy.jpg in Resources */,
 				41AECDDE235633450091A1BA /* fishData.json in Resources */,
 				41E35CD3236FCB7300B45147 /* seaSnail.jpg in Resources */,
-				CB0C080A239951FF00ACEAD5 /* appleSnail.jpg in Resources */,
+				4115B547239D71FD00938E75 /* appleSnail.jpg in Resources */,
 				41C6167D2351464D003DADD8 /* Preview Assets.xcassets in Resources */,
 				41C6167A2351464D003DADD8 /* Assets.xcassets in Resources */,
 				412DCBC0238B698100DA969A /* barb.jpg in Resources */,

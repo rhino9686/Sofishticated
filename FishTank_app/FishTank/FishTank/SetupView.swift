@@ -23,7 +23,7 @@ struct SetupView: View {
     @State private var wifiName: String = ""
     @State private var wifiPassword: String = ""
     
-    @State var index: Int = 0
+    @State var index: Int = 1
     let phases = [0, 1, 2, 3]
     let phaseNames = ["Step 1", "Step 2", "Step 3", "Step 4"]
     
@@ -70,7 +70,7 @@ struct SetupView: View {
                              Text("open up Settings and connect to FishTank")
                                 .font(.caption)
                          
-                             FittedImage(image: Image("placeholder"), width: 220, height: 280)
+                             FittedImage(image: Image("wifi_circled"), width: 320, height: 300)
                             
                              Button(action: self.nextStep) {
                                     Text("Next Step")
