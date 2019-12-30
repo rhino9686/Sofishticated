@@ -20,16 +20,16 @@ All the Phone App code is in FishTank_app/FishTank/FishTank/
 ## Authors
 #### (left to right)
 
-* **Robert Cecil** 
+
+* **David Waier** 
 
 * **Madeline Devore** 
 
 * **Celine Schlueter**
 
-* **David Waier** 
+* **Robert Cecil** 
 
 * **Ray Puyat** 
 
-![groupShot](https://user-images.githubusercontent.com/41589697/57891265-cfa0bc80-7808-11e9-98fe-a6b496384759.jpg)
-
+![cuties](https://user-images.githubusercontent.com/41589697/71604888-f3640900-2b32-11ea-96e6-fc64cbe460e1.jpeg)
 
