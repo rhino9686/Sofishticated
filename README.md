@@ -1,13 +1,13 @@
 ## Sofishticated: 
 ### A Smarter fish tank for your finned friend
 
-![Webp net-resizeimage](https://user-images.githubusercontent.com/41589697/57890693-86e80400-7806-11e9-8d56-a8f19770ed18.jpg)
+![close_up](https://user-images.githubusercontent.com/41589697/71604711-f0b4e400-2b31-11ea-888f-ee7d592da443.jpeg)
 
 
 This was our final project for EECS 473. We made a monitoring system that could connect to fish tanks.
 
 
-![tank#2 resize](https://user-images.githubusercontent.com/41589697/57891187-79cc1480-7808-11e9-8c35-25ea086762f5.jpg)
+![IMG_1660](https://user-images.githubusercontent.com/41589697/71604759-23f77300-2b32-11ea-932b-220c6a707082.jpeg)
 
 ## Installation:
 Be advised that this software was designed for a custom PCB designed and constructed from scratch, but can be adapted to any Arduino or Atmel system with a bit of hacking.
