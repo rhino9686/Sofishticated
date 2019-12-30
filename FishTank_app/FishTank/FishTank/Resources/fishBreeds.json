@@ -1,0 +1,125 @@
+
+[
+    {
+           "breedName": "Goldfish",
+           "maxTemp": 74,
+           "minTemp": 68,
+           "maxPh": 8.4,
+           "minPh": 7.0,
+           "imageName": "goldfish",
+           "fishFact1": "Goldfish get along well wish similarly sized fish, they do best with other peaceful fish",
+           "fishFact2": "Goldfish are omnivores and bottom feeders, they like fish flakes and will dig around in substrate for small invertebrates",
+           "fishFact3":  "Goldfish actually have good memories, studies show they can retain a memory for six months"
+    },
+    
+    {
+           "breedName": "Betta",
+           "maxTemp": 85,
+           "minTemp": 76,
+           "maxPh": 7.5,
+           "minPh": 6.8,
+           "imageName": "betta",
+           "fishFact1": "Bettas are very territorial, multiple males should not be kept together",
+           "fishFact2": "Bettas can live well with other fish in large, peaceful communities. They prefer to live with Tetras, Barbs, or other non aggressive fish",
+           "fishFact3": "Bettas eat insects and other invertebrates, they can also eat tropical fish flakes",
+           "fishFact4": "Bettas have a special organ called the labyrinth organ, which allows them to breathe air fromt the surface"
+    },
+    
+    {
+           "breedName": "Tetra",
+           "maxTemp": 80,
+           "minTemp": 75,
+           "maxPh": 7.8,
+           "minPh": 6.8,
+           "imageName": "tetra",
+           "fishFact1": "Tetras prefer to live with Rasboras, Rainbow Fish, and other Tetras",
+           "fishFact2": "Tetras like to live in schools of six or more, they are big fans of the buddy system"
+      
+    },
+    
+    {
+           "breedName": "Angelfish",
+           "maxTemp": 84,
+           "minTemp": 78,
+           "maxPh": 7.8,
+           "minPh": 6.8,
+           "imageName": "angelfish",
+           "fishFact1": "Angelfish are aggressive towards other Angelfish, suitable tankmates include larger Tetras, Rainbowfish, and medium sized Catfish",
+           "fishFact2": "Angelfish are omnivores, besides fish flakes they will also forage for worms or small crustaceans",
+           "fishFact3": "Full grown Angelfish are quite large and will require a 55+ gallon tank when full grown"
+    
+    },
+    {
+           "breedName": "Nerite Snail",
+           "maxTemp": 78,
+           "minTemp": 72,
+           "maxPh": 8.4,
+           "minPh": 8.1,
+           "imageName": "seaSnail",
+           "fishFact1": "Nerites are great for helping keep your tank clean, they clean algae off of most tank surfaces",
+           "fishFact2": "Nerites thrive in both fresh and saltwater"
+    },
+  {
+    "breedName": "Barb",
+    "maxTemp": 80,
+    "minTemp": 75,
+    "maxPh": 7.8,
+    "minPh": 6.8,
+    "imageName": "barb",
+    "fishFact1": "Barbs are nipping fish, avoid mixing with timid fish like Tetras, Angelfish, Guppies, and Bettas",
+    "fishFact2": "Barbs like to live in schools of six to ten, they live well with Red Tails, Rainbow Sharks, and other Barb species",
+    "fishFact3": "Barbs are omnivores and enjoy a diet of meat and vegetables, they can also enjoy a stable diet eating fish flakes"
+    
+  },
+
+  {
+    "breedName": "Corydoras Catfish",
+    "maxTemp": 80,
+    "minTemp": 74,
+    "maxPh": 8.0,
+    "minPh": 7.0,
+    "imageName": "cory_catfish",
+    "fishFact1": "Corydoras Catfish can live well with other types of catfish",
+    "fishFact2": "Corydoras Catfish are omnivores and enjoy a diet of meat and vegetables, they can also enjoy a stable diet eating fish flakes",
+    "fishFact3": "Corydoras Catfish prefer to live in tanks that are thirty gallons or larger"
+  },
+
+  {
+    "breedName": "Danio",
+    "maxTemp": 78,
+    "minTemp": 70,
+    "maxPh": 8.0,
+    "minPh": 7.0,
+    "imageName": "danios",
+    "fishFact1": "Danios are active fish and like to live with other active fish such as Tetras, Barbs, and other Danios",
+    "fishFact2": "Danios are omnivores and enjoy a diet of meat and vegetables, they can also enjoy a stable diet eating fish flakes",
+    "fishFact3": "Danios are best kept in schools of six or more, they like long tanks for lots of swimming room"
+  },
+  {
+    "breedName": "Guppy",
+    "maxTemp": 84,
+    "minTemp": 72,
+    "maxPh": 7.2,
+    "minPh": 7.0,
+    "imageName": "guppy",
+    "fishFact1": "Guppies do well in trios (2 female, 2 male), they also prefer to life with other peaceful fish",
+    "fishFact2": "Guppies have smaller stomachs and prefer to eat two small meals per day instead of one large one",
+    "fishFact3": "Guppies are omnivores and enjoy a diet of meat and vegetables, they can also enjoy a stable diet eating fish flakes",
+    "fishFact4": "Guppies are also known as Rainbow Fish"
+  },
+  
+  {
+    "breedName": "Apple Snail",
+    "maxTemp": 82,
+    "minTemp": 65,
+    "maxPh": 8.0,
+    "minPh": 7.0,
+    "imageName": "appleSnail",
+    "fishFact1": "In captivity, as well as eating vegetables and fish food pellets, apple snails will also eat other foods if they are available",
+    "fishFact2": "In the 1980s, Pomacea canaliculata was introduced in Taiwan to start an escargot industry",
+    "fishFact3": "Instead of becoming a valuable food source, the introduced snails escaped and became a serious threat to rice production and the native ecosystems",
+    "fishFact4": "In captivity, apple snails are most active at night. During the day they usually retreat to somewhere shaded"
+  }
+    
+
+]

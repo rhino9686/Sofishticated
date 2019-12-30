@@ -1,0 +1,34 @@
+[
+    {
+           "name": "Lucky",
+           "id": 1001,
+           "imageName": "goldfish",
+           "breedData":
+           {
+                  "breedName": "Goldfish",
+                  "maxTemp": 74,
+                  "minTemp": 68,
+                  "maxPh": 8.4,
+                  "minPh": 7.0,
+                  "imageName": "goldfish"
+           }
+           
+           
+    },
+
+    {
+           "name": "Steve",
+           "id": 1002,
+           "imageName": "seaSnail",
+           "breedData":
+           {
+                  "breedName": "Nerite Snail",
+                  "maxTemp": 74,
+                  "minTemp": 68,
+                  "maxPh": 8.4,
+                  "minPh": 7.0,
+                  "imageName": "seaSnail"
+           }
+           
+    }
+]
