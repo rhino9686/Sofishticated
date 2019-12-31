@@ -6,13 +6,13 @@
 
 This was our final project for EECS 473, Advanced Embedded Systems at the University of Michigan.
 
+## Overview:
 
-The Sofishticated smart tank module is made a monitoring system that can connect to a fish tank and measure live data about its temperature and pH, while also controlling a water heater to keep it at optimal levels. The data is then streamed to an iPhone app, which lets a user see it and store fish profiles. 
+The Sofishticated smart tank module is made a monitoring system that can connect to a fish tank and measure live data about its temperature and pH, while also controlling a water heater to keep it at optimal levels. The data is then streamed to an iPhone app, which lets a user see it and store fish profiles, schedule feeding reminders, and be guided in testing for Ammonia and Nitrate chemical buildup.
+The end result is a smarter fish tank that lends to an easier fish keeping experience.
 
 ![far_away](https://user-images.githubusercontent.com/41589697/71604920-3d4cef00-2b33-11ea-815b-50a8049a89a6.jpeg)
 
-
-## Overview:
 
 
 
@@ -21,8 +21,12 @@ The main component of the device is the enclosed Printed Circuit Board system, w
 
 ![pcb](https://user-images.githubusercontent.com/41589697/71606034-b7817180-2b3b-11ea-8abe-e3f3c50c45d5.jpeg)
 
-The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iPhone App.
+The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iOS App.
 
+
+![phone_good](https://user-images.githubusercontent.com/41589697/71607510-09c88f80-2b48-11ea-88e3-bf07a69e3c15.png)
+
+The iOS App was written from the ground up, using the new SwiftUI framework.
 
 ## Installation:
 Be advised that this software was designed for a custom PCB designed and constructed from scratch, but can be adapted to any Arduino or Atmel system with a bit of hacking.
