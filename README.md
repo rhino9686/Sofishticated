@@ -23,6 +23,8 @@ The main component of the device is the enclosed Printed Circuit Board system, w
 
 The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iOS App.
 
+![esp8266](https://user-images.githubusercontent.com/41589697/71607698-932c9180-2b49-11ea-87dd-ed7b1f021a14.jpg)
+
 
 ![phone_good](https://user-images.githubusercontent.com/41589697/71607510-09c88f80-2b48-11ea-88e3-bf07a69e3c15.png)
 
