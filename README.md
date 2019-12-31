@@ -26,7 +26,7 @@ The PCB was connected to an ESP8266, which transmits the collected data over Wi-
 ![esp8266](https://user-images.githubusercontent.com/41589697/71607698-932c9180-2b49-11ea-87dd-ed7b1f021a14.jpg)
 
 
-![phone_good](https://user-images.githubusercontent.com/41589697/71607510-09c88f80-2b48-11ea-88e3-bf07a69e3c15.png)
+![rsz_phone_good](https://user-images.githubusercontent.com/41589697/71607757-0b935280-2b4a-11ea-846f-34df39afa55d.jpg)
 
 The iOS App was written from the ground up, using the new SwiftUI framework.
 
