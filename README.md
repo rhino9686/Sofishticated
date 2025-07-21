@@ -1,7 +1,6 @@
 ## Sofishticated: 
 ### A smarter fish tank for your finned friend
 
-![close_up](https://user-images.githubusercontent.com/41589697/71604908-26a69800-2b33-11ea-80fa-e5c2636d1bf4.jpeg)
 
 <img src="img/close_up.jpeg" alt="drawing" width="600"/>
 
@@ -17,6 +16,7 @@ The final project was demoed successfully at a design expo on December 5, 2019. 
 
 ![far_away](https://user-images.githubusercontent.com/41589697/71604920-3d4cef00-2b33-11ea-815b-50a8049a89a6.jpeg)
 
+<img src="img/far_away.jpeg" alt="drawing" width="600"/>
 
 
 
@@ -25,15 +25,21 @@ The main component of the device is the enclosed Printed Circuit Board system, w
 
 ![pcb](https://user-images.githubusercontent.com/41589697/71606034-b7817180-2b3b-11ea-8abe-e3f3c50c45d5.jpeg)
 
+<img src="img/pcb.jpeg" alt="drawing" width="600"/>
+
 The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iOS App.
 
 ![esp8266](https://user-images.githubusercontent.com/41589697/71607698-932c9180-2b49-11ea-87dd-ed7b1f021a14.jpg)
+
+<img src="img/esp8266.jpg" alt="drawing" width="600"/>
 
 
 The iOS App was written from the ground up, using the new SwiftUI framework.
 Special thanks to https://github.com/AppPear/ChartView, which was used as a dependency for the app.
 
 ![rsz_phone_good](https://user-images.githubusercontent.com/41589697/71607757-0b935280-2b4a-11ea-846f-34df39afa55d.jpg)
+
+<img src="img/phone_good.png" alt="drawing" width="600"/>
 
 
 ## Installation:
