@@ -14,7 +14,6 @@ The end result is a smarter fish tank that lends to an easier fish keeping exper
 
 The final project was demoed successfully at a design expo on December 5, 2019. It was deployed on a live marine environment, monitoring 6 fish and one sea snail.
 
-![far_away](https://user-images.githubusercontent.com/41589697/71604920-3d4cef00-2b33-11ea-815b-50a8049a89a6.jpeg)
 
 <img src="img/far_away.jpeg" alt="drawing" width="600"/>
 
@@ -23,27 +22,24 @@ The final project was demoed successfully at a design expo on December 5, 2019. 
 ## Technology:
 The main component of the device is the enclosed Printed Circuit Board system, which runs a port of FreeRTOS for Arduino. The RTOS ran drivers for the pH sensor and Temperature sensor written in C and C++.
 
-![pcb](https://user-images.githubusercontent.com/41589697/71606034-b7817180-2b3b-11ea-8abe-e3f3c50c45d5.jpeg)
 
 <img src="img/pcb.jpeg" alt="drawing" width="600"/>
 
 The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iOS App.
 
-![esp8266](https://user-images.githubusercontent.com/41589697/71607698-932c9180-2b49-11ea-87dd-ed7b1f021a14.jpg)
 
-<img src="img/esp8266.jpg" alt="drawing" width="600"/>
+<img src="img/esp8266.jpg" alt="drawing" width="400"/>
 
 
 The iOS App was written from the ground up, using the new SwiftUI framework.
 Special thanks to https://github.com/AppPear/ChartView, which was used as a dependency for the app.
 
-![rsz_phone_good](https://user-images.githubusercontent.com/41589697/71607757-0b935280-2b4a-11ea-846f-34df39afa55d.jpg)
 
-<img src="img/phone_good.png" alt="drawing" width="600"/>
+<img src="img/phone_good.png" alt="drawing" width="300"/>
 
 
 ## Installation:
-Be advised that this software was designed for a custom PCB designed and constructed from scratch, but can be adapted to any Arduino or Atmel system with a bit of hacking.
+Be advised that this software was designed for a custom PCB designed and constructed from scratch, but can be adapted to any Arduino or Atmel system with a bit of modification.
 
 ## The sauce
 All the C/C++ code that we run on the board is in LilFishTanks/LilFishTanks/lil_fish_tanks_arduino/.
