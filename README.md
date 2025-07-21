@@ -3,6 +3,8 @@
 
 ![close_up](https://user-images.githubusercontent.com/41589697/71604908-26a69800-2b33-11ea-80fa-e5c2636d1bf4.jpeg)
 
+<img src="img/close_up.jpeg" alt="drawing" width="600"/>
+
 
 This was our final project for EECS 473, Advanced Embedded Systems at the University of Michigan.
 
