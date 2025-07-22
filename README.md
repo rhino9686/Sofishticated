@@ -4,7 +4,7 @@
 
 <img src="img/close_up.jpeg" alt="drawing" width="400"/>
 
-<img src="img/system_overview.jpg" alt="drawing" width="500"/>
+
 
 
 This was our final project for EECS 473, Advanced Embedded Systems at the University of Michigan.
@@ -13,6 +13,8 @@ This was our final project for EECS 473, Advanced Embedded Systems at the Univer
 
 The Sofishticated smart tank module is made a monitoring system that can connect to a fish tank and measure live data about its temperature and pH, while also controlling a water heater to keep it at optimal levels. The data is then streamed to an iPhone app, which lets a user see it and store fish profiles, schedule feeding reminders, and be guided in testing for Ammonia and Nitrate chemical buildup.
 The end result is a smarter fish tank that lends to an easier fish keeping experience. 
+
+<img src="img/system_overview.jpg" alt="drawing" width="500"/>
 
 The final project was demoed successfully at a design expo on December 5, 2019. It was deployed on a live marine environment, monitoring 6 fish and one sea snail.
 
