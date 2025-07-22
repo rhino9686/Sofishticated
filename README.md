@@ -2,7 +2,7 @@
 ### A smarter fish tank for your finned friend
 
 
-<img src="img/close_up.jpeg" alt="drawing" width="600"/>
+<img src="img/close_up.jpeg" alt="drawing" width="400"/>
 
 
 This was our final project for EECS 473, Advanced Embedded Systems at the University of Michigan.
@@ -15,7 +15,7 @@ The end result is a smarter fish tank that lends to an easier fish keeping exper
 The final project was demoed successfully at a design expo on December 5, 2019. It was deployed on a live marine environment, monitoring 6 fish and one sea snail.
 
 
-<img src="img/far_away.jpeg" alt="drawing" width="600"/>
+<img src="img/far_away.jpeg" alt="drawing" width="400"/>
 
 
 
@@ -23,12 +23,12 @@ The final project was demoed successfully at a design expo on December 5, 2019. 
 The main component of the device is the enclosed Printed Circuit Board system, which runs a port of FreeRTOS for Arduino. The RTOS ran drivers for the pH sensor and Temperature sensor written in C and C++.
 
 
-<img src="img/pcb.jpeg" alt="drawing" width="600"/>
+<img src="img/pcb.jpeg" alt="drawing" width="500"/>
 
 The PCB was connected to an ESP8266, which transmits the collected data over Wi-fi to a Flask Server, which relayed it to an iOS App.
 
 
-<img src="img/esp8266.jpg" alt="drawing" width="400"/>
+<img src="img/esp8266.jpg" alt="drawing" width="350"/>
 
 
 The iOS App was written from the ground up, using the new SwiftUI framework.
@@ -37,7 +37,7 @@ Special thanks to https://github.com/AppPear/ChartView, which was used as a depe
 
 <img src="img/phone_good.png" alt="drawing" width="300"/>
 
-<img src="img/ipadShot.jpeg" alt="drawing" width="300"/>
+<img src="img/ipadShot.jpeg" alt="drawing" width="500"/>
 
 
 ## Installation:
