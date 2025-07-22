@@ -37,7 +37,7 @@ Special thanks to https://github.com/AppPear/ChartView, which was used as a depe
 
 <img src="img/phone_good.png" alt="drawing" width="300"/>
 
-<img src="img/ipadShot.png" alt="drawing" width="300"/>
+<img src="img/ipadShot.jpeg" alt="drawing" width="300"/>
 
 
 ## Installation:
