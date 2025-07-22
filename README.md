@@ -22,6 +22,7 @@ The final project was demoed successfully at a design expo on December 5, 2019. 
 ## Technology:
 The main component of the device is the enclosed Printed Circuit Board system, which runs a port of FreeRTOS for Arduino. The RTOS ran drivers for the pH sensor and Temperature sensor written in C and C++.
 
+<img src="img/system_overview.jpg" alt="drawing" width="500"/>
 
 <img src="img/pcb.jpeg" alt="drawing" width="500"/>
 
