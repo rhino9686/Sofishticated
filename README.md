@@ -37,6 +37,8 @@ Special thanks to https://github.com/AppPear/ChartView, which was used as a depe
 
 <img src="img/phone_good.png" alt="drawing" width="300"/>
 
+<img src="img/ipadShot.png" alt="drawing" width="300"/>
+
 
 ## Installation:
 Be advised that this software was designed for a custom PCB designed and constructed from scratch, but can be adapted to any Arduino or Atmel system with a bit of modification.
